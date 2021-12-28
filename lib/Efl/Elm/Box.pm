@@ -1,4 +1,4 @@
-package Efl::Elm::Actionslider;
+package Efl::Elm::Box;
 
 use strict;
 use warnings;
@@ -7,7 +7,7 @@ require Exporter;
 use Efl::Evas::Object;
 use Efl::Elm::Object;
 
-our @ISA = qw(Exporter ElmActionsliderPtr);
+our @ISA = qw(Exporter ElmBoxPtr);
 
 # Items to export into callers namespace by default. Note: do not export
 # names by default without a very good reason. Use EXPORT_OK instead.
@@ -27,18 +27,18 @@ our @EXPORT = qw(
 );
 
 require XSLoader;
-XSLoader::load('Efl::Elm::Actionslider');
+XSLoader::load('Efl::Elm::Box');
 
 sub add {
     my ($class,$parent) = @_;
-    my $widget = elm_actionslider_add($parent);
+    my $widget = elm_box_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     return $widget;
 }
 
 *new = \&add;
 
-package ElmActionsliderPtr;
+package ElmBoxPtr;
 
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
 
@@ -50,24 +50,23 @@ __END__
 
 =head1 NAME
 
-Efl::Elm:Actionslider
+Efl::Elm:Box
 
 =head1 SYNOPSIS
 
-  use Efl::Elm; # For use of constants as ELM_ACTIONSLIDER_LEFT
-  use Efl::Elm::Actionslider;
+  use Efl::Elm::Box;
   [...]
-  my $actionslider = Efl::Elm::Actionslider->add($parent);
-  $actionslider->indicator_pos_set(ELM_ACTIONSLIDER_LEFT);
+  my $box = Efl::Elm::Box->add($parent);
+  $box->homogeneous_set(1);
   [...]
 
 =head1 DESCRIPTION
 
-This module is a perl binding to the Elementary Actionslider widget.
+This module is a perl binding to the Elementary Box widget.
 
-For more informations see https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Actionslider.html 
+For more informations see https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Box.html 
 
-For instructions, how to use Efl::Elm::Actionslider, please study this API reference for now. A perl-specific documentation will perhaps come in later versions. But applying the C documentation should be no problem. Efl::Elm::Actionslider gives you a nice object-oriented interface that is kept close to the C API. But Please note, that the perl method names remove the "elm_actionslider_" at the beginning of the c functions.
+For instructions, how to use Efl::Elm::Box, please study this API reference for now. A perl-specific documentation will perhaps come in later versions. But applying the C documentation should be no problem. Efl::Elm::Box gives you a nice object-oriented interface that is kept close to the C API. Please note, that the perl method names remove the "elm_box_" at the beginning of the c functions.
 
 =head2 EXPORT
 
@@ -75,7 +74,7 @@ None by default.
 
 =head1 SEE ALSO
 
-https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Actionslider.html
+https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Box.html
 
 =head1 AUTHOR
 
