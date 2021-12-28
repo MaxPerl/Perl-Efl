@@ -1,0 +1,224 @@
+
+
+
+
+
+
+void
+evas_object_intercept_show_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Show_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_show_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Show_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+void
+evas_object_intercept_hide_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Hide_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_hide_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Hide_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+void
+evas_object_intercept_move_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Move_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_move_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Move_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+void
+evas_object_intercept_resize_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Resize_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_resize_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Resize_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+void
+evas_object_intercept_raise_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Raise_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_raise_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Raise_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+void
+evas_object_intercept_lower_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Lower_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_lower_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Lower_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+void
+evas_object_intercept_stack_above_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Stack_Above_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_stack_above_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Stack_Above_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+void
+evas_object_intercept_stack_below_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Stack_Below_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_stack_below_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Stack_Below_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+void
+evas_object_intercept_layer_set_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Layer_Set_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_layer_set_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Layer_Set_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+void
+evas_object_intercept_color_set_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Color_Set_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_color_set_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Color_Set_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+void
+evas_object_intercept_clip_set_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Clip_Set_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_clip_set_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Clip_Set_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+void
+evas_object_intercept_clip_unset_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Clip_Unset_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_clip_unset_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Clip_Unset_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+void
+evas_object_intercept_focus_set_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Focus_Set_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_focus_set_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Focus_Set_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+void
+evas_object_intercept_device_focus_set_callback_add(obj,func,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Device_Focus_Set_Cb func
+	const void *data) EINA_ARG_NONNULL(1
+	 2
+
+
+void *
+evas_object_intercept_device_focus_set_callback_del(obj,EINA_ARG_NONNULL(1,2)
+	EvasObject *obj
+	EvasObject_Intercept_Device_Focus_Set_Cb func) EINA_ARG_NONNULL(1
+	 2
+
+
+Eina_Bool
+_evas_object_intercept_call(obj,type,internal,...)
+	EvasObject *obj
+	EvasObject_Intercept_Cb_Type type
+	int internal
+	 ...
+
+
