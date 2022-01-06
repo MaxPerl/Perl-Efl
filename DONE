@@ -40,7 +40,7 @@ Efl::Elm::GLView (partly)
     - elm_glview_evas_gl_get missing
 Efl::Elm::Hover
 Efl::Elm::Hoversel (mostly)
-    - ElmHoverselItem must be implemented
+    - ElmHoverselItem must be implemented !!!
 Elm::Menu (mostly)
 Elm::MenuItem
 Elm::Image (mostly)
@@ -97,7 +97,19 @@ Map and Route
 Video (should be no problem)
 ----
 Efl::ev_info2s()
+    - used by Efl::Elm::Fileselector ("done","selected","activated", "directory,open")
+    - Event: Image "drop" (?)
 Efl::ev_info2obj(Efl::Elm::FocusOn);
-
-
+    supported_structs:
+    - Event: Elm::Entry "anchor..." => struct: Elm_Entry_Anchor_Info (aka Efl::Elm::EntryAnchorInfo)
+    - Event: Elm::Colorselector "color,item.." => struct Efl::Elm::ColorselectorPaletteItem
+    - Event: Ctxpopup "geometry,update" => struct Efl::Evas::Coord::Rectangle
+    - Event: Genlist "..." => GenlistItems
+    - Event: Hoverlsel "selected" => HoverselItem
+    - Event: Image "download,progress" => ElmImageProgress
+    - Event: Index "changed" "delay,changed", "selected" => IndexItem data pointer (???) (TODO)
+    - Event: ElmList "activated", "clicked,...", "highlighted","unhighlighted" => ElmListIem
+    - Event: ElmPanel "scroll" => ElmPanelScrollInfo
+    - Event: SlemSegmentControl "changed" => segment item pointer (ElmSegmentItem) 
+    - Event: Toolbar "selected", "unselected" => ElmToolbarItem
 ---

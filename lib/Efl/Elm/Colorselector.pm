@@ -47,7 +47,7 @@ our @ISA = qw(ElmObjectPtr EvasObjectPtr);
 sub palette_items_get_pv {
     my ($obj) = @_;
     my $list = $obj->palette_items_get();
-    my @array = Efl::Eina::list2array($list,"ElmWidgetItemPtr");
+    my @array = Efl::Eina::list2array($list,"ElmColorselectorPaletteItemPtr");
     return @array;
 }
 

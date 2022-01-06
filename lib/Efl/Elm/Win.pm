@@ -29,6 +29,13 @@ our @EXPORT = qw(
 require XSLoader;
 XSLoader::load('Efl::Elm::Win');
 
+sub add {
+    my ($class,$parent,$name,$type) = @_;
+    my $widget = elm_win_add($parent,$name,$type);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    return $widget;
+}
+
 sub util_standard_add {
     my ($class,$name,$title) = @_;
     my $widget = elm_win_util_standard_add($name,$title);

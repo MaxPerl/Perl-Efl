@@ -13,7 +13,7 @@
 // By this trick we get a wonderful perlish oo-interface :-)
 typedef Evas_Object ElmColorselector;
 typedef Evas_Object EvasObject;
-typedef Elm_Object_Item ElmObjectItem;
+typedef Elm_Object_Item ElmColorselectorPaletteItem;
 typedef Eina_List EinaList;
 
 MODULE = Efl::Elm::Colorselector		PACKAGE = Efl::Elm::Colorselector
@@ -69,12 +69,12 @@ elm_colorselector_palette_items_get(obj)
 	const ElmColorselector *obj
 
 
-ElmObjectItem *
+ElmColorselectorPaletteItem *
 elm_colorselector_palette_selected_item_get(obj)
 	const ElmColorselector *obj
 
 
-ElmObjectItem *
+ElmColorselectorPaletteItem *
 elm_colorselector_palette_color_add(obj,r,g,b,a)
 	ElmColorselector *obj
 	int r

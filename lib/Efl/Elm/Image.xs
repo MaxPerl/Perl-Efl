@@ -13,6 +13,7 @@
 // By this trick we get a wonderful perlish oo-interface :-)
 typedef Evas_Object ElmImage;
 typedef Evas_Object EvasObject;
+typedef Elm_Image_Progress ElmImageProgress;
 
 MODULE = Efl::Elm::Image		PACKAGE = Efl::Elm::Image
 
@@ -190,3 +191,22 @@ void
 elm_image_async_open_set(obj,async)
 	ElmImage *obj
 	Eina_Bool async
+
+
+MODULE = Efl::Elm::Image		PACKAGE = ElmImageProgressPtr
+
+double
+now(progress_info)
+    ElmImageProgress *progress_info
+CODE:
+    RETVAL = progress_info->now;
+OUTPUT:
+    RETVAL
+    
+double
+total(progress_info)
+    ElmImageProgress *progress_info
+CODE:
+    RETVAL = progress_info->total;
+OUTPUT:
+    RETVAL

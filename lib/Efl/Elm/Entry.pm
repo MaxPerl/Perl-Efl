@@ -97,6 +97,10 @@ sub markup_filter_remove{
     delete($Efl::PLSide::MarkupFilters_Cbs{$objaddr}{$funcname});
 }
 
+package Efl::Elm::EntryAnchorInfo;
+
+our @ISA = qw(ElmEntryAnchorInfoPtr);
+
 # Preloaded methods go here.
 
 1;

@@ -42,6 +42,10 @@ package ElmPanelPtr;
 
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
 
+package Efl::Elm::PanelScrollInfo;
+
+our @ISA = qw(ElmPanelScrollInfoPtr);
+
 # Preloaded methods go here.
 
 1;

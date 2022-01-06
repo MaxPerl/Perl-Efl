@@ -13,9 +13,16 @@
 // By this trick we get a wonderful perlish oo-interface :-)
 typedef Evas_Object ElmWin;
 typedef Evas_Object EvasObject;
+typedef Evas_Object EvasObject;
 typedef Elm_Icon ElmIcon;
 
 MODULE = Efl::Elm::Win		PACKAGE = Efl::Elm::Win
+
+ElmWin *
+elm_win_add(parent,name,type)
+	ElmWin *parent
+	const char *name
+	int type
 
 ElmWin *
 elm_win_util_standard_add(name,title)
@@ -27,6 +34,21 @@ elm_win_util_dialog_add(parent,name,title)
 	ElmWin *parent
 	const char *name
 	const char *title
+	
+MODULE = Efl::Elm::Win		PACKAGE = Efl::Elm::Win PREFIX = elm_win_
+	
+int
+elm_win_xwindow_xid_get(obj)
+    const ElmWin *obj
+PREINIT:
+    Ecore_X_Window xwin;
+    int xid;
+CODE:
+    xwin = elm_win_xwindow_get(obj);
+    xid = xwin;
+    RETVAL = xid;
+OUTPUT:
+    RETVAL
 
 
 MODULE = Efl::Elm::Win		PACKAGE = ElmWinPtr     PREFIX = elm_win_
@@ -105,8 +127,7 @@ elm_win_resize_object_del(obj,subobj)
 # Ecore_X_Window
 # elm_win_xwindow_get(obj)
 #	const ElmWin *obj
-
-
+    
 # Ecore_Wl2_Window *
 # elm_win_wl_window_get(obj)
 #	const ElmWin *obj

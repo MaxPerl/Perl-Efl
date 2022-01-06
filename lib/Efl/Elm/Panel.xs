@@ -13,6 +13,7 @@
 // By this trick we get a wonderful perlish oo-interface :-)
 typedef Evas_Object ElmPanel;
 typedef Evas_Object EvasObject;
+typedef Elm_Panel_Scroll_Info ElmPanelScrollInfo;
 
 MODULE = Efl::Elm::Panel		PACKAGE = Efl::Elm::Panel
 
@@ -69,3 +70,22 @@ elm_panel_scrollable_content_size_get(obj)
 void
 elm_panel_toggle(obj)
 	ElmPanel *obj
+
+
+MODULE = Efl::Elm::Panel		PACKAGE = ElmPanelScrollInfoPtr
+
+double
+rel_x(scroll_info)
+    ElmPanelScrollInfo *scroll_info
+CODE:
+    RETVAL = scroll_info->rel_x;
+OUTPUT:
+    RETVAL
+    
+double
+rel_y(scroll_info)
+    ElmPanelScrollInfo *scroll_info
+CODE:
+    RETVAL = scroll_info->rel_y;
+OUTPUT:
+    RETVAL

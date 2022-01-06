@@ -12,7 +12,7 @@ my $size;
 
 Efl::Elm::init($#ARGV, \@ARGV);
 
-Efl::Elm::policy_set(ELM::POLICY_QUIT, ELM::POLICY_QUIT_LAST_WINDOW_CLOSED);
+Efl::Elm::policy_set(ELM_POLICY_QUIT, ELM_POLICY_QUIT_LAST_WINDOW_CLOSED);
 
 my $win = Efl::Elm::Win->util_standard_add("hello", "Hello, World!");
 $win->autodel_set(1);
@@ -34,7 +34,7 @@ $box->pack_end($vbox);
 my $fs = Efl::Elm::Fileselector->add($win);
 $fs->is_save_set(1);
 $fs->expandable_set(0);
-$fs->path_set("/home/maximilian");
+$fs->path_set("/tmp");
 
 $fs->multi_select_set(1);
 
@@ -45,7 +45,9 @@ $vbox->pack_end($fs);
 
 
 $fs->smart_callback_add("done", \&_fs_done, $fs);
+$fs->smart_callback_add("activated", \&_fs_done, $fs);
 $fs->smart_callback_add("selected", \&_fs_selected, $fs);
+$fs->smart_callback_add("directory,open", \&_fs_selected, $fs);
 
 # win 400x400
 $win->resize(800,600);
@@ -59,8 +61,6 @@ Efl::Elm::shutdown();
 sub _fs_done {
 
 my ($data, $obj, $ev_info) = @_;
-#Dump($ev_info);
-#my $selected = $obj->selected_get();
 my $selected = Efl::ev_info2s($ev_info);
 print "We are done!! Selected file is $selected\n";
 Efl::Elm::exit();
@@ -69,9 +69,6 @@ Efl::Elm::exit();
 
 sub _fs_selected {
     my ($data, $obj, $ev_info) = @_;
-#my $selected = $obj->selected_get();
 my $selected = Efl::ev_info2s($ev_info);
-my @selected = $obj->selected_paths_get_pv();
 print "There is been a selection. Selected file is $selected\n";
-print "SELECTED FILES @selected\n";
 }

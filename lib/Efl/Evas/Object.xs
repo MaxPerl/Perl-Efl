@@ -14,6 +14,7 @@
 #include "PLSide.h"
 
 typedef Evas_Object EvasObject;
+typedef Evas_Canvas EvasCanvas;
 typedef Eina_List EinaList;
 
 
@@ -342,6 +343,10 @@ evas_object_pointer_coords_inside_get(eo_obj,x,y)
 # Evas *
 # evas_object_evas_get(obj)
 #	const Eo *obj
+
+EvasCanvas *
+evas_object_evas_get(obj)
+	const EvasObject *obj
 
 
 # Eina_List *

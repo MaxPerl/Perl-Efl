@@ -30,6 +30,9 @@ WriteMakefile(
 		'lib/Efl/Ecore/Timer' => {
 			OBJECT => 'lib/Efl/Ecore/Timer$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},
+		'lib/Efl/Ecore/Idler' => {
+			OBJECT => 'lib/Efl/Ecore/Idler$(OBJ_EXT) PLSide$(OBJ_EXT)',
+		},
 		'lib/Efl/Elm/Entry' => {
 			OBJECT => 'lib/Efl/Elm/Entry$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},

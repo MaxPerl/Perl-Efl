@@ -1,4 +1,4 @@
-package Efl::Elm::GLView;
+package Efl::Elm::Glview;
 
 use strict;
 use warnings;
@@ -7,7 +7,7 @@ require Exporter;
 use Efl::Evas::Object;
 use Efl::Elm::Object;
 
-our @ISA = qw(Exporter ElmGLViewPtr);
+our @ISA = qw(Exporter ElmGlviewPtr);
 
 # Items to export into callers namespace by default. Note: do not export
 # names by default without a very good reason. Use EXPORT_OK instead.
@@ -27,7 +27,7 @@ our @EXPORT = qw(
 );
 
 require XSLoader;
-XSLoader::load('Efl::Elm::GLView');
+XSLoader::load('Efl::Elm::Glview');
 
 sub add {
     my ($class,$parent) = @_;
@@ -38,7 +38,7 @@ sub add {
 
 *new = \&add;
 
-package ElmGLViewPtr;
+package ElmGlviewPtr;
 
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
 

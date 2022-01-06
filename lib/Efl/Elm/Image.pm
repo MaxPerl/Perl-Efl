@@ -42,6 +42,11 @@ package ElmImagePtr;
 
 our @ISA = qw(ElmObjectPtr EvasObjectPtr );
 
+
+package Efl::Elm::ImageProgress;
+
+our @ISA = qw(ElmImageProgressPtr);
+
 # Preloaded methods go here.
 
 1;

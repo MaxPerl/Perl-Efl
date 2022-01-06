@@ -3,4 +3,12 @@ Revision history for Perl extension Efl.
 0.6  Tu Dec  28 22:30:33 2021
 	- first published version
 	- this is still a work-in-progress version, even if the Elementary part seems to be usable
-
+0.61 Thu Jan 06 09:21:00 2022
+    - Add Efl::ev_info2obj()
+    - Add the following Event_Info structs to use with Efl::ev_info2obj:
+        - Elm_Entry_Anchor_Info (aka Efl::Elm::EntryAnchorInfo)
+        - Elm_Image_Progress (aka Efl::Elm::ImageProgress)
+        - Elm_Panel_Scroll_Info (aka Efl::Elm::PanelScrollInfo)
+    - Add Efl::Elm::ColorselectorPaletteItem
+    - Add example for colorselector.pl
+    - Add Efl::Evas::Coord::Rectangle (= c struct Evas_Coord_Rectangle)

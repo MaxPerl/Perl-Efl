@@ -14,6 +14,7 @@
 // see the @ISA's in Elm/Win.pm
 // By this trick we get a wonderful perlish oo-interface :-)
 typedef Elm_Entry ElmEntry;
+typedef Elm_Entry_Anchor_Info ElmEntryAnchorInfo;
 typedef Evas_Object EvasObject;
 
 MODULE = Efl::Elm::Entry		PACKAGE = Efl::Elm::Entry
@@ -752,3 +753,59 @@ Eina_Bool
 elm_entry_prediction_hint_hash_del(obj,key)
 	ElmEntry *obj
 	const char *key
+
+
+MODULE = Efl::Elm::Entry		PACKAGE = ElmEntryAnchorInfoPtr
+
+const char*
+name(anchor_info)
+    ElmEntryAnchorInfo *anchor_info
+CODE:
+    RETVAL = anchor_info->name;
+OUTPUT:
+    RETVAL
+  
+  
+int
+button(anchor_info)
+    ElmEntryAnchorInfo *anchor_info
+CODE:
+    RETVAL = anchor_info->button;
+OUTPUT:
+    RETVAL
+  
+  
+Evas_Coord
+x(anchor_info)
+    ElmEntryAnchorInfo *anchor_info
+CODE:
+    RETVAL = anchor_info->x;
+OUTPUT:
+    RETVAL
+  
+  
+Evas_Coord
+y(anchor_info)
+    ElmEntryAnchorInfo *anchor_info
+CODE:
+    RETVAL = anchor_info->y;
+OUTPUT:
+    RETVAL
+    
+
+Evas_Coord
+w(anchor_info)
+    ElmEntryAnchorInfo *anchor_info
+CODE:
+    RETVAL = anchor_info->w;
+OUTPUT:
+    RETVAL
+    
+    
+Evas_Coord
+h(anchor_info)
+    ElmEntryAnchorInfo *anchor_info
+CODE:
+    RETVAL = anchor_info->h;
+OUTPUT:
+    RETVAL

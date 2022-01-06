@@ -11,18 +11,18 @@
 // This class is a child class of Efl::Elm::Win, which inherits from EvasObjectPtr
 // see the @ISA's in Elm/Win.pm
 // By this trick we get a wonderful perlish oo-interface :-)
-typedef Elm_Glview ElmGLView;
+typedef Elm_Glview ElmGlview;
 typedef Evas_Object EvasObject;
 
-MODULE = Efl::Elm::GLView		PACKAGE = Efl::Elm::GLView
+MODULE = Efl::Elm::Glview		PACKAGE = Efl::Elm::Glview
 
-ElmGLView *
+ElmGlview *
 elm_glview_add(parent)
     EvasObject *parent
 
-MODULE = Efl::Elm::GLView		PACKAGE = ElmGLViewPtr     PREFIX = elm_glview_
+MODULE = Efl::Elm::Glview		PACKAGE = ElmGlviewPtr     PREFIX = elm_glview_
 
-ElmGLView *
+ElmGlview *
 elm_glview_version_add(parent,version)
 	EvasObject *parent
 	int version
@@ -30,74 +30,74 @@ elm_glview_version_add(parent,version)
 
 void
 elm_glview_changed_set(obj)
-	ElmGLView *obj
+	ElmGlview *obj
 
 
 void
 elm_glview_size_get(obj,OUTLIST w, OUTLIST h)
-	ElmGLView *obj
+	ElmGlview *obj
 	int w
 	int h
 
 
 void
 elm_glview_size_set(obj,w,h)
-	ElmGLView *obj
+	ElmGlview *obj
 	int w
 	int h
 
 
 # void
 # elm_glview_init_func_set(obj,func)
-#	ElmGLView *obj
-#	Elm_GLView_Func_Cb func
+#	ElmGlview *obj
+#	Elm_Glview_Func_Cb func
 
 
 # void
 # elm_glview_del_func_set(obj,func)
-#	ElmGLView *obj
-# 	Elm_GLView_Func_Cb func
+#	ElmGlview *obj
+# 	Elm_Glview_Func_Cb func
 
 
 # void
 # elm_glview_resize_func_set(obj,func)
-#	ElmGLView *obj
-#	Elm_GLView_Func_Cb func
+#	ElmGlview *obj
+#	Elm_Glview_Func_Cb func
 
 
 # void
 # elm_glview_render_func_set(obj,func)
-#	ElmGLView *obj
-#	Elm_GLView_Func_Cb func
+#	ElmGlview *obj
+#	Elm_Glview_Func_Cb func
 
 Eina_Bool
 elm_glview_resize_policy_set(obj,policy)
-	ElmGLView *obj
+	ElmGlview *obj
 	int policy
 
 
 Eina_Bool
 elm_glview_render_policy_set(obj,policy)
-	ElmGLView *obj
+	ElmGlview *obj
 	int policy
 
 
 Eina_Bool
 elm_glview_mode_set(obj,mode)
-	ElmGLView *obj
+	ElmGlview *obj
 	int mode
 
 
 # Evas_GL_API *
 # elm_glview_gl_api_get(obj)
-#	ElmGLView *obj
+#	ElmGlview *obj
 
 
 # Evas_GL *
 # elm_glview_evas_gl_get(obj)
-#	ElmGLView *obj
+#	ElmGlview *obj
 
 
 int
 elm_glview_rotation_get(obj)
-	ElmGLView *obj
+	ElmGlview *obj
