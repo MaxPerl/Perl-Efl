@@ -12,3 +12,9 @@ Revision history for Perl extension Efl.
     - Add Efl::Elm::ColorselectorPaletteItem
     - Add example for colorselector.pl
     - Add Efl::Evas::Coord::Rectangle (= c struct Evas_Coord_Rectangle)
+0.62 Fri Jan 21 00:29::00 2022
+	- Fix examples (use the right CONSTANTS)
+	- Fix Efl::Elm::List->add($parent), Efl::Elm::Panes->add($parent) and Efl::Elm::Radio->add($parent)
+	- Add Efl::Evas::Modifier and Efl::Evas::Lock
+	- Add Efl::Evas::Event::MouseDown, Efl::Evas::Event::MouseUp, Efl::Evas::Event::MouseIn, Efl::Evas::Event::MouseOut, Efl::Evas::Event::MouseMove, Efl::Evas::Event::MouseWheel, Efl::Evas::Event::KeyDown, Efl::Evas::Event::KeyUp, Efl::Evas::Event::Hold
+	- Print Debug Messages only if $Efl::Debug is set.

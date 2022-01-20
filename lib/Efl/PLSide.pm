@@ -5,6 +5,7 @@ use warnings;
 
 require Exporter;
 
+use Efl;
 use Efl::Evas;
 use Scalar::Util qw(blessed refaddr);
 use Carp;
@@ -62,7 +63,7 @@ sub cleanup {
     my $objaddr = refaddr($widget);
     my $cbs = $Callbacks{$objaddr};
     foreach my $key (keys %$cbs) {
-        warn "Delete callback with key: $key\n";
+        warn "Delete callback with key: $key\n" if ($Efl::Debug);
 
         # Free the cstruct on C side
         my $cstructaddr = $Callbacks{$objaddr}{$key}{cstructaddr};
@@ -97,7 +98,7 @@ sub cleanup_format_cb {
     my ($widget) = @_;
 
     my $objaddr = refaddr($widget);
-    warn "Delete Form Callback with key: $objaddr\n";
+    warn "Delete Form Callback with key: $objaddr\n" if ($Efl::Debug);
 
     # Free the cstruct on C side
     my $cstructaddr = $Format_Cbs{$objaddr}{cstructaddr};
@@ -174,7 +175,7 @@ sub cleanup_genitems {
     
 
     foreach my $item ( @{ $GenItems{$objaddr} } ) {
-        warn "Delete Genitem with key: $objaddr \n";
+        warn "Delete Genitem with key: $objaddr \n" if ($Efl::Debug);
 
         # Free the cstruct on C side
         if ($item->{cstructaddr}) {
@@ -219,7 +220,7 @@ sub cleanup_markup_filters {
     my $objaddr = $$widget;
     my $cbs = $MarkupFilter_Cbs{$objaddr};
     foreach my $key (keys %$cbs) {
-        warn "Delete callback with key: $key\n";
+        warn "Delete callback with key: $key\n" if ($Efl::Debug);
 
         # Free the cstruct on C side
         my $cstructaddr = $MarkupFilter_Cbs{$objaddr}{$key}{cstructaddr};
@@ -279,13 +280,13 @@ sub get_signal_id {
 
 sub cleanup_signals {
     my ($widget) = @_;
-    print "Cleanup Signals\n";
+    print "Cleanup Signals\n" if ($Efl::Debug);
     my $objaddr = refaddr($widget);
     my $cbs = $EdjeSignals{$objaddr};
     use Data::Dumper;
     Dumper($cbs);
     foreach my $key (@$cbs) {
-        warn "Delete Edje Signal of Layout $widget, \n\t Function : " . $key->{function} . "Emission: " . $key->{emission} . "\n\tSource " . $key->{source} .  "\n";
+        warn "Delete Edje Signal of Layout $widget, \n\t Function : " . $key->{function} . "Emission: " . $key->{emission} . "\n\tSource " . $key->{source} .  "\n" if ($Efl::Debug);
 
         # Free the cstruct on C side
         my $cstructaddr = $EdjeSignals{$objaddr}{$key}{cstructaddr};
@@ -318,7 +319,7 @@ sub cleanup_ecore_evas_event_cb {
     my ($widget) = @_;
 
     my $objaddr = $$widget;
-    warn "Delete Ecore Evas Event Callbacks with key: $objaddr\n";
+    warn "Delete Ecore Evas Event Callbacks with key: $objaddr\n" if ($Efl::Debug);
 
     # Free the cstruct on C side
     #my $cstructaddr = $Format_Cbs{$objaddr}{cstructaddr};
@@ -350,7 +351,7 @@ sub cleanup_ecore_task_cb {
     my ($widget) = @_;
 
     my $objaddr = $$widget;
-    warn "Delete Ecore Evas Event Callbacks with key: $objaddr\n";
+    warn "Delete Ecore Evas Event Callbacks with key: $objaddr\n" if ($Efl::Debug);
 
     # Free the cstruct on C side
     #my $cstructaddr = $Format_Cbs{$objaddr}{cstructaddr};

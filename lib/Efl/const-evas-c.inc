@@ -21,10 +21,105 @@ typedef double NV; /* 5.6 and later define NVTYPE, and typedef NV to it.  */
 #endif
 
 static int
+constant_18 (pTHX_ const char *name, IV *iv_return) {
+  /* When generated this function returned values for the list of names given
+     here.  However, subsequent manual editing may have added or removed some.
+     EVAS_CALLBACK_FREE EVAS_CALLBACK_HIDE EVAS_CALLBACK_HOLD
+     EVAS_CALLBACK_LAST EVAS_CALLBACK_MOVE EVAS_CALLBACK_SHOW */
+  /* Offset 16 gives the best switch position.  */
+  switch (name[16]) {
+  case 'D':
+    if (memEQ(name, "EVAS_CALLBACK_HIDE", 18)) {
+    /*                               ^        */
+      *iv_return = EVAS_CALLBACK_HIDE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'E':
+    if (memEQ(name, "EVAS_CALLBACK_FREE", 18)) {
+    /*                               ^        */
+      *iv_return = EVAS_CALLBACK_FREE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'L':
+    if (memEQ(name, "EVAS_CALLBACK_HOLD", 18)) {
+    /*                               ^        */
+      *iv_return = EVAS_CALLBACK_HOLD;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'O':
+    if (memEQ(name, "EVAS_CALLBACK_SHOW", 18)) {
+    /*                               ^        */
+      *iv_return = EVAS_CALLBACK_SHOW;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'S':
+    if (memEQ(name, "EVAS_CALLBACK_LAST", 18)) {
+    /*                               ^        */
+      *iv_return = EVAS_CALLBACK_LAST;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'V':
+    if (memEQ(name, "EVAS_CALLBACK_MOVE", 18)) {
+    /*                               ^        */
+      *iv_return = EVAS_CALLBACK_MOVE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  }
+  return PERL_constant_NOTFOUND;
+}
+
+static int
+constant_20 (pTHX_ const char *name, IV *iv_return) {
+  /* When generated this function returned values for the list of names given
+     here.  However, subsequent manual editing may have added or removed some.
+     EVAS_CALLBACK_KEY_UP EVAS_CALLBACK_RESIZE EVAS_IMAGE_ORIENT_90
+     EVAS_LOAD_ERROR_NONE */
+  /* Offset 16 gives the best switch position.  */
+  switch (name[16]) {
+  case 'N':
+    if (memEQ(name, "EVAS_LOAD_ERROR_NONE", 20)) {
+    /*                               ^          */
+      *iv_return = EVAS_LOAD_ERROR_NONE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'S':
+    if (memEQ(name, "EVAS_CALLBACK_RESIZE", 20)) {
+    /*                               ^          */
+      *iv_return = EVAS_CALLBACK_RESIZE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'T':
+    if (memEQ(name, "EVAS_IMAGE_ORIENT_90", 20)) {
+    /*                               ^          */
+      *iv_return = EVAS_IMAGE_ORIENT_90;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'Y':
+    if (memEQ(name, "EVAS_CALLBACK_KEY_UP", 20)) {
+    /*                               ^          */
+      *iv_return = EVAS_CALLBACK_KEY_UP;
+      return PERL_constant_ISIV;
+    }
+    break;
+  }
+  return PERL_constant_NOTFOUND;
+}
+
+static int
 constant_21 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
-     EVAS_BORDER_FILL_NONE EVAS_IMAGE_ORIENT_180 EVAS_IMAGE_ORIENT_270 */
+     EVAS_BORDER_FILL_NONE EVAS_CALLBACK_RESTACK EVAS_IMAGE_ORIENT_180
+     EVAS_IMAGE_ORIENT_270 */
   /* Offset 19 gives the best switch position.  */
   switch (name[19]) {
   case '7':
@@ -38,6 +133,13 @@ constant_21 (pTHX_ const char *name, IV *iv_return) {
     if (memEQ(name, "EVAS_IMAGE_ORIENT_180", 21)) {
     /*                                  ^        */
       *iv_return = EVAS_IMAGE_ORIENT_180;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'C':
+    if (memEQ(name, "EVAS_CALLBACK_RESTACK", 21)) {
+    /*                                  ^        */
+      *iv_return = EVAS_CALLBACK_RESTACK;
       return PERL_constant_ISIV;
     }
     break;
@@ -56,47 +158,82 @@ static int
 constant_22 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
-     EVAS_BORDER_FILL_SOLID EVAS_DISPLAY_MODE_NONE EVAS_FONT_HINTING_AUTO
-     EVAS_FONT_HINTING_NONE EVAS_IMAGE_ORIENT_NONE EVAS_NATIVE_SURFACE_WL */
-  /* Offset 5 gives the best switch position.  */
-  switch (name[5]) {
-  case 'B':
-    if (memEQ(name, "EVAS_BORDER_FILL_SOLID", 22)) {
-    /*                    ^                       */
-      *iv_return = EVAS_BORDER_FILL_SOLID;
+     EVAS_BORDER_FILL_SOLID EVAS_CALLBACK_FOCUS_IN EVAS_CALLBACK_KEY_DOWN
+     EVAS_CALLBACK_MOUSE_IN EVAS_CALLBACK_MOUSE_UP EVAS_CALLBACK_MULTI_UP
+     EVAS_DISPLAY_MODE_NONE EVAS_FONT_HINTING_AUTO EVAS_FONT_HINTING_NONE
+     EVAS_IMAGE_ORIENT_NONE EVAS_NATIVE_SURFACE_WL */
+  /* Offset 16 gives the best switch position.  */
+  switch (name[16]) {
+  case 'A':
+    if (memEQ(name, "EVAS_NATIVE_SURFACE_WL", 22)) {
+    /*                               ^            */
+      *iv_return = EVAS_NATIVE_SURFACE_WL;
       return PERL_constant_ISIV;
     }
     break;
-  case 'D':
+  case 'C':
+    if (memEQ(name, "EVAS_CALLBACK_FOCUS_IN", 22)) {
+    /*                               ^            */
+      *iv_return = EVAS_CALLBACK_FOCUS_IN;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'E':
     if (memEQ(name, "EVAS_DISPLAY_MODE_NONE", 22)) {
-    /*                    ^                       */
+    /*                               ^            */
       *iv_return = EVAS_DISPLAY_MODE_NONE;
       return PERL_constant_ISIV;
     }
     break;
-  case 'F':
+  case 'G':
     if (memEQ(name, "EVAS_FONT_HINTING_AUTO", 22)) {
-    /*                    ^                       */
+    /*                               ^            */
       *iv_return = EVAS_FONT_HINTING_AUTO;
       return PERL_constant_ISIV;
     }
     if (memEQ(name, "EVAS_FONT_HINTING_NONE", 22)) {
-    /*                    ^                       */
+    /*                               ^            */
       *iv_return = EVAS_FONT_HINTING_NONE;
       return PERL_constant_ISIV;
     }
     break;
-  case 'I':
+  case 'L':
+    if (memEQ(name, "EVAS_CALLBACK_MULTI_UP", 22)) {
+    /*                               ^            */
+      *iv_return = EVAS_CALLBACK_MULTI_UP;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'T':
     if (memEQ(name, "EVAS_IMAGE_ORIENT_NONE", 22)) {
-    /*                    ^                       */
+    /*                               ^            */
       *iv_return = EVAS_IMAGE_ORIENT_NONE;
       return PERL_constant_ISIV;
     }
     break;
-  case 'N':
-    if (memEQ(name, "EVAS_NATIVE_SURFACE_WL", 22)) {
-    /*                    ^                       */
-      *iv_return = EVAS_NATIVE_SURFACE_WL;
+  case 'U':
+    if (memEQ(name, "EVAS_CALLBACK_MOUSE_IN", 22)) {
+    /*                               ^            */
+      *iv_return = EVAS_CALLBACK_MOUSE_IN;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "EVAS_CALLBACK_MOUSE_UP", 22)) {
+    /*                               ^            */
+      *iv_return = EVAS_CALLBACK_MOUSE_UP;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'Y':
+    if (memEQ(name, "EVAS_CALLBACK_KEY_DOWN", 22)) {
+    /*                               ^            */
+      *iv_return = EVAS_CALLBACK_KEY_DOWN;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case '_':
+    if (memEQ(name, "EVAS_BORDER_FILL_SOLID", 22)) {
+    /*                               ^            */
+      *iv_return = EVAS_BORDER_FILL_SOLID;
       return PERL_constant_ISIV;
     }
     break;
@@ -108,42 +245,55 @@ static int
 constant_23 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
-     EVAS_LOAD_ERROR_GENERIC EVAS_NATIVE_SURFACE_TBM EVAS_NATIVE_SURFACE_X11
-     EVAS_VIDEO_SURFACE_CLIP EVAS_VIDEO_SURFACE_MOVE */
-  /* Offset 20 gives the best switch position.  */
-  switch (name[20]) {
-  case 'L':
-    if (memEQ(name, "EVAS_VIDEO_SURFACE_CLIP", 23)) {
-    /*                                   ^         */
-      *iv_return = EVAS_VIDEO_SURFACE_CLIP;
+     EVAS_CALLBACK_FOCUS_OUT EVAS_CALLBACK_MOUSE_OUT EVAS_LOAD_ERROR_GENERIC
+     EVAS_NATIVE_SURFACE_TBM EVAS_NATIVE_SURFACE_X11 EVAS_VIDEO_SURFACE_CLIP
+     EVAS_VIDEO_SURFACE_MOVE */
+  /* Offset 22 gives the best switch position.  */
+  switch (name[22]) {
+  case '1':
+    if (memEQ(name, "EVAS_NATIVE_SURFACE_X1", 22)) {
+    /*                                     1      */
+      *iv_return = EVAS_NATIVE_SURFACE_X11;
       return PERL_constant_ISIV;
     }
     break;
-  case 'O':
-    if (memEQ(name, "EVAS_VIDEO_SURFACE_MOVE", 23)) {
-    /*                                   ^         */
-      *iv_return = EVAS_VIDEO_SURFACE_MOVE;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'R':
-    if (memEQ(name, "EVAS_LOAD_ERROR_GENERIC", 23)) {
-    /*                                   ^         */
+  case 'C':
+    if (memEQ(name, "EVAS_LOAD_ERROR_GENERI", 22)) {
+    /*                                     C      */
       *iv_return = EVAS_LOAD_ERROR_GENERIC;
       return PERL_constant_ISIV;
     }
     break;
-  case 'T':
-    if (memEQ(name, "EVAS_NATIVE_SURFACE_TBM", 23)) {
-    /*                                   ^         */
+  case 'E':
+    if (memEQ(name, "EVAS_VIDEO_SURFACE_MOV", 22)) {
+    /*                                     E      */
+      *iv_return = EVAS_VIDEO_SURFACE_MOVE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'M':
+    if (memEQ(name, "EVAS_NATIVE_SURFACE_TB", 22)) {
+    /*                                     M      */
       *iv_return = EVAS_NATIVE_SURFACE_TBM;
       return PERL_constant_ISIV;
     }
     break;
-  case 'X':
-    if (memEQ(name, "EVAS_NATIVE_SURFACE_X11", 23)) {
-    /*                                   ^         */
-      *iv_return = EVAS_NATIVE_SURFACE_X11;
+  case 'P':
+    if (memEQ(name, "EVAS_VIDEO_SURFACE_CLI", 22)) {
+    /*                                     P      */
+      *iv_return = EVAS_VIDEO_SURFACE_CLIP;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'T':
+    if (memEQ(name, "EVAS_CALLBACK_FOCUS_OU", 22)) {
+    /*                                     T      */
+      *iv_return = EVAS_CALLBACK_FOCUS_OUT;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "EVAS_CALLBACK_MOUSE_OU", 22)) {
+    /*                                     T      */
+      *iv_return = EVAS_CALLBACK_MOUSE_OUT;
       return PERL_constant_ISIV;
     }
     break;
@@ -156,56 +306,89 @@ constant_24 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
      EVAS_BORDER_FILL_DEFAULT EVAS_BUTTON_DOUBLE_CLICK EVAS_BUTTON_TRIPLE_CLICK
-     EVAS_DISPLAY_MODE_EXPAND EVAS_IMAGE_FLIP_VERTICAL EVAS_NATIVE_SURFACE_NONE
-     EVAS_VIDEO_SURFACE_BELOW */
-  /* Offset 14 gives the best switch position.  */
-  switch (name[14]) {
-  case 'F':
+     EVAS_CALLBACK_MOUSE_DOWN EVAS_CALLBACK_MOUSE_MOVE EVAS_CALLBACK_MULTI_DOWN
+     EVAS_CALLBACK_MULTI_MOVE EVAS_CALLBACK_RENDER_PRE EVAS_DISPLAY_MODE_EXPAND
+     EVAS_IMAGE_FLIP_VERTICAL EVAS_NATIVE_SURFACE_NONE EVAS_VIDEO_SURFACE_BELOW
+     */
+  /* Offset 15 gives the best switch position.  */
+  switch (name[15]) {
+  case 'A':
     if (memEQ(name, "EVAS_VIDEO_SURFACE_BELOW", 24)) {
-    /*                             ^                */
+    /*                              ^               */
       *iv_return = EVAS_VIDEO_SURFACE_BELOW;
       return PERL_constant_ISIV;
     }
     break;
-  case 'I':
-    if (memEQ(name, "EVAS_BUTTON_TRIPLE_CLICK", 24)) {
-    /*                             ^                */
-      *iv_return = EVAS_BUTTON_TRIPLE_CLICK;
+  case 'B':
+    if (memEQ(name, "EVAS_BUTTON_DOUBLE_CLICK", 24)) {
+    /*                              ^               */
+      *iv_return = EVAS_BUTTON_DOUBLE_CLICK;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'D':
+    if (memEQ(name, "EVAS_DISPLAY_MODE_EXPAND", 24)) {
+    /*                              ^               */
+      *iv_return = EVAS_DISPLAY_MODE_EXPAND;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'E':
+    if (memEQ(name, "EVAS_CALLBACK_RENDER_PRE", 24)) {
+    /*                              ^               */
+      *iv_return = EVAS_CALLBACK_RENDER_PRE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'F':
+    if (memEQ(name, "EVAS_NATIVE_SURFACE_NONE", 24)) {
+    /*                              ^               */
+      *iv_return = EVAS_NATIVE_SURFACE_NONE;
       return PERL_constant_ISIV;
     }
     break;
   case 'L':
     if (memEQ(name, "EVAS_BORDER_FILL_DEFAULT", 24)) {
-    /*                             ^                */
+    /*                              ^               */
       *iv_return = EVAS_BORDER_FILL_DEFAULT;
       return PERL_constant_ISIV;
     }
     break;
   case 'O':
-    if (memEQ(name, "EVAS_DISPLAY_MODE_EXPAND", 24)) {
-    /*                             ^                */
-      *iv_return = EVAS_DISPLAY_MODE_EXPAND;
+    if (memEQ(name, "EVAS_CALLBACK_MOUSE_DOWN", 24)) {
+    /*                              ^               */
+      *iv_return = EVAS_CALLBACK_MOUSE_DOWN;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "EVAS_CALLBACK_MOUSE_MOVE", 24)) {
+    /*                              ^               */
+      *iv_return = EVAS_CALLBACK_MOUSE_MOVE;
       return PERL_constant_ISIV;
     }
     break;
   case 'P':
-    if (memEQ(name, "EVAS_IMAGE_FLIP_VERTICAL", 24)) {
-    /*                             ^                */
-      *iv_return = EVAS_IMAGE_FLIP_VERTICAL;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'R':
-    if (memEQ(name, "EVAS_NATIVE_SURFACE_NONE", 24)) {
-    /*                             ^                */
-      *iv_return = EVAS_NATIVE_SURFACE_NONE;
+    if (memEQ(name, "EVAS_BUTTON_TRIPLE_CLICK", 24)) {
+    /*                              ^               */
+      *iv_return = EVAS_BUTTON_TRIPLE_CLICK;
       return PERL_constant_ISIV;
     }
     break;
   case 'U':
-    if (memEQ(name, "EVAS_BUTTON_DOUBLE_CLICK", 24)) {
-    /*                             ^                */
-      *iv_return = EVAS_BUTTON_DOUBLE_CLICK;
+    if (memEQ(name, "EVAS_CALLBACK_MULTI_DOWN", 24)) {
+    /*                              ^               */
+      *iv_return = EVAS_CALLBACK_MULTI_DOWN;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "EVAS_CALLBACK_MULTI_MOVE", 24)) {
+    /*                              ^               */
+      *iv_return = EVAS_CALLBACK_MULTI_MOVE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case '_':
+    if (memEQ(name, "EVAS_IMAGE_FLIP_VERTICAL", 24)) {
+    /*                              ^               */
+      *iv_return = EVAS_IMAGE_FLIP_VERTICAL;
       return PERL_constant_ISIV;
     }
     break;
@@ -217,27 +400,47 @@ static int
 constant_25 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
-     EVAS_IMAGE_FLIP_TRANSPOSE EVAS_LOAD_ERROR_CANCELLED
-     EVAS_VIDEO_SURFACE_RESIZE */
-  /* Offset 8 gives the best switch position.  */
-  switch (name[8]) {
-  case 'D':
-    if (memEQ(name, "EVAS_LOAD_ERROR_CANCELLED", 25)) {
-    /*                       ^                       */
-      *iv_return = EVAS_LOAD_ERROR_CANCELLED;
+     EVAS_CALLBACK_AXIS_UPDATE EVAS_CALLBACK_MOUSE_WHEEL
+     EVAS_CALLBACK_RENDER_POST EVAS_IMAGE_FLIP_TRANSPOSE
+     EVAS_LOAD_ERROR_CANCELLED EVAS_VIDEO_SURFACE_RESIZE */
+  /* Offset 22 gives the best switch position.  */
+  switch (name[22]) {
+  case 'A':
+    if (memEQ(name, "EVAS_CALLBACK_AXIS_UPDATE", 25)) {
+    /*                                     ^         */
+      *iv_return = EVAS_CALLBACK_AXIS_UPDATE;
       return PERL_constant_ISIV;
     }
     break;
   case 'E':
+    if (memEQ(name, "EVAS_CALLBACK_MOUSE_WHEEL", 25)) {
+    /*                                     ^         */
+      *iv_return = EVAS_CALLBACK_MOUSE_WHEEL;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'I':
     if (memEQ(name, "EVAS_VIDEO_SURFACE_RESIZE", 25)) {
-    /*                       ^                       */
+    /*                                     ^         */
       *iv_return = EVAS_VIDEO_SURFACE_RESIZE;
       return PERL_constant_ISIV;
     }
     break;
-  case 'G':
+  case 'L':
+    if (memEQ(name, "EVAS_LOAD_ERROR_CANCELLED", 25)) {
+    /*                                     ^         */
+      *iv_return = EVAS_LOAD_ERROR_CANCELLED;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'O':
+    if (memEQ(name, "EVAS_CALLBACK_RENDER_POST", 25)) {
+    /*                                     ^         */
+      *iv_return = EVAS_CALLBACK_RENDER_POST;
+      return PERL_constant_ISIV;
+    }
     if (memEQ(name, "EVAS_IMAGE_FLIP_TRANSPOSE", 25)) {
-    /*                       ^                       */
+    /*                                     ^         */
       *iv_return = EVAS_IMAGE_FLIP_TRANSPOSE;
       return PERL_constant_ISIV;
     }
@@ -250,15 +453,23 @@ static int
 constant_26 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
-     EVAS_DISPLAY_MODE_COMPRESS EVAS_FONT_HINTING_BYTECODE
-     EVAS_IMAGE_FLIP_HORIZONTAL EVAS_IMAGE_FLIP_TRANSVERSE
-     EVAS_NATIVE_SURFACE_EVASGL EVAS_NATIVE_SURFACE_OPENGL */
+     EVAS_CALLBACK_IMAGE_RESIZE EVAS_DISPLAY_MODE_COMPRESS
+     EVAS_FONT_HINTING_BYTECODE EVAS_IMAGE_FLIP_HORIZONTAL
+     EVAS_IMAGE_FLIP_TRANSVERSE EVAS_NATIVE_SURFACE_EVASGL
+     EVAS_NATIVE_SURFACE_OPENGL */
   /* Offset 23 gives the best switch position.  */
   switch (name[23]) {
   case 'E':
     if (memEQ(name, "EVAS_DISPLAY_MODE_COMPRESS", 26)) {
     /*                                      ^         */
       *iv_return = EVAS_DISPLAY_MODE_COMPRESS;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'I':
+    if (memEQ(name, "EVAS_CALLBACK_IMAGE_RESIZE", 26)) {
+    /*                                      ^         */
+      *iv_return = EVAS_CALLBACK_IMAGE_RESIZE;
       return PERL_constant_ISIV;
     }
     break;
@@ -302,30 +513,125 @@ constant_26 (pTHX_ const char *name, IV *iv_return) {
 }
 
 static int
+constant_28 (pTHX_ const char *name, IV *iv_return) {
+  /* When generated this function returned values for the list of names given
+     here.  However, subsequent manual editing may have added or removed some.
+     EVAS_CALLBACK_DEVICE_CHANGED EVAS_CALLBACK_IMAGE_UNLOADED
+     EVAS_IMAGE_CONTENT_HINT_NONE EVAS_LOAD_ERROR_CORRUPT_FILE */
+  /* Offset 25 gives the best switch position.  */
+  switch (name[25]) {
+  case 'D':
+    if (memEQ(name, "EVAS_CALLBACK_IMAGE_UNLOADED", 28)) {
+    /*                                        ^         */
+      *iv_return = EVAS_CALLBACK_IMAGE_UNLOADED;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'G':
+    if (memEQ(name, "EVAS_CALLBACK_DEVICE_CHANGED", 28)) {
+    /*                                        ^         */
+      *iv_return = EVAS_CALLBACK_DEVICE_CHANGED;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'I':
+    if (memEQ(name, "EVAS_LOAD_ERROR_CORRUPT_FILE", 28)) {
+    /*                                        ^         */
+      *iv_return = EVAS_LOAD_ERROR_CORRUPT_FILE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'O':
+    if (memEQ(name, "EVAS_IMAGE_CONTENT_HINT_NONE", 28)) {
+    /*                                        ^         */
+      *iv_return = EVAS_IMAGE_CONTENT_HINT_NONE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  }
+  return PERL_constant_NOTFOUND;
+}
+
+static int
+constant_29 (pTHX_ const char *name, IV *iv_return) {
+  /* When generated this function returned values for the list of names given
+     here.  However, subsequent manual editing may have added or removed some.
+     EVAS_CALLBACK_CANVAS_FOCUS_IN EVAS_CALLBACK_IMAGE_PRELOADED
+     EVAS_DISPLAY_MODE_DONT_CHANGE EVAS_NATIVE_SURFACE_WL_DMABUF */
+  /* Offset 28 gives the best switch position.  */
+  switch (name[28]) {
+  case 'D':
+    if (memEQ(name, "EVAS_CALLBACK_IMAGE_PRELOADE", 28)) {
+    /*                                           D      */
+      *iv_return = EVAS_CALLBACK_IMAGE_PRELOADED;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'E':
+    if (memEQ(name, "EVAS_DISPLAY_MODE_DONT_CHANG", 28)) {
+    /*                                           E      */
+      *iv_return = EVAS_DISPLAY_MODE_DONT_CHANGE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'F':
+    if (memEQ(name, "EVAS_NATIVE_SURFACE_WL_DMABU", 28)) {
+    /*                                           F      */
+      *iv_return = EVAS_NATIVE_SURFACE_WL_DMABUF;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'N':
+    if (memEQ(name, "EVAS_CALLBACK_CANVAS_FOCUS_I", 28)) {
+    /*                                           N      */
+      *iv_return = EVAS_CALLBACK_CANVAS_FOCUS_IN;
+      return PERL_constant_ISIV;
+    }
+    break;
+  }
+  return PERL_constant_NOTFOUND;
+}
+
+static int
 constant_30 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
+     EVAS_CALLBACK_CANVAS_FOCUS_OUT EVAS_CALLBACK_RENDER_FLUSH_PRE
      EVAS_IMAGE_CONTENT_HINT_STATIC EVAS_LOAD_ERROR_DOES_NOT_EXIST
      EVAS_LOAD_ERROR_UNKNOWN_FORMAT */
-  /* Offset 17 gives the best switch position.  */
-  switch (name[17]) {
-  case 'N':
+  /* Offset 27 gives the best switch position.  */
+  switch (name[27]) {
+  case 'I':
+    if (memEQ(name, "EVAS_LOAD_ERROR_DOES_NOT_EXIST", 30)) {
+    /*                                          ^         */
+      *iv_return = EVAS_LOAD_ERROR_DOES_NOT_EXIST;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'M':
     if (memEQ(name, "EVAS_LOAD_ERROR_UNKNOWN_FORMAT", 30)) {
-    /*                                ^                   */
+    /*                                          ^         */
       *iv_return = EVAS_LOAD_ERROR_UNKNOWN_FORMAT;
       return PERL_constant_ISIV;
     }
     break;
   case 'O':
-    if (memEQ(name, "EVAS_LOAD_ERROR_DOES_NOT_EXIST", 30)) {
-    /*                                ^                   */
-      *iv_return = EVAS_LOAD_ERROR_DOES_NOT_EXIST;
+    if (memEQ(name, "EVAS_CALLBACK_CANVAS_FOCUS_OUT", 30)) {
+    /*                                          ^         */
+      *iv_return = EVAS_CALLBACK_CANVAS_FOCUS_OUT;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'P':
+    if (memEQ(name, "EVAS_CALLBACK_RENDER_FLUSH_PRE", 30)) {
+    /*                                          ^         */
+      *iv_return = EVAS_CALLBACK_RENDER_FLUSH_PRE;
       return PERL_constant_ISIV;
     }
     break;
   case 'T':
     if (memEQ(name, "EVAS_IMAGE_CONTENT_HINT_STATIC", 30)) {
-    /*                                ^                   */
+    /*                                          ^         */
       *iv_return = EVAS_IMAGE_CONTENT_HINT_STATIC;
       return PERL_constant_ISIV;
     }
@@ -357,6 +663,43 @@ my @names = (qw(),
             {name=>"EVAS_BORDER_FILL_SOLID", type=>"IV", macro=>"1"},
             {name=>"EVAS_BUTTON_DOUBLE_CLICK", type=>"IV", macro=>"1"},
             {name=>"EVAS_BUTTON_TRIPLE_CLICK", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_AXIS_UPDATE", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_CANVAS_FOCUS_IN", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_CANVAS_FOCUS_OUT", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_CANVAS_OBJECT_FOCUS_IN", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_CANVAS_OBJECT_FOCUS_OUT", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_CANVAS_VIEWPORT_RESIZE", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_CHANGED_SIZE_HINTS", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_DEL", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_DEVICE_CHANGED", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_FOCUS_IN", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_FOCUS_OUT", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_FREE", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_HIDE", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_HOLD", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_IMAGE_PRELOADED", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_IMAGE_RESIZE", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_IMAGE_UNLOADED", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_KEY_DOWN", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_KEY_UP", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_LAST", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_MOUSE_DOWN", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_MOUSE_IN", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_MOUSE_MOVE", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_MOUSE_OUT", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_MOUSE_UP", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_MOUSE_WHEEL", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_MOVE", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_MULTI_DOWN", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_MULTI_MOVE", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_MULTI_UP", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_RENDER_FLUSH_POST", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_RENDER_FLUSH_PRE", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_RENDER_POST", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_RENDER_PRE", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_RESIZE", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_RESTACK", type=>"IV", macro=>"1"},
+            {name=>"EVAS_CALLBACK_SHOW", type=>"IV", macro=>"1"},
             {name=>"EVAS_DISPLAY_MODE_COMPRESS", type=>"IV", macro=>"1"},
             {name=>"EVAS_DISPLAY_MODE_DONT_CHANGE", type=>"IV", macro=>"1"},
             {name=>"EVAS_DISPLAY_MODE_EXPAND", type=>"IV", macro=>"1"},
@@ -444,10 +787,28 @@ __END__
     }
     break;
   case 17:
-    if (memEQ(name, "EVAS_RENDER_BLEND", 17)) {
-      *iv_return = EVAS_RENDER_BLEND;
-      return PERL_constant_ISIV;
+    /* Names all of length 17.  */
+    /* EVAS_CALLBACK_DEL EVAS_RENDER_BLEND */
+    /* Offset 14 gives the best switch position.  */
+    switch (name[14]) {
+    case 'D':
+      if (memEQ(name, "EVAS_CALLBACK_DEL", 17)) {
+      /*                             ^         */
+        *iv_return = EVAS_CALLBACK_DEL;
+        return PERL_constant_ISIV;
+      }
+      break;
+    case 'E':
+      if (memEQ(name, "EVAS_RENDER_BLEND", 17)) {
+      /*                             ^         */
+        *iv_return = EVAS_RENDER_BLEND;
+        return PERL_constant_ISIV;
+      }
+      break;
     }
+    break;
+  case 18:
+    return constant_18 (aTHX_ name, iv_return);
     break;
   case 19:
     if (memEQ(name, "EVAS_IMAGE_ORIENT_0", 19)) {
@@ -456,25 +817,7 @@ __END__
     }
     break;
   case 20:
-    /* Names all of length 20.  */
-    /* EVAS_IMAGE_ORIENT_90 EVAS_LOAD_ERROR_NONE */
-    /* Offset 6 gives the best switch position.  */
-    switch (name[6]) {
-    case 'M':
-      if (memEQ(name, "EVAS_IMAGE_ORIENT_90", 20)) {
-      /*                     ^                    */
-        *iv_return = EVAS_IMAGE_ORIENT_90;
-        return PERL_constant_ISIV;
-      }
-      break;
-    case 'O':
-      if (memEQ(name, "EVAS_LOAD_ERROR_NONE", 20)) {
-      /*                     ^                    */
-        *iv_return = EVAS_LOAD_ERROR_NONE;
-        return PERL_constant_ISIV;
-      }
-      break;
-    }
+    return constant_20 (aTHX_ name, iv_return);
     break;
   case 21:
     return constant_21 (aTHX_ name, iv_return);
@@ -495,60 +838,54 @@ __END__
     return constant_26 (aTHX_ name, iv_return);
     break;
   case 28:
-    /* Names all of length 28.  */
-    /* EVAS_IMAGE_CONTENT_HINT_NONE EVAS_LOAD_ERROR_CORRUPT_FILE */
-    /* Offset 13 gives the best switch position.  */
-    switch (name[13]) {
-    case 'N':
-      if (memEQ(name, "EVAS_IMAGE_CONTENT_HINT_NONE", 28)) {
-      /*                            ^                     */
-        *iv_return = EVAS_IMAGE_CONTENT_HINT_NONE;
-        return PERL_constant_ISIV;
-      }
-      break;
-    case 'O':
-      if (memEQ(name, "EVAS_LOAD_ERROR_CORRUPT_FILE", 28)) {
-      /*                            ^                     */
-        *iv_return = EVAS_LOAD_ERROR_CORRUPT_FILE;
-        return PERL_constant_ISIV;
-      }
-      break;
-    }
+    return constant_28 (aTHX_ name, iv_return);
     break;
   case 29:
-    /* Names all of length 29.  */
-    /* EVAS_DISPLAY_MODE_DONT_CHANGE EVAS_NATIVE_SURFACE_WL_DMABUF */
-    /* Offset 28 gives the best switch position.  */
-    switch (name[28]) {
-    case 'E':
-      if (memEQ(name, "EVAS_DISPLAY_MODE_DONT_CHANG", 28)) {
-      /*                                           E      */
-        *iv_return = EVAS_DISPLAY_MODE_DONT_CHANGE;
-        return PERL_constant_ISIV;
-      }
-      break;
-    case 'F':
-      if (memEQ(name, "EVAS_NATIVE_SURFACE_WL_DMABU", 28)) {
-      /*                                           F      */
-        *iv_return = EVAS_NATIVE_SURFACE_WL_DMABUF;
-        return PERL_constant_ISIV;
-      }
-      break;
-    }
+    return constant_29 (aTHX_ name, iv_return);
     break;
   case 30:
     return constant_30 (aTHX_ name, iv_return);
     break;
   case 31:
-    if (memEQ(name, "EVAS_IMAGE_CONTENT_HINT_DYNAMIC", 31)) {
-      *iv_return = EVAS_IMAGE_CONTENT_HINT_DYNAMIC;
-      return PERL_constant_ISIV;
+    /* Names all of length 31.  */
+    /* EVAS_CALLBACK_RENDER_FLUSH_POST EVAS_IMAGE_CONTENT_HINT_DYNAMIC */
+    /* Offset 14 gives the best switch position.  */
+    switch (name[14]) {
+    case 'R':
+      if (memEQ(name, "EVAS_CALLBACK_RENDER_FLUSH_POST", 31)) {
+      /*                             ^                       */
+        *iv_return = EVAS_CALLBACK_RENDER_FLUSH_POST;
+        return PERL_constant_ISIV;
+      }
+      break;
+    case 'T':
+      if (memEQ(name, "EVAS_IMAGE_CONTENT_HINT_DYNAMIC", 31)) {
+      /*                             ^                       */
+        *iv_return = EVAS_IMAGE_CONTENT_HINT_DYNAMIC;
+        return PERL_constant_ISIV;
+      }
+      break;
     }
     break;
   case 32:
-    if (memEQ(name, "EVAS_VIDEO_SURFACE_IGNORE_WINDOW", 32)) {
-      *iv_return = EVAS_VIDEO_SURFACE_IGNORE_WINDOW;
-      return PERL_constant_ISIV;
+    /* Names all of length 32.  */
+    /* EVAS_CALLBACK_CHANGED_SIZE_HINTS EVAS_VIDEO_SURFACE_IGNORE_WINDOW */
+    /* Offset 27 gives the best switch position.  */
+    switch (name[27]) {
+    case 'H':
+      if (memEQ(name, "EVAS_CALLBACK_CHANGED_SIZE_HINTS", 32)) {
+      /*                                          ^           */
+        *iv_return = EVAS_CALLBACK_CHANGED_SIZE_HINTS;
+        return PERL_constant_ISIV;
+      }
+      break;
+    case 'I':
+      if (memEQ(name, "EVAS_VIDEO_SURFACE_IGNORE_WINDOW", 32)) {
+      /*                                          ^           */
+        *iv_return = EVAS_VIDEO_SURFACE_IGNORE_WINDOW;
+        return PERL_constant_ISIV;
+      }
+      break;
     }
     break;
   case 33:
@@ -572,10 +909,48 @@ __END__
       break;
     }
     break;
+  case 36:
+    /* Names all of length 36.  */
+    /* EVAS_CALLBACK_CANVAS_OBJECT_FOCUS_IN
+       EVAS_CALLBACK_CANVAS_VIEWPORT_RESIZE */
+    /* Offset 23 gives the best switch position.  */
+    switch (name[23]) {
+    case 'E':
+      if (memEQ(name, "EVAS_CALLBACK_CANVAS_VIEWPORT_RESIZE", 36)) {
+      /*                                      ^                   */
+        *iv_return = EVAS_CALLBACK_CANVAS_VIEWPORT_RESIZE;
+        return PERL_constant_ISIV;
+      }
+      break;
+    case 'J':
+      if (memEQ(name, "EVAS_CALLBACK_CANVAS_OBJECT_FOCUS_IN", 36)) {
+      /*                                      ^                   */
+        *iv_return = EVAS_CALLBACK_CANVAS_OBJECT_FOCUS_IN;
+        return PERL_constant_ISIV;
+      }
+      break;
+    }
+    break;
   case 37:
-    if (memEQ(name, "EVAS_NATIVE_SURFACE_STATUS_SCANOUT_ON", 37)) {
-      *iv_return = EVAS_NATIVE_SURFACE_STATUS_SCANOUT_ON;
-      return PERL_constant_ISIV;
+    /* Names all of length 37.  */
+    /* EVAS_CALLBACK_CANVAS_OBJECT_FOCUS_OUT
+       EVAS_NATIVE_SURFACE_STATUS_SCANOUT_ON */
+    /* Offset 22 gives the best switch position.  */
+    switch (name[22]) {
+    case 'A':
+      if (memEQ(name, "EVAS_NATIVE_SURFACE_STATUS_SCANOUT_ON", 37)) {
+      /*                                     ^                     */
+        *iv_return = EVAS_NATIVE_SURFACE_STATUS_SCANOUT_ON;
+        return PERL_constant_ISIV;
+      }
+      break;
+    case 'B':
+      if (memEQ(name, "EVAS_CALLBACK_CANVAS_OBJECT_FOCUS_OUT", 37)) {
+      /*                                     ^                     */
+        *iv_return = EVAS_CALLBACK_CANVAS_OBJECT_FOCUS_OUT;
+        return PERL_constant_ISIV;
+      }
+      break;
     }
     break;
   case 38:

@@ -408,10 +408,9 @@ CODE:
     tmp = SvIV((SV*)SvRV(perlobj));
     obj = INT2PTR(EvasObject*,tmp);
     event = SvPV_nolen(type);
-    printf("EVENT %s",event);
     // Save the data on the perl side
     sc = perl_save_callback(aTHX_ func, perlobj,event,"Efl::PLSide::Callbacks");
-    evas_object_event_callback_add(obj,SvIV(type),call_perl_sub,sc);
+    evas_object_event_callback_add(obj,SvIV(type),call_perl_evas_event_cb,sc);
 
 
 # void
@@ -444,7 +443,7 @@ CODE:
     address = SvUV(cstructaddr);
     printf("Delete cb CSTRUCTADDR %"UVuf,address);
     sc = INT2PTR(_perl_callback*,address);
-    data = evas_object_smart_callback_del_full(obj, type, call_perl_sub,sc);
+    data = evas_object_smart_callback_del_full(obj, type, call_perl_evas_event_cb,sc);
     if (data == NULL) {
         croak("Could not delete evas callback\n");
     }

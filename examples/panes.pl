@@ -12,7 +12,7 @@ my $size;
 
 Efl::Elm::init($#ARGV, \@ARGV);
 
-Efl::Elm::policy_set(ELM::POLICY_QUIT, ELM::POLICY_QUIT_LAST_WINDOW_CLOSED);
+Efl::Elm::policy_set(ELM_POLICY_QUIT, ELM_POLICY_QUIT_LAST_WINDOW_CLOSED);
 
 my $win = Efl::Elm::Win->util_standard_add("hello", "Hello, World!");
 $win->autodel_set(1);
@@ -21,7 +21,7 @@ $win->autodel_set(1);
 $win->resize(400,400);
 
 my $panes = Efl::Elm::Panes->add($win);
-$panes->size_hint_weight_set(EVAS::HINT_EXPAND, EVAS::HINT_EXPAND);
+$panes->size_hint_weight_set(EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
 $win->resize_object_add($panes);
 $panes->show();
 
@@ -32,8 +32,8 @@ $panes->part_content_set("left",$panes_h);
 # Create a button object
 my $bt = Efl::Elm::Button->add($win);
 $bt->text_set("Right");
-$bt->size_hint_weight_set(EVAS::HINT_EXPAND,EVAS::HINT_EXPAND);
-$bt->size_hint_align_set(EVAS::HINT_FILL, EVAS::HINT_FILL);
+$bt->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
+$bt->size_hint_align_set(EVAS_HINT_FILL, EVAS_HINT_FILL);
 $bt->show();
 
 $panes->part_content_set("right",$bt);
@@ -41,8 +41,8 @@ $panes->part_content_set("right",$bt);
 # Create an "Up" button
 my $bt2 = Efl::Elm::Button->add($win);
 $bt2->text_set("Up");
-$bt2->size_hint_weight_set(EVAS::HINT_EXPAND,EVAS::HINT_EXPAND);
-$bt2->size_hint_align_set(EVAS::HINT_FILL, EVAS::HINT_FILL);
+$bt2->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
+$bt2->size_hint_align_set(EVAS_HINT_FILL, EVAS_HINT_FILL);
 $bt2->show();
 
 $panes_h->part_content_set("left",$bt2);
@@ -50,8 +50,8 @@ $panes_h->part_content_set("left",$bt2);
 # Create a "Down" button
 my $bt3 = Efl::Elm::Button->add($win);
 $bt3->text_set("Down");
-$bt3->size_hint_weight_set(EVAS::HINT_EXPAND,EVAS::HINT_EXPAND);
-$bt3->size_hint_align_set(EVAS::HINT_FILL, EVAS::HINT_FILL);
+$bt3->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
+$bt3->size_hint_align_set(EVAS_HINT_FILL, EVAS_HINT_FILL);
 $bt3->show();
 
 $panes_h->part_content_set("right",$bt3);

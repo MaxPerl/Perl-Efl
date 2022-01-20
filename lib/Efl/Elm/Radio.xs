@@ -14,7 +14,7 @@
 typedef Evas_Object ElmRadio;
 typedef Evas_Object EvasObject;
 
-MODULE = Efl::Elm::Radio		PACKAGE = Efl::Elm::Radio     PREFIX = elm_radio_
+MODULE = Efl::Elm::Radio		PACKAGE = Efl::Elm::Radio
 
 ElmRadio * 
 elm_radio_add(EvasObject *parent)

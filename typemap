@@ -129,8 +129,19 @@ EvasObject *                    	T_EVAS_OBJECT
 const EvasObject *              	T_EVAS_OBJECT
 EvasCoordRectangle *         		T_PTROBJ
 Evas_Coord                      	T_IV
-Evas_Modifier *           			T_PTR
-const Evas_Modifier *         		T_PTR
+EvasModifier *           			T_EVAS_OBJECT
+const EvasModifier *         		T_EVAS_OBJECT
+EvasLock *           				T_EVAS_OBJECT
+const EvasLock *         			T_EVAS_OBJECT
+EvasEventMouseDown *   				T_PTROBJ
+EvasEventMouseUp *   				T_PTROBJ
+EvasEventMouseIn *   				T_PTROBJ
+EvasEventMouseOut *   				T_PTROBJ
+EvasEventMouseMove *   				T_PTROBJ
+EvasEventMouseWheel *   			T_PTROBJ
+EvasEventKeyDown *		   			T_PTROBJ
+EvasEventKeyUp *		   			T_PTROBJ
+EvasEventHold *		   			T_PTROBJ
 
 ####################
 # ECORE

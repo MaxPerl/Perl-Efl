@@ -24,6 +24,8 @@ _perl_callback *perl_save_callback(pTHX_ SV *func, SV *obj, char *event, char *h
 void call_perl_sub(void *data, Evas_Object *obj, void *event_info);
 void del_free(void *data);
 
+void call_perl_evas_event_cb(void *data, Evas *e, Evas_Object *obj, void *event_info);
+
 void call_perl_tooltip_content_cb(void *data, Evas_Object *obj, Evas_Object *tooltip);
 void del_tooltip(void *data);
 

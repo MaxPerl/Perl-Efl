@@ -9,7 +9,7 @@ use Efl::Elm::Radio;
 
 Efl::Elm::init($#ARGV, \@ARGV);
 
-Efl::Elm::policy_set(ELM::POLICY_QUIT, ELM::POLICY_QUIT_LAST_WINDOW_CLOSED);
+Efl::Elm::policy_set(ELM_POLICY_QUIT, ELM_POLICY_QUIT_LAST_WINDOW_CLOSED);
 
 my $win = Efl::Elm::Win->util_standard_add("Radio", "Radio Example");
 $win->autodel_set(1);
@@ -21,13 +21,13 @@ my $box = Efl::Elm::Box->add($win);
 $box->show();
 
 my $radio = Efl::Elm::Radio->add($box);
-$radio->text_set(undef, "Radio 1");
+$radio->text_set("Radio 1");
 $radio->state_value_set(1);
 $radio->show();
 $box->pack_end($radio);
 
 my $radio2 = Efl::Elm::Radio->add($box);
-$radio2->text_set("content", "Radio 2");
+$radio2->text_set("Radio 2");
 $radio2->state_value_set(2);
 $radio2->show();
 $box->pack_end($radio2);
@@ -35,7 +35,7 @@ $box->pack_end($radio2);
 $radio2->group_add($radio);
 
 my $radio3 = Efl::Elm::Radio->add($box);
-$radio3->text_set("content", "Radio 3");
+$radio3->text_set("Radio 3");
 $radio3->state_value_set(3);
 $radio3->show();
 $box->pack_end($radio3);

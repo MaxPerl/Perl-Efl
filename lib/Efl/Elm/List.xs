@@ -17,7 +17,7 @@ typedef Elm_Widget_Item ElmWidgetItem;
 typedef Elm_List_Item ElmListItem;
 typedef Eina_List EinaList;
 
-MODULE = Efl::Elm::List		PACKAGE = Efl::Elm::List     PREFIX = elm_list_
+MODULE = Efl::Elm::List		PACKAGE = Efl::Elm::List
 
 ElmList * 
 elm_list_add(EvasObject *parent)

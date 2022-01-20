@@ -14,7 +14,7 @@
 typedef Evas_Object ElmPanes;
 typedef Evas_Object EvasObject;
 
-MODULE = Efl::Elm::Panes		PACKAGE = Efl::Elm::Panes     PREFIX = elm_panes_
+MODULE = Efl::Elm::Panes		PACKAGE = Efl::Elm::Panes
 
 ElmPanes * 
 elm_panes_add(EvasObject *parent)

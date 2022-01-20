@@ -6,6 +6,7 @@ use warnings;
 require Exporter;
 use Efl::Evas::Object;
 use Efl::Elm::Object;
+use Efl::Elm::ListItem;
 
 our @ISA = qw(Exporter ElmListPtr);
 

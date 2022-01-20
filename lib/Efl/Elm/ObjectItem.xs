@@ -7,7 +7,6 @@
 
 #include <Elementary.h>
 
-
 typedef Elm_Object_Item ElmObjectItem;
 typedef Evas_Object EvasObject;
 

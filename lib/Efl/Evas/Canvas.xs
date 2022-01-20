@@ -313,12 +313,6 @@ evas_image_cache_flush(obj)
 	EvasCanvas *obj
 
 
-Eina_Bool
-evas_key_modifier_is_set(m,keyname)
-	const Evas_Modifier *m
-	const char *keyname
-
-
 void
 evas_norender(obj)
 	EvasCanvas *obj

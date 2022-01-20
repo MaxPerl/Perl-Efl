@@ -1,8 +1,6 @@
 use strict;
 use warnings;
 
-use Efl::Evas;
-use Efl::Evas::Object;
 use Efl::Elm;
 use Efl::Elm::Win;
 use Efl::Elm::Box;
@@ -11,7 +9,7 @@ use Efl::Elm::Button;
 
 Efl::Elm::init($#ARGV, \@ARGV);
 
-Efl::Elm::policy_set(ELM::POLICY_QUIT, ELM::POLICY_QUIT_LAST_WINDOW_CLOSED);
+Efl::Elm::policy_set(ELM_POLICY_QUIT, ELM_POLICY_QUIT_LAST_WINDOW_CLOSED);
 
 my $win = Efl::Elm::Win->util_standard_add("hello", "Hello");
 
@@ -48,7 +46,6 @@ $win->show();
 
 Efl::Elm::run();
 
-#print "Exiting ...\n";
 Efl::Elm::shutdown();
 
 sub on_done {

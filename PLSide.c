@@ -119,7 +119,8 @@ void call_perl_sub(void *data, Evas_Object *obj, void *event_info) {
 
     SV *s_ei  = newSV(0);
     if (event_info) {
-        fprintf(stderr, "event has an event info\n");
+        if (SvTRUE(get_sv("Efl::Debug",0)))
+			fprintf(stderr, "event has an event info\n");
         IV adress;
         adress = PTR2IV(event_info);
         sv_setiv(s_ei,adress);
@@ -141,6 +142,60 @@ void call_perl_sub(void *data, Evas_Object *obj, void *event_info) {
     PUSHMARK(SP);
 
     XPUSHs(args);
+    XPUSHs(sv_2mortal(s_obj));
+    XPUSHs(sv_2mortal(s_ei));
+
+
+    PUTBACK;
+
+    count = call_sv(func, G_DISCARD);
+    if (count != 0) {
+        croak("Expected 0 value got %d\n", count);
+    }
+
+    FREETMPS;
+    LEAVE;
+
+    /* TODO free data? */
+}
+
+void call_perl_evas_event_cb(void *data, Evas *e, Evas_Object *obj, void *event_info) {
+    dTHX;
+    dSP;
+    
+    int n;
+    int count;
+    SV *s_obj = newSV(0);
+	SV *s_canvas = newSV(0);
+    _perl_callback *perl_saved_cb = data;
+
+    SV *s_ei  = newSV(0);
+    if (event_info) {
+        if (SvTRUE(get_sv("Efl::Debug",0)))
+			fprintf(stderr, "event has an event info\n");
+        IV adress;
+        adress = PTR2IV(event_info);
+        sv_setiv(s_ei,adress);
+    }
+
+    HV *cb_data = _get_smart_cb_hash(aTHX_ perl_saved_cb->objaddr,perl_saved_cb->event,perl_saved_cb->funcname, "Efl::PLSide::Callbacks");
+
+    SV *pclass = *( hv_fetch(cb_data, "pclass",6,FALSE) );
+    SV *func = *( hv_fetch(cb_data, "function",8,FALSE) );
+    SV *args = *( hv_fetch(cb_data, "data",4,FALSE) ) ;
+    
+    
+    
+    sv_setref_pv(s_obj, SvPV_nolen(pclass), obj);
+	sv_setref_pv(s_canvas, "Efl::Evas::Canvas", e);
+	
+    ENTER;
+    SAVETMPS;
+
+    PUSHMARK(SP);
+
+    XPUSHs(args);
+	XPUSHs(sv_2mortal(s_canvas));
     XPUSHs(sv_2mortal(s_obj));
     XPUSHs(sv_2mortal(s_ei));
 
@@ -770,7 +825,8 @@ void call_perl_gen_item_selected(void *data, Evas_Object *obj, void *event_info)
         // TODO: Make an own function? This is also needed by call_perl_sub
         SV *s_ei  = newSV(0);
         if (event_info) {
-            fprintf(stderr, "event has an event info\n");
+            if (SvTRUE(get_sv("Efl::Debug",0)))
+				fprintf(stderr, "event has an event info\n");
             IV adress;
             adress = PTR2IV(event_info);
             sv_setiv(s_ei,adress);

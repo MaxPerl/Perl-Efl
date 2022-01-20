@@ -17,8 +17,6 @@ Efl::Elm::policy_set(ELM_POLICY_QUIT, ELM_POLICY_QUIT_LAST_WINDOW_CLOSED);
 my $win = Efl::Elm::Win->util_standard_add("hello", "Hello, World!");
 $win->autodel_set(1);
 
-my $timer = Efl::Ecore::Timer->loop_add(5,\&timer,123);
-
 my $bx = Efl::Elm::Box->add($win);
 $bx->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
 $win->resize_object_add($bx);
@@ -46,10 +44,4 @@ sub indicator_format {
 
 sub free {
 
-}
-
-sub timer {
-    my ($data) = @_;
-    print "HELLO FROM TIMER $data \n";
-    return ECORE_CALLBACK_RENEW;
 }
