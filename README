@@ -1,16 +1,14 @@
-Efl version 0.01
+Efl Perl bindings for the Enlightenment Foundation Libraries
 ================
 
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+Perl bindings for the Enlightenment Foundation Libraries (EFL). 
+The module gives a nice object-oriented interface. Apart from that 
+the API is deliberatly kept close to the Elementary API. The perl 
+method names generally remove the prefix at the beginning of the c 
+functions. Therefore applying the C documentation should be no problem. 
 
-A README file is required for CPAN modules since CPAN extracts the
-README file from a module distribution so that people browsing the
-archive can use it get an idea of the modules uses. It is usually a
-good idea to provide version information here so that people can
-decide whether fixes for the module are worth downloading.
+For the documentation in detail please study the single modules and the 
+documentation at https://www.enlightenment.org/docs/start
 
 INSTALLATION
 
@@ -25,11 +23,9 @@ DEPENDENCIES
 
 This module requires these other modules and libraries:
 
-  blah blah blah
+efl-dev
 
 COPYRIGHT AND LICENCE
-
-Put the correct copyright and licence information here.
 
 Copyright (C) 2021 by Maximilian Lika
 
