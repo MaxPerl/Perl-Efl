@@ -95,45 +95,26 @@ sub event_callback_del {
 
 1;
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
-Elm2 - Perl extension for blah blah blah
-
-=head1 SYNOPSIS
-
-  use Elm2;
-  blah blah blah
+Efl::Evas::Object
 
 =head1 DESCRIPTION
 
-Stub documentation for Elm2, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
-
-Blah blah blah.
-
-=head2 EXPORT
-
-None by default.
-
-
+This module is a perl binding to the Evas General Object Functions and Evas Smart Object funtions. It contains funtions
+and methods that manipulate generic Evas Objects, and functions dealing with Evas smart objects / instances (methods with
+the prefix smart_*).  
 
 =head1 SEE ALSO
 
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
+https://www.enlightenment.org/develop/legacy/api/c/start#group__Evas__Object__Group.html
 
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
+https://www.enlightenment.org/develop/legacy/api/c/start#group__Evas__Smart__Object__Group.html
 
 =head1 AUTHOR
 
-Maximilian Lika, E<lt>maximilian@E<gt>
+Maximilian Lika
 
 =head1 COPYRIGHT AND LICENSE
 

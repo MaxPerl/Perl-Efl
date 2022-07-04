@@ -78,45 +78,25 @@ our @ISA = qw();
 
 1;
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
-Efl::Elm - Perl extension for blah blah blah
-
-=head1 SYNOPSIS
-
-  use Efl::Elm;
-  blah blah blah
+Efl::Ecore::Idler
 
 =head1 DESCRIPTION
 
-Stub documentation for Efl::Elm, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
+This module is a perl binding to the Ecore Idle functions.
 
-Blah blah blah.
-
-=head2 EXPORT
-
-None by default.
-
-
+The idler functionality in Ecore allows for callbacks to be called when
+the program isn't handling.
 
 =head1 SEE ALSO
 
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
+https://www.enlightenment.org/develop/legacy/api/c/start#group__Ecore__Idle__Group.html
 
 =head1 AUTHOR
 
-Maximilian Lika, E<lt>maximilian@E<gt>
+Maximilian Lika
 
 =head1 COPYRIGHT AND LICENSE
 

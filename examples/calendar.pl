@@ -6,6 +6,8 @@ use Efl::Elm;
 use Efl::Elm::Win;
 use Efl::Elm::Calendar;
 use Efl::Evas;
+use Efl::Time;
+
 
 Efl::Elm::init($#ARGV, \@ARGV);
 
@@ -23,8 +25,10 @@ my $cal = Efl::Elm::Calendar->add($win);
 $cal->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
 $cal->weekdays_names_set(["Mo","Di","Mi","Do","Fr","Sa","So"]);
 
+my $tm = Efl::Time->new(localtime());
+$cal->date_max_set($tm);
 my $time = $cal->date_max_get();
-print "TIME " . $time->tm_mday() . "\n";
+
 
 $win->resize_object_add($cal);
 

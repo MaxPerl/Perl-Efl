@@ -1,11 +1,11 @@
-package Efl::Evas::Rectangle;
+package Efl::Evas::Textblock;
 
 use strict;
 use warnings;
 
 require Exporter;
 
-our @ISA = qw(Exporter EvasRectanglePtr);
+our @ISA = qw(Exporter EvasTextblockPtr);
 
 # Items to export into callers namespace by default. Note: do not export
 # names by default without a very good reason. Use EXPORT_OK instead.
@@ -25,22 +25,29 @@ our @EXPORT = qw(
 );
 
 require XSLoader;
-XSLoader::load('Efl::Evas::Rectangle');
+XSLoader::load('Efl::Evas::Textblock');
 
 sub add {
     my ($class,$parent) = @_;
-    my $widget = evas_object_rectangle_add($parent);
-    #$widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    my $widget = evas_object_textblock_add($parent);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     return $widget;
 }
 
 *new = \&add;
 
-package EvasRectanglePtr;
+package EvasTextblockPtr;
 
-use Efl::Evas::Object;
+use Efl::Eina;
 
 our @ISA = qw(EvasObjectPtr);
+
+sub node_format_list_get_pv {
+	my ($obj) = @_;
+    my $list = $obj->node_format_list_get();
+    my @array = Efl::Eina::list2array($list,"EvasTextblockNodeFormatPtr");
+    return @array;
+}
 
 # Preloaded methods go here.
 
@@ -49,17 +56,17 @@ __END__
 
 =head1 NAME
 
-Efl::Evas::Rectangle
+Efl::Evas::Textblock
 
 =head1 DESCRIPTION
 
-This module is a perl binding to the Evas Rectangle Object Functions.
+This module is a perl binding to the Evas Textblock Object Functions.
 
-It contains a function used to create evas rectangle objects.
+It contains functions and methods to create and manipulate textblock objects.
 
 =head1 SEE ALSO
 
-https://www.enlightenment.org/develop/legacy/api/c/start#group__Evas__Object__Rectangle.html
+https://www.enlightenment.org/develop/legacy/api/c/start#group__Evas__Object__Textblock__Group.html
 
 =head1 AUTHOR
 
@@ -75,4 +82,3 @@ at your option, any later version of Perl 5 you may have available.
 
 
 =cut
-

@@ -24,9 +24,7 @@ Efl::Elm::ObjectItem (not much)
     - Macros of elm_object_item.h
     - data_set|get
 Efl::Elm::Entry
-    - Basic functions (most of explained in Programming guide)
-    - filtering_callback stuff
-    - rest of Entry2_auto.xs
+    - see missing parts im Efl::Elm::Entry
 Efl::Fileselector (mostly)
     - custom_filter_append missing
 Efl::Elm::Ctxpopup
@@ -84,10 +82,9 @@ Elm::Object
 Elm::Genlist, Elm::GenlistItem, Elm::GenlistClass
     - insert_sorted not implemented
     - elm_genlist_filter_iterator_new missing
-
-
 Efl::Time
-    -needs a constructor
+
+
 ---- TODO
 
 Slideshow (works as Genlist!)
@@ -112,4 +109,9 @@ Efl::ev_info2obj(Efl::Elm::FocusOn);
     - Event: ElmPanel "scroll" => ElmPanelScrollInfo
     - Event: SlemSegmentControl "changed" => segment item pointer (ElmSegmentItem) 
     - Event: Toolbar "selected", "unselected" => ElmToolbarItem
+
+missing Evas_Event_structs:
+	- Evas_Event_Multi_Down
+	- Evas_Event_Multi_Up
+	- Evas_Event_Multi_Move
 ---

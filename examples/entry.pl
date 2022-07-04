@@ -69,8 +69,10 @@ sub changed {
         #$text =~ s/\<b\>//g;
         #$text =~ s/\<\/b\>//g;
         my @lines = split("\n",$text);
-        print "LINES @lines\n";
+        #print "LINES @lines\n";
         $text = "";
+        my $pos = $entry->cursor_pos_get();
+        print "POS $pos \n";
         foreach my $line (@lines) {
             # Notes
             if ($line =~ m/^[a-vx-zA-VX-Z]:/) {
@@ -85,7 +87,7 @@ sub changed {
                 $text = $text . "$line<br>";
             }
         }
-        print "TEXT $text\n";
+        #print "TEXT $text\n";
         
         $entry->entry_set("$text");
         $rehighlight = 0;

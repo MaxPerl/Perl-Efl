@@ -1,11 +1,11 @@
-package Efl::Evas::Rectangle;
+package Efl::Evas::TextblockCursor;
 
 use strict;
 use warnings;
 
 require Exporter;
 
-our @ISA = qw(Exporter EvasRectanglePtr);
+our @ISA = qw(Exporter EvasTextblockCursorPtr);
 
 # Items to export into callers namespace by default. Note: do not export
 # names by default without a very good reason. Use EXPORT_OK instead.
@@ -25,22 +25,35 @@ our @EXPORT = qw(
 );
 
 require XSLoader;
-XSLoader::load('Efl::Evas::Rectangle');
+XSLoader::load('Efl::Evas::TextblockCursor');
 
-sub add {
+sub new {
     my ($class,$parent) = @_;
-    my $widget = evas_object_rectangle_add($parent);
-    #$widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    my $widget = evas_object_textblock_cursor_new($parent);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     return $widget;
 }
 
-*new = \&add;
 
-package EvasRectanglePtr;
+package EvasTextblockCursorPtr;
 
-use Efl::Evas::Object;
+use Efl::Eina;
 
-our @ISA = qw(EvasObjectPtr);
+sub range_formats_get_pv {
+	my ($obj) = @_;
+    my $list = $obj->range_formats_get();
+    my @array = Efl::Eina::list2array($list,"EvasTextblockNodeFormat");
+    return @array;
+}
+
+sub range_geometry_get_pv {
+	my ($obj) = @_;
+    my $list = $obj->range_geometry_get();
+    my @array = Efl::Eina::list2array($list,"EvasRectangle");
+    return @array;
+}
+
+#our @ISA = qw(EvasObjectPtr);
 
 # Preloaded methods go here.
 
@@ -49,17 +62,17 @@ __END__
 
 =head1 NAME
 
-Efl::Evas::Rectangle
+Efl::Evas::TextblockCursor
 
 =head1 DESCRIPTION
 
-This module is a perl binding to the Evas Rectangle Object Functions.
+This module is a perl binding to Evas_Textblock_Cursor.
 
-It contains a function used to create evas rectangle objects.
+A Efl::Evas::TextblockCursor is used to manipulate the cursor of an evas textblock.
 
 =head1 SEE ALSO
 
-https://www.enlightenment.org/develop/legacy/api/c/start#group__Evas__Object__Rectangle.html
+https://www.enlightenment.org/develop/legacy/api/c/start#group__Evas__Object__Textblock__Group.html
 
 =head1 AUTHOR
 
@@ -75,4 +88,3 @@ at your option, any later version of Perl 5 you may have available.
 
 
 =cut
-

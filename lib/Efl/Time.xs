@@ -5,8 +5,6 @@
 
 #include "ppport.h"
 
-
-
 typedef struct _Efl_Time {
     int tm_sec;
     int tm_min;
@@ -21,6 +19,39 @@ typedef struct _Efl_Time {
 
 
 MODULE = Efl::Time		PACKAGE = Efl::Time
+
+EflTime *
+new(class,sec,min,hour,mday,mon,year,wday,yday,isdst)
+	char *class
+	int sec 
+	int min 
+	int hour 
+	int mday
+	int mon 
+	int year
+	int wday
+	int yday 
+	int isdst
+PREINIT:
+	EflTime *tmpbuf;
+CODE:
+	New(0, tmpbuf, 1, EflTime);
+	
+	// Init EflTime struct
+	tmpbuf->tm_sec = sec;
+	tmpbuf->tm_min = min;
+	tmpbuf->tm_hour = hour;
+	tmpbuf->tm_mday = mday;
+	tmpbuf->tm_mon = mon;
+	tmpbuf->tm_year = year;
+	tmpbuf->tm_wday = wday;
+	tmpbuf->tm_yday = yday;
+	tmpbuf->tm_isdst = isdst;
+	
+	RETVAL = tmpbuf;
+OUTPUT: 
+	RETVAL
+	
 
 MODULE = Efl::Time		PACKAGE = EflTimePtr
 

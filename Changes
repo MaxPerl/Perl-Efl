@@ -18,3 +18,11 @@ Revision history for Perl extension Efl.
 	- Add Efl::Evas::Modifier and Efl::Evas::Lock
 	- Add Efl::Evas::Event::MouseDown, Efl::Evas::Event::MouseUp, Efl::Evas::Event::MouseIn, Efl::Evas::Event::MouseOut, Efl::Evas::Event::MouseMove, Efl::Evas::Event::MouseWheel, Efl::Evas::Event::KeyDown, Efl::Evas::Event::KeyUp, Efl::Evas::Event::Hold
 	- Print Debug Messages only if $Efl::Debug is set.
+0.63 Sat Jul 02 06:00:00 2022
+	- Add Efl::Evas::Text
+	- Add Efl::Evas::Textblock,Efl::Evas::TextblockCursor,Efl::Evas::TextblockStyle,Efl::Evas::TextblockNodeFormat
+	- Add a simple constructor to Efl::Text
+	- POD corrections and amendments
+0.64
+	- POD amendemnts
+	- export all constants in Evas.pm and Elm.pm

@@ -1,8 +1,8 @@
 char *                              T_PV_OR_NULL
 const char *                        T_PV_OR_NULL
 
-EflTime *                           T_PTROBJ
-const EflTime *                     T_PTROBJ
+EflTime *                           T_EVAS_OBJECT
+const EflTime *                     T_EVAS_OBJECT
 
 Eina_Bool                           T_IV
 Eina_Bool *                         T_PTR
@@ -125,6 +125,16 @@ EvasPolygon *                    	T_EVAS_OBJECT
 const EvasPolygon *              	T_EVAS_OBJECT
 EvasRectangle *              		T_EVAS_OBJECT
 const EvasRectangle *      			T_EVAS_OBJECT
+EvasText *              			T_EVAS_OBJECT
+const EvasText *      				T_EVAS_OBJECT
+EvasTextblock *              		T_EVAS_OBJECT
+const EvasTextblock *      			T_EVAS_OBJECT
+EvasTextblockCursor *              	T_EVAS_OBJECT
+const EvasTextblockCursor *      	T_EVAS_OBJECT
+EvasTextblockNodeFormat * 			T_EVAS_OBJECT
+const EvasTextblockNodeFormat * 	T_EVAS_OBJECT
+EvasTextblockStyle *              	T_EVAS_OBJECT
+const EvasTextblockStyle *      	T_EVAS_OBJECT
 EvasObject *                    	T_EVAS_OBJECT
 const EvasObject *              	T_EVAS_OBJECT
 EvasCoordRectangle *         		T_PTROBJ

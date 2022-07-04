@@ -25,7 +25,7 @@ our @EXPORT = qw(
     
 );
 
-our $VERSION = '0.61';
+our $VERSION = '0.64';
 
 require XSLoader;
 XSLoader::load('Efl', $VERSION);
@@ -66,7 +66,7 @@ The Efl modules gives you the following functions:
 
 =item Efl::ev_info2s($ev_info) - if event info is a string, this function converts the void pointer to a perl string
 
-=item Efl::ev_info2obj($ev_info, "Efl::Evas::Event::... or similar") - if event info is a c stuct, this function converts the void pointer to a perl scalar, that is blessed to the given class. The perl class gives the necessary methods to get the members of the struc. At the moment the following c structs are (among others) supported:
+=item Efl::ev_info2obj($ev_info, "Efl::Evas::Event::MouseUp") - if event info is a c stuct, this function converts the void pointer to a perl scalar, that is blessed to the given class. The perl class gives the necessary methods to get the members of the struc. At the moment the following c structs are (among others) supported:
 
 =over 8
 
@@ -94,7 +94,12 @@ The Efl modules gives you the following functions:
 
 Some events pass an Elementary Widget or an Evas Object as event info. Of course you can use ev_info2obj to convert these pointers to a appropiate blessed perl scalar, too. See for instance examples/colorselector.pl, where the Elm Widget Elm_Colorselector_Palette_Item is passed as event_info. This must converted by Efl::ev_info2obj($ev_info, "Efl::Elm::ColorselectorPaletteItem"); 
 
-The provision of perl classes for event_info c structs is work in progress. If you need a specific binding for a c srtuct that is not supported at the moment, please send an issue report.
+The provision of perl classes for event_info c structs is work in progress. If you need a specific binding for a c struct that is not supported at the moment, please send an issue report.
+
+=item Output Parameters
+
+Efl uses sometimes output parameters. See for example C<void elm_calendar_min_max_year_get(Evas_Object *obj,int *min,int *max)>, where you have to pass in C a pointer to max and min. In perl this is translated to my C<($min, $max) = $calendar->min_max_year_get();>. Sometimes the C function returns a status or similar as in C<Eina_Bool
+elm_entry_cursor_geometry_get(Evas_Object *obj,int *x,int *y,int *w,int *h)>. In Perl this status variable is given, too. So the function elm_entry_cursor_geometry_get for example is translated into C<my ($status,$x,$y,$w,$h) = $entry->cursor_geometry_get;>.
 
 =back
 

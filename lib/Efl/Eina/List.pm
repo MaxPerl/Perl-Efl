@@ -48,41 +48,32 @@ __END__
 
 =head1 NAME
 
-Efl::Elm - Perl extension for blah blah blah
-
-=head1 SYNOPSIS
-
-  use Efl::Elm;
-  blah blah blah
+Efl::Eina::List
 
 =head1 DESCRIPTION
 
-Stub documentation for Efl::Elm, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
+This module is a perl binding to the Eina List datatype. 
 
-Blah blah blah.
+If a method returns an Eina_List, it is better to use the perl function with the
+suffix _pv. This translates the Eina_List into an perl array.
+
+You can manually convert an Eina_List to a perl array with Eina::list2array($list, $class).
+
+Note: At the moment it is not planed to support the Eina datatypes in Perl. Also the function in this
+module are not tested at the moment. So use it at your own risk!
 
 =head2 EXPORT
 
 None by default.
 
 
-
 =head1 SEE ALSO
 
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
+https://www.enlightenment.org/develop/legacy/api/c/start#group__Eina__List__Group.html
 
 =head1 AUTHOR
 
-Maximilian Lika, E<lt>maximilian@E<gt>
+Maximilian Lika
 
 =head1 COPYRIGHT AND LICENSE
 

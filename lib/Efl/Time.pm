@@ -5,9 +5,8 @@ use warnings;
 use Carp;
 
 require Exporter;
-use AutoLoader;
 
-our @ISA = qw(Exporter);
+our @ISA = qw(Exporter EflTimePtr);
 
 # Items to export into callers namespace by default. Note: do not export
 # names by default without a very good reason. Use EXPORT_OK instead.
@@ -26,33 +25,24 @@ our @EXPORT = qw(
 	
 );
 
-our $VERSION = '0.01';
+require XSLoader;
+XSLoader::load('Efl::Time');
 
-sub AUTOLOAD {
-    # This AUTOLOAD is used to 'autoload' constants from the constant()
-    # XS function.
-
-    my $constname;
-    our $AUTOLOAD;
-    ($constname = $AUTOLOAD) =~ s/.*:://;
-    croak "&Callback::constant not defined" if $constname eq 'constant';
-    my ($error, $val) = constant($constname);
-    if ($error) { croak $error; }
-    {
-	no strict 'refs';
-	# Fixed between 5.005_53 and 5.005_61
-#XXX	if ($] >= 5.00561) {
-#XXX	    *$AUTOLOAD = sub () { $val };
-#XXX	}
-#XXX	else {
-	    *$AUTOLOAD = sub { $val };
-#XXX	}
-    }
-    goto &$AUTOLOAD;
+sub localtime {
+	my ($time) = shift;
+	$time = $time || time;
+	my $tm = Efl::Time->new(localtime($time);
+	return $tm;	
 }
 
-require XSLoader;
-XSLoader::load('Efl::Time', $VERSION);
+sub gmtime {
+	my ($time) = shift;
+	$time = $time || time;
+	my $tm = Efl::Time->new(gmtime($time);
+	return $tm;	
+}
+
+package EflTimePtr;
 
 # Preloaded methods go here.
 
@@ -62,37 +52,31 @@ __END__
 
 =head1 NAME
 
-Efl::Time - Perl extension for blah blah blah
+Efl::Time
 
 =head1 SYNOPSIS
 
   use Efl::Time;
-  blah blah blah
+  my $tm = Efl::Time->new(localtime(time));
+  my $tm = Efl::Time->localtime(time);
+  my $tm = Efl::Time->gmtime(time);
+  my $sec = $tm->tm_sec;
+  my $min = $tm->tm_min;
+  my $hour = $tm->tm_hour;
+  [...]
 
 =head1 DESCRIPTION
 
-Stub documentation for Efl::Time, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
-
-Blah blah blah.
+This module is a perl binding to the Efl_Time struct which is an alias for the struct tm. 
 
 =head2 EXPORT
 
 None by default.
 
 
-
 =head1 SEE ALSO
 
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
+https://www.enlightenment.org/develop/api/efl/time
 
 =head1 AUTHOR
 

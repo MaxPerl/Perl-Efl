@@ -452,6 +452,39 @@ if  (eval {require ExtUtils::Constant; 1}) {
 		{name => 'EVAS_CALLBACK_AXIS_UPDATE', 'macro' => 1},
 		{name => 'EVAS_CALLBACK_CANVAS_VIEWPORT_RESIZE', 'macro' => 1},
 		{name => 'EVAS_CALLBACK_LAST', 'macro' => 1},
+		# EVAS TEXT
+		{name => 'EVAS_TEXT_STYLE_PLAIN', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_SHADOW', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_OUTLINE', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_SOFT_OUTLINE', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_GLOW', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_OUTLINE_SHADOW', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_FAR_SHADOW', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_OUTLINE_SOFT_SHADOW', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_SOFT_SHADOW', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_FAR_SOFT_SHADOW', 'macro' => 1},
+		#
+		{name => 'EVAS_TEXT_STYLE_SHADOW_DIRECTION_BOTTOM_RIGHT', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_SHADOW_DIRECTION_BOTTOM', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_SHADOW_DIRECTION_BOTTOM_LEFT', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_SHADOW_DIRECTION_LEFT', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_SHADOW_DIRECTION_TOP_LEFT', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_SHADOW_DIRECTION_TOP', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_SHADOW_DIRECTION_TOP_RIGHT', 'macro' => 1},
+		{name => 'EVAS_TEXT_STYLE_SHADOW_DIRECTION_RIGHT', 'macro' => 1},
+		#
+		{name => 'EVAS_BIDI_DIRECTION_NEUTRAL', 'macro' => 1},
+		{name => 'EVAS_BIDI_DIRECTION_NATURAL', 'macro' => 1},
+		{name => 'EVAS_BIDI_DIRECTION_LTR', 'macro' => 1},     
+		{name => 'EVAS_BIDI_DIRECTION_RTL', 'macro' => 1},     
+		{name => 'EVAS_BIDI_DIRECTION_INHERIT', 'macro' => 1},
+		#
+		{name => 'EVAS_TEXTBLOCK_TEXT_RAW', 'macro' => 1},
+		{name => 'EVAS_TEXTBLOCK_TEXT_PLAIN', 'macro' => 1},
+		{name => 'EVAS_TEXTBLOCK_TEXT_MARKUP', 'macro' => 1},
+		#
+		{name => 'EVAS_TEXTBLOCK_CURSOR_UNDER', 'macro' => 1},
+		{name => 'EVAS_TEXTBLOCK_CURSOR_BEFORE', 'macro' => 1},
     );
     
     ExtUtils::Constant::WriteConstants(

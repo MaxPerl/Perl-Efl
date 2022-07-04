@@ -16,6 +16,7 @@
 typedef Elm_Entry ElmEntry;
 typedef Elm_Entry_Anchor_Info ElmEntryAnchorInfo;
 typedef Evas_Object EvasObject;
+typedef Evas_Textblock EvasTextblock;
 
 MODULE = Efl::Elm::Entry		PACKAGE = Efl::Elm::Entry
 
@@ -466,7 +467,7 @@ elm_entry_cursor_line_begin_set(obj)
 	ElmEntry *obj
 
 
-EvasObject *
+EvasTextblock *
 elm_entry_textblock_get(obj)
 	const ElmEntry *obj
 
@@ -753,6 +754,33 @@ Eina_Bool
 elm_entry_prediction_hint_hash_del(obj,key)
 	ElmEntry *obj
 	const char *key
+	
+
+# void
+# elm_entry_filter_limit_size(data,entry,*text)
+#	void *data
+#	Evas_Object *entry
+#	char **text
+
+
+# void
+# elm_entry_filter_accept_set(data,entry,*text)
+#	void *data
+#	Evas_Object *entry
+#	char **text
+
+
+# char *
+# elm_entry_context_menu_item_label_get(item)
+#	const ElmEntry_Context_Menu_Item *item
+
+
+# void
+# elm_entry_context_menu_item_icon_get(item,*icon_file,*icon_group,icon_type)
+#	const ElmEntry_Context_Menu_Item *item
+#	const char **icon_file
+#	const char **icon_group
+#	Elm_Icon_Type *icon_type
 
 
 MODULE = Efl::Elm::Entry		PACKAGE = ElmEntryAnchorInfoPtr

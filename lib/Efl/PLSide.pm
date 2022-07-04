@@ -369,37 +369,14 @@ __END__
 
 =head1 NAME
 
-Elm2 - Perl extension for blah blah blah
-
-=head1 SYNOPSIS
-
-  use Elm2;
-  blah blah blah
+Efl::PLSide - Perl extension for blah blah blah
 
 =head1 DESCRIPTION
 
-Stub documentation for Elm2, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
-
-Blah blah blah.
-
-=head2 EXPORT
-
-None by default.
-
-
-
-=head1 SEE ALSO
-
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
+This module contains internal functions that are needed to connect c callbacks with
+the passed perl callback functions (as registering perl callback, saving perl callback data in 
+a hash, freeing perl callback data and freeing the c struct, that saves the data to find the
+appropriate perl data ...). 
 
 =head1 AUTHOR
 
