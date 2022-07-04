@@ -58,22 +58,22 @@ $button_text->smart_callback_add("clicked", \&_button_click_cb, $text);
 #$button_text->smart_callback_add("del", sub {$button_text->delete_perl_data()}, undef);
 # Press event
 
-    # Basic icon button
-    my $button_icon = Efl::Elm::Button->add($win);
-    my $icon = Efl::Elm::Icon->add($win);
+# Basic icon button
+my $button_icon = Efl::Elm::Button->add($win);
+my $icon = Efl::Elm::Icon->add($win);
 
-    # set the image file and the button as an icon
-    $icon->file_set("icon.png",undef);
-    $button_icon->part_content_set("icon",$icon);
+# set the image file and the button as an icon
+$icon->file_set("icon.png",undef);
+$button_icon->part_content_set("icon",$icon);
 
-    $button_icon->size_hint_weight_set(1,1);
-    $button_icon->size_hint_align_set(-1, 0.5);
+$button_icon->size_hint_weight_set(1,1);
+$button_icon->size_hint_align_set(-1, 0.5);
 
-    $button_icon->resize(100,30);
-    $button_icon->move(110,0);
-    $button_icon->show();
+$button_icon->resize(100,30);
+$button_icon->move(110,0);
+$button_icon->show();
 
-    #$button_icon->smart_callback_add("clicked", \&_button_press_cb, $button_text);
+#$button_icon->smart_callback_add("clicked", \&_button_press_cb, $button_text);
 
 
 # Unpress event
@@ -95,11 +95,6 @@ sub test {
 sub _button_click_cb {
     my ($data, $button, $event_info) = @_;
     print "Clicked\n";
-    my $addr = refaddr($button);
-    print "BU>TT " . $$button."\n";
-    use Devel::Peek;
-    Dump($_[1]);
-    #Dump($_[0]);
     $_[1]->text_set("Clicked!");
     #$button_text->smart_callback_del("clicked",\&_button_click_cb,undef);
 }

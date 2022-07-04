@@ -309,9 +309,32 @@ ELM_GENLIST_ITEM_SCROLLTO_BOTTOM
 );
 
 require XSLoader;
-XSLoader::load('Efl::Elm', $VERSION);
+XSLoader::load('Efl::Elm');
 
 # Preloaded methods go here.
+
+sub AUTOLOAD {
+    # This AUTOLOAD is used to 'autoload' constants from the constant()
+    # XS function.
+
+    my $constname;
+    our $AUTOLOAD;
+    ($constname = $AUTOLOAD) =~ s/.*:://;
+    croak "&Callback::constant not defined" if $constname eq 'constant';
+    my ($error, $val) = constant($constname);
+    if ($error) { croak $error; }
+    {
+	no strict 'refs';
+	# Fixed between 5.005_53 and 5.005_61
+#XXX	if ($] >= 5.00561) {
+#XXX	    *$AUTOLOAD = sub () { $val };
+#XXX	}
+#XXX	else {
+	    *$AUTOLOAD = sub { $val };
+#XXX	}
+    }
+    goto &$AUTOLOAD;
+}
 
 1;
 __END__

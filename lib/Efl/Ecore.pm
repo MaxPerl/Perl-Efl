@@ -30,9 +30,14 @@ our @EXPORT = qw(
     ECORE_CALLBACK_RENEW
     ECORE_CALLBACK_PASS_ON
     ECORE_CALLBACK_DONE
+	ECORE_POLLER_CORE
 );
 
-our $VERSION = '0.01';
+
+require XSLoader;
+XSLoader::load('Efl::Ecore');
+
+# Preloaded methods go here.
 
 sub AUTOLOAD {
     # This AUTOLOAD is used to 'autoload' constants from the constant()
@@ -56,11 +61,6 @@ sub AUTOLOAD {
     }
     goto &$AUTOLOAD;
 }
-
-require XSLoader;
-XSLoader::load('Efl::Ecore', $VERSION);
-
-# Preloaded methods go here.
 
 
 1;

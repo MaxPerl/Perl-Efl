@@ -59,7 +59,6 @@ Efl::Elm::run();
 Efl::Elm::shutdown();
 
 sub del_cb {
-    print "ITEM DELETED\n";
 }
 
 sub _text_get {
@@ -80,11 +79,8 @@ sub _content_get {
 
 sub _select_item {
     my ($data, $obj, $evInfo) = @_;
-    #my $i = $obj->selected_items_get();
-    #my @arr = Efl::Eina::list2array($i,"ElmGenlistItemPtr");
     my @arr = $obj->selected_items_get_pv();
     foreach my $item (@arr) {
-        print "ITEM HAS INDEX " . $item->index_get() ."\n";
         $item->del();
     }
     

@@ -31,14 +31,14 @@ XSLoader::load('Efl::Time');
 sub localtime {
 	my ($time) = shift;
 	$time = $time || time;
-	my $tm = Efl::Time->new(localtime($time);
+	my $tm = Efl::Time->new(localtime($time));
 	return $tm;	
 }
 
 sub gmtime {
 	my ($time) = shift;
 	$time = $time || time;
-	my $tm = Efl::Time->new(gmtime($time);
+	my $tm = Efl::Time->new(gmtime($time));
 	return $tm;	
 }
 

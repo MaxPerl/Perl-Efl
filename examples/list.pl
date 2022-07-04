@@ -50,7 +50,7 @@ sub _prepend_itembutton_cb {
     
 	if ($next) {
 		my $text = $next->text_get();
-		print "TEXT $text\n";
+		print "Text of next item: $text\n";
 		$li->item_insert_before($next,"Hello Perl", undef, undef, undef, undef);
 		$li->go();
     }

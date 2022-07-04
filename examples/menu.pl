@@ -52,10 +52,9 @@ sub _del_it {
 
 sub show {
     my ($data) = @_;
-    print "SHOW\n";
     $data->show();
 }
 
 sub select {
-    my ($data2,$e,$f ) = @_; print "SELECT $data2 $e $f\n";
+    my ($data2,$e,$f ) = @_; print "SELECT $data2\n";
 }
