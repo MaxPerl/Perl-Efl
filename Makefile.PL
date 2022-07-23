@@ -24,6 +24,9 @@ WriteMakefile(
 		INC           => '-Wall -I. ' . $elm_pkg_info{'cflags'} . $evas_pkg_info{'cflags'},
 	},
 	xs => {
+		'lib/Efl/Ecore/EventHandler' => {
+			OBJECT => 'lib/Efl/Ecore/EventHandler$(OBJ_EXT) PLSide$(OBJ_EXT)',
+		},
 		'lib/Efl/Ecore/Evas' => {
 			OBJECT => 'lib/Efl/Ecore/Evas$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},

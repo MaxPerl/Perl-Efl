@@ -156,6 +156,19 @@ EvasEventHold *		   			T_PTROBJ
 ####################
 # ECORE
 ###################
+EcoreEventHandler *          		T_EVAS_OBJECT
+const EcoreEventHandler *   		T_EVAS_OBJECT
+EcoreEvent * 		         		T_EVAS_OBJECT
+const EcoreEvent *			   		T_EVAS_OBJECT
+EcoreEventFilter * 	        		T_EVAS_OBJECT
+const EcoreEventFilter *			T_EVAS_OBJECT
+EcoreEventKey * 		         	T_EVAS_OBJECT
+EcoreEventMouseButton * 			T_EVAS_OBJECT
+EcoreEventMouseWheel *	 			T_EVAS_OBJECT
+EcoreEventMouseMove *	 			T_EVAS_OBJECT
+EcoreEventSignalExit *	 			T_EVAS_OBJECT
+EcoreEventSignalRealtime *	 		T_EVAS_OBJECT
+EcoreEventSignalUser * 				T_EVAS_OBJECT
 EcoreEvas *                     	T_EVAS_OBJECT
 const EcoreEvas *               	T_EVAS_OBJECT
 EcoreTimer *                    	T_EVAS_OBJECT

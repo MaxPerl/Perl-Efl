@@ -85,5 +85,8 @@ void call_perl_ecore_evas_state_change(Ecore_Evas *ee);
 // Ecore Task Cbs
 Eina_Bool call_perl_task_cb(void *data);
 
+// Ecore Event Handler
+Eina_Bool call_perl_ecore_event_handler_cb(void *data, int type, void *event);
+
 #define H_PLSIDE
 #endif

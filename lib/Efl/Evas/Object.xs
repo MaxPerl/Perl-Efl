@@ -701,6 +701,23 @@ evas_object_smart_move_children_relative(obj,dx,dy)
 	Evas_Coord dx
 	Evas_Coord dy
 
+void
+evas_object_pass_events_set(obj,pass)
+	const EvasObject *obj
+	Eina_Bool pass
+
+Eina_Bool
+evas_object_pass_events_get(obj)
+	const EvasObject *obj
+
+void
+evas_object_freeze_events_set(obj,freeze)
+	const EvasObject *obj
+	Eina_Bool freeze
+
+Eina_Bool
+evas_object_freeze_events_get(obj)
+	const EvasObject *obj
 
 # The following functions seem to be duplicate (see above)
 
@@ -717,3 +734,4 @@ evas_object_smart_move_children_relative(obj,dx,dy)
 # Eina_Iterator *
 # evas_object_smart_iterator_new(obj)
 #	const Efl_Canvas_Group *obj
+

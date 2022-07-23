@@ -41,7 +41,7 @@ HV* _get_smart_cb_hash(pTHX_ UV objaddr,char *event,SV *funcname, char* hashName
     HV* Obj_Cbs;
     int len, n;
     char *keybuffer = _get_keybuffer2(aTHX_ event,funcname, &len);
-    
+
     HV *Callbacks = get_hv(hashName, 0);
     if (Callbacks == NULL) {
         croak("Efl::PLSide::Callbacks hash does not exist\n");
@@ -68,18 +68,18 @@ HV* _get_smart_cb_hash(pTHX_ UV objaddr,char *event,SV *funcname, char* hashName
 
 _perl_callback *perl_save_callback(pTHX_ SV *func, SV *obj, char *event, char *hashName) {
     _perl_callback *cb;
-    
+
     cb = (_perl_callback *)malloc(sizeof(_perl_callback));
     memset(cb, '\0', sizeof(_perl_callback));
     cb->funcname = newSV(0);
-    
+
     if (func && SvOK(func)) {
         cv_name((CV*)SvRV(func),cb->funcname,NULL);
     }
     else {
         croak("No function passed\n");
     }
-    
+
     if (obj && SvOK(obj)) {
         UV objaddr = PTR2UV (SvRV(obj));
         cb->objaddr = objaddr;
@@ -87,7 +87,7 @@ _perl_callback *perl_save_callback(pTHX_ SV *func, SV *obj, char *event, char *h
     else {
         croak("EvasObject missing\n");
     }
-    
+
     if (event) {
             strcpy(cb->event, event);
     }
@@ -98,12 +98,12 @@ _perl_callback *perl_save_callback(pTHX_ SV *func, SV *obj, char *event, char *h
     if (strcmp(hashName,"Efl::PLSide::Format_Cbs") == 0) {
         HV *cb_data = _get_format_cb_hash(aTHX_ cb->objaddr);
         hv_store(cb_data, "cstructaddr",11,newSVuv(PTR2UV(cb)),0);
-    } 
+    }
     else if (strcmp(hashName,"Efl::PLSide::Callbacks") == 0) {
         HV *smart_cb = _get_smart_cb_hash(aTHX_ cb->objaddr,cb->event,cb->funcname, hashName);
         hv_store(smart_cb, "cstructaddr",11,newSVuv(PTR2UV(cb)),0);
     }
-    
+
     return cb;
 }
 
@@ -111,7 +111,7 @@ _perl_callback *perl_save_callback(pTHX_ SV *func, SV *obj, char *event, char *h
 void call_perl_sub(void *data, Evas_Object *obj, void *event_info) {
     dTHX;
     dSP;
-    
+
     int n;
     int count;
     SV *s_obj = newSV(0);
@@ -131,9 +131,9 @@ void call_perl_sub(void *data, Evas_Object *obj, void *event_info) {
     SV *pclass = *( hv_fetch(cb_data, "pclass",6,FALSE) );
     SV *func = *( hv_fetch(cb_data, "function",8,FALSE) );
     SV *args = *( hv_fetch(cb_data, "data",4,FALSE) ) ;
-    
-    
-    
+
+
+
     sv_setref_pv(s_obj, SvPV_nolen(pclass), obj);
 
     ENTER;
@@ -162,7 +162,7 @@ void call_perl_sub(void *data, Evas_Object *obj, void *event_info) {
 void call_perl_evas_event_cb(void *data, Evas *e, Evas_Object *obj, void *event_info) {
     dTHX;
     dSP;
-    
+
     int n;
     int count;
     SV *s_obj = newSV(0);
@@ -183,12 +183,12 @@ void call_perl_evas_event_cb(void *data, Evas *e, Evas_Object *obj, void *event_
     SV *pclass = *( hv_fetch(cb_data, "pclass",6,FALSE) );
     SV *func = *( hv_fetch(cb_data, "function",8,FALSE) );
     SV *args = *( hv_fetch(cb_data, "data",4,FALSE) ) ;
-    
-    
-    
+
+
+
     sv_setref_pv(s_obj, SvPV_nolen(pclass), obj);
 	sv_setref_pv(s_canvas, "Efl::Evas::Canvas", e);
-	
+
     ENTER;
     SAVETMPS;
 
@@ -216,12 +216,12 @@ void call_perl_evas_event_cb(void *data, Evas *e, Evas_Object *obj, void *event_
 void call_perl_tooltip_content_cb(void *data, Evas_Object *obj, Evas_Object *tooltip) {
     dTHX;
     dSP;
-    
+
     int count;
 
     _perl_callback *perl_saved_cb = data;
     HV *cb_data = _get_smart_cb_hash(aTHX_ perl_saved_cb->objaddr,perl_saved_cb->event,perl_saved_cb->funcname, "Efl::PLSide::Callbacks");
-    
+
     // Object
     SV *s_obj = newSV(0);
     SV *pclass = *( hv_fetch(cb_data, "pclass",6,FALSE) );
@@ -231,12 +231,12 @@ void call_perl_tooltip_content_cb(void *data, Evas_Object *obj, Evas_Object *too
     SV *s_tooltip = newSV(0);
     sv_setref_pv(s_tooltip, "EvasObjectPtr", tooltip);
 
-    
+
     SV *func = *( hv_fetch(cb_data, "function",8,FALSE) );
     SV *args = *( hv_fetch(cb_data, "data",4,FALSE) ) ;
-    
-    
-    
+
+
+
     sv_setref_pv(s_obj, SvPV_nolen(pclass), obj);
 
     ENTER;
@@ -278,7 +278,7 @@ HV* _get_format_cb_hash(pTHX_ UV objaddr) {
     if (Callbacks == NULL) {
         croak("Efl::PLSide::Format_Cbs hash does not exist\n");
     }
-    
+
     n = snprintf(keybuffer, len, "%" UVuf, objaddr);
     if (hv_exists(Callbacks,keybuffer,strlen(keybuffer))) {
         SV** Cb_DataPtr = hv_fetch(Callbacks, keybuffer,strlen(keybuffer),FALSE);
@@ -330,11 +330,11 @@ char* call_perl_format_cb(double value, void* data) {
     s_string = POPs;
     len = sv_len(s_string);
     buf = savepv(SvPV(s_string,len));
-    
+
     PUTBACK;
     FREETMPS;
     LEAVE;
-    
+
     return buf;
 }
 
@@ -350,15 +350,15 @@ HV* _get_markup_filter_cb(pTHX_ UV objaddr,SV* funcname) {
     HV* markup_filters;
     HV* cb_data;
     int len, n;
-    
+
     HV *cbs = get_hv("Efl::PLSide::MarkupFilter_Cbs", 0);
     if (cbs == NULL) {
         croak("Efl::PLSide::MarkupFilter_Cbs hash does not exist\n");
     }
-    
+
     char *addr_keybuffer = _get_keybuffer(NULL, objaddr,&len);
     n = snprintf(addr_keybuffer, len, "%" UVuf, objaddr);
-    
+
     if (hv_exists(cbs,addr_keybuffer,strlen(addr_keybuffer))) {
         SV** markup_filtersPtr = hv_fetch(cbs, addr_keybuffer, strlen(addr_keybuffer), FALSE);
         markup_filters = (HV*) SvRV(*markup_filtersPtr);
@@ -366,9 +366,9 @@ HV* _get_markup_filter_cb(pTHX_ UV objaddr,SV* funcname) {
     else {
         croak("No markup filters found\n");
     }
-    
+
     free(addr_keybuffer);
-    
+
     char *keybuffer = _get_keybuffer2(aTHX_ NULL,funcname, &len);
     n = snprintf(keybuffer, len, "%s", SvPV_nolen(funcname));
     if (hv_exists(markup_filters,keybuffer,strlen(keybuffer))) {
@@ -378,19 +378,19 @@ HV* _get_markup_filter_cb(pTHX_ UV objaddr,SV* funcname) {
     else {
         croak("No callbacksss found\n");
     }
-    
+
     free(keybuffer);
-    
+
     return cb_data;
 }
 
 _perl_callback *save_markup_filter_struct(pTHX_ SV *func, UV addr) {
     _perl_callback *cb;
-    
+
     cb = (_perl_callback *)malloc(sizeof(_perl_callback));
     memset(cb, '\0', sizeof(_perl_callback));
     cb->funcname = newSV(0);
-    
+
     if (SvPOK(func) && (strcmp(SvPV_nolen(func),"limit_size") == 0)) {
         cb->funcname = func;
     }
@@ -410,11 +410,11 @@ _perl_callback *save_markup_filter_struct(pTHX_ SV *func, UV addr) {
     else {
         croak("No object address passed\n");
     }
-    
-    
+
+
     HV *markup_filter_cb = _get_markup_filter_cb(aTHX_ cb->objaddr,cb->funcname);
     hv_store(markup_filter_cb, "cstructaddr",11,newSVuv(PTR2UV(cb)),0);
-    
+
     return cb;
 }
 
@@ -423,26 +423,26 @@ void call_perl_markup_filter_cb(void *data, Elm_Entry *entry, char **text) {
     dSP;
 
     int count; STRLEN len;
-    SV *s_string; 
-    
-    
+    SV *s_string;
+
+
     _perl_callback *perl_saved_cb = data;
 
     HV *cb_data = _get_markup_filter_cb(aTHX_ perl_saved_cb->objaddr, perl_saved_cb->funcname);
 
     // Get functoion
     SV *func = *( hv_fetch(cb_data, "function",8,FALSE) );
-    
+
     // Get data
     SV* s_data = *( hv_fetch(cb_data, "data",4,FALSE) );
-    
+
     // Get Object
     SV *s_obj = newSV(0);
     sv_setref_pv(s_obj, "ElmEntry", entry);
-    
+
     // text
     SV *s_text = newSVpvn(*text,strlen(*text));
-    
+
     ENTER;
     SAVETMPS;
 
@@ -451,7 +451,7 @@ void call_perl_markup_filter_cb(void *data, Elm_Entry *entry, char **text) {
     XPUSHs(s_data);
     XPUSHs(sv_2mortal(s_obj));
     XPUSHs(sv_2mortal(s_text));
-    
+
     PUTBACK;
 
     count = call_sv(func, G_SCALAR);
@@ -470,7 +470,7 @@ void call_perl_markup_filter_cb(void *data, Elm_Entry *entry, char **text) {
     else {
         *text = NULL;
     }
-    
+
     PUTBACK;
     FREETMPS;
     LEAVE;
@@ -484,12 +484,12 @@ AV* _get_gen_items(pTHX_ UV objaddr) {
     AV* cbs;
     int len, n;
     char *keybuffer = _get_keybuffer(NULL,objaddr, &len);
-    
+
     HV *GenItc_Cbs = get_hv("Efl::PLSide::GenItems", 0);
     if (GenItc_Cbs == NULL) {
         croak("Efl::PLSide::GenItems hash does not exist\n");
     }
-    
+
     n = snprintf(keybuffer, len, "%" UVuf, objaddr);
     if (hv_exists(GenItc_Cbs,keybuffer,strlen(keybuffer))) {
         SV** CbsPtr = hv_fetch(GenItc_Cbs, keybuffer,strlen(keybuffer),FALSE);
@@ -506,7 +506,7 @@ AV* _get_gen_items(pTHX_ UV objaddr) {
 
 HV* _get_gen_item_hash(pTHX_ UV objaddr, int item_id) {
     AV *GenItems = _get_gen_items(aTHX_ objaddr);
-    
+
     SV** GenItem_Ptr = av_fetch(GenItems, (I32) item_id,FALSE);
     HV *GenItem = (HV*) (SvRV(*GenItem_Ptr));
     return GenItem;
@@ -528,7 +528,7 @@ _perl_gendata *perl_save_gen_cb(pTHX_ SV *obj, SV *itc, int id) {
         UV itcaddr = PTR2UV(SvRV(itc));
         cb->itcaddr = itcaddr ;
     }
-    
+
     if (id>=0) {
         cb->item_id = id;
     }
@@ -554,12 +554,12 @@ HV* _get_gen_hash(pTHX_ UV objaddr, char *hashName) {
     HV* cbs;
     int len, n;
     char *keybuffer = _get_keybuffer(NULL,objaddr, &len);
-    
+
     HV *GenItc_Cbs = get_hv(hashName, 0);
     if (GenItc_Cbs == NULL) {
         croak("Efl::PLSide::GenItc hash does not exist\n");
     }
-    
+
     n = snprintf(keybuffer, len, "%" UVuf, objaddr);
     if (hv_exists(GenItc_Cbs,keybuffer,strlen(keybuffer))) {
         SV** CbsPtr = hv_fetch(GenItc_Cbs, keybuffer,strlen(keybuffer),FALSE);
@@ -580,31 +580,31 @@ char* call_perl_gen_text_get(void *data, Evas_Object *obj, const char *part) {
 
     int count; STRLEN len;
     SV *s_part;
-    SV *s_string; 
+    SV *s_string;
     char* buf;
 
     _perl_gendata *perl_saved_cb = data;
-    
+
     HV *cb_data = _get_gen_hash(aTHX_ perl_saved_cb->itcaddr,"Efl::PLSide::GenItc");
     SV *func = *( hv_fetch(cb_data, "text_get",8,FALSE) );
 
     HV *GenItem = _get_gen_item_hash(aTHX_ perl_saved_cb->objaddr, perl_saved_cb->item_id);
-    
+
     // Get data
     SV* s_data = *( hv_fetch(GenItem, "data",4,FALSE) );
-    
+
     // Object
     SV *s_obj = newSV(0);
     sv_setref_pv(s_obj, "ElmGenlistItemPtr", obj);
-    
+
     // part
     s_part = newSVpvn(part,strlen(part));
-    
+
     ENTER;
     SAVETMPS;
 
     PUSHMARK(SP);
-    
+
     XPUSHs(s_data);
     XPUSHs(sv_2mortal(s_obj));
     XPUSHs(sv_2mortal(s_part));
@@ -621,7 +621,7 @@ char* call_perl_gen_text_get(void *data, Evas_Object *obj, const char *part) {
 
     s_string = POPs;
     len = sv_len(s_string);
-    
+
     buf = strdup(SvPV(s_string,len));
 
     PUTBACK;
@@ -641,27 +641,27 @@ Eina_Bool call_perl_gen_state_get(void *data, Evas_Object *obj, const char *part
     char* buf;
 
     _perl_gendata *perl_saved_cb = data;
-    
+
     HV *cb_data = _get_gen_hash(aTHX_ perl_saved_cb->itcaddr,"Efl::PLSide::GenItc");
     SV *func = *( hv_fetch(cb_data, "state_get",8,FALSE) );
 
     HV *GenItem = _get_gen_item_hash(aTHX_ perl_saved_cb->objaddr, perl_saved_cb->item_id);
-    
+
     // Get data
     SV* s_data = *( hv_fetch(GenItem, "data",4,FALSE) );
-    
+
     // Object
     SV *s_obj = newSV(0);
     sv_setref_pv(s_obj, "ElmGenlistItemPtr", obj);
-    
+
     // part
     s_part = newSVpvn(part,strlen(part));
-    
+
     ENTER;
     SAVETMPS;
 
     PUSHMARK(SP);
-    
+
     XPUSHs(s_data);
     XPUSHs(sv_2mortal(s_obj));
     XPUSHs(sv_2mortal(s_part));
@@ -676,14 +676,14 @@ Eina_Bool call_perl_gen_state_get(void *data, Evas_Object *obj, const char *part
         croak("Expected 1 value got %d\n", count);
     }
 
-    s_bool = POPs;    
+    s_bool = POPs;
     if (SvTRUE(s_bool) ) {
         e_bool = EINA_TRUE;
     }
     else {
         e_bool = EINA_FALSE;
     }
-    
+
     PUTBACK;
     FREETMPS;
     LEAVE;
@@ -694,34 +694,34 @@ Eina_Bool call_perl_gen_state_get(void *data, Evas_Object *obj, const char *part
 Evas_Object* call_perl_gen_content_get(void *data, Evas_Object *obj, const char *part) {
     dTHX;
     dSP;
-    
+
     int count;
     SV *s_part;
-    SV *s_content; Evas_Object *ret_obj; 
+    SV *s_content; Evas_Object *ret_obj;
     char* buf;
 
     _perl_gendata *perl_saved_cb = data;
-    
+
     HV *cb_data = _get_gen_hash(aTHX_ perl_saved_cb->itcaddr,"Efl::PLSide::GenItc");
     SV *func = *( hv_fetch(cb_data, "content_get",11,FALSE) );
-    
+
     HV *GenItem = _get_gen_item_hash(aTHX_ perl_saved_cb->objaddr, perl_saved_cb->item_id);
-    
+
     // Get data
     SV* s_data = *( hv_fetch(GenItem, "data",4,FALSE) );
-    
+
     // Object
     SV *s_obj = newSV(0);
     sv_setref_pv(s_obj, "ElmGenlistItemPtr", obj);
-    
+
     // part
     s_part = newSVpvn(part,strlen(part));
-    
+
     ENTER;
     SAVETMPS;
 
     PUSHMARK(SP);
-    
+
     XPUSHs(s_data);
     XPUSHs(sv_2mortal(s_obj));
     XPUSHs(sv_2mortal(s_part));
@@ -737,7 +737,7 @@ Evas_Object* call_perl_gen_content_get(void *data, Evas_Object *obj, const char 
     }
 
     s_content = POPs;
-   
+
     if (!SvROK(s_content)) {
             ret_obj = NULL;
         }
@@ -757,28 +757,28 @@ Evas_Object* call_perl_gen_content_get(void *data, Evas_Object *obj, const char 
 void call_perl_gen_del(void *data, Evas_Object *obj) {
     dTHX;
     dSP;
-    
+
     _perl_gendata *perl_saved_cb = data;
-    
+
     HV *cb_data = _get_gen_hash(aTHX_ perl_saved_cb->itcaddr,"Efl::PLSide::GenItc");
     HV *GenItem = _get_gen_item_hash(aTHX_ perl_saved_cb->objaddr, perl_saved_cb->item_id);
-    
+
     if (hv_exists(cb_data,"del",3)) {
-        int count; 
-        
+        int count;
+
         SV *func = *( hv_fetch(cb_data, "del",3,FALSE) );
         // Get data
         SV* s_data = *( hv_fetch(GenItem, "data",4,FALSE) );
-        
+
         // Object
         SV *s_obj = newSV(0);
         sv_setref_pv(s_obj, "ElmGenlistItemPtr", obj);
-        
+
         ENTER;
         SAVETMPS;
 
         PUSHMARK(SP);
-        
+
         XPUSHs(s_data);
         XPUSHs(sv_2mortal(s_obj));
 
@@ -789,11 +789,11 @@ void call_perl_gen_del(void *data, Evas_Object *obj) {
         if (count != 0) {
             croak("Expected 0 value got %d\n", count);
         }
-        
+
         FREETMPS;
         LEAVE;
     }
-    
+
     hv_undef(GenItem);
     Safefree(data);
 }
@@ -805,22 +805,22 @@ void call_perl_gen_item_selected(void *data, Evas_Object *obj, void *event_info)
     int count; STRLEN len;
 
     _perl_gendata *perl_saved_cb = data;
-    
+
     HV *GenItem = _get_gen_item_hash(aTHX_ perl_saved_cb->objaddr, perl_saved_cb->item_id);
-    
+
     // Object
     SV *s_obj = newSV(0);
     SV *pclass = *( hv_fetch(GenItem, "pclass",6,FALSE) );
     sv_setref_pv(s_obj, SvPV_nolen(pclass), obj);
-    
+
     // Get func
     SV* func = *( hv_fetch(GenItem, "func",4,FALSE) );
-    
+
     // Execute callback only if a callback is saved :-)
     if (func && SvOK(func)) {
         // Get func_data
         SV *func_data = *( hv_fetch(GenItem, "func_data",9,FALSE) );
-        
+
         // event info
         // TODO: Make an own function? This is also needed by call_perl_sub
         SV *s_ei  = newSV(0);
@@ -831,12 +831,12 @@ void call_perl_gen_item_selected(void *data, Evas_Object *obj, void *event_info)
             adress = PTR2IV(event_info);
             sv_setiv(s_ei,adress);
         }
-        
+
         ENTER;
         SAVETMPS;
 
         PUSHMARK(SP);
-        
+
         XPUSHs(func_data);
         XPUSHs(sv_2mortal(s_obj));
         XPUSHs(sv_2mortal(s_ei));
@@ -851,7 +851,7 @@ void call_perl_gen_item_selected(void *data, Evas_Object *obj, void *event_info)
         FREETMPS;
         LEAVE;
     }
-    
+
 }
 
 //
@@ -864,12 +864,12 @@ AV* _get_signals(pTHX_ UV objaddr) {
     AV* cbs;
     int len, n;
     char *keybuffer = _get_keybuffer(NULL,objaddr, &len);
-    
+
     HV *Signals_Cbs = get_hv("Efl::PLSide::EdjeSignals", 0);
     if (Signals_Cbs == NULL) {
         croak("Efl::PLSide::EdjeSignals hash does not exist\n");
     }
-    
+
     n = snprintf(keybuffer, len, "%"UVuf, objaddr);
     if (hv_exists(Signals_Cbs,keybuffer,strlen(keybuffer))) {
         SV** CbsPtr = hv_fetch(Signals_Cbs, keybuffer,strlen(keybuffer),FALSE);
@@ -886,7 +886,7 @@ AV* _get_signals(pTHX_ UV objaddr) {
 
 HV* _get_signal_hash(pTHX_ UV objaddr, int item_id) {
     AV *Items = _get_signals(aTHX_ objaddr);
-    
+
     SV** Item_Ptr = av_fetch(Items, (I32) item_id,FALSE);
     HV *Item = (HV*) (SvRV(*Item_Ptr));
     return Item;
@@ -896,7 +896,7 @@ _perl_signal_cb *perl_save_signal_cb(pTHX_ SV *obj, int id) {
     _perl_signal_cb *cb;
 
     New(0,cb,1,_perl_signal_cb);
-    
+
     if (obj && SvOK(obj)) {
         UV objaddr = PTR2UV(SvRV(obj));
         cb->objaddr = objaddr ;
@@ -904,7 +904,7 @@ _perl_signal_cb *perl_save_signal_cb(pTHX_ SV *obj, int id) {
     else {
         croak("No Gen item class passed\n");
     }
-    
+
     if (id>=0) {
         cb->signal_id = id;
     }
@@ -925,19 +925,19 @@ _perl_signal_cb *perl_save_signal_cb(pTHX_ SV *obj, int id) {
 void call_perl_signal_cb(void *data, Evas_Object *layout, char *emission, char *source) {
     dTHX;
     dSP;
-    
+
     int n; int count;
-    
+
     _perl_signal_cb *perl_saved_cb = data;
     HV *cb_data = _get_signal_hash(aTHX_ perl_saved_cb->objaddr, perl_saved_cb->signal_id);
-    
+
     SV *func = *( hv_fetch(cb_data, "function",8,FALSE) );
     SV *args = *( hv_fetch(cb_data, "data",4,FALSE) ) ;
     SV *s_obj = newSV(0);
     sv_setref_pv(s_obj, "ElmLayoutPtr", layout);
     SV *s_emission = newSVpvn(emission,strlen(emission));
     SV *s_source = newSVpvn(source,strlen(source));
-    
+
     ENTER;
     SAVETMPS;
 
@@ -972,7 +972,7 @@ HV* _get_ecore_evas_event_cb_hash(pTHX_ UV objaddr) {
     if (Callbacks == NULL) {
         croak("Efl::PLSide::EcoreEvasEvent_Cbs hash does not exist\n");
     }
-    
+
     n = snprintf(keybuffer, len, "%" UVuf, objaddr);
     if (hv_exists(Callbacks,keybuffer,strlen(keybuffer))) {
         SV** Cb_DataPtr = hv_fetch(Callbacks, keybuffer,strlen(keybuffer),FALSE);
@@ -992,11 +992,11 @@ void call_perl_ecore_evas_event(pTHX_ Ecore_Evas *ee,char *event) {
     int n, count;
     UV eeaddr = PTR2IV(ee);
     HV *functions = _get_ecore_evas_event_cb_hash(aTHX_ eeaddr);
-    
+
     // Object
     SV *s_obj = newSV(0);
     sv_setref_pv(s_obj,"EcoreEvasPtr",ee);
-    
+
     //Get func
     SV *func = *( hv_fetch(functions,event,strlen(event), FALSE) );
 
@@ -1005,9 +1005,9 @@ void call_perl_ecore_evas_event(pTHX_ Ecore_Evas *ee,char *event) {
         SAVETMPS;
 
         PUSHMARK(SP);
-        
+
         XPUSHs(sv_2mortal(s_obj));
-        
+
         PUTBACK;
 
         count = call_sv(func, G_DISCARD);
@@ -1117,6 +1117,88 @@ void call_perl_ecore_evas_state_change(Ecore_Evas *ee) {
 }
 
 // --------------------------------------
+// Ecore Event Handler
+// --------------------------------------
+
+HV* _get_event_handler_hash(pTHX_ int item_id) {
+    AV *Task_Cbs = get_av("Efl::PLSide::EcoreEventHandler_Cbs", 0);
+    if (Task_Cbs == NULL) {
+        croak("Efl::PLSide::EcoreEventHandler_Cbs array does not exist\n");
+    }
+
+    SV** Task_Ptr = av_fetch(Task_Cbs, (I32) item_id,FALSE);
+    HV *Task = (HV*) (SvRV(*Task_Ptr));
+    return Task;
+}
+
+Eina_Bool call_perl_ecore_event_handler_cb(void *data, int type, void *event) {
+    dTHX;
+    dSP;
+    int n, count;
+    SV *s_bool; Eina_Bool e_bool;
+
+    int item_id = (intptr_t) data;
+    HV *Task = _get_event_handler_hash(aTHX_ item_id);
+
+    // Object
+    SV *s_data = *( hv_fetch(Task,"data",4, FALSE) );
+
+	// Type
+	// TODO: Not needed to save in the EventHandler Hash
+	// instead create a new SvIV?
+    SV *s_type = *( hv_fetch(Task,"type",4, FALSE) );
+
+	// eventinfo
+	SV *s_event  = newSV(0);
+    if (event) {
+        if (SvTRUE(get_sv("Efl::Debug",0)))
+			fprintf(stderr, "event has an event info\n");
+        IV adress;
+        adress = PTR2IV(event);
+        sv_setiv(s_event,adress);
+    }
+
+    //Get func
+    SV *func = *( hv_fetch(Task,"function",8, FALSE) );
+
+    if (func && SvOK(func)) {
+        ENTER;
+        SAVETMPS;
+
+        PUSHMARK(SP);
+
+        XPUSHs(s_data);
+        XPUSHs(s_type);
+        XPUSHs(s_event);
+
+        PUTBACK;
+
+        count = call_sv(func, G_SCALAR);
+
+        SPAGAIN;
+
+        if (count != 1) {
+            croak("Expected 1 value got %d\n", count);
+        }
+
+        s_bool = POPs;
+
+        if (SvTRUE(s_bool) ) {
+        e_bool = EINA_TRUE;
+    }
+    else {
+        e_bool = EINA_FALSE;
+    }
+
+    PUTBACK;
+    FREETMPS;
+    LEAVE;
+
+    return e_bool;
+    }
+}
+
+// --------------------------------------
 // Ecore Task Cbs
 // -------------------------------------
 
@@ -1125,7 +1207,7 @@ HV* _get_task_hash(pTHX_ int item_id) {
     if (Task_Cbs == NULL) {
         croak("Efl::PLSide::EcoreTask_Cbs array does not exist\n");
     }
-    
+
     SV** Task_Ptr = av_fetch(Task_Cbs, (I32) item_id,FALSE);
     HV *Task = (HV*) (SvRV(*Task_Ptr));
     return Task;
@@ -1136,13 +1218,13 @@ Eina_Bool call_perl_task_cb(void *data) {
     dSP;
     int n, count;
     SV *s_bool; Eina_Bool e_bool;
-    
+
     int item_id = (intptr_t) data;
     HV *Task = _get_task_hash(aTHX_ item_id);
-    
+
     // Object
     SV *s_data = *( hv_fetch(Task,"data",4, FALSE) );
-    
+
     //Get func
     SV *func = *( hv_fetch(Task,"function",8, FALSE) );
 
@@ -1151,19 +1233,19 @@ Eina_Bool call_perl_task_cb(void *data) {
         SAVETMPS;
 
         PUSHMARK(SP);
-        
+
         XPUSHs(s_data);
-        
+
         PUTBACK;
 
         count = call_sv(func, G_SCALAR);
-        
-        SPAGAIN; 
-        
+
+        SPAGAIN;
+
         if (count != 1) {
             croak("Expected 1 value got %d\n", count);
         }
-        
+
         s_bool = POPs;
 
         if (SvTRUE(s_bool) ) {
@@ -1172,7 +1254,7 @@ Eina_Bool call_perl_task_cb(void *data) {
     else {
         e_bool = EINA_FALSE;
     }
-    
+
     PUTBACK;
     FREETMPS;
     LEAVE;

@@ -26,3 +26,8 @@ Revision history for Perl extension Efl.
 0.64
 	- POD amendemnts
 	- export all constants in Evas.pm and Elm.pm
+0.65
+	- Add evas_object_freeze_events_set|get and evas_object_pass_events_set|get
+	- Add elm_object_scroll_freeze_*|hold_*|lock_*|item_loop_enabled_* etc.
+	- Add Efl::Ecore::EventHandler, Efl::Ecore::Event and some basic Ecore stuff
+	

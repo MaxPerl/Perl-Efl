@@ -7,6 +7,8 @@ use Efl::Elm;
 use Efl::Elm::Win;
 use Efl::Elm::Button;
 use Efl::Elm::Icon;
+
+
 use Scalar::Util qw(refaddr);
 
 Efl::Elm::init($#ARGV, \@ARGV);
@@ -79,8 +81,6 @@ $button_icon->show();
 # Unpress event
 #$button_icon->smart_callback_add("unpressed", \&_button_unpress_cb, undef);
 #Dump($button_icon);
-
-
 $win->show();
 
 Efl::Elm::run();

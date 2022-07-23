@@ -290,3 +290,54 @@ elm_object_tooltip_window_mode_set(obj,disable)
 Eina_Bool
 elm_object_tooltip_window_mode_get(obj)
 	const EvasObject *obj
+
+void
+elm_object_scroll_hold_push(obj)
+	const EvasObject *obj
+
+void
+elm_object_scroll_hold_pop(obj)
+	const EvasObject *obj
+
+int
+elm_object_scroll_hold_get(obj)
+	const EvasObject *obj
+
+void
+elm_object_scroll_freeze_push(obj)
+	const EvasObject *obj
+
+void
+elm_object_scroll_freeze_pop(obj)
+	const EvasObject *obj
+
+int
+elm_object_scroll_freeze_get(obj)
+	const EvasObject *obj
+
+void
+elm_object_scroll_lock_x_set(obj,lock)
+	const EvasObject *obj
+	Eina_Bool lock
+
+void
+elm_object_scroll_lock_y_set(obj,lock)
+	const EvasObject *obj
+	Eina_Bool lock
+
+Eina_Bool
+elm_object_scroll_lock_x_get(obj)
+	const EvasObject *obj
+
+Eina_Bool
+elm_object_scroll_lock_y_get(obj)
+	const EvasObject *obj
+
+void
+elm_object_scroll_item_loop_enabled_set(obj,enable)
+	const EvasObject *obj
+	Eina_Bool enable
+
+Eina_Bool
+elm_object_scroll_item_loop_enabled_get(obj)
+	const EvasObject *obj

@@ -505,6 +505,28 @@ my @names_ecore = (
     {name => 'ECORE_CALLBACK_DONE', 'macro' => 1},
     # TODO: IN Poller.xs
     {name => 'ECORE_POLLER_CORE', 'macro' => 1},
+    # Ecore Event
+    {name => 'ECORE_EVENT_NONE'},
+	{name => 'ECORE_EVENT_SIGNAL_USER'},
+	{name => 'ECORE_EVENT_SIGNAL_HUP'},
+	{name => 'ECORE_EVENT_SIGNAL_EXIT'},
+	{name => 'ECORE_EVENT_SIGNAL_POWER'},
+	{name => 'ECORE_EVENT_SIGNAL_REALTIME'},
+	{name => 'ECORE_EVENT_MEMORY_STATE'},
+	{name => 'ECORE_EVENT_POWER_STATE'},
+	{name => 'ECORE_EVENT_LOCALE_CHANGED'},
+	{name => 'ECORE_EVENT_HOSTNAME_CHANGED'},
+	{name => 'ECORE_EVENT_SYSTEM_TIMEDATE_CHANGED'},
+	{name => 'ECORE_EVENT_COUNT'},
+	#
+	{name => 'ECORE_EVENT_KEY_DOWN', 'macro' => 1},
+	{name => 'ECORE_EVENT_KEY_UP', 'macro' => 1},
+	{name => 'ECORE_EVENT_MOUSE_BUTTON_DOWN', 'macro' => 1},
+	{name => 'ECORE_EVENT_MOUSE_BUTTON_UP', 'macro' => 1},
+	{name => 'ECORE_EVENT_MOUSE_MOVE', 'macro' => 1},
+	{name => 'ECORE_EVENT_MOUSE_WHEEL', 'macro' => 1},
+	{name => 'ECORE_EVENT_MOUSE_IN', 'macro' => 1},
+	{name => 'ECORE_EVENT_MOUSE_OUT', 'macro' => 1},
     );
     
     ExtUtils::Constant::WriteConstants(

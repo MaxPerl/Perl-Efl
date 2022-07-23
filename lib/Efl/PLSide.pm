@@ -146,11 +146,11 @@ sub gen_del {
 sub save_gen_item_data {
     my ($obj, $data, $func, $func_data) = @_;
     my $objaddr = refaddr($obj);
-    
+
     # Note: We don't save the object itself, becaus we don't want to increase
     # the refcount of the object!!!
     my $pclass = blessed($obj);
-    
+
     my $struct = {
         data => $data,
         func => $func,
@@ -163,7 +163,7 @@ sub save_gen_item_data {
         @items = @{ $GenItems{$objaddr} };
     }
     push @items, $struct;
-    
+
     $GenItems{$objaddr} = \@items;
     return $#items;
 }
@@ -172,14 +172,14 @@ sub cleanup_genitems {
     my ($widget) = @_;
 
     my $objaddr = refaddr($widget);
-    
+
 
     foreach my $item ( @{ $GenItems{$objaddr} } ) {
         warn "Delete Genitem with key: $objaddr \n" if ($Efl::Debug);
 
         # Free the cstruct on C side
         if ($item->{cstructaddr}) {
-            
+
             my $cstructaddr = $item->{cstructaddr};
             Efl::PLSide->_free_perl_gendata($cstructaddr);
         }
@@ -207,7 +207,7 @@ sub register_markup_filter_cb {
     else {
         $funcname = get_func_name($func);
     }
-    
+
     my $func_struct ={  function => $func,
                         data => $data,
                         cstructaddr => ''
@@ -252,7 +252,7 @@ sub save_signal_data {
         @signals = @{ $EdjeSignals{$objaddr} };
     }
     push @signals, $struct;
-    
+
     $EdjeSignals{$objaddr} = \@signals;
     return $#signals;
 }
@@ -261,7 +261,7 @@ sub get_signal_id {
     my ( $obj, $emission, $source, $func) = @_;
     my $objaddr = refaddr($obj);
     my $funcname = get_func_name($func);
-    
+
     my @signals = ();
     @signals = @{ $EdjeSignals{$objaddr} } if ($EdjeSignals{$objaddr});
     my $signal_id = undef;
@@ -306,7 +306,7 @@ our %EcoreEvasEvent_Cbs;
 sub register_ecore_evas_event_cb {
     my ($obj, $func,$event) = @_;
 
-    # The key is the object address of the C Ecore_Evas struct, because 
+    # The key is the object address of the C Ecore_Evas struct, because
     # we don't have a data pointer where we can store the objectaddress of the perl scalar
     # The "IV-Pointeradress" of the C struct is saved in the SV of the referenced scalar
     # TODO: Perhaps it is always useful to use the adress of the C struct???
@@ -329,6 +329,25 @@ sub cleanup_ecore_evas_event_cb {
     delete($EcoreEvasEvent_Cbs{$objaddr});
 }
 
+
+##############################
+# Ecore EventHandler
+#############################
+	
+our @EcoreEventHandler_Cbs;
+
+sub register_ecore_event_handler_cb {
+    my ($type,$func, $data) = @_;
+
+    my $struct = {  function => $func,
+                    data => $data,
+                    type => $type};
+    push @EcoreEventHandler_Cbs, $struct;
+
+    return $#EcoreEventHandler_Cbs;
+
+}
+
 ##############################
 # Ecore Tasks (Timer, idler, poller, animator, etc)
 #############################
@@ -337,13 +356,13 @@ our @EcoreTask_Cbs;
 
 sub register_ecore_task_cb {
     my ($func, $data) = @_;
-    
-    my $struct = {  function => $func, 
+
+    my $struct = {  function => $func,
                     data => $data };
     push @EcoreTask_Cbs, $struct;
-    
+
     return $#EcoreTask_Cbs;
-    
+
 }
 
 # TODO: Passe das an den Array Aufbau an und Add this to a ecore_timer_del etc.
@@ -374,9 +393,9 @@ Efl::PLSide - Perl extension for blah blah blah
 =head1 DESCRIPTION
 
 This module contains internal functions that are needed to connect c callbacks with
-the passed perl callback functions (as registering perl callback, saving perl callback data in 
+the passed perl callback functions (as registering perl callback, saving perl callback data in
 a hash, freeing perl callback data and freeing the c struct, that saves the data to find the
-appropriate perl data ...). 
+appropriate perl data ...).
 
 =head1 AUTHOR
 

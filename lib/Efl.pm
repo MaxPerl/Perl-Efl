@@ -25,7 +25,7 @@ our @EXPORT = qw(
     
 );
 
-our $VERSION = '0.64';
+our $VERSION = '0.65';
 
 require XSLoader;
 XSLoader::load('Efl', $VERSION);
