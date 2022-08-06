@@ -31,7 +31,7 @@ XSLoader::load('Efl::Elm::CtxpopupItem');
 
 package ElmCtxpopupItemPtr;
 
-our @ISA = qw(ElmObjectPtr EvasObjectPtr);
+our @ISA = qw(ElmObjectItemPtr);
 
 # Preloaded methods go here.
 

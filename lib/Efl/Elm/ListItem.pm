@@ -32,7 +32,7 @@ XSLoader::load('Efl::Elm::ListItem');
 
 package ElmListItemPtr;
 
-our @ISA = qw(ElmObjectItemPtr EvasObjectPtr ElmObjectPtr);
+our @ISA = qw(ElmObjectItemPtr);
 
 # Preloaded methods go here.
 

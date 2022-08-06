@@ -17,7 +17,7 @@ typedef Elm_Toolbar ElmToolbar;
 typedef Elm_Toolbar_Item ElmToolbarItem;
 typedef Evas_Object EvasObject;
 
-MODULE = Efl::Elm::Toolbar		PACKAGE = Efl::Elm::Toolbar     PREFIX = elm_toolbar_
+MODULE = Efl::Elm::Toolbar		PACKAGE = Efl::Elm::Toolbar
 
 ElmToolbar * 
 elm_toolbar_add(parent)
@@ -179,6 +179,7 @@ PREINIT:
     _perl_gendata *data;
     ElmToolbar *obj;
     IV tmp;
+    ElmToolbarItem *item;
 CODE:
    // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
@@ -187,7 +188,9 @@ CODE:
     
     // Save C struct with necessary infos to link to perl side
     data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
-    RETVAL = elm_toolbar_item_insert_before(obj,before,icon,label,call_perl_gen_item_selected, data);
+    item = elm_toolbar_item_insert_before(obj,before,icon,label,call_perl_gen_item_selected, data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
 
@@ -203,6 +206,7 @@ PREINIT:
     _perl_gendata *data;
     ElmToolbar *obj;
     IV tmp;
+    ElmToolbarItem *item;
 CODE:
    // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
@@ -211,7 +215,9 @@ CODE:
     
     // Save C struct with necessary infos to link to perl side
     data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
-    RETVAL = elm_toolbar_item_insert_after(obj,after,icon,label,call_perl_gen_item_selected, data);
+    item = elm_toolbar_item_insert_after(obj,after,icon,label,call_perl_gen_item_selected, data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
 
@@ -226,6 +232,7 @@ PREINIT:
     _perl_gendata *data;
     ElmToolbar *obj;
     IV tmp;
+    ElmToolbarItem *item;
 CODE:
     // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
@@ -234,7 +241,9 @@ CODE:
     
     // Save C struct with necessary infos to link to perl side
     data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
-    RETVAL = elm_toolbar_item_append(obj,icon,label,call_perl_gen_item_selected, data);
+    item = elm_toolbar_item_append(obj,icon,label,call_perl_gen_item_selected, data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
 
@@ -253,6 +262,7 @@ PREINIT:
     _perl_gendata *data;
     ElmToolbar *obj;
     IV tmp;
+    ElmToolbarItem *item;
 CODE:
     // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
@@ -261,7 +271,9 @@ CODE:
     
     // Save C struct with necessary infos to link to perl side
     data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
-    RETVAL = elm_toolbar_item_prepend(obj,icon,label,call_perl_gen_item_selected, data);
+    item = elm_toolbar_item_prepend(obj,icon,label,call_perl_gen_item_selected, data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
 
@@ -269,17 +281,3 @@ ElmToolbarItem *
 elm_toolbar_item_find_by_label(obj,label)
 	const ElmToolbar *obj
 	const char *label
-
-
-MODULE = Efl::Elm::Toolbar	PACKAGE = Efl::Elm::Toolbar
-
-BOOT:
-/* set up constant subs */
-    {
-	HV *stash = gv_stashpvn("ELM::TOOLBAR", 12, TRUE);
-	newCONSTSUB(stash, "SHRINK_NONE",               newSViv(ELM_TOOLBAR_SHRINK_NONE));
-	newCONSTSUB(stash, "SHRINK_HIDE",            newSViv(ELM_TOOLBAR_SHRINK_HIDE));
-	newCONSTSUB(stash, "SHRINK_SCROLL",           newSViv(ELM_TOOLBAR_SHRINK_SCROLL));
-	newCONSTSUB(stash, "SHRINK_EXPAND",      newSViv(ELM_TOOLBAR_SHRINK_EXPAND));
-	newCONSTSUB(stash, "SHRINK_LAST",            newSViv(ELM_TOOLBAR_SHRINK_LAST));
-    }

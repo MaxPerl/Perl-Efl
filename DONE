@@ -58,7 +58,6 @@ Elm::SegmentItem
 Elm::Slider
 Elm::Spinner
 Elm::Toolbar
-    - Constants!!!
 Elm::ToolbarItem (partly)
     - elm_toolbar_item_state_del(obj,state)
     - elm_toolbar_item_icon_memfile_set missing
@@ -83,7 +82,8 @@ Elm::Genlist, Elm::GenlistItem, Elm::GenlistClass
     - insert_sorted not implemented
     - elm_genlist_filter_iterator_new missing
 Efl::Time
-
+Efl::Elm::Video
+	-elm_video_emotion_get(obj) missing
 
 ---- TODO
 
@@ -91,7 +91,7 @@ Slideshow (works as Genlist!)
 Prefs
 Map and Route
 [[ Thumbnail (should be no problem!) ]] Efl needs to be compiled with special settings => don't include!
-Video (should be no problem)
+
 ----
 Efl::ev_info2s()
     - used by Efl::Elm::Fileselector ("done","selected","activated", "directory,open")
@@ -109,6 +109,7 @@ Efl::ev_info2obj(Efl::Elm::FocusOn);
     - Event: ElmPanel "scroll" => ElmPanelScrollInfo
     - Event: SlemSegmentControl "changed" => segment item pointer (ElmSegmentItem) 
     - Event: Toolbar "selected", "unselected" => ElmToolbarItem
+    - EcoreEvents*
 
 missing Evas_Event_structs:
 	- Evas_Event_Multi_Down

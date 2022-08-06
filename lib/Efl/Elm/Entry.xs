@@ -280,14 +280,14 @@ Eina_Bool
 elm_entry_file_set(obj,file,format)
 	EvasObject *obj
 	const char *file
-	int format	
+	Elm_Text_Format format	
 
 	
 void
 elm_entry_file_get(obj,OUTLIST file, OUTLIST format)
 	EvasObject *obj
 	const char *file
-	int format	
+	Elm_Text_Format format	
 	
 	
 void

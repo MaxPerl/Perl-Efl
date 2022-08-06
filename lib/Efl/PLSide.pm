@@ -146,7 +146,6 @@ sub gen_del {
 sub save_gen_item_data {
     my ($obj, $data, $func, $func_data) = @_;
     my $objaddr = refaddr($obj);
-
     # Note: We don't save the object itself, becaus we don't want to increase
     # the refcount of the object!!!
     my $pclass = blessed($obj);

@@ -68,7 +68,7 @@ CODE:
     // stolen from the typemap of T_PTROBJ
     tmp = SvIV((SV*)SvRV(pobj));
     obj = INT2PTR(EvasObject*,tmp);
-    // Save Signal_Id
+    // Save Signal_Id 
     data = perl_save_signal_cb(aTHX_ pobj, id);
     elm_layout_signal_callback_add(obj,emission,source,call_perl_signal_cb,data);
 

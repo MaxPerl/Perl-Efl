@@ -74,7 +74,7 @@ _perl_callback *perl_save_callback(pTHX_ SV *func, SV *obj, char *event, char *h
     cb->funcname = newSV(0);
 
     if (func && SvOK(func)) {
-        cv_name((CV*)SvRV(func),cb->funcname,NULL);
+        cv_name((CV*)SvRV(func),cb->funcname,0);
     }
     else {
         croak("No function passed\n");
@@ -213,11 +213,14 @@ void call_perl_evas_event_cb(void *data, Evas *e, Evas_Object *obj, void *event_
     /* TODO free data? */
 }
 
-void call_perl_tooltip_content_cb(void *data, Evas_Object *obj, Evas_Object *tooltip) {
+Evas_Object* call_perl_tooltip_content_cb(void *data, Evas_Object *obj, Evas_Object *tooltip) {
     dTHX;
     dSP;
 
     int count;
+    SV *s_content;
+    IV tmp;
+    Evas_Object *ret_obj;
 
     _perl_callback *perl_saved_cb = data;
     HV *cb_data = _get_smart_cb_hash(aTHX_ perl_saved_cb->objaddr,perl_saved_cb->event,perl_saved_cb->funcname, "Efl::PLSide::Callbacks");
@@ -251,6 +254,70 @@ void call_perl_tooltip_content_cb(void *data, Evas_Object *obj, Evas_Object *too
 
     PUTBACK;
 
+    if (count != 1) {
+        croak("Expected 1 value got %d\n", count);
+    }
+
+    s_content = POPs;
+
+    if (!SvROK(s_content)) {
+            ret_obj = NULL;
+        }
+    else {
+    	IV tmp = SvIV((SV*)SvRV(s_content));
+    	ret_obj = INT2PTR(Evas_Object*,tmp);
+    	sv_setref_pv(s_obj, "EvasObjectPtr", obj);
+    }
+
+    PUTBACK;
+    FREETMPS;
+    LEAVE;
+
+    return ret_obj;
+
+    /* TODO free data? */
+}
+
+void del_tooltip(void *data, Evas_Object *obj, void *event_info) {
+    dTHX;
+    dSP;
+
+    int n;
+    int count;
+    SV *s_obj = newSV(0);
+    _perl_callback *perl_saved_cb = data;
+
+    SV *s_ei  = newSV(0);
+    if (event_info) {
+        if (SvTRUE(get_sv("Efl::Debug",0)))
+			fprintf(stderr, "event has an event info\n");
+        IV adress;
+        adress = PTR2IV(event_info);
+        sv_setiv(s_ei,adress);
+    }
+
+    HV *cb_data = _get_smart_cb_hash(aTHX_ perl_saved_cb->objaddr,perl_saved_cb->event,perl_saved_cb->funcname, "Efl::PLSide::Callbacks");
+
+    SV *pclass = *( hv_fetch(cb_data, "pclass",6,FALSE) );
+    SV *func = *( hv_fetch(cb_data, "function",8,FALSE) );
+    SV *args = *( hv_fetch(cb_data, "data",4,FALSE) ) ;
+
+
+
+    sv_setref_pv(s_obj, SvPV_nolen(pclass), obj);
+
+    ENTER;
+    SAVETMPS;
+
+    PUSHMARK(SP);
+
+    XPUSHs(args);
+    XPUSHs(sv_2mortal(s_obj));
+    XPUSHs(sv_2mortal(s_ei));
+
+
+    PUTBACK;
+
     count = call_sv(func, G_DISCARD);
     if (count != 0) {
         croak("Expected 0 value got %d\n", count);
@@ -258,11 +325,8 @@ void call_perl_tooltip_content_cb(void *data, Evas_Object *obj, Evas_Object *too
 
     FREETMPS;
     LEAVE;
-
-    /* TODO free data? */
-}
-
-void del_tooltip(void *data) {
+    
+    
     Safefree(data);
 }
 
@@ -398,7 +462,7 @@ _perl_callback *save_markup_filter_struct(pTHX_ SV *func, UV addr) {
         cb->funcname = func;
     }
     else if (func && SvOK(func)) {
-        cv_name((CV*)SvRV(func),cb->funcname,NULL);
+        cv_name((CV*)SvRV(func),cb->funcname,0);
     }
     else {
         croak("No function passed\n");
@@ -527,6 +591,9 @@ _perl_gendata *perl_save_gen_cb(pTHX_ SV *obj, SV *itc, int id) {
     if (itc && SvOK(itc)) {
         UV itcaddr = PTR2UV(SvRV(itc));
         cb->itcaddr = itcaddr ;
+    }
+    else {
+    	cb->itcaddr = 0;
     }
 
     if (id>=0) {
@@ -754,16 +821,27 @@ Evas_Object* call_perl_gen_content_get(void *data, Evas_Object *obj, const char 
     return ret_obj;
 }
 
-void call_perl_gen_del(void *data, Evas_Object *obj) {
+void call_perl_genitc_del(void *data, Evas_Object *obj) {
+	call_perl_gen_del(data,obj, NULL);
+}
+
+void call_perl_gen_del(void *data, Evas_Object *obj, void *event_info) {
     dTHX;
     dSP;
 
     _perl_gendata *perl_saved_cb = data;
+    
+    int id = perl_saved_cb->item_id;
+    
+    HV *cb_data = NULL;
+    UV itcaddr = perl_saved_cb->itcaddr; 
+	if (perl_saved_cb->itcaddr != 0) {
+    	cb_data = _get_gen_hash(aTHX_ perl_saved_cb->itcaddr,"Efl::PLSide::GenItc");
+    }
 
-    HV *cb_data = _get_gen_hash(aTHX_ perl_saved_cb->itcaddr,"Efl::PLSide::GenItc");
     HV *GenItem = _get_gen_item_hash(aTHX_ perl_saved_cb->objaddr, perl_saved_cb->item_id);
 
-    if (hv_exists(cb_data,"del",3)) {
+    if (cb_data && hv_exists(cb_data,"del",3)) {
         int count;
 
         SV *func = *( hv_fetch(cb_data, "del",3,FALSE) );
@@ -801,7 +879,7 @@ void call_perl_gen_del(void *data, Evas_Object *obj) {
 void call_perl_gen_item_selected(void *data, Evas_Object *obj, void *event_info) {
     dTHX;
     dSP;
-
+	
     int count; STRLEN len;
 
     _perl_gendata *perl_saved_cb = data;
@@ -922,7 +1000,7 @@ _perl_signal_cb *perl_save_signal_cb(pTHX_ SV *obj, int id) {
     return cb;
 }
 
-void call_perl_signal_cb(void *data, Evas_Object *layout, char *emission, char *source) {
+void call_perl_signal_cb(void *data, Evas_Object *layout, const char *emission, const char *source) {
     dTHX;
     dSP;
 

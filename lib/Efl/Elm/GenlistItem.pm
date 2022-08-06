@@ -35,7 +35,7 @@ package ElmGenlistItemPtr;
 
 use Efl::Eina;
 
-our @ISA = qw(ElmObjectItemPtr EvasObjectPtr ElmObjectPtr);
+our @ISA = qw(ElmObjectItemPtr);
 
 # Preloaded methods go here.
 

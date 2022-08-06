@@ -979,11 +979,29 @@ constant_23 (pTHX_ const char *name, IV *iv_return) {
      ELM_ACTIONSLIDER_CENTER ELM_BUBBLE_POS_TOP_LEFT ELM_FLIP_DIRECTION_DOWN
      ELM_FLIP_DIRECTION_LEFT ELM_HOVER_AXIS_VERTICAL ELM_IMAGE_FLIP_VERTICAL
      ELM_PANEL_ORIENT_BOTTOM ELM_POPUP_ORIENT_BOTTOM ELM_POPUP_ORIENT_CENTER
-     ELM_SCROLLER_POLICY_OFF ELM_TOOLTIP_ORIENT_LAST ELM_TOOLTIP_ORIENT_LEFT
+     ELM_SCROLLER_POLICY_OFF ELM_TOOLBAR_SHRINK_HIDE ELM_TOOLBAR_SHRINK_MENU
+     ELM_TOOLBAR_SHRINK_NONE ELM_TOOLTIP_ORIENT_LAST ELM_TOOLTIP_ORIENT_LEFT
      ELM_TOOLTIP_ORIENT_NONE ELM_WIN_KEYBOARD_KEYPAD ELM_WIN_KEYGRAB_TOPMOST
      ELM_WIN_KEYGRAB_UNKNOWN ELM_WIN_MOVE_RESIZE_TOP ELM_WIN_NAVIFRAME_BASIC */
   /* Offset 8 gives the best switch position.  */
   switch (name[8]) {
+  case 'B':
+    if (memEQ(name, "ELM_TOOLBAR_SHRINK_HIDE", 23)) {
+    /*                       ^                     */
+      *iv_return = ELM_TOOLBAR_SHRINK_HIDE;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "ELM_TOOLBAR_SHRINK_MENU", 23)) {
+    /*                       ^                     */
+      *iv_return = ELM_TOOLBAR_SHRINK_MENU;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "ELM_TOOLBAR_SHRINK_NONE", 23)) {
+    /*                       ^                     */
+      *iv_return = ELM_TOOLBAR_SHRINK_NONE;
+      return PERL_constant_ISIV;
+    }
+    break;
   case 'E':
     if (memEQ(name, "ELM_IMAGE_FLIP_VERTICAL", 23)) {
     /*                       ^                     */
@@ -1201,7 +1219,8 @@ constant_25 (pTHX_ const char *name, IV *iv_return) {
      ELM_ICON_LOOKUP_THEME_FDO ELM_IMAGE_FLIP_HORIZONTAL
      ELM_IMAGE_FLIP_TRANSVERSE ELM_LABEL_SLIDE_MODE_AUTO
      ELM_LABEL_SLIDE_MODE_NONE ELM_POLICY_THROTTLE_NEVER
-     ELM_POPUP_ORIENT_TOP_LEFT ELM_TOOLTIP_ORIENT_BOTTOM
+     ELM_POPUP_ORIENT_TOP_LEFT ELM_TOOLBAR_SHRINK_EXPAND
+     ELM_TOOLBAR_SHRINK_SCROLL ELM_TOOLTIP_ORIENT_BOTTOM
      ELM_TOOLTIP_ORIENT_CENTER ELM_WIN_INDICATOR_UNKNOWN
      ELM_WIN_KEYBOARD_PASSWORD ELM_WIN_KEYBOARD_TERMINAL
      ELM_WIN_KEYGRAB_EXCLUSIVE ELM_WIN_MOVE_RESIZE_RIGHT */
@@ -1271,6 +1290,13 @@ constant_25 (pTHX_ const char *name, IV *iv_return) {
       return PERL_constant_ISIV;
     }
     break;
+  case 'L':
+    if (memEQ(name, "ELM_TOOLBAR_SHRINK_SCROLL", 25)) {
+    /*                                      ^        */
+      *iv_return = ELM_TOOLBAR_SHRINK_SCROLL;
+      return PERL_constant_ISIV;
+    }
+    break;
   case 'N':
     if (memEQ(name, "ELM_FLIP_INTERACTION_NONE", 25)) {
     /*                                      ^        */
@@ -1280,6 +1306,11 @@ constant_25 (pTHX_ const char *name, IV *iv_return) {
     if (memEQ(name, "ELM_LABEL_SLIDE_MODE_NONE", 25)) {
     /*                                      ^        */
       *iv_return = ELM_LABEL_SLIDE_MODE_NONE;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "ELM_TOOLBAR_SHRINK_EXPAND", 25)) {
+    /*                                      ^        */
+      *iv_return = ELM_TOOLBAR_SHRINK_EXPAND;
       return PERL_constant_ISIV;
     }
     break;
@@ -2317,6 +2348,11 @@ my @names = (qw(),
             {name=>"ELM_TOOLBAR_ITEM_SCROLLTO_LAST", type=>"IV", macro=>"1"},
             {name=>"ELM_TOOLBAR_ITEM_SCROLLTO_MIDDLE", type=>"IV", macro=>"1"},
             {name=>"ELM_TOOLBAR_ITEM_SCROLLTO_NONE", type=>"IV", macro=>"1"},
+            {name=>"ELM_TOOLBAR_SHRINK_EXPAND", type=>"IV", macro=>"1"},
+            {name=>"ELM_TOOLBAR_SHRINK_HIDE", type=>"IV", macro=>"1"},
+            {name=>"ELM_TOOLBAR_SHRINK_MENU", type=>"IV", macro=>"1"},
+            {name=>"ELM_TOOLBAR_SHRINK_NONE", type=>"IV", macro=>"1"},
+            {name=>"ELM_TOOLBAR_SHRINK_SCROLL", type=>"IV", macro=>"1"},
             {name=>"ELM_TOOLTIP_ORIENT_BOTTOM", type=>"IV", macro=>"1"},
             {name=>"ELM_TOOLTIP_ORIENT_BOTTOM_LEFT", type=>"IV", macro=>"1"},
             {name=>"ELM_TOOLTIP_ORIENT_BOTTOM_RIGHT", type=>"IV", macro=>"1"},

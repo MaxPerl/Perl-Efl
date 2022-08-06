@@ -45,6 +45,16 @@ elm_object_part_text_get(obj,part)
 
 
 void
+elm_object_focus_set(obj,focus)
+	EvasObject *obj
+	Eina_Bool focus
+
+
+Eina_Bool
+elm_object_focus_get(obj)
+	const EvasObject *obj
+
+void
 elm_object_domain_translatable_part_text_set(obj,part,domain,text)
 	EvasObject *obj
 	const char *part
@@ -152,13 +162,13 @@ elm_object_signal_emit(obj,emission,source)
 	const char *source
 
 # func = Edje_Signal_Cb
-void
-elm_object_signal_callback_add(obj,emission,source,func,data)
-	EvasObject *obj
-	const char *emission
-	const char *source
-	SV* func
-	SV *data
+#void
+#elm_object_signal_callback_add(obj,emission,source,func,data)
+#	EvasObject *obj
+#	const char *emission
+#	const char *source
+#	SV* func
+#	SV *data
 
 
 # void *
@@ -293,11 +303,11 @@ elm_object_tooltip_window_mode_get(obj)
 
 void
 elm_object_scroll_hold_push(obj)
-	const EvasObject *obj
+	EvasObject *obj
 
 void
 elm_object_scroll_hold_pop(obj)
-	const EvasObject *obj
+	EvasObject *obj
 
 int
 elm_object_scroll_hold_get(obj)
@@ -305,11 +315,11 @@ elm_object_scroll_hold_get(obj)
 
 void
 elm_object_scroll_freeze_push(obj)
-	const EvasObject *obj
+	EvasObject *obj
 
 void
 elm_object_scroll_freeze_pop(obj)
-	const EvasObject *obj
+	EvasObject *obj
 
 int
 elm_object_scroll_freeze_get(obj)
@@ -317,12 +327,12 @@ elm_object_scroll_freeze_get(obj)
 
 void
 elm_object_scroll_lock_x_set(obj,lock)
-	const EvasObject *obj
+	EvasObject *obj
 	Eina_Bool lock
 
 void
 elm_object_scroll_lock_y_set(obj,lock)
-	const EvasObject *obj
+	EvasObject *obj
 	Eina_Bool lock
 
 Eina_Bool
@@ -335,7 +345,7 @@ elm_object_scroll_lock_y_get(obj)
 
 void
 elm_object_scroll_item_loop_enabled_set(obj,enable)
-	const EvasObject *obj
+	EvasObject *obj
 	Eina_Bool enable
 
 Eina_Bool

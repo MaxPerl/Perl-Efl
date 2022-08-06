@@ -1,12 +1,8 @@
 use strict;
 use warnings;
 
-use Efl::Evas::Object;
-use Efl::Elm;
-use Efl::Elm::Win;
-use Efl::Elm::Calendar;
 use Efl::Evas;
-use Efl::Time;
+use Efl::Elm;
 
 
 Efl::Elm::init($#ARGV, \@ARGV);
@@ -24,7 +20,9 @@ $win->smart_callback_add("delete,request",sub {print "Exiting \n"}, undef);
 my $cal = Efl::Elm::Calendar->add($win);
 $cal->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
 $cal->weekdays_names_set(["Mo","Di","Mi","Do","Fr","Sa","So"]);
-
+my $names = $cal->weekdays_names_get();
+use Data::Dumper;
+print Dumper ($names);
 my $tm = Efl::Time->new(localtime());
 $cal->date_max_set($tm);
 my $time = $cal->date_max_get();

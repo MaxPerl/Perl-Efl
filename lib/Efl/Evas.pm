@@ -9,6 +9,33 @@ use AutoLoader;
 
 use Scalar::Util qw(refaddr blessed);
 
+use Efl::Evas::Canvas;
+use Efl::Evas::Image;
+use Efl::Evas::Line;
+use Efl::Evas::Lock;
+use Efl::Evas::Modifier;
+use Efl::Evas::Object;
+use Efl::Evas::Polygon;
+use Efl::Evas::Rectangle;
+use Efl::Evas::Text;
+use Efl::Evas::Textblock;
+use Efl::Evas::TextblockCursor;
+use Efl::Evas::TextblockNodeFormat;
+use Efl::Evas::TextblockStyle;
+
+use Efl::Evas::Coord::Rectangle;
+
+use Efl::Evas::Event::Hold;
+use Efl::Evas::Event::KeyDown;
+use Efl::Evas::Event::KeyUp;
+use Efl::Evas::Event::MouseDown;
+use Efl::Evas::Event::MouseIn;
+use Efl::Evas::Event::MouseMove;
+use Efl::Evas::Event::MouseOut;
+use Efl::Evas::Event::MouseUp;
+use Efl::Evas::Event::MouseWheel;
+
+
 our @ISA = qw(Exporter);
 
 # Items to export into callers namespace by default. Note: do not export

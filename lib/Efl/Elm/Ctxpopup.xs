@@ -80,19 +80,19 @@ elm_ctxpopup_hover_parent_get(obj)
 void
 elm_ctxpopup_direction_priority_set(obj,first,second,third,fourth)
 	ElmCtxpopup *obj
-	int first
-	int second
-	int third
-	int fourth
+	Elm_Ctxpopup_Direction first
+	Elm_Ctxpopup_Direction second
+	Elm_Ctxpopup_Direction third
+	Elm_Ctxpopup_Direction fourth
 
 
 void
 elm_ctxpopup_direction_priority_get(obj,OUTLIST first,OUTLIST second,OUTLIST third,OUTLIST fourth)
 	ElmCtxpopup *obj
-	int first
-	int second
-	int third
-	int fourth
+	Elm_Ctxpopup_Direction first
+	Elm_Ctxpopup_Direction second
+	Elm_Ctxpopup_Direction third
+	Elm_Ctxpopup_Direction fourth
 
 
 int

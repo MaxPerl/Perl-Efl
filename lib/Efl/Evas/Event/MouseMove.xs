@@ -56,8 +56,8 @@ CODE:
 	hv_store(canvas_hash,"y",1,newSViv(y),0);
 	
 	hash = (HV*) sv_2mortal( (SV*) newHV() );
-	hv_store(hash,"output",6,newRV_noinc(output_hash),0);
-	hv_store(hash,"canvas",6,newRV_noinc(canvas_hash),0);
+	hv_store(hash,"output",6,newRV_noinc( (SV*) output_hash),0);
+	hv_store(hash,"canvas",6,newRV_noinc( (SV*) canvas_hash),0);
     
     RETVAL = hash;
 OUTPUT:
@@ -96,8 +96,8 @@ CODE:
 	hv_store(canvas_hash,"y",1,newSViv(y),0);
 	
 	hash = (HV*) sv_2mortal( (SV*) newHV() );
-	hv_store(hash,"output",6,newRV_noinc(output_hash),0);
-	hv_store(hash,"canvas",6,newRV_noinc(canvas_hash),0);
+	hv_store(hash,"output",6,newRV_noinc( (SV*) output_hash),0);
+	hv_store(hash,"canvas",6,newRV_noinc( (SV*) canvas_hash),0);
     
     RETVAL = hash;
 OUTPUT:

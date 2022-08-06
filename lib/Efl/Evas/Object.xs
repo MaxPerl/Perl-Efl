@@ -443,7 +443,7 @@ CODE:
     address = SvUV(cstructaddr);
     printf("Delete cb CSTRUCTADDR %"UVuf,address);
     sc = INT2PTR(_perl_callback*,address);
-    data = evas_object_smart_callback_del_full(obj, type, call_perl_evas_event_cb,sc);
+    data = evas_object_event_callback_del_full(obj, type, call_perl_evas_event_cb,sc);
     if (data == NULL) {
         croak("Could not delete evas callback\n");
     }
@@ -703,7 +703,7 @@ evas_object_smart_move_children_relative(obj,dx,dy)
 
 void
 evas_object_pass_events_set(obj,pass)
-	const EvasObject *obj
+	EvasObject *obj
 	Eina_Bool pass
 
 Eina_Bool
@@ -712,7 +712,7 @@ evas_object_pass_events_get(obj)
 
 void
 evas_object_freeze_events_set(obj,freeze)
-	const EvasObject *obj
+	EvasObject *obj
 	Eina_Bool freeze
 
 Eina_Bool

@@ -166,13 +166,13 @@ elm_object_item_part_content_unset(obj,part)
 
 
 # TODO: func ist eigtl. stets Elm_Object_Item_Signal_Cb func
-void
-elm_object_item_signal_callback_add(obj,emission,source,func,data)
-	ElmWidgetItem *obj
-	const char *emission
-	const char *source
-	SV* func
-	void *data
+#void
+#elm_object_item_signal_callback_add(obj,emission,source,func,data)
+#	ElmWidgetItem *obj
+#	const char *emission
+#	const char *source
+#	SV* func
+#	void *data
 
 
 # void *
@@ -240,10 +240,10 @@ elm_object_item_track_get(obj)
 
 
 # del_cb ist eigtl. Evas_Smart_Cb del_cb
-void
-elm_object_item_del_cb_set(obj,del_cb)
-	ElmWidgetItem *obj
-	SV* del_cb
+#void
+#elm_object_item_del_cb_set(obj,del_cb)
+#	ElmWidgetItem *obj
+#	SV* del_cb
 
 
 # func ist eigtl. Elm_Tooltip_Item_Content_Cb!!

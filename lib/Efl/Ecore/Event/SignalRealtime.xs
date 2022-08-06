@@ -11,7 +11,7 @@ typedef Ecore_Event_Signal_Realtime EcoreEventSignalRealtime;
 
 
 
-MODULE = Efl::Evas::Event::SignalRealtime		PACKAGE = EvasEventSignalRealtimePtr
+MODULE = Efl::Ecore::Event::SignalRealtime		PACKAGE = EvasEventSignalRealtimePtr
 
 int
 num(event)

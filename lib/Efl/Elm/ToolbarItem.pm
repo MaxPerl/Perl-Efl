@@ -32,7 +32,7 @@ XSLoader::load('Efl::Elm::ToolbarItem');
 
 package ElmToolbarItemPtr;
 
-our @ISA = qw(ElmWidgetItemPtr EvasObjectPtr ElmObjectPtr);
+our @ISA = qw(ElmObjectItemPtr);
 
 sub item_state_add {
     my ($obj,$icon,$label,$func,$data) = @_;

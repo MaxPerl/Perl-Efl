@@ -25,12 +25,12 @@ elm_genlist_item_tooltip_text_set(it,text)
 	const char *text
 
 
-void
-elm_genlist_item_tooltip_content_cb_set(it,func,data,del_cb)
-	ElmObjectItem *it
-	SV* func
-	void *data
-	SV* del_cb
+# void
+# elm_genlist_item_tooltip_content_cb_set(it,func,data,del_cb)
+#	ElmObjectItem *it
+#	SV* func
+#	void *data
+#	SV* del_cb
 
 
 void

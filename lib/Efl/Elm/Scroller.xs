@@ -41,15 +41,15 @@ elm_scroller_region_show(obj,x,y,w,h)
 void
 elm_scroller_policy_set(obj,policy_h,policy_v)
 	ElmScroller *obj
-	int policy_h
-	int policy_v
+	Elm_Scroller_Policy policy_h
+	Elm_Scroller_Policy policy_v
 
 
 void
 elm_scroller_policy_get(obj,OUTLIST policy_h,OUTLIST policy_v)
 	const ElmScroller *obj
-	int policy_h
-	int policy_v
+	Elm_Scroller_Policy policy_h
+	Elm_Scroller_Policy policy_v
 
 
 void

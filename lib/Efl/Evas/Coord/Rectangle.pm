@@ -15,7 +15,7 @@ XSLoader::load('Efl::Evas::Coord::Rectangle');
 #    my $widget = evas_object_rectangle_add($parent);
 #    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
 #    return $widget;
-}
+#}
 
 # *new = \&add;
 

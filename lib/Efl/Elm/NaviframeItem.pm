@@ -32,7 +32,7 @@ XSLoader::load('Efl::Elm::NaviframeItem');
 
 package ElmNaviframeItemPtr;
 
-our @ISA = qw(ElmWidgetItemPtr EvasObjectPtr ElmObjectPtr);
+our @ISA = qw(ElmObjectItemPtr);
 
 # Preloaded methods go here.
 

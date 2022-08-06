@@ -2,12 +2,8 @@
 use strict;
 use warnings;
 
-use Efl::Evas;
 use Efl::Elm;
-use Efl::Elm::Win;
-use Efl::Elm::Button;
-use Efl::Elm::Icon;
-
+use Efl::Evas;
 
 use Scalar::Util qw(refaddr);
 

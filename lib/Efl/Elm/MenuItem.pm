@@ -34,7 +34,7 @@ package ElmMenuItemPtr;
 
 use Efl::Eina;
 
-our @ISA = qw(ElmObjectItemPtr EvasObjectPtr ElmObjectPtr);
+our @ISA = qw(ElmObjectItemPtr);
 
 sub subitems_get_pv {
     my ($obj) = @_;

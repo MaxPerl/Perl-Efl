@@ -206,7 +206,7 @@ CODE:
     // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
     tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmGenlistItemClass*,tmp);
+    obj = INT2PTR(ElmGenlist*,tmp);
     tmp = SvIV((SV*)SvRV(pitc));
     itc = INT2PTR(ElmGenlistItemClass*,tmp);
     
@@ -243,7 +243,7 @@ CODE:
     // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
     tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmGenlistItemClass*,tmp);
+    obj = INT2PTR(ElmGenlist*,tmp);
     tmp = SvIV((SV*)SvRV(pitc));
     itc = INT2PTR(ElmGenlistItemClass*,tmp);
     
@@ -302,7 +302,7 @@ CODE:
     // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
     tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmGenlistItemClass*,tmp);
+    obj = INT2PTR(ElmGenlist*,tmp);
     tmp = SvIV((SV*)SvRV(pitc));
     itc = INT2PTR(ElmGenlistItemClass*,tmp);
     // Save GenItc
@@ -337,7 +337,7 @@ CODE:
     // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
     tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmGenlistItemClass*,tmp);
+    obj = INT2PTR(ElmGenlist*,tmp);
     tmp = SvIV((SV*)SvRV(pitc));
     itc = INT2PTR(ElmGenlistItemClass*,tmp);
     

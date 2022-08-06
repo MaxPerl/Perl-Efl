@@ -251,6 +251,12 @@ if  (eval {require ExtUtils::Constant; 1}) {
     {name => 'ELM_TOOLTIP_ORIENT_BOTTOM', 'macro' => 1},
     {name => 'ELM_TOOLTIP_ORIENT_BOTTOM_RIGHT', 'macro' => 1},
     {name => 'ELM_TOOLTIP_ORIENT_LAST', 'macro' => 1},
+    # ELM_TOOLBAR
+    {name => 'ELM_TOOLBAR_SHRINK_NONE', 'macro' => 1},
+	{name => 'ELM_TOOLBAR_SHRINK_HIDE', 'macro' => 1},
+	{name => 'ELM_TOOLBAR_SHRINK_SCROLL', 'macro' => 1},
+	{name => 'ELM_TOOLBAR_SHRINK_MENU', 'macro' => 1},
+	{name => 'ELM_TOOLBAR_SHRINK_EXPAND', 'macro' => 1},
 	# ELM_TOOLBARITEM
 	{name => 'ELM_TOOLBAR_ITEM_SCROLLTO_NONE', 'macro' => 1},
 	{name => 'ELM_TOOLBAR_ITEM_SCROLLTO_IN', 'macro' => 1},

@@ -26,8 +26,8 @@ void del_free(void *data);
 
 void call_perl_evas_event_cb(void *data, Evas *e, Evas_Object *obj, void *event_info);
 
-void call_perl_tooltip_content_cb(void *data, Evas_Object *obj, Evas_Object *tooltip);
-void del_tooltip(void *data);
+Evas_Object* call_perl_tooltip_content_cb(void *data, Evas_Object *obj, Evas_Object *tooltip);
+void del_tooltip(void *data, Evas_Object *obj, void *event_info);
 
 HV* _get_format_cb_hash(pTHX_ UV objaddr);
 char* call_perl_format_cb(double value, void *data);
@@ -50,7 +50,8 @@ _perl_gendata *perl_save_gen_cb(pTHX_ SV *obj, SV *itc, int id);
 char* call_perl_gen_text_get(void *data, Evas_Object *obj, const char *part);
 Evas_Object* call_perl_gen_content_get(void *data, Evas_Object *obj, const char *part);
 Eina_Bool call_perl_gen_state_get(void *data, Evas_Object *obj, const char *part);
-void call_perl_gen_del(void *data, Evas_Object *obj);
+void call_perl_gen_del(void *data, Evas_Object *obj, void *event_info);
+void call_perl_genitc_del(void *data, Evas_Object *obj);
 void call_perl_gen_item_selected(void *data, Evas_Object *obj, void *event_info);
 
 
@@ -62,7 +63,7 @@ struct __perl_signal_cb {
 };
 
 _perl_signal_cb *perl_save_signal_cb(pTHX_ SV *obj, int id);
-void call_perl_signal_cb(void *data, Evas_Object *layout, char *emission, char *source);
+void call_perl_signal_cb(void *data, Evas_Object *layout, const char *emission, const char *source);
 
 // Ecore_Evas_Events
 void call_perl_ecore_evas_resize(Ecore_Evas *ee);

@@ -158,6 +158,8 @@ lib/Efl/Elm/Photo.pm
 lib/Efl/Elm/Photo.xs
 lib/Efl/Elm/Photocam.pm
 lib/Efl/Elm/Photocam.xs
+lib/Efl/Elm/Player.pm
+lib/Efl/Elm/Player.xs
 lib/Efl/Elm/Popup.pm
 lib/Efl/Elm/Popup.xs
 lib/Efl/Elm/Progressbar.pm
@@ -184,6 +186,8 @@ lib/Efl/Elm/ToolbarItem.pm
 lib/Efl/Elm/ToolbarItem.xs
 lib/Efl/Elm/Tooltip.pm
 lib/Efl/Elm/Tooltip.xs
+lib/Efl/Elm/Video.pm
+lib/Efl/Elm/Video.xs
 lib/Efl/Elm/WidgetItem.pm
 lib/Efl/Elm/WidgetItem.xs
 lib/Efl/Elm/Win.pm

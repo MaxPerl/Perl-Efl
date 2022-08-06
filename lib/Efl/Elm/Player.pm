@@ -1,4 +1,4 @@
-package Efl::Elm::Ctxpopup;
+package Efl::Elm::Player;
 
 use strict;
 use warnings;
@@ -7,7 +7,7 @@ require Exporter;
 use Efl::Evas::Object;
 use Efl::Elm::Object;
 
-our @ISA = qw(Exporter ElmCtxpopupPtr);
+our @ISA = qw(Exporter ElmPlayerPtr);
 
 # Items to export into callers namespace by default. Note: do not export
 # names by default without a very good reason. Use EXPORT_OK instead.
@@ -27,53 +27,42 @@ our @EXPORT = qw(
 );
 
 require XSLoader;
-XSLoader::load('Efl::Elm::Ctxpopup');
+XSLoader::load('Efl::Elm::Player');
 
 sub add {
     my ($class,$parent) = @_;
-    my $widget = elm_ctxpopup_add($parent);
+    my $widget = elm_player_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     return $widget;
 }
 
 *new = \&add;
 
-package ElmCtxpopupPtr;
-
-use Efl::Eina;
+package ElmPlayerPtr;
 
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
-
-sub items_get_pv {
-    my ($obj) = @_;
-    my $list = $obj->items_get();
-    my @array = Efl::Eina::list2array($list,"ElmCtxpopupItemPtr");
-    return @array;
-}
 
 # Preloaded methods go here.
 
 1;
 __END__
+
 =head1 NAME
 
-Efl::Elm:Ctxpopup
+Efl::Elm:Player
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Ctxpopup;
-  [...]
-  my $widget = Efl::Elm::Ctxpopup->add($parent);
-  $widget->horizontal_set(1);
-  [...]
+  
 
 =head1 DESCRIPTION
 
-This module is a perl binding to the Elementary Ctxpopup widget.
+This module is a perl binding to the Elementary Player widget.
 
-For more informations see https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Ctxpopup.html 
+For more informations see https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Video.html 
 
-For instructions, how to use Efl::Elm::Ctxpopup, please study this API reference for now. A perl-specific documentation will perhaps come in later versions. But applying the C documentation should be no problem. Efl::Elm::Ctxpopup gives you a nice object-oriented interface that is kept close to the C API. Please note, that the perl method names remove the "elm_ctxpopup_" at the beginning of the c functions.
+For instructions, how to use Efl::Elm::Player, please study this API reference for now. A perl-specific documentation will perhaps come in later versions. But applying the C documentation should be no problem. 
+Efl::Elm::Player gives you a nice object-oriented interface that is kept close to the C API. Please note, that the perl method names remove the "elm_player_" at the beginning of the c functions.
 
 =head2 EXPORT
 
@@ -81,7 +70,7 @@ None by default.
 
 =head1 SEE ALSO
 
-https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Ctxpopup.html
+https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Video.html
 
 =head1 AUTHOR
 

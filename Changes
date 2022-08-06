@@ -30,4 +30,24 @@ Revision history for Perl extension Efl.
 	- Add evas_object_freeze_events_set|get and evas_object_pass_events_set|get
 	- Add elm_object_scroll_freeze_*|hold_*|lock_*|item_loop_enabled_* etc.
 	- Add Efl::Ecore::EventHandler, Efl::Ecore::Event and some basic Ecore stuff
-	
+0.66
+	- Add multi member to Efl::Ecore::Event::MouseButton and Efl::Ecore::EventMouseWheel (but member of multi root is missing)
+0.67 Fr Aug 05 12:25:00 2022
+	- Add Efl::Elm::Player and Efl::Elm::Video widget (but elm_video_emotion_get(obj) is still missing!!)
+	- Minor code cleaning and Bugfixes (Efl::Elm::Video and Efl::Elm::Toolbar)
+	- Add constants of Efl::Elm::Toolbar
+	- add elm_object_focus_set|get
+	- automatically cleanup c struct and GenItem hash, if a Efl::Elm::ToolbarItem is deleted 
+		(by setting elm_object_item_del_cb_set to call_perl_gen_del at inserting/appending/prepending)
+		(TODO: Do the same for other WidgetItems/ObjectItems, e.g. ElmIndex, ElmList) 
+	- Correct inheritance of the scrollable widgets Efl::Elm::Entry, Efl::Elm::Genlist and Efl::Elm::Toolbar 
+		(inherit from ElmSrollablePtr, too)
+	- Correct inheritance of the WidgetItems Efl::Elm::CtxpopupItem, Efl::Elm::GenlistItem, Efl::Elm::IndexItem,
+		Efl::Elm::ListItem, Efl::Elm::MenuItem, Efl::Elm::NaviframeItem, Efl::Elm::SegmentItem, Efl::Elm::ToolbarItem
+		(inherit only from ElmObjectItemPtr)
+	- remove (at the moment not working) functions elm_object_item_del_cb_set and elm_object_item_signal_callback_add
+		(TODO: Implement callbacks of ElmWidgetItemPtr)
+	- remove (at the moment not working) function elm_object_signal_callback_add
+		(TODO: Implement this callback)
+	- remove (at the moment not working) functions ecore_event_add (TODO: Implement this!)
+	- remove (at the moment not working) functions elm_genlist_item_tooltip_content_cb_set() (TODO: Implement this!)

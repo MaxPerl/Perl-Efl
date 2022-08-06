@@ -9,9 +9,7 @@
 
 typedef Ecore_Event_Signal_Exit EcoreEventSignalExit;
 
-
-
-MODULE = Efl::Evas::Event::SignalExit		PACKAGE = EvasEventSignalExitPtr
+MODULE = Efl::Ecore::Event::SignalExit		PACKAGE = EvasEventSignalExitPtr
 
 int
 interrupt(event)

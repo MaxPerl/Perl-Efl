@@ -29,7 +29,6 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 );
 
-our $VERSION = '0.01';
 
 sub AUTOLOAD {
     # This AUTOLOAD is used to 'autoload' constants from the constant()
@@ -55,7 +54,7 @@ sub AUTOLOAD {
 }
 
 require XSLoader;
-XSLoader::load('Efl::Eina', $VERSION);
+XSLoader::load('Efl::Eina');
 
 # Preloaded methods go here.
 

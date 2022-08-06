@@ -36,7 +36,7 @@ _free_perl_gendata(class, addr)
     SV* addr
 PREINIT:
     UV address;
-    _perl_callback *data;
+    _perl_gendata *data;
 CODE:
     address = SvUV(addr);
     data = INT2PTR(_perl_gendata*,address);
@@ -77,7 +77,7 @@ PREINIT:
 CODE:
     name = newSV(0);
     func = (CV*) SvRV(func_ref);
-    cv_name(func,name,NULL);
+    cv_name(func,name,0);
     RETVAL = name;
 OUTPUT:
     RETVAL

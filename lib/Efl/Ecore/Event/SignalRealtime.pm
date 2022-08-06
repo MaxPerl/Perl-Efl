@@ -1,4 +1,4 @@
-package Efl::Evas::Event::SignalRealtime;
+package Efl::Ecore::Event::SignalRealtime;
 
 use strict;
 use warnings;
@@ -8,7 +8,7 @@ require Exporter;
 our @ISA = qw(Exporter EvasEventSignalRealtimePtr);
 
 require XSLoader;
-XSLoader::load('Efl::Evas::Event::SignalRealtime');
+XSLoader::load('Efl::Ecore::Event::SignalRealtime');
 
 
 package EvasEventSignalRealtimePtr;

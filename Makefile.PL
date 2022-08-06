@@ -36,6 +36,9 @@ WriteMakefile(
 		'lib/Efl/Ecore/Idler' => {
 			OBJECT => 'lib/Efl/Ecore/Idler$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},
+		'lib/Efl/Ecore/Poller' => {
+			OBJECT => 'lib/Efl/Ecore/Poller$(OBJ_EXT) PLSide$(OBJ_EXT)',
+		},
 		'lib/Efl/Elm/Entry' => {
 			OBJECT => 'lib/Efl/Elm/Entry$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},

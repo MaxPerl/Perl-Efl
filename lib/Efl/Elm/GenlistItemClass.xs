@@ -24,7 +24,7 @@ PREINIT:
     ElmGenlistItemClass *itc;
 CODE:
     itc = elm_genlist_item_class_new();
-    itc->func.del = call_perl_gen_del;
+    itc->func.del = call_perl_genitc_del;
     RETVAL = itc;
 OUTPUT:
     RETVAL

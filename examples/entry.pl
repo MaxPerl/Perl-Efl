@@ -24,6 +24,10 @@ $box->show();
 
 my $en = Efl::Elm::Entry->add($win);
 $en->autosave_set(0);
+# Important: The file must exist. Otherwise saving doesn't work!!
+$en->file_set("./test.txt",1);
+my ($file, $text_format) = $en->file_get();
+print "Saving to $file in Format $text_format (0=uft8, 1=Markup)\n";
 $en->entry_set("This text is outside <a href=anc-01>but this one is an anchor</a>");
 $en->file_set("./da_test.txt", ELM_TEXT_FORMAT_MARKUP_UTF8);
 $en->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
@@ -32,7 +36,6 @@ $en->line_wrap_set(ELM_WRAP_WORD);
 #$en->markup_filter_append(\&filter_user, undef);
 #$en->markup_filter_prepend("limit_size", {max_char_count => 5, max_byte_count => 0});
 #$en->markup_filter_append("accept_set", {accepted=> "ABCE",rejected => "0123456789"});
-$en->smart_callback_add("changed,user" => \&changed, undef);
 $en->smart_callback_add("anchor,clicked" => \&anchor_clicked, undef);
 $box->pack_end($en);
 $en->show();
@@ -59,37 +62,7 @@ sub anchor_clicked {
     my $button = $pobj->button();
     my $x = $pobj->x; my $y = $pobj->y; my $w = $pobj->w; my $h = $pobj->h;
     print "NAME $name \n BUTTON $button\n X: $x, Y: $y, W: $w, H: $h\n";
+    $entry->file_save();
 }
 
-sub changed {
-    my ($data, $entry, $ev) = @_;
-    
-        my $text = $entry->entry_get();
-        $text = Efl::Elm::Entry::markup_to_utf8($text);
-        #$text =~ s/\<b\>//g;
-        #$text =~ s/\<\/b\>//g;
-        my @lines = split("\n",$text);
-        #print "LINES @lines\n";
-        $text = "";
-        my $pos = $entry->cursor_pos_get();
-        print "POS $pos \n";
-        foreach my $line (@lines) {
-            # Notes
-            if ($line =~ m/^[a-vx-zA-VX-Z]:/) {
-                $text = $text . "<b>$line</b><br>";
-            }
-            else {
-                $line =~ s/([_=^]*[abcdefgxzABCDEFGXZ][,'-]*[0-9\/]*)/\<class\>$1\<\/class\>/g;
-                # Slurs
-                $line =~ s/([\(\)\-])/\<class\>$1\<\/class\>/g;
-                # Keywords
-                $line =~ s/(![\S]+?!)/\<string\>$1\<\/string\>/g;
-                $text = $text . "$line<br>";
-            }
-        }
-        #print "TEXT $text\n";
-        
-        $entry->entry_set("$text");
-        $rehighlight = 0;
-    
-}
+

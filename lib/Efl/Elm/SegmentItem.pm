@@ -32,7 +32,7 @@ XSLoader::load('Efl::Elm::SegmentItem');
 
 package ElmSegmentItemPtr;
 
-our @ISA = qw(ElmWidgetItemPtr EvasObjectPtr ElmObjectPtr);
+our @ISA = qw(ElmObjectItemPtr);
 
 # Preloaded methods go here.
 

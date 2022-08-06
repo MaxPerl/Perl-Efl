@@ -132,7 +132,7 @@ evas_textblock_cursor_geometry_get(cur,OUTLIST cx,OUTLIST cy,OUTLIST cw,OUTLIST 
 	Evas_Coord cy
 	Evas_Coord cw
 	Evas_Coord ch
-	int dir
+	Evas_BiDi_Direction dir
 	int ctype
 
 

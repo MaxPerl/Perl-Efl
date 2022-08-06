@@ -7,6 +7,69 @@ use Carp;
 require Exporter;
 use AutoLoader;
 
+
+use Efl::Elm::Actionslider;
+use Efl::Elm::Bg;
+use Efl::Elm::Box;
+use Efl::Elm::Bubble;
+use Efl::Elm::Button;
+use Efl::Elm::Calendar;
+use Efl::Elm::Check;
+use Efl::Elm::Colorselector;
+use Efl::Elm::ColorselectorPaletteItem;
+use Efl::Elm::Conformant;
+use Efl::Elm::Ctxpopup;
+use Efl::Elm::CtxpopupItem;
+use Efl::Elm::Entry;
+use Efl::Elm::Fileselector;
+use Efl::Elm::Flip;
+use Efl::Elm::Frame;
+use Efl::Elm::Genlist;
+use Efl::Elm::GenlistItem;
+use Efl::Elm::GenlistItemClass;
+use Efl::Elm::Glview;
+use Efl::Elm::Grid;
+use Efl::Elm::Hover;
+use Efl::Elm::Hoversel;
+use Efl::Elm::Icon;
+use Efl::Elm::Image;
+use Efl::Elm::Index;
+use Efl::Elm::IndexItem;
+use Efl::Elm::Inwin;
+use Efl::Elm::Label;
+use Efl::Elm::Layout;
+use Efl::Elm::List;
+use Efl::Elm::ListItem;
+use Efl::Elm::Mapbuf;
+use Efl::Elm::Menu;
+use Efl::Elm::MenuItem;
+use Efl::Elm::Naviframe;
+use Efl::Elm::NaviframeItem;
+use Efl::Elm::Notify;
+use Efl::Elm::Object;
+use Efl::Elm::ObjectItem;
+use Efl::Elm::Panel;
+use Efl::Elm::Panes;
+use Efl::Elm::Photo;
+use Efl::Elm::Photocam;
+use Efl::Elm::Player;
+use Efl::Elm::Popup;
+use Efl::Elm::Progressbar;
+use Efl::Elm::Radio;
+use Efl::Elm::Scroller;
+use Efl::Elm::SegmentControl;
+use Efl::Elm::SegmentItem;
+use Efl::Elm::Separator;
+use Efl::Elm::Slider;
+use Efl::Elm::Spinner;
+use Efl::Elm::Table;
+use Efl::Elm::Toolbar;
+use Efl::Elm::ToolbarItem;
+use Efl::Elm::Tooltip;
+use Efl::Elm::Video;
+use Efl::Elm::WidgetItem;
+use Efl::Elm::Win;
+
 our @ISA = qw(Exporter);
 
 # Items to export into callers namespace by default. Note: do not export
@@ -237,6 +300,11 @@ ELM_TOOLTIP_ORIENT_BOTTOM_LEFT
 ELM_TOOLTIP_ORIENT_BOTTOM
 ELM_TOOLTIP_ORIENT_BOTTOM_RIGHT
 ELM_TOOLTIP_ORIENT_LAST
+ELM_TOOLBAR_SHRINK_NONE
+ELM_TOOLBAR_SHRINK_HIDE
+ELM_TOOLBAR_SHRINK_SCROLL
+ELM_TOOLBAR_SHRINK_MENU
+ELM_TOOLBAR_SHRINK_EXPAND
 ELM_TOOLBAR_ITEM_SCROLLTO_NONE
 ELM_TOOLBAR_ITEM_SCROLLTO_IN
 ELM_TOOLBAR_ITEM_SCROLLTO_FIRST

@@ -1,4 +1,4 @@
-package Efl::Evas::Event::SignalUser;
+package Efl::Ecore::Event::SignalUser;
 
 use strict;
 use warnings;
@@ -8,7 +8,7 @@ require Exporter;
 our @ISA = qw(Exporter EvasEventSignalUserPtr);
 
 require XSLoader;
-XSLoader::load('Efl::Evas::Event::SignalUser');
+XSLoader::load('Efl::Ecore::Event::SignalUser');
 
 
 package EvasEventSignalUserPtr;

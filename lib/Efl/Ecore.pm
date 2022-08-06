@@ -8,6 +8,22 @@ use Carp;
 require Exporter;
 use AutoLoader;
 
+use Efl::Ecore::Idler;
+use Efl::Ecore::Mainloop;
+use Efl::Ecore::Poller;
+use Efl::Ecore::Time;
+use Efl::Ecore::Timer;
+use Efl::Ecore::Event;
+use Efl::Ecore::EventFilter;
+use Efl::Ecore::EventHandler;
+use Efl::Ecore::Event::Key;
+use Efl::Ecore::Event::MouseButton;
+use Efl::Ecore::Event::MouseMove;
+use Efl::Ecore::Event::MouseWheel;
+use Efl::Ecore::Event::SignalExit;
+use Efl::Ecore::Event::SignalRealtime;
+use Efl::Ecore::Event::SignalUser;
+
 our @ISA = qw(Exporter);
 
 # Items to export into callers namespace by default. Note: do not export

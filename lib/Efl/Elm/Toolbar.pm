@@ -6,6 +6,7 @@ use warnings;
 require Exporter;
 use Efl::Evas::Object;
 use Efl::Elm::Object;
+use Efl::Elm::ToolbarItem;
 
 our @ISA = qw(Exporter ElmToolbarPtr);
 
@@ -41,13 +42,12 @@ sub add {
 
 package ElmToolbarPtr;
 
-our @ISA = qw(ElmObjectPtr EvasObjectPtr);
+our @ISA = qw(ElmScrollerPtr ElmObjectPtr EvasObjectPtr);
 
 sub insert_before {
     my ($obj,$before,$icon,$label,$func,$func_data) = @_;
     my $id = Efl::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
     my $widget = _elm_toolbar_item_insert_before($obj,$before,$icon, $label, $id);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_genitems, $widget);
     return $widget;
 }
 
@@ -55,7 +55,6 @@ sub insert_after {
     my ($obj,$after,$icon,$label,$func,$func_data) = @_;
     my $id = Efl::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
     my $widget = _elm_toolbar_insert_after($obj,$after,$icon,$label,$id);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_genitems, $widget);
     return $widget;
 }
 
@@ -63,7 +62,6 @@ sub item_prepend {
     my ($obj,$icon, $label,$func,$func_data) = @_;
     my $id = Efl::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
     my $widget = _elm_toolbar_item_prepend($obj,$icon,$label,$id);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_genitems, $widget);
     return $widget;
 }
 
@@ -71,7 +69,6 @@ sub item_append {
     my ($obj,$icon, $label,$func,$func_data) = @_;
     my $id = Efl::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
     my $widget = _elm_toolbar_item_append($obj,$icon,$label,$id);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_genitems, $widget);
     return $widget;
 }
 

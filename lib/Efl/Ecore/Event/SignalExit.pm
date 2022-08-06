@@ -1,4 +1,4 @@
-package Efl::Evas::Event::SignalExit;
+package Efl::Ecore::Event::SignalExit;
 
 use strict;
 use warnings;
@@ -8,7 +8,7 @@ require Exporter;
 our @ISA = qw(Exporter EvasEventSignalExitPtr);
 
 require XSLoader;
-XSLoader::load('Efl::Evas::Event::SignalExit');
+XSLoader::load('Efl::Ecore::Event::SignalExit');
 
 
 package EvasEventSignalExitPtr;

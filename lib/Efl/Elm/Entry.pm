@@ -41,7 +41,7 @@ sub add {
 
 package ElmEntryPtr;
 
-our @ISA = qw(ElmObjectPtr EvasObjectPtr);
+our @ISA = qw(ElmScrollerPtr ElmObjectPtr EvasObjectPtr);
 
 sub markup_filter_prepend {
     my ($obj, $func, $data) = @_;

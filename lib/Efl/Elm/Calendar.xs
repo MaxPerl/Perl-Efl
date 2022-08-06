@@ -105,14 +105,14 @@ CODE:
                 croak("Segmentation fault\n");
             }
             */
-            Newz(0, c_weekdays[i],len, char*);
+            Newz(0, c_weekdays[i],len, char);
 
             strcpy(c_weekdays[i],string);
             printf("Saved: %s\n",c_weekdays[i]);
         }
     }
 
-    elm_calendar_weekdays_names_set(obj,c_weekdays);
+    elm_calendar_weekdays_names_set(obj,(const char **) c_weekdays);
 }
 CLEANUP:
     for (i=0; i<= 6; i++) {
@@ -124,7 +124,7 @@ AV*
 elm_calendar_weekdays_names_get(obj)
     ElmCalendar *obj
 PREINIT:
-    char **c_weekdays;
+    const char **c_weekdays;
     AV *pl_weekdays;
     int i;
     char *string;

@@ -18,16 +18,16 @@ typedef Evas_Object EvasObject;
 MODULE = Efl::Elm::SegmentItem		PACKAGE = ElmSegmentItemPtr     PREFIX = elm_segment_control_item_
 
 int
-elm_obj_segment_control_item_index_get(obj)
+elm_segment_control_item_index_get(obj)
 	const ElmSegmentItem *obj
 
 
 EvasObject *
-elm_obj_segment_control_item_object_get(obj)
+elm_segment_control_item_object_get(obj)
 	const ElmSegmentItem *obj
 
 
 void
-elm_obj_segment_control_item_selected_set(obj,selected)
+elm_segment_control_item_selected_set(obj,selected)
 	ElmSegmentItem *obj
 	Eina_Bool selected

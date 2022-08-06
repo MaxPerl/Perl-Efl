@@ -6,6 +6,7 @@
 #include "ppport.h"
 
 #include <Ecore.h>
+#include <Ecore_Input.h>
 
 typedef Ecore_Event EcoreEvent;
 
@@ -17,12 +18,12 @@ ecore_event_init()
 int
 ecore_event_shutdown()
 
-EcoreEvent *
-ecore_event_add(type,ev,func_free,data)
-	int type
-	void *ev
-	SV *func_free
-	void *data
+#EcoreEvent *
+#ecore_event_add(type,ev,func_free,data)
+#	int type
+#	void *ev
+#	SV *func_free
+#	void *data
 
 int
 ecore_event_type_new()

@@ -43,7 +43,7 @@ package ElmGenlistPtr;
 
 use Efl::Eina;
 
-our @ISA = qw(ElmObjectPtr EvasObjectPtr);
+our @ISA = qw(ElmScrollerPtr ElmObjectPtr EvasObjectPtr);
 
 sub insert_before {
     my ($obj,$itc,$data,$parent,$before_it,$type,$func,$func_data) = @_;

@@ -11,7 +11,7 @@
 typedef Ecore_Event_Mouse_Move EcoreEventMouseMove;
 
 
-MODULE = Efl::Ecore::Event::MouseWheel		PACKAGE = EcoreEventMouseMovePtr
+MODULE = Efl::Ecore::Event::MouseMove		PACKAGE = EcoreEventMouseMovePtr
 
 void
 window(event)
@@ -96,8 +96,41 @@ OUTPUT:
     RETVAL
     
     
-void
+HV *
 multi(event)
 	EcoreEventMouseMove *event
+PREINIT:
+	HV *hash;
+	int device;
+	double radius;
+	double radius_x;
+	double radius_y;
+	double pressure;
+	double angle;
+	double x;
+	double y;
+	HV *root;
 CODE:
-	printf("the multi member of the event struct is at the moment not supported in Perl. Sorry :-( \n");
+	device = event->multi.device;
+	radius = event->multi.radius;
+	radius_x = event->multi.radius_x;
+	radius_y = event->multi.radius_y;
+	pressure = event->multi.pressure;
+	angle = event->multi.angle;
+	x = event->multi.x;
+	y = event->multi.y;
+	
+	hash = (HV*) sv_2mortal( (SV*) newHV() );
+	
+	hv_store(hash,"device",6,newSViv(device),0);
+	hv_store(hash,"radius",6,newSVnv(radius),0);
+	hv_store(hash,"radius_x",8,newSVnv(radius_x),0);
+	hv_store(hash,"radius_y",8,newSVnv(radius_y),0);
+	hv_store(hash,"pressure",8,newSVnv(pressure),0);
+	hv_store(hash,"angle",5,newSVnv(angle),0);
+	hv_store(hash,"x",1,newSVnv(x),0);
+	hv_store(hash,"y",1,newSVnv(y),0);
+    
+    RETVAL = hash;
+OUTPUT:
+    RETVAL
