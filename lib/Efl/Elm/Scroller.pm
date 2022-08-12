@@ -54,7 +54,7 @@ Efl::Elm:Scroller
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Scroller;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Scroller->add($parent);
   [...]

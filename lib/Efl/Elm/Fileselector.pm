@@ -61,7 +61,7 @@ Efl::Elm:Fileselector
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Fileselector;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Fileselector->add($parent);
   $widget->path_set("/path/to/folder");

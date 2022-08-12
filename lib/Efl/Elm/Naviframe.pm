@@ -56,7 +56,7 @@ Efl::Elm:Naviframe
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Naviframe;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Naviframe->add($parent);
   [...]

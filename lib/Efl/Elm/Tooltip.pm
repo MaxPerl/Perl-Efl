@@ -48,7 +48,7 @@ Efl::Elm:Tooltip
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Tooltip;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Tooltip->add($parent);
   $widget->collapse_set(1);

@@ -53,7 +53,7 @@ Efl::Elm:Glview
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Glview;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Glview->add($parent);
   [...]

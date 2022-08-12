@@ -52,7 +52,7 @@ Efl::Elm:Spinner
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Spinner;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Spinner->add($parent);
   $widget->value_set(12.3);

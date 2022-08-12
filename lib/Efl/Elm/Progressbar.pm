@@ -64,7 +64,7 @@ Efl::Elm:Progressbar
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Progressbar;
+  use Efl::Elm;
   [...]
   my $pb = Efl::Elm::Progressbar->add($win);
   $pb->text_set("LABEL");

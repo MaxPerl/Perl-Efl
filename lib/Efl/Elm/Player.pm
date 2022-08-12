@@ -53,7 +53,9 @@ Efl::Elm:Player
 
 =head1 SYNOPSIS
 
-  
+  use Efl::Elm;
+  [...]
+  my $player = Efl::Elm->add($parent); 
 
 =head1 DESCRIPTION
 

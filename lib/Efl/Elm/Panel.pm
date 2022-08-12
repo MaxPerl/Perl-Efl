@@ -58,7 +58,7 @@ Efl::Elm:Panel
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Panel;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Panel->add($parent);
   $widget->hidden_set(1);

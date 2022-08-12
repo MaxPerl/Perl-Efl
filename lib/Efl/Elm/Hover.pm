@@ -61,7 +61,7 @@ Efl::Elm:Hover
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Hover;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Hover->add($parent);
   $widget->parent_set($parent);

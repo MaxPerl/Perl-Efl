@@ -53,7 +53,7 @@ Efl::Elm:Frame
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Frame;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Frame->add($parent);
   $widget->collapse_set(1);

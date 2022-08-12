@@ -62,7 +62,7 @@ Efl::Elm:GenlistItem
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::GenlistItem;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::GenlistItem->add($parent);
   my $index = $widget->item_index_get();

@@ -54,7 +54,7 @@ Efl::Elm:Popup
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Popup;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Popup->add($parent);
   $widget->timeout_set(20.0);

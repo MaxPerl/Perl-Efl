@@ -662,7 +662,7 @@ char* call_perl_gen_text_get(void *data, Evas_Object *obj, const char *part) {
 
     // Object
     SV *s_obj = newSV(0);
-    sv_setref_pv(s_obj, "ElmGenlistItemPtr", obj);
+    sv_setref_pv(s_obj, "ElmGenlistPtr", obj);
 
     // part
     s_part = newSVpvn(part,strlen(part));
@@ -719,7 +719,7 @@ Eina_Bool call_perl_gen_state_get(void *data, Evas_Object *obj, const char *part
 
     // Object
     SV *s_obj = newSV(0);
-    sv_setref_pv(s_obj, "ElmGenlistItemPtr", obj);
+    sv_setref_pv(s_obj, "ElmGenlistPtr", obj);
 
     // part
     s_part = newSVpvn(part,strlen(part));
@@ -779,7 +779,7 @@ Evas_Object* call_perl_gen_content_get(void *data, Evas_Object *obj, const char 
 
     // Object
     SV *s_obj = newSV(0);
-    sv_setref_pv(s_obj, "ElmGenlistItemPtr", obj);
+    sv_setref_pv(s_obj, "ElmGenlistPtr", obj);
 
     // part
     s_part = newSVpvn(part,strlen(part));
@@ -809,9 +809,9 @@ Evas_Object* call_perl_gen_content_get(void *data, Evas_Object *obj, const char 
             ret_obj = NULL;
         }
     else {
-    IV tmp = SvIV((SV*)SvRV(s_content));
-    ret_obj = INT2PTR(Evas_Object*,tmp);
-    // sv_setref_pv(s_obj, "EvasObjectPtr", obj);
+    	IV tmp = SvIV((SV*)SvRV(s_content));
+    	ret_obj = INT2PTR(Evas_Object*,tmp);
+    	// sv_setref_pv(s_obj, "EvasObjectPtr", obj);
     }
 
     PUTBACK;
@@ -850,7 +850,7 @@ void call_perl_gen_del(void *data, Evas_Object *obj, void *event_info) {
 
         // Object
         SV *s_obj = newSV(0);
-        sv_setref_pv(s_obj, "ElmGenlistItemPtr", obj);
+        sv_setref_pv(s_obj, "ElmGenlistPtr", obj);
 
         ENTER;
         SAVETMPS;

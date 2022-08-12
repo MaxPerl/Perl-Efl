@@ -52,7 +52,7 @@ Efl::Elm:Conformant
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Conformant;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Conformant->add($parent);
   [...]

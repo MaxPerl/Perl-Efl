@@ -53,7 +53,7 @@ Efl::Elm:MenuItem
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::MenuItem;
+  use Efl::Elm;
   [...]
   my $selected = $menu->selected_item_get();
   my $next = $selected->next;

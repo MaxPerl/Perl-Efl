@@ -54,7 +54,7 @@ Efl::Elm:Separator
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Separator;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Separator->add($parent);
   $widget->horizontal_set(1);

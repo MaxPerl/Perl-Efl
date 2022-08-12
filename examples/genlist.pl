@@ -3,13 +3,6 @@ use warnings;
 
 use Efl::Evas;
 use Efl::Elm;
-use Efl::Elm::Win;
-use Efl::Elm::Genlist;
-use Efl::Elm::GenlistItemClass;
-use Efl::Elm::GenlistItem;
-use Efl::PLSide;
-use Efl::Eina;
-use Efl::Elm::Icon;
 
 Efl::Elm::init($#ARGV, \@ARGV);
 
@@ -35,17 +28,17 @@ $itc->del(\&del_cb);
 
 my $item1 = $list->item_append($itc,123,undef,0,\&_select_item,123);
 
-my $item2 = $list->item_prepend($itc,567,undef,undef,undef,undef);
-$list->insert_before($itc,111,undef,$item1,undef,undef,undef);
-$list->insert_after($itc,444,undef,$item1,undef,undef,undef);
-$list->item_prepend($itc,"000",undef,undef,undef,undef);
+my $item2 = $list->item_prepend($itc,567,undef,ELM_GENLIST_ITEM_NONE,undef,undef);
+$list->insert_before($itc,111,undef,$item1,ELM_GENLIST_ITEM_NONE,undef,undef);
+$list->insert_after($itc,444,undef,$item1,ELM_GENLIST_ITEM_NONE,undef,undef);
+$list->item_prepend($itc,"000",undef,ELM_GENLIST_ITEM_NONE,undef,undef);
 
 $list->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
 $win->resize_object_add($list);
 
 my $i = 777;
 for ($i; $i < 800; $i++) {
-my $item3 = $list->item_prepend($itc,$i,undef,undef,undef,undef);
+	$list->item_prepend($itc,$i,undef,ELM_GENLIST_ITEM_NONE,undef,undef);
 }
 
 $list->show();
@@ -55,7 +48,6 @@ $win->show();
 
 Efl::Elm::run();
 
-#print "Exiting ...\n";
 Efl::Elm::shutdown();
 
 sub del_cb {
@@ -68,12 +60,13 @@ sub _text_get {
 
 sub _content_get {
     my ($data, $obj, $part) = @_;
-    #print "PART $part\n";
+ 	my $type = $obj->widget_type_get();
+ 	print "TYPE $type\n";
     my $icon = Efl::Elm::Icon->add($obj);
     if ($part eq "elm.swallow.icon") {
         $icon->standard_set("clock");
     }
-    #$icon->size_hint_aspect_set(0.5, 1, 1);
+    $icon->size_hint_aspect_set(0.5, 1, 1);
     return $icon;
 }
 

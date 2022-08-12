@@ -44,7 +44,7 @@ Efl::Elm:ListItem
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::ListItem;
+  use Efl::Elm;
   [...]
   my $selected = $list->selected_item_get();
   my $next = $selected->next;

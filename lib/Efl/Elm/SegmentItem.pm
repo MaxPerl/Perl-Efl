@@ -46,7 +46,7 @@ Efl::Elm:SegmentItem
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::SegmentItem;
+  use Efl::Elm;
   [...]
   my $index = $item->index_get();
   [...]

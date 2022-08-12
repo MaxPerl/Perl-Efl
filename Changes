@@ -32,7 +32,7 @@ Revision history for Perl extension Efl.
 	- Add Efl::Ecore::EventHandler, Efl::Ecore::Event and some basic Ecore stuff
 0.66
 	- Add multi member to Efl::Ecore::Event::MouseButton and Efl::Ecore::EventMouseWheel (but member of multi root is missing)
-0.67 Fr Aug 05 12:25:00 2022
+0.67 Wed Aug 10 22:33:00 2022
 	- Add Efl::Elm::Player and Efl::Elm::Video widget (but elm_video_emotion_get(obj) is still missing!!)
 	- Minor code cleaning and Bugfixes (Efl::Elm::Video and Efl::Elm::Toolbar)
 	- Add constants of Efl::Elm::Toolbar
@@ -51,3 +51,7 @@ Revision history for Perl extension Efl.
 		(TODO: Implement this callback)
 	- remove (at the moment not working) functions ecore_event_add (TODO: Implement this!)
 	- remove (at the moment not working) functions elm_genlist_item_tooltip_content_cb_set() (TODO: Implement this!)
+	- Let $win->main_menu_get() return an Efl::Elm::Menu object
+	- Correct Efl::Elm::Inwin->add()
+	- ADD evas_object_size_hint_aspect_set|get
+	- Fix GenlistItemClass functions (obj must be GenlistItemPtr)

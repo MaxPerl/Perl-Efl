@@ -117,9 +117,6 @@ Efl::Elm:Entry
 
   use Efl::Evas;
   use Efl::Elm;
-  use Efl::Elm::Win;
-  use Efl::Elm::Box;
-  use Efl::Elm::Entry;
 
   Efl::Elm::init($#ARGV, \@ARGV);
 

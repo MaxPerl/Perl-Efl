@@ -84,7 +84,7 @@ Efl::Elm:Toolbar
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Toolbar;
+  use Efl::Elm;
   [...]
   my $tb = Efl::Elm::Toolbar->add($parent);
   $tb->shrink_mode_set(ELM_TOOLBAR_SHRINK_SCROLL);

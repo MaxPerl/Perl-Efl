@@ -54,7 +54,7 @@ Efl::Elm:SegmentControl
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::SegmentControl;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::SegmentControl->add($parent);
   my $count = $widget->count_get(1);

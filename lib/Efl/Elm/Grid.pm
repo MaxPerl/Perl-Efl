@@ -52,7 +52,7 @@ Efl::Elm:Grid
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Grid;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Grid->add($parent);
   $widget->pack($subobj,0,0,2,2);

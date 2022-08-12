@@ -52,7 +52,7 @@ Efl::Elm:Mapbuf
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Mapbuf;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Mapbuf->add($parent);
   $widget->auto_set(1);

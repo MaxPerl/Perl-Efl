@@ -54,7 +54,7 @@ Efl::Elm:Panes
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Panes;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Panes->add($parent);
   $widget->horizontal_set(1);

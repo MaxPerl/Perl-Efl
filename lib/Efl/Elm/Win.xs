@@ -15,6 +15,7 @@ typedef Evas_Object ElmWin;
 typedef Evas_Object EvasObject;
 typedef Evas_Object EvasObject;
 typedef Elm_Icon ElmIcon;
+typedef Elm_Menu ElmMenu;
 
 MODULE = Efl::Elm::Win		PACKAGE = Efl::Elm::Win
 
@@ -458,7 +459,7 @@ elm_win_inlined_image_object_get(obj)
 #	const ElmWin *obj
 
 
-ElmWin *
+ElmMenu *
 elm_win_main_menu_get(obj)
 	ElmWin *obj
 

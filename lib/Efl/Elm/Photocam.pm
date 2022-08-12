@@ -54,7 +54,7 @@ Efl::Elm:Photocam
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Photocam;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Photocam->add($parent);
   $widget->zoom_set(2.0);

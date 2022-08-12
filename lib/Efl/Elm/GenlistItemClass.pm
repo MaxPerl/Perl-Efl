@@ -81,7 +81,7 @@ Efl::Elm:GenlistItemClass
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::GenlistItemClass;
+  use Efl::Elm;
   [...]
   my $list = Efl::Elm::Genlist->new($win);
   $list->multi_select_set(1);

@@ -57,7 +57,7 @@ Efl::Elm:Image
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Image;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Image->add($parent);
   $widget->file_set("image.png", undef);

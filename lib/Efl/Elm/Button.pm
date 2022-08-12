@@ -53,7 +53,7 @@ Efl::Elm:Button
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Button;
+  use Efl::Elm;
   [...]
   my $button = Efl::Elm::Button->add($parent);
   $button->autorepeat_initial_timeout_set(1);

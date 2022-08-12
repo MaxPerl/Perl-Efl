@@ -95,7 +95,7 @@ Efl::Elm:Layout
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Layout;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Layout->add($parent);
   my @content_swallows = $widget->content_swallow_list_get_pv(1);

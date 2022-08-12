@@ -44,7 +44,7 @@ Efl::Elm:IndexItem
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::IndexItem;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::IndexItem->add($parent);
   $widget->selected_set(1);

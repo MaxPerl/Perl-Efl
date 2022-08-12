@@ -41,7 +41,7 @@ sub add {
 
 package ElmIconPtr;
 
-our @ISA = qw(ElmImagePtr EvasObjectPtr ElmObjectPtr);
+our @ISA = qw(ElmImagePtr ElmObjectPtr EvasObjectPtr);
 
 # Preloaded methods go here.
 
@@ -53,7 +53,7 @@ Efl::Elm:Icon
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Icon;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Icon->add($parent);
   my $theme = $widget->theme_get();

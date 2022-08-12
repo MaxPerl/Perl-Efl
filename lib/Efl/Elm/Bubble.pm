@@ -52,7 +52,7 @@ Efl::Elm:Bubble
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Bubble;
+  use Efl::Elm;
   [...]
   my $bubble = Efl::Elm::Bubble->add($parent);
   $bubble->pos_set(1);

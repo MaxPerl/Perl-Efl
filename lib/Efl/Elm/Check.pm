@@ -52,7 +52,7 @@ Efl::Elm:Check
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Check;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Check->add($parent);
   $widget->state_set(1);

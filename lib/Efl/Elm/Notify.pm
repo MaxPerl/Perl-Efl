@@ -54,7 +54,7 @@ Efl::Elm:Notify
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Notify;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Notify->add($parent);
   $widget->parent_set($parent);

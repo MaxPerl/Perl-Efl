@@ -69,7 +69,7 @@ Efl::Elm:Slider
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Slider;
+  use Efl::Elm;
   [...]
   my $sl = Efl::Elm::Slider->add($win);
   $sl->size_hint_align_set(EVAS_HINT_FILL,0.5);

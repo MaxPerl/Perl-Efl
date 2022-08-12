@@ -54,7 +54,7 @@ Efl::Elm:Radio
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Radio;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Radio->add($parent);
   $widget->value_set(1);

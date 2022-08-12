@@ -33,7 +33,7 @@ package ElmWidgetItemPtr;
 
 use Efl::Eina;
 
-our @ISA = qw(ElmObjectPtr EvasObjectPtr);
+our @ISA = qw();
 
 # Preloaded methods go here.
 
@@ -54,7 +54,7 @@ Efl::Elm:WidgetItem
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::WidgetItem;
+  use Efl::Elm;
   [...]
   my $it->disabled_set(1);
   [...]

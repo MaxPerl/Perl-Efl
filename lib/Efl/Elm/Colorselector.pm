@@ -61,7 +61,7 @@ Efl::Elm:Colorselector
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Colorselector;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Colorselector->add($parent);
   $widget->color_set(255,255,255,1);

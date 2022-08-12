@@ -53,7 +53,10 @@ Efl::Elm:Video
 
 =head1 SYNOPSIS
 
-  
+  use Efl::Elm;
+  [...]
+  my $video = Efl::Elm::Video->add($parent);
+  [...]
 
 =head1 DESCRIPTION
 

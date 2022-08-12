@@ -32,7 +32,7 @@ XSLoader::load('Efl::Elm::ObjectItem');
 
 package ElmObjectItemPtr;
 
-our @ISA = qw(ElmWidgetItemPtr ElmObjectPtr EvasObjectPtr);
+our @ISA = qw(ElmWidgetItemPtr);
 
 # Preloaded methods go here.
 
@@ -46,7 +46,7 @@ Efl::Elm:ObjectItem
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::ObjectItem;
+  use Efl::Elm;
   [...]
   my $text = $item->text_get();
   $item->content_set("default", $content);

@@ -11,7 +11,7 @@ typedef Elm_Widget_Item ElmWidgetItem;
 typedef Evas_Object EvasObject;
 typedef Eina_List EinaList;
 
-MODULE = Efl::Elm::WidgetItem		PACKAGE = ElmWidgetItemPtr     PREFIX = elm_object_
+MODULE = Efl::Elm::WidgetItem		PACKAGE = ElmWidgetItemPtr     PREFIX = elm_object_item_
 
 Eina_Bool
 elm_object_item_tooltip_window_mode_set(obj,disable)

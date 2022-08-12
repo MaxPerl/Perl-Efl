@@ -31,7 +31,7 @@ XSLoader::load('Efl::Elm::Inwin');
 
 sub add {
     my ($class,$parent) = @_;
-    my $widget = elm_inwin_add($parent);
+    my $widget = elm_win_inwin_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     return $widget;
 }
@@ -52,7 +52,7 @@ Efl::Elm:Inwin
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Inwin;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Inwin->add($parent);
   $widget->content_set($content);

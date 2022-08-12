@@ -81,7 +81,7 @@ Efl::Elm:Index
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Index;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Index->add($parent);
   $widget->autohide_disabled_set(1);

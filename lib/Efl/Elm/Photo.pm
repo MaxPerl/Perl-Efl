@@ -54,7 +54,7 @@ Efl::Elm:Photo
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Photo;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Photo->add($parent);
   $widget->file_set("path-to-photo.png");

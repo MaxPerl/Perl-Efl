@@ -54,8 +54,7 @@ Efl::Elm:Bg
 
 =head1 SYNOPSIS
 
-  use Efl::Elm; # For use of ELM_BG_* constants
-  use Efl::Elm::Bg;
+  use Efl::Elm;
   [...]
   my $bg = Efl::Elm::Bg->add($parent);
   $bg->color_set(255,255,255);

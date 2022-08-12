@@ -61,7 +61,7 @@ Efl::Elm:Ctxpopup
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Ctxpopup;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Ctxpopup->add($parent);
   $widget->horizontal_set(1);

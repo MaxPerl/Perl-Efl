@@ -63,7 +63,7 @@ Efl::Elm:Object
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Object;
+  use Efl::Elm;
   [...]
   $widget->text_set("a text");
   $widget->part_text_set("default","another text");

@@ -215,20 +215,21 @@ evas_object_size_hint_padding_get(obj,OUTLIST l,OUTLIST r,OUTLIST t,OUTLIST b)
 	Evas_Coord b
 
 
-# void
-# evas_object_size_hint_aspect_set(obj,aspect,w,h)
-#	EvasObject *obj
-#	Evas_Aspect_Control aspect
-#	Evas_Coord w
-#	Evas_Coord h
+# TODO(?) aspect is of type Evas_Aspect_Control
+void
+evas_object_size_hint_aspect_set(obj,aspect,w,h)
+	EvasObject *obj
+	double aspect
+	Evas_Coord w
+	Evas_Coord h
 
 
-# void
-# evas_object_size_hint_aspect_get(obj,OUTLIST aspect,OUTLIST w,OUTLIST h)
-#	const EvasObject *obj
-#	Evas_Aspect_Control aspect
-#	Evas_Coord w
-#	Evas_Coord h
+void
+evas_object_size_hint_aspect_get(obj,OUTLIST aspect,OUTLIST w,OUTLIST h)
+	const EvasObject *obj
+	double aspect
+	Evas_Coord w
+	Evas_Coord h
 
 
 void
@@ -401,16 +402,19 @@ PREINIT:
     EvasObject *obj;
     IV tmp;
     char *event;
+    int event_iv;
 CODE:
     New(0,event,3,char);
     // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
     tmp = SvIV((SV*)SvRV(perlobj));
     obj = INT2PTR(EvasObject*,tmp);
+    event_iv = SvIV(type);
     event = SvPV_nolen(type);
+    
     // Save the data on the perl side
     sc = perl_save_callback(aTHX_ func, perlobj,event,"Efl::PLSide::Callbacks");
-    evas_object_event_callback_add(obj,SvIV(type),call_perl_evas_event_cb,sc);
+    evas_object_event_callback_add(obj,event_iv,call_perl_evas_event_cb,sc);
 
 
 # void

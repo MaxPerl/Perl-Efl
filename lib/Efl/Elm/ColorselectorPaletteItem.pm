@@ -27,7 +27,7 @@ Efl::Elm:ColorselectorPaletteItem
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::ColorselectorPaletteItem;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::ColorselectorPaletteItem->add($parent);
   $widget->color_set(255,255,255,1);

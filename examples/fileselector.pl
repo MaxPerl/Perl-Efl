@@ -19,17 +19,18 @@ $win->autodel_set(1);
 
 
 
-my $box = Efl::Elm::Box->add($win);
-$box->horizontal_set(1);
-$box->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
-$win->resize_object_add($box);
-$box->show();
+#my $box = Efl::Elm::Box->add($win);
+#$box->horizontal_set(1);
+#$box->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
+#$win->resize_object_add($box);
+#$box->show();
 
 my $vbox = Efl::Elm::Box->add($win);
 $vbox->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
 $vbox->size_hint_align_set(EVAS_HINT_FILL,EVAS_HINT_FILL);
 $vbox->show();
-$box->pack_end($vbox);
+$win->resize_object_add($vbox);
+#$box->pack_end($vbox);
 
 my $fs = Efl::Elm::Fileselector->add($win);
 $fs->is_save_set(1);
@@ -45,8 +46,7 @@ $vbox->pack_end($fs);
 
 
 $fs->smart_callback_add("done", \&_fs_done, $fs);
-$fs->smart_callback_add("activated", \&_fs_done, $fs);
-$fs->smart_callback_add("selected", \&_fs_selected, $fs);
+$fs->smart_callback_add("activated", \&_fs_done, $fs);$fs->smart_callback_add("selected", \&_fs_selected, $fs);
 $fs->smart_callback_add("directory,open", \&_fs_selected, $fs);
 
 # win 400x400

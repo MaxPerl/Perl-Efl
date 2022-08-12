@@ -52,7 +52,7 @@ Efl::Elm:Flip
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Flip;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Flip->add($parent);
   [...]

@@ -93,7 +93,7 @@ Efl::Elm:Genlist
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Genlist;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Genlist->add($parent);
   $widget->item_append($item);

@@ -52,7 +52,7 @@ Efl::Elm:Label
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Label;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Label->add($parent);
   $widget->text_set("a Label");

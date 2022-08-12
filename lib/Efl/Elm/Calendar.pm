@@ -87,7 +87,7 @@ Efl::Elm:Calendar
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Calendar;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Calendar->add($parent);
   $widget->weekdays_names_set(["Mo","Di","Mi","Do","Fr","Sa","So"]);

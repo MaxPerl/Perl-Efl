@@ -70,7 +70,7 @@ Efl::Elm:Hoversel
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Hoversel;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Hoversel->add($parent);
   [...]

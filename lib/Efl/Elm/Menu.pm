@@ -69,7 +69,7 @@ Efl::Elm:Menu
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Menu;
+  use Efl::Elm;
   [...]
   my $menu = Efl::Elm::Menu->add($win);
   $menu->item_add(undef, undef, "first item", \&select, 123);

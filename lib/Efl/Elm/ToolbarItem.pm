@@ -53,7 +53,7 @@ Efl::Elm:ToolbarItem
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::ToolbarItem;
+  use Efl::Elm;
   [...]
   my $tb_it = $tb->item_append("mail-send","Send eMail",\&_item_3_pressed,$data);
   $tb_it->disabled_set(1);

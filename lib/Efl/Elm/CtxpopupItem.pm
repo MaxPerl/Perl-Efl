@@ -43,7 +43,7 @@ Efl::Elm:CtxpopupItem
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::CtxpopupItem;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::CtxpopupItem->add($parent);
   $widget->selected_set(1);

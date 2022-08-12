@@ -54,7 +54,7 @@ Efl::Elm:Box
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Box;
+  use Efl::Elm;
   [...]
   my $box = Efl::Elm::Box->add($parent);
   $box->homogeneous_set(1);

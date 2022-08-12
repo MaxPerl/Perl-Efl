@@ -67,7 +67,7 @@ Efl::Elm:Win
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Win;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Win->util_standard_add("name", "title of win");
   $widget->autodel_set(1);

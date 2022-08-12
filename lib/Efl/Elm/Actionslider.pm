@@ -54,8 +54,7 @@ Efl::Elm:Actionslider
 
 =head1 SYNOPSIS
 
-  use Efl::Elm; # For use of constants as ELM_ACTIONSLIDER_LEFT
-  use Efl::Elm::Actionslider;
+  use Efl::Elm;
   [...]
   my $actionslider = Efl::Elm::Actionslider->add($parent);
   $actionslider->indicator_pos_set(ELM_ACTIONSLIDER_LEFT);

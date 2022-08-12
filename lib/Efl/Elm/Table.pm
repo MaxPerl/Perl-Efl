@@ -52,7 +52,7 @@ Efl::Elm:Table
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::Table;
+  use Efl::Elm;
   [...]
   my $widget = Efl::Elm::Table->add($parent);
   $widget->homogeneous_set(1);

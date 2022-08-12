@@ -69,7 +69,7 @@ Efl::Elm:List
 
 =head1 SYNOPSIS
 
-  use Efl::Elm::List;
+  use Efl::Elm;
   [...]
   my $list = Efl::Elm::List->add($parent);
   $list->resize(320,300);
