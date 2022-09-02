@@ -105,6 +105,12 @@ Some events pass an Elementary Widget or an Evas Object as event info. Of course
 
 The provision of perl classes for event_info c structs is work in progress. If you need a specific binding for a c struct that is not supported at the moment, please send an issue report.
 
+=head1 STATE OF THE BINDING
+
+The perl binding is in an early development state. So things may change in the future and some functionalities are missing at the moment. Nevertheless especially the Elementary binding is very usable and complete.
+
+If you miss something or find issues, please report it to github (see below). 
+
 =head2 EXPORT
 
 None by default.
