@@ -51,25 +51,19 @@ elm_layout_sizing_restricted_eval(obj,width,height)
 	Eina_Bool height
 
 
-# TODO: func ist eigtl. Edje_Signal_Cb??
 void
-_elm_layout_signal_callback_add(pobj,emission,source,func,id)
-	SV *pobj
+_elm_layout_signal_callback_add(obj,emission,source,func,id)
+	ElmLayout *obj
 	const char *emission
 	const char *source
 	SV* func
 	int id
 PREINIT:
-    EvasObject *obj;
-    IV tmp;
+    UV objaddr;
     _perl_signal_cb *data;
 CODE:
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(EvasObject*,tmp);
-    // Save Signal_Id 
-    data = perl_save_signal_cb(aTHX_ pobj, id);
+    objaddr = PTR2IV(obj);
+    data = perl_save_signal_cb(aTHX_ objaddr, id);
     elm_layout_signal_callback_add(obj,emission,source,call_perl_signal_cb,data);
 
     

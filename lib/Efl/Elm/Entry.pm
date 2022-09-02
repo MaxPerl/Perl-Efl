@@ -34,6 +34,7 @@ sub add {
     my $widget = elm_entry_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_markup_filters, $widget);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 
@@ -100,6 +101,10 @@ sub markup_filter_remove{
 package Efl::Elm::EntryAnchorInfo;
 
 our @ISA = qw(ElmEntryAnchorInfoPtr);
+
+package Efl::Elm::EntryChangeInfo;
+
+our @ISA = qw(ElmEntryChangeInfoPtr);
 
 # Preloaded methods go here.
 

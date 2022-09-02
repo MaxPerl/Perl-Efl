@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 require Exporter;
+use Efl::Evas;
 use Efl::Evas::Object;
 use Efl::Elm::Object;
 
@@ -32,17 +33,17 @@ XSLoader::load('Efl::Elm::Layout');
 sub add {
     my ($class,$parent) = @_;
     my $widget = elm_layout_add($parent);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
+
 
 *new = \&add;
 
 package ElmLayoutPtr;
 
 use Efl::Eina;
-use Scalar::Util qw(refaddr);
 use Carp;
 
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
@@ -59,6 +60,8 @@ sub content_swallow_list_get_pv {
 
 sub signal_callback_add {
     my ($obj,$emission,$source,$func,$data) = @_;
+    my $objaddr = $$obj;
+     
     my $id = undef; $id = Efl::PLSide::get_signal_id( $obj, $emission, $source, $func);
     
     if (defined($id)) {
@@ -74,7 +77,7 @@ sub signal_callback_add {
 sub signal_callback_del {
     my ($obj,$emission,$source,$func) = @_;
     my $id = Efl::PLSide::get_signal_id( $obj, $emission, $source, $func);
-    my $objaddr = refaddr($obj);
+    my $objaddr = $$obj;
     
     if (defined($id)) {
         my $cstructaddr = $Efl::PLSide::EdjeSignals{$objaddr}[$id]{cstructaddr};

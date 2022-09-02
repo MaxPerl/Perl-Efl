@@ -34,6 +34,7 @@ sub add {
     my $widget = elm_genlist_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_genitems, $widget);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 
@@ -63,6 +64,7 @@ sub item_prepend {
     my ($obj,$itc,$data,$parent,$type,$func,$func_data) = @_;
     my $id = Efl::PLSide::save_gen_item_data( $obj,$data,$func,$func_data );
     my $widget = _elm_genlist_item_prepend($obj,$itc,$id,$parent,$type);
+    
     return $widget;
 }
 

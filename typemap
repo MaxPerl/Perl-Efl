@@ -10,6 +10,7 @@ Elm_Text_Format						T_IV
 Elm_Ctxpopup_Direction				T_IV
 Elm_Scroller_Policy					T_IV
 Evas_BiDi_Direction					T_IV
+Evas_Aspect_Control					T_IV
 
 ElmActionslider *                   T_EVAS_OBJECT
 const ElmActionslider *             T_EVAS_OBJECT
@@ -36,6 +37,7 @@ ElmCheck *                          T_EVAS_OBJECT
 ElmEntry *                          T_EVAS_OBJECT
 const ElmEntry *                    T_EVAS_OBJECT
 ElmEntryAnchorInfo *                T_PTROBJ
+ElmEntryChangeInfo *                T_PTROBJ
 ElmFileselector *                   T_EVAS_OBJECT
 ElmFrame *                 			T_EVAS_OBJECT
 ElmFlip *                 			T_EVAS_OBJECT

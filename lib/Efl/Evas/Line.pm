@@ -30,7 +30,7 @@ XSLoader::load('Efl::Evas::Line');
 sub add {
     my ($class,$parent) = @_;
     my $widget = evas_object_line_add($parent);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    #$widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     return $widget;
 }
 

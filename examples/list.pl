@@ -1,35 +1,41 @@
+# Based on the Basic tutorial code Basic List
+# see https://www.enlightenment.org/develop/legacy/tutorial/basic_tutorial
+#
+#! /usr/bin/perl
+use strict;
+use warnings;
+
+my $counter = 0;
+
 use Efl::Elm;
-use Efl::Elm::Win;
-use Efl::Elm::List;
-use Efl::Elm::Icon;
-use Efl::Elm::Button;
 
 Efl::Elm::init($#ARGV, \@ARGV);
 
 Efl::Elm::policy_set(ELM_POLICY_QUIT, ELM_POLICY_QUIT_LAST_WINDOW_CLOSED);
 
 my $win = Efl::Elm::Win->util_standard_add("Main", "Hello, World");
-
 $win->autodel_set(1);
-
 $win->resize(400,400);
 
 my $list = Efl::Elm::List->add($win);
-
+# $list->horizontal_set(1); //uncoment to get horizontal
+# size giving scrollbar
 $list->resize(320,300);
-
 $list->mode_set(ELM_LIST_LIMIT);
 
-$list->item_append("Text item",undef, undef,undef,undef);
+# first item: text
+$list->item_append("Text item",undef, undef,\&select_cb,undef);
 
+# second item: icon
 my $icon = Efl::Elm::Icon->add($list);
 $icon->standard_set("chat");
-$list->item_append("Icon item", $icon, undef,undef,undef);
+$list->item_append("Icon item", $icon, undef,\&select_cb,undef);
 
+# third item: button
 my $button = Efl::Elm::Button->add($list);
 $button->text_set("Button");
+my $itembutton = $list->item_append("Button item", undef, $button, \&select_cb,undef);
 
-my $itembutton = $list->item_append("Button item", undef, $button, undef,undef);
 $list->go();
 $list->show();
 
@@ -41,6 +47,13 @@ Efl::Elm::run();
 
 Efl::Elm::shutdown();
 
+sub select_cb {
+	my ($data, $obj, $evinfo) = @_;
+	
+	my $selected = Efl::ev_info2obj($evinfo, "Efl::Elm::ListItem");
+	print "The text of selected item " . $selected->text_get() . "\n";
+}
+
 sub _prepend_itembutton_cb {
     my ($data, $obj, $event_info) = @_;
     my $li = $obj;
@@ -51,7 +64,8 @@ sub _prepend_itembutton_cb {
 	if ($next) {
 		my $text = $next->text_get();
 		print "Text of next item: $text\n";
-		$li->item_insert_before($next,"Hello Perl", undef, undef, undef, undef);
+		$li->item_prepend("Item $counter", undef, undef, \&select_cb, undef);
+		$counter++;
 		$li->go();
     }
     

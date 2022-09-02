@@ -7,6 +7,8 @@
 
 #include <Elementary.h>
 
+#include "PLSide.h"
+
 // We need this typedef to bless the created object into the class ElmListPtr
 // This class is a child class of Efl::Elm::List, which inherits from EvasObjectPtr
 // see the @ISA's in Elm/List.pm
@@ -78,7 +80,6 @@ int
 elm_list_mode_get(obj)
 	ElmList *obj
 
-# TODO ElmWidgetItem must be ElmWidgetItem, but seems to be the same...
 
 ElmListItem *
 elm_list_selected_item_get(obj)
@@ -100,23 +101,31 @@ ElmListItem *
 elm_list_last_item_get(obj)
 	ElmList *obj
 
-# func = Evas_Smart_Cb (without *); not supported at the moment
 	
 ElmListItem *
-elm_list_item_insert_before(obj,before,label,icon,end,func,data)
-	ElmList *obj
+_elm_list_item_insert_before(pobj,before,label,icon,end,id)
+	SV *pobj
 	ElmListItem *before
 	char *label
 	EvasObject *icon 
 	EvasObject *end  
-	SV* func
-	void *data
+	int id
+PREINIT:
+	_perl_gendata *data;
+    ElmList *obj;
+    IV tmp;
+	ElmListItem *item;
 CODE:
-if (SvOK(func) || data) {
-        fprintf(stderr, "registering callback function is not supported at the moment \n");
-    }
+	// Fetch the c struct from the perl SV
+    // stolen from the typemap of T_PTROBJ
+    tmp = SvIV((SV*)SvRV(pobj));
+    obj = INT2PTR(ElmList*,tmp);
     
-    RETVAL = elm_list_item_insert_before(obj,before,label,icon, end,(Evas_Smart_Cb) NULL ,NULL);
+    // Save C struct with necessary infos to link to perl side
+    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    item = elm_list_item_insert_before(obj,before,label,icon,end,call_perl_gen_item_selected, data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
 	
@@ -125,22 +134,32 @@ elm_list_go(obj)
 	ElmList *obj
 	
 ElmListItem *
-elm_list_item_insert_after(obj,after,label,icon,end,func,data)
-	ElmList *obj
+_elm_list_item_insert_after(pobj,after,label,icon,end,id)
+	SV *pobj
 	ElmListItem *after
 	char *label
 	EvasObject *icon 
 	EvasObject *end  
-	SV* func
-	void *data
+	int id
+PREINIT:
+	_perl_gendata *data;
+    ElmList *obj;
+    IV tmp;
+	ElmListItem *item;
 CODE:
-if (SvOK(func) || data) {
-        fprintf(stderr, "registering callback function is not supported at the moment \n");
-    }
+	// Fetch the c struct from the perl SV
+    // stolen from the typemap of T_PTROBJ
+    tmp = SvIV((SV*)SvRV(pobj));
+    obj = INT2PTR(ElmList*,tmp);
     
-    RETVAL = elm_list_item_insert_after(obj,after,label,icon, end,(Evas_Smart_Cb) NULL ,NULL);
+    // Save C struct with necessary infos to link to perl side
+    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    item = elm_list_item_insert_after(obj,after,label,icon,end,call_perl_gen_item_selected, data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
+    
 	
 ElmListItem *
 elm_list_at_xy_item_get(obj,x,y,OUTLIST posret)
@@ -149,38 +168,57 @@ elm_list_at_xy_item_get(obj,x,y,OUTLIST posret)
 	int y
 	int posret
 	
+	
 ElmListItem *
-elm_list_item_append(obj,label,icon,end,func,data)
-	ElmList *obj
+_elm_list_item_append(pobj,label,icon,end,id)
+	SV *pobj
 	char *label
-	EvasObject *icon
-	EvasObject *end
-	SV* func
-	void *data
+	EvasObject *icon 
+	EvasObject *end  
+	int id
+PREINIT:
+	_perl_gendata *data;
+    ElmList *obj;
+    IV tmp;
+	ElmListItem *item;
 CODE:
-    if (SvOK(func) || data) {
-        fprintf(stderr, "registering callback function is not supported at the moment \n");
-    }
+	// Fetch the c struct from the perl SV
+    // stolen from the typemap of T_PTROBJ
+    tmp = SvIV((SV*)SvRV(pobj));
+    obj = INT2PTR(ElmList*,tmp);
     
-    RETVAL = elm_list_item_append(obj,label,icon, end,(Evas_Smart_Cb) NULL ,NULL);
+    // Save C struct with necessary infos to link to perl side
+    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    item = elm_list_item_append(obj,label,icon,end,call_perl_gen_item_selected, data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
     
 	
 ElmListItem *
-elm_list_item_prepend(obj,label,icon,end,func,data)
-	ElmList *obj
+_elm_list_item_prepend(pobj,label,icon,end,id)
+	SV *pobj
 	char *label
 	EvasObject *icon 
 	EvasObject *end  
-	SV* func
-	void *data
+	int id
+PREINIT:
+	_perl_gendata *data;
+    ElmList *obj;
+    IV tmp;
+	ElmListItem *item;
 CODE:
-    if (SvOK(func) || data) {
-        fprintf(stderr, "registering callback function is not supported at the moment \n");
-    }
+	// Fetch the c struct from the perl SV
+    // stolen from the typemap of T_PTROBJ
+    tmp = SvIV((SV*)SvRV(pobj));
+    obj = INT2PTR(ElmList*,tmp);
     
-    RETVAL = elm_list_item_prepend(obj,label,icon, end,(Evas_Smart_Cb) NULL ,NULL);
+    // Save C struct with necessary infos to link to perl side
+    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    item = elm_list_item_prepend(obj,label,icon,end,call_perl_gen_item_selected, data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
 	

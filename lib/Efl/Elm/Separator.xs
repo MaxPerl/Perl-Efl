@@ -14,7 +14,7 @@
 typedef Evas_Object ElmSeparator;
 typedef Evas_Object EvasObject;
 
-MODULE = Efl::Elm::Separator		PACKAGE = Efl::Elm::Separator     PREFIX = elm_separator_
+MODULE = Efl::Elm::Separator		PACKAGE = Efl::Elm::Separator
 
 ElmSeparator * 
 elm_separator_add(parent)

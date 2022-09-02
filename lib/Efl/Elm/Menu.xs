@@ -75,6 +75,7 @@ PREINIT:
     _perl_gendata *data;
     ElmMenu *obj;
     IV tmp;
+    ElmMenuItem *item;
 CODE:
     if (!parent) 
         parent = NULL;
@@ -84,7 +85,9 @@ CODE:
     obj = INT2PTR(ElmMenu*,tmp);
     // Save C struct with necessary infos to link to perl side
     data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
-    RETVAL = elm_menu_item_add(obj,parent,icon,label,call_perl_gen_item_selected,data);
+    item = elm_menu_item_add(obj,parent,icon,label,call_perl_gen_item_selected,data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
 

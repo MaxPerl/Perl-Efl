@@ -14,7 +14,7 @@
 typedef Elm_Notify ElmNotify;
 typedef Evas_Object EvasObject;
 
-MODULE = Efl::Elm::Notify		PACKAGE = Efl::Elm::Notify     PREFIX = elm_notify_
+MODULE = Efl::Elm::Notify		PACKAGE = Efl::Elm::Notify
 
 ElmNotify * 
 elm_notify_add(parent)

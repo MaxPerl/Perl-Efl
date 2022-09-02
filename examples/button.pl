@@ -1,3 +1,6 @@
+# Based on the Basic tutorial code Basic Button
+# see https://www.enlightenment.org/develop/legacy/tutorial/basic_tutorial
+#
 #! /usr/bin/perl
 use strict;
 use warnings;
@@ -5,7 +8,7 @@ use warnings;
 use Efl::Elm;
 use Efl::Evas;
 
-use Scalar::Util qw(refaddr);
+my $count = 0;
 
 Efl::Elm::init($#ARGV, \@ARGV);
 
@@ -22,15 +25,28 @@ my $button_text = Efl::Elm::Button->new($win);
 $button_text->text_set("Click me");
 
 # how a container object should resize a given child within its area
-$button_text->size_hint_weight_set(EVAS_HINT_EXPAND,1);
+$button_text->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
 
 # how to align an object
-$button_text->size_hint_align_set(-1, 0.5);
+$button_text->size_hint_align_set(EVAS_HINT_FILL, 0.5);
 
 $button_text->resize(100,30);
 $button_text->show();
-test($button_text);
 
+# Basic icon button
+my $button_icon = Efl::Elm::Button->add($win);
+my $icon = Efl::Elm::Icon->add($win);
+
+# set the image file and the button as an icon
+$icon->file_set("icon.png",undef);
+$button_icon->part_content_set("icon",$icon);
+
+$button_icon->size_hint_weight_set(1,1);
+$button_icon->size_hint_align_set(-1, 0.5);
+
+$button_icon->resize(100,30);
+$button_icon->move(110,0);
+$button_icon->show();
 
 # Icon and text button
 my $button_icon_text = Efl::Elm::Button->add($win);
@@ -49,64 +65,45 @@ $button_icon_text->move(210,0);
 $button_icon_text->show();
 
 # Click event
-my $text = "TEXT";
-my $func = \&_button_click_cb;
-$button_text->smart_callback_add("clicked", \&_button_click_cb, $text);
-#$button_text->evas_object_event_callback_add(1, \&_button_click_cb2, 123);
-#$button_text->smart_callback_add("del", sub {$button_text->delete_perl_data()}, undef);
+$button_text->smart_callback_add("clicked", \&_button_click_cb, undef);
+
 # Press event
-
-# Basic icon button
-my $button_icon = Efl::Elm::Button->add($win);
-my $icon = Efl::Elm::Icon->add($win);
-
-# set the image file and the button as an icon
-$icon->file_set("icon.png",undef);
-$button_icon->part_content_set("icon",$icon);
-
-$button_icon->size_hint_weight_set(1,1);
-$button_icon->size_hint_align_set(-1, 0.5);
-
-$button_icon->resize(100,30);
-$button_icon->move(110,0);
-$button_icon->show();
-
-#$button_icon->smart_callback_add("clicked", \&_button_press_cb, $button_text);
-
-
+$button_icon->smart_callback_add("pressed", \&_button_press_cb, undef);
 # Unpress event
-#$button_icon->smart_callback_add("unpressed", \&_button_unpress_cb, undef);
-#Dump($button_icon);
+$button_icon->smart_callback_add("unpressed", \&_button_unpress_cb, undef);
+
+# Get whether the autorepeat feature is enabled.
+$button_icon_text->autorepeat_set(1);
+# Set the initial timeout before the autorepeat event is generated.
+$button_icon_text->autorepeat_initial_timeout_set(1.0);
+# gap between two callbacks
+$button_icon_text->autorepeat_gap_timeout_set(0.5);
+# "repeated": the user pressed the button without releasing it
+$button_icon_text->smart_callback_add("repeated", \&_button_repeat_cb, undef);
+
 $win->show();
 
 Efl::Elm::run();
 Efl::Elm::shutdown();
 
-sub test {
-    #my ($button) = @_;
-    use Devel::Peek;
-    #Dump($_[0]);
-}
 
 sub _button_click_cb {
     my ($data, $button, $event_info) = @_;
-    print "Clicked\n";
-    $_[1]->text_set("Clicked!");
-    #$button_text->smart_callback_del("clicked",\&_button_click_cb,undef);
-}
-sub _button_click_cb2 {
-    my ($data, $button, $event_info) = @_;
-    print "CLICKED\n";
+    $button->text_set("Clicked!");
 }
 
 sub _button_press_cb {
     my ($data, $button, $event_info) = @_;
-     $data->text_set("Pressed!");
-     $button_text->del();
-
+     $button->text_set("Pressed!");
 }
 
 sub _button_unpress_cb {
     my ($data,$button, $event_info) = @_;
-    $button->text_set("Unpressed!\n");
+    $button->text_set("Unpressed!");
+}
+
+sub _button_repeat_cb {
+    my ($data, $button, $event_info) = @_;
+    $count++;
+    $button->text_set("Repeat $count!");
 }

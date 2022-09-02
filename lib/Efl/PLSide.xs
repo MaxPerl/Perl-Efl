@@ -10,6 +10,23 @@
 MODULE = Efl::PLSide		PACKAGE = Efl::PLSide
 
 void
+_free_perl_signal_callback(class, addr)
+    SV* class
+    SV* addr
+PREINIT:
+    UV address;
+    _perl_signal_cb *data;
+CODE:
+    address = SvUV(addr);
+    data = INT2PTR(_perl_signal_cb*,address);
+    if (data == NULL) {
+        croak("Could not delete smart callback\n");
+    }
+    else {
+        Safefree(data);
+    }
+    
+void
 _free_perl_callback(class, addr)
     SV* class
     SV* addr
@@ -29,7 +46,7 @@ CODE:
     else {
         Safefree(data);
     }
-    
+
 void
 _free_perl_gendata(class, addr)
     SV* class
@@ -39,6 +56,7 @@ PREINIT:
     _perl_gendata *data;
 CODE:
     address = SvUV(addr);
+    printf("Freeing gendata with address %"UVuf"\n",address);
     data = INT2PTR(_perl_gendata*,address);
     
     if (data == NULL) {

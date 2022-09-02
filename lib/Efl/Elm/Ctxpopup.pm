@@ -33,6 +33,7 @@ sub add {
     my ($class,$parent) = @_;
     my $widget = elm_ctxpopup_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 
@@ -41,8 +42,37 @@ sub add {
 package ElmCtxpopupPtr;
 
 use Efl::Eina;
+use Efl::PLSide;
 
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
+
+sub insert_before {
+    my ($obj,$before,$label,$icon,$func,$func_data) = @_;
+    my $id = Efl::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
+    my $widget = _elm_ctxpopup_item_insert_before($obj,$before,$label,$icon, $id);
+    return $widget;
+}
+
+sub insert_after {
+    my ($obj,$after,$label,$icon,$func,$func_data) = @_;
+    my $id = Efl::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
+    my $widget = _elm_ctxpopup_insert_after($obj,$after,$label,$icon,$id);
+    return $widget;
+}
+
+sub item_prepend {
+    my ($obj, $label,$icon,$func,$func_data) = @_;
+    my $id = Efl::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
+    my $widget = _elm_ctxpopup_item_prepend($obj,$label,$icon,$id);
+    return $widget;
+}
+
+sub item_append {
+    my ($obj,$label,$icon,$func,$func_data) = @_;
+    my $id = Efl::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
+    my $widget = _elm_ctxpopup_item_append($obj,$label,$icon,$id);
+    return $widget;
+}
 
 sub items_get_pv {
     my ($obj) = @_;

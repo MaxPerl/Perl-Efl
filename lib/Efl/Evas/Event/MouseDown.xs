@@ -56,9 +56,9 @@ PREINIT:
 	int x;
 	int y;
 CODE:
-	canvas = event->canvas;
-	x = canvas.x;
-	y = canvas.y;
+	//canvas = event->canvas;
+	x = event->canvas.x;
+	y = event->canvas.y;
 	
 	hash = (HV*) sv_2mortal( (SV*) newHV() );
 	

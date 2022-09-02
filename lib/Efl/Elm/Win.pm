@@ -33,6 +33,7 @@ sub add {
     my ($class,$parent,$name,$type) = @_;
     my $widget = elm_win_add($parent,$name,$type);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 
@@ -40,6 +41,7 @@ sub util_standard_add {
     my ($class,$name,$title) = @_;
     my $widget = elm_win_util_standard_add($name,$title);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 
@@ -47,6 +49,7 @@ sub util_dialog_add {
     my ($class,$parent,$name,$title) = @_;
     my $widget = elm_win_util_dialog_add($parent,$name,$title);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 

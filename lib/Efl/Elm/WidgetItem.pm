@@ -32,6 +32,7 @@ XSLoader::load('Efl::Elm::WidgetItem');
 package ElmWidgetItemPtr;
 
 use Efl::Eina;
+use Carp;
 
 our @ISA = qw();
 
@@ -42,6 +43,51 @@ sub access_order_get_pv {
     my $list = $obj->access_order_get();
     my @array = Efl::Eina::list2array($list,"EvasObjectPtr");
     return @array;
+}
+
+sub part_content_get_pv {
+	my ($obj,$part) = @_;
+	my $content = $obj->part_content_get($part);
+	my $class = ElmObjectPtr::widget_type_get($content);
+	if ($class =~ /^Elm_/) {
+		my $pclass = $class;
+		$pclass =~ s/_//g;
+		$pclass = $pclass . "Ptr";
+		bless($content,$pclass);
+	}
+	return $content;
+}
+
+sub signal_callback_add {
+    my ($obj,$emission,$source,$func,$data) = @_;
+    my $id = undef; 
+    $id = Efl::PLSide::get_item_signal_id( $obj, $emission, $source, $func);
+    
+    if (defined($id)) {
+        croak "You can only create a single signal with the same emission, source and function. Sorry \n";
+    }
+    else {
+        $id = Efl::PLSide::save_item_signal_data( $obj, $emission, $source, $func,$data );
+        my $widget = _elm_object_item_signal_callback_add($obj,$emission,$source,$func,$id);
+        return $id;
+    }
+}
+
+sub signal_callback_del {
+    my ($obj,$emission,$source,$func) = @_;
+    my $id = Efl::PLSide::get_item_signal_id( $obj, $emission, $source, $func);
+    my $parent = $obj->widget_get();
+    my $parentaddr = $$parent;
+    
+    if (defined($id)) {
+        my $cstructaddr = $Efl::PLSide::EdjeSignals{"$parentaddr###items"}[$id]{cstructaddr};
+        my $success = $obj->_elm_object_signal_callback_del($emission,$source, $cstructaddr);
+        
+        undef $Efl::PLSide::EdjeSignals{"$parentaddr###items"}[$id];
+    }
+    else {
+        croak "Deleting signal was not possible. Could not find signal of $obj with \n Emission: $emission \n Source $source \n Function " . Efl::PLSide::get_func_name($func) . "\n";
+    }
 }
 
 1;
@@ -66,6 +112,10 @@ This module is a perl binding to the Elementary WidgetItem widget.
 For more informations see https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__WidgetItem.html 
 
 For instructions, how to use Efl::Elm::WidgetItem, please study this API reference for now. A perl-specific documentation will perhaps come in later versions. But applying the C documentation should be no problem. Efl::Elm::WidgetItem gives you a nice object-oriented interface that is kept close to the C API. Please note, that the perl method names remove the "elm_object_item_" at the beginning of the c functions.
+
+=head1 SPECIFICS OF THE BINDING
+
+There is a special version of $widget_item->content_get() and $widget_item->part_content_get($part) with the name $widget_item->content_get_pv() and $widget_item->part_content_get_pv($part) that try to bless the returned EvasObject to the appropriate perl class. In fact the C class is fetched by ElmObjectPtr::widget_type_get and translated to the PerlClass through deleting underscores and adding "Ptr". It should work with all Elm_*-Widgets for which a perl binding exist. Nevertheless it is not guaranteed to work in all cases.
 
 =head2 EXPORT
 

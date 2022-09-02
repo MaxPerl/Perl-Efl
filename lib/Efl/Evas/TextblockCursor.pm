@@ -30,7 +30,7 @@ XSLoader::load('Efl::Evas::TextblockCursor');
 sub new {
     my ($class,$parent) = @_;
     my $widget = evas_object_textblock_cursor_new($parent);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    #$widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     return $widget;
 }
 

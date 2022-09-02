@@ -35,6 +35,7 @@ sub add {
     my $widget = elm_hoversel_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_genitems, $widget);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 
@@ -43,6 +44,7 @@ sub add {
 package ElmHoverselPtr;
 
 use Efl::Eina;
+use Efl::Elm::ObjectItem;
 
 our @ISA = qw(ElmButtonPtr ElmObjectPtr EvasObjectPtr);
 
@@ -56,7 +58,7 @@ sub item_add {
 sub items_get_pv {
     my ($obj) = @_;
     my $list = $obj->items_get();
-    my @array = Efl::Eina::list2array($list,"ElmHoverselItemPtr");
+    my @array = Efl::Eina::list2array($list,"ElmObjectItemPtr");
     return @array;
 }
 

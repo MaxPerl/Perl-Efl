@@ -4,11 +4,7 @@ use warnings;
 
 use Efl;
 use Efl::Evas;
-use Efl::Evas::Event::MouseDown;
-use Efl::Evas::Event::MouseUp;
-use Efl::Evas::Event::MouseMove;
 use Efl::Ecore::Evas;
-use Efl::Evas::Rectangle;
 use Efl::Ecore::Mainloop;
 
 if (Efl::Ecore::Evas::init() <= 0) {
@@ -60,9 +56,9 @@ sub on_click {
 	my $pev = Efl::ev_info2obj( $ev, "Efl::Evas::Event::MouseDown");
 	
 	my $output = $pev->output();
-	print "OUTPUT: $output->{x} $output->{x}\n";
+	print "OUTPUT: $output->{x} $output->{y}\n";
 	my $canvas = $pev->canvas();
-	print "CANVAS: $canvas->{x} $canvas->{x}\n";
+	print "CANVAS: $canvas->{x} $canvas->{y}\n";
 	my $button = $pev->button();
 	print "BUTTON $button\n";
 	
@@ -92,9 +88,9 @@ sub on_mouse_up {
 	my $pev = Efl::ev_info2obj( $ev, "Efl::Evas::Event::MouseUp");
 	
 	my $output = $pev->output();
-	print "OUTPUT: $output->{x} $output->{x}\n";
+	print "OUTPUT: $output->{x} $output->{y}\n";
 	my $canvas = $pev->canvas();
-	print "CANVAS: $canvas->{x} $canvas->{x}\n";
+	print "CANVAS: $canvas->{x} $canvas->{y}\n";
 	my $button = $pev->button();
 	print "BUTTON $button\n";
 	
@@ -125,13 +121,13 @@ sub on_mouse_move {
 	
 	my $cur = $pev->prev();
 	print "PREVIOUS POSITION\n";
-	print "OUTPUT: $cur->{output}->{x} $cur->{output}->{x}\n";
-	print "CANVAS: $cur->{canvas}->{x} $cur->{canvas}->{x}\n";
+	print "OUTPUT: $cur->{output}->{x} $cur->{output}->{y}\n";
+	print "CANVAS: $cur->{canvas}->{x} $cur->{canvas}->{y}\n";
 	
 	my $cur = $pev->cur();
 	print "CURRENT POSITION\n";
-	print "OUTPUT: $cur->{output}->{x} $cur->{output}->{x}\n";
-	print "CANVAS: $cur->{canvas}->{x} $cur->{canvas}->{x}\n";
+	print "OUTPUT: $cur->{output}->{x} $cur->{output}->{y}\n";
+	print "CANVAS: $cur->{canvas}->{x} $cur->{canvas}->{y}\n";
 	
 	my $buttons = $pev->buttons();
 	print "BUTTON $buttons\n";
@@ -139,12 +135,12 @@ sub on_mouse_move {
 	my $mod = $pev->modifiers();
 	# Control ist Str :-)
 	my $control_set = $mod->key_modifier_is_set("Control");
-	print "CONTROL_SET? $control_set\n";
+	print "CONTROL_SET $control_set\n";
 	
 	my $locks = $pev->locks();
 	# Control ist Str :-)
 	my $lock_set = $locks->key_lock_is_set("Caps_Lock");
-	print "LOCK_SET? $lock_set\n";
+	print "LOCK_SET $lock_set\n";
 	
 	my $ev_flags = $pev->event_flags();
 	print "EVENT FLAGS $ev_flags\n";

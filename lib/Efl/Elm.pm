@@ -7,7 +7,6 @@ use Carp;
 require Exporter;
 use AutoLoader;
 
-
 use Efl::Elm::Actionslider;
 use Efl::Elm::Bg;
 use Efl::Elm::Box;

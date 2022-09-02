@@ -3,14 +3,7 @@
 use warnings;
 
 use Efl::Evas;
-use Efl::Evas::Object;
 use Efl::Elm;
-use Efl::Elm::Win;
-use Efl::Elm::Box;
-use Efl::Elm::Label;
-use Efl::Elm::Button;
-use Efl::Elm::Icon;
-use Efl::Elm::Progressbar;
 
 Efl::Elm::init($#ARGV, \@ARGV);
 
@@ -38,8 +31,6 @@ $pb->show();
 $bx->show();
 $pb->value_set(0.8);
 
-
-
 $win->show();
 
 Efl::Elm::run();
@@ -49,8 +40,4 @@ Efl::Elm::shutdown();
 sub _progress_format_cb {
     my ($val) = @_;
     return "VAL is $val";
-}
-
-sub free {
-
 }

@@ -15,6 +15,7 @@
 // By this trick we get a wonderful perlish oo-interface :-)
 typedef Elm_Entry ElmEntry;
 typedef Elm_Entry_Anchor_Info ElmEntryAnchorInfo;
+typedef Elm_Entry_Change_Info ElmEntryChangeInfo;
 typedef Evas_Object EvasObject;
 typedef Evas_Textblock EvasTextblock;
 
@@ -47,7 +48,7 @@ PREINIT:
     char *markup;
     SV *s_string;
 CODE:
-    markup = elm_entry_markup_to_utf8(s);
+    markup = elm_entry_utf8_to_markup(s);
     s_string = newSVpv(markup,0);
     free(markup);
     RETVAL = s_string;
@@ -837,3 +838,67 @@ CODE:
     RETVAL = anchor_info->h;
 OUTPUT:
     RETVAL
+
+MODULE = Efl::Elm::Entry		PACKAGE = ElmEntryChangeInfoPtr
+
+Eina_Bool
+insert(change_info)
+    ElmEntryChangeInfo *change_info
+CODE:
+    RETVAL = change_info->insert;
+OUTPUT:
+    RETVAL
+    
+    
+Eina_Bool
+merge(change_info)
+    ElmEntryChangeInfo *change_info
+CODE:
+    RETVAL = change_info->merge;
+OUTPUT:
+    RETVAL    
+
+HV*
+change(change_info)
+    ElmEntryChangeInfo *change_info
+PREINIT:
+	HV *hash;
+	HV *insert;
+	size_t pos;
+	size_t plain_length;
+	const char *insert_content;
+	HV *del;
+	size_t start;
+	size_t end;
+	const char *del_content;
+CODE:
+    pos = change_info->change.insert.pos;
+    plain_length = change_info->change.insert.plain_length;
+    insert_content = change_info->change.insert.content;
+    
+    insert = newHV();
+    hv_store(insert,"pos",3,newSViv(pos),0);
+    hv_store(insert,"plain_length",12,newSViv(plain_length),0);
+    hv_store(insert,"content",7,newSVpv(insert_content,0),0);
+    
+    
+    start = change_info->change.del.start;
+    end = change_info->change.del.end;
+    del_content = change_info->change.del.content;
+    
+    del = newHV();
+    hv_store(del,"start",5,newSViv(start),0);
+    hv_store(del,"end",3,newSViv(end),0);
+    hv_store(del,"content",7,newSVpv(del_content,0),0);
+    
+    hash = (HV*) sv_2mortal( (SV*) newHV() );
+    hv_store(hash,"insert",6,newRV_noinc((SV*)insert),0);
+    hv_store(hash,"del",3,newRV_noinc((SV*)del),0);
+    
+    RETVAL = hash;
+OUTPUT:
+    RETVAL
+    
+    
+    
+    

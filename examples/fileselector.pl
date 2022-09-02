@@ -17,8 +17,6 @@ Efl::Elm::policy_set(ELM_POLICY_QUIT, ELM_POLICY_QUIT_LAST_WINDOW_CLOSED);
 my $win = Efl::Elm::Win->util_standard_add("hello", "Hello, World!");
 $win->autodel_set(1);
 
-
-
 #my $box = Efl::Elm::Box->add($win);
 #$box->horizontal_set(1);
 #$box->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);

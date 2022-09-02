@@ -186,9 +186,9 @@ elm_genlist_last_item_get(obj)
 
 
 ElmGenlistItem *
-_elm_genlist_item_insert_before(pobj,pitc,id,parent,before_it,type)
+_elm_genlist_item_insert_before(pobj,itc,id,parent,before_it,type)
 	SV *pobj
-	SV *pitc
+    const ElmGenlistItemClass *itc
 	int id
 	ElmWidgetItem *parent
 	ElmWidgetItem *before_it
@@ -196,8 +196,8 @@ _elm_genlist_item_insert_before(pobj,pitc,id,parent,before_it,type)
 PREINIT:
     _perl_gendata *gen_data;
     ElmGenlist *obj;
-    const ElmGenlistItemClass *itc;
     IV tmp;
+    UV itcaddr;
 CODE:
     if (!itc)
         itc = NULL;
@@ -207,11 +207,12 @@ CODE:
     // stolen from the typemap of T_PTROBJ
     tmp = SvIV((SV*)SvRV(pobj));
     obj = INT2PTR(ElmGenlist*,tmp);
-    tmp = SvIV((SV*)SvRV(pitc));
-    itc = INT2PTR(ElmGenlistItemClass*,tmp);
+    
+    // Get the Adress of the itc struct
+    itcaddr = PTR2IV(itc);
     
     // Save GenItc
-    gen_data = perl_save_gen_cb(aTHX_ pobj, pitc, id);
+    gen_data = perl_save_gen_cb(aTHX_ pobj, itcaddr, id);
     RETVAL = elm_genlist_item_insert_before( obj,itc,gen_data, parent, before_it, type,call_perl_gen_item_selected,gen_data);
 OUTPUT:
     RETVAL
@@ -223,9 +224,9 @@ elm_genlist_realized_items_update(obj)
 
 
 ElmGenlistItem *
-_elm_genlist_item_insert_after(pobj,pitc,id,parent,after_it,type)
+_elm_genlist_item_insert_after(pobj,itc,id,parent,after_it,type)
 	SV *pobj
-	SV *pitc
+	const ElmGenlistItemClass *itc
 	int id
 	ElmWidgetItem *parent
 	ElmWidgetItem *after_it
@@ -233,7 +234,7 @@ _elm_genlist_item_insert_after(pobj,pitc,id,parent,after_it,type)
 PREINIT:
     _perl_gendata *gen_data;
     ElmGenlist *obj;
-    const ElmGenlistItemClass *itc;
+    UV itcaddr;
     IV tmp;
 CODE:
     if (!itc)
@@ -244,11 +245,12 @@ CODE:
     // stolen from the typemap of T_PTROBJ
     tmp = SvIV((SV*)SvRV(pobj));
     obj = INT2PTR(ElmGenlist*,tmp);
-    tmp = SvIV((SV*)SvRV(pitc));
-    itc = INT2PTR(ElmGenlistItemClass*,tmp);
+    
+    // Get the Adress of the itc struct
+    itcaddr = PTR2IV(itc);
     
     // Save GenItc
-    gen_data = perl_save_gen_cb(aTHX_ pobj, pitc, id);
+    gen_data = perl_save_gen_cb(aTHX_ pobj, itcaddr, id);
     RETVAL = elm_genlist_item_insert_after( obj,itc,gen_data, parent, after_it, type,call_perl_gen_item_selected,gen_data);
 OUTPUT:
     RETVAL
@@ -283,16 +285,16 @@ elm_genlist_items_count(obj)
 
 
 ElmGenlistItem *
-_elm_genlist_item_prepend(pobj,pitc,id,parent,type)
+_elm_genlist_item_prepend(pobj,itc,id,parent,type)
     SV *pobj
-	SV *pitc
+	const ElmGenlistItemClass *itc
 	int id
 	ElmWidgetItem *parent
 	int type
 PREINIT:
     _perl_gendata *gen_data;
     ElmGenlist *obj;
-    const ElmGenlistItemClass *itc;
+    UV itcaddr;
     IV tmp;
 CODE:
     if (!itc)
@@ -303,10 +305,12 @@ CODE:
     // stolen from the typemap of T_PTROBJ
     tmp = SvIV((SV*)SvRV(pobj));
     obj = INT2PTR(ElmGenlist*,tmp);
-    tmp = SvIV((SV*)SvRV(pitc));
-    itc = INT2PTR(ElmGenlistItemClass*,tmp);
+    
+    // Get the Adress of the itc struct
+    itcaddr = PTR2IV(itc);
+    
     // Save GenItc
-    gen_data = perl_save_gen_cb(aTHX_ pobj, pitc, id);
+    gen_data = perl_save_gen_cb(aTHX_ pobj, itcaddr, id);
     RETVAL = elm_genlist_item_prepend( obj,itc,gen_data, parent,type,call_perl_gen_item_selected,gen_data);
 OUTPUT:
     RETVAL
@@ -318,16 +322,16 @@ elm_genlist_clear(obj)
 
 
 ElmGenlistItem *
-_elm_genlist_item_append(pobj,pitc,id,parent,type)
+_elm_genlist_item_append(pobj,itc,id,parent,type)
 	SV *pobj
-	SV *pitc
+	const ElmGenlistItemClass *itc;
 	int id
 	ElmWidgetItem *parent
 	int type
 PREINIT:
     _perl_gendata *gen_data;
     ElmGenlist *obj;
-    const ElmGenlistItemClass *itc;
+    UV itcaddr;
     IV tmp;
 CODE:
     if (!itc)
@@ -338,11 +342,12 @@ CODE:
     // stolen from the typemap of T_PTROBJ
     tmp = SvIV((SV*)SvRV(pobj));
     obj = INT2PTR(ElmGenlist*,tmp);
-    tmp = SvIV((SV*)SvRV(pitc));
-    itc = INT2PTR(ElmGenlistItemClass*,tmp);
+    
+    // Get the Adress of the itc struct
+    itcaddr = PTR2IV(itc);
     
     // Save GenItc
-    gen_data = perl_save_gen_cb(aTHX_ pobj, pitc, id);
+    gen_data = perl_save_gen_cb(aTHX_ pobj, itcaddr, id);
     RETVAL = elm_genlist_item_append( obj,itc,gen_data, parent,type,call_perl_gen_item_selected,gen_data);
 OUTPUT:
     RETVAL

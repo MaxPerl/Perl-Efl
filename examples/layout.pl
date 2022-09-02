@@ -25,7 +25,7 @@ $layout->show();
 
 $layout->signal_callback_add("size,changed","",\&_size_changed_cb2,$layout);
 $layout->signal_callback_add("size,changed","",\&_size_changed_cb,$layout);
-
+$layout->signal_callback_del("size,changed","",\&_size_changed_cb2);
 
 my $btn = Efl::Elm::Button->add($win);
 $btn->text_set("Enlarge me");
@@ -33,6 +33,7 @@ $btn->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
 $btn->size_hint_align_set(EVAS_HINT_FILL,EVAS_HINT_FILL);
 $layout->part_content_set("example/custom",$btn);
 $btn->smart_callback_add("clicked", \&_swallow_btn_cb,$layout);
+#$btn->signal_callback_add("size,changed","",\&_size_changed_cb2,$layout);
 
 $win->resize(160,160);
 $win->show();

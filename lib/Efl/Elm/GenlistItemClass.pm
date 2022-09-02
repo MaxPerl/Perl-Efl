@@ -39,7 +39,7 @@ sub new {
 
 package ElmGenlistItemClassPtr;
 
-our @ISA = qw(ElmObjectPtr EvasObjectPtr);
+#our @ISA = qw(ElmObjectPtr EvasObjectPtr);
 
 sub text_get {
     my ($obj, $func) = @_;
@@ -50,7 +50,7 @@ sub text_get {
 
 sub content_get {
     my ($obj, $func) = @_;
-
+	
     Efl::PLSide::gen_content_get($obj,$func);
     $obj->_elm_genlist_item_class_content_get();
 }

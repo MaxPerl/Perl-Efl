@@ -30,7 +30,7 @@ XSLoader::load('Efl::Evas::Textblock');
 sub add {
     my ($class,$parent) = @_;
     my $widget = evas_object_textblock_add($parent);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    #$widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     return $widget;
 }
 
@@ -47,6 +47,11 @@ sub node_format_list_get_pv {
     my $list = $obj->node_format_list_get();
     my @array = Efl::Eina::list2array($list,"EvasTextblockNodeFormatPtr");
     return @array;
+}
+
+sub range_text_get {
+	my ($textblock,$cur1,$cur2,$format) = @_;
+	return $cur1->range_text_get($cur2,$format);
 }
 
 # Preloaded methods go here.

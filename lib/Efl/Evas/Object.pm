@@ -66,7 +66,7 @@ sub smart_callback_del {
 
 sub event_callback_add {
     my ($obj, $event, $func, $data) = @_;
-    
+
     Efl::PLSide::register_smart_cb( $obj, $event, $func, $data);
     
     $obj->_evas_object_event_callback_add($event, $func, $data);

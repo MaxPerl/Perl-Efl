@@ -61,8 +61,10 @@ sub register_smart_cb {
 sub cleanup {
     my ($widget) = @_;
     my $objaddr = refaddr($widget);
+    warn "Cleanup smart callbacks of widget with adress $objaddr\n" if ($Efl::Debug);
     my $cbs = $Callbacks{$objaddr};
     foreach my $key (keys %$cbs) {
+    	next unless (defined($key));
         warn "Delete callback with key: $key\n" if ($Efl::Debug);
 
         # Free the cstruct on C side
@@ -118,29 +120,29 @@ our %GenItems;
 sub gen_text_get {
     my ($itc, $func) = @_;
 
-    my $itcaddr = refaddr($itc);
+    my $itcaddr = $$itc;
     $GenItc{$itcaddr}{'text_get'} = $func;
 }
 
 sub gen_content_get {
     my ($itc, $func) = @_;
 
-    my $itcaddr = refaddr($itc);
+    my $itcaddr = $$itc;
     $GenItc{$itcaddr}{'content_get'} = $func;
 }
 
 sub gen_state_get {
     my ($itc, $func) = @_;
 
-    my $itcaddr = refaddr($itc);
+    my $itcaddr = $$itc;
     $GenItc{$itcaddr}{'state_get'} = $func;
 }
 
 sub gen_del {
     my ($itc, $func) = @_;
 
-    my $itcaddr = refaddr($itc);
-    $GenItc{$itcaddr}{'del'} = $func;
+    my $itcaddr = $$itc;
+    $GenItc{$itcaddr}{'del'} = $func || sub {};
 }
 
 sub save_gen_item_data {
@@ -156,6 +158,7 @@ sub save_gen_item_data {
         func_data => $func_data,
         pclass => $pclass,
         cstructaddr => '',
+        signals => [],
     };
     my @items = ();
     if ( $GenItems{$objaddr} ) {
@@ -171,10 +174,38 @@ sub cleanup_genitems {
     my ($widget) = @_;
 
     my $objaddr = refaddr($widget);
+    my $caddr = $$widget;
 
+	# Workaround:
+	# Problem: If we delete $item->cstructaddr, in the "del_cb" call of the GenlistItem (the callback is defined automatically
+	# and can be supplemented by a user-defined callback through $itc->del()) the perl_gendata struct cannot not be accessed any more :-( )
+	# Solution: If widget is a genlist we have to delete the Genlistitems. Thereby the perl hash and c struct is freed by the del callback
+	# of the GenlistItemClass (see call_perl_gen_del in PLSide.c)
+	# TODO: Would be this solution possible with other widgets with items (there is call_perl_gen_del also used, if user deletes an item
+	#		automatically (e.g. Toolbar, CtxPopupItem (done), IndexItem (done), ListItem (done), HoverselItem (done), MenuItem (done), PopupItem)
+	my $pclass = blessed($widget);
+	if ( 	$pclass eq "ElmGenlistPtr" || $pclass eq "Efl::Elm::Genlist" ||
+			# CtxPopup doesn't work because in the del_cb data ins't defined
+			#$pclass eq "ElmCtxpopupPtr" || $pclass eq "Efl::Elm::Ctxpopup" ||
+			$pclass eq "ElmListPtr" || $pclass eq "Efl::Elm::List" ) {
+
+		$widget->clear();
+
+	}
+	elsif ($pclass eq "ElmIndexPtr" || $pclass eq "Efl::Elm::Index") {
+		$widget->item_clear();
+	}
+	elsif ($pclass eq "ElmMenuPtr" || $pclass eq "Efl::Elm::Menu" ||
+			$pclass eq "ElmHoverselPtr" || $pclass eq "Efl::Elm::Hoversel") {
+		my @items = $widget->items_get_pv;
+		foreach my $item (@items) {
+			$item->del();
+		}
+	}
 
     foreach my $item ( @{ $GenItems{$objaddr} } ) {
-        warn "Delete Genitem with key: $objaddr \n" if ($Efl::Debug);
+    	next unless (defined($item));
+        warn "Delete Genitem with key: $objaddr\n" if ($Efl::Debug);
 
         # Free the cstruct on C side
         if ($item->{cstructaddr}) {
@@ -219,6 +250,7 @@ sub cleanup_markup_filters {
     my $objaddr = $$widget;
     my $cbs = $MarkupFilter_Cbs{$objaddr};
     foreach my $key (keys %$cbs) {
+    	next unless (defined($key));
         warn "Delete callback with key: $key\n" if ($Efl::Debug);
 
         # Free the cstruct on C side
@@ -239,12 +271,15 @@ our %EdjeSignals;
 
 sub save_signal_data {
     my ($obj, $emission, $source, $func, $data) = @_;
-    my $objaddr = refaddr($obj);
+
+    my $objaddr = $$obj;
+    my $pclass = blessed($obj);
     my $struct = {
         emission => $emission,
         source => $source,
         data => $data,
         function => $func,
+        pclass => $pclass,
     };
     my @signals = ();
     if ( $EdjeSignals{$objaddr} ) {
@@ -258,7 +293,7 @@ sub save_signal_data {
 
 sub get_signal_id {
     my ( $obj, $emission, $source, $func) = @_;
-    my $objaddr = refaddr($obj);
+    my $objaddr = $$obj;
     my $funcname = get_func_name($func);
 
     my @signals = ();
@@ -279,21 +314,91 @@ sub get_signal_id {
 
 sub cleanup_signals {
     my ($widget) = @_;
-    print "Cleanup Signals\n" if ($Efl::Debug);
-    my $objaddr = refaddr($widget);
+
+    my $objaddr = $$widget;
+    print "Cleanup Signals from widget with adress $objaddr\n" if ($Efl::Debug);
+    
     my $cbs = $EdjeSignals{$objaddr};
-    use Data::Dumper;
-    Dumper($cbs);
     foreach my $key (@$cbs) {
+        next unless (defined($key));
         warn "Delete Edje Signal of Layout $widget, \n\t Function : " . $key->{function} . "Emission: " . $key->{emission} . "\n\tSource " . $key->{source} .  "\n" if ($Efl::Debug);
 
         # Free the cstruct on C side
-        my $cstructaddr = $EdjeSignals{$objaddr}{$key}{cstructaddr};
-        Efl::PLSide->_free_perl_callback($cstructaddr);
-
-        # Delete the callback on the Perl side
-        delete($EdjeSignals{$objaddr});
+        my $cstructaddr = $key->{cstructaddr};
+        Efl::PLSide->_free_perl_signal_callback($cstructaddr);
     }
+
+    # Delete the callback on the Perl side
+    delete($EdjeSignals{$objaddr});
+
+    # TODO: Cleanup item signals if @EdjeSignals{$objaddr###items} exists
+    my @item_signals = ();
+
+    if ($EdjeSignals{"$objaddr###items"}) {
+
+		@item_signals = @{ $EdjeSignals{"$objaddr###items"} } ;
+
+		foreach my $signal (@item_signals) {
+		    next unless (defined($signal));
+		    warn "Delete Edje Signal of Widget $signal->{objaddr}, \n\t Function : " . $signal->{function} . "Emission: " . $signal->{emission} . "\n\tSource " . $signal->{source} .  "\n" if ($Efl::Debug);
+
+		    # Free the cstruct on C side
+		    my $cstructaddr = $signal->{cstructaddr};
+		    Efl::PLSide->_free_perl_signal_callback($cstructaddr);
+		}
+
+		# Delete the callback on the Perl side
+		delete($EdjeSignals{"$objaddr###items"});
+    }
+
+}
+
+
+sub get_item_signal_id {
+    my ( $obj, $emission, $source, $func) = @_;
+    my $parent = $obj->widget_get();
+    my $parentaddr = $$parent;
+    my $objaddr = $$obj;
+    my $funcname = get_func_name($func);
+
+    my @signals = ();
+    @signals = @{ $EdjeSignals{"$objaddr###items"} } if ($EdjeSignals{"$objaddr###items"});
+    my $signal_id = undef;
+    my $i = 0;
+    foreach my $signal (@signals) {
+        next unless (defined($signal));
+        my $sfuncname = get_func_name($signal->{function});
+        if (($signal->{objaddr} == $objaddr ) && ( $signal->{emission} eq $emission) && ($signal->{source} eq $source) && ($sfuncname eq $funcname) ) {
+            $signal_id = $i;
+            last;
+        }
+        $i++;
+    }
+    return $signal_id;
+}
+
+sub save_item_signal_data {
+    my ($obj, $emission, $source, $func, $data) = @_;
+
+    my $parent = $obj->widget_get();
+    my $parentaddr = $$parent;
+    my $pclass = blessed($obj);
+    my $struct = {
+        objaddr => $$obj || 0,
+        emission => $emission,
+        source => $source,
+        data => $data,
+        function => $func,
+        pclass => $pclass,
+    };
+    my @signals = ();
+    if ( $EdjeSignals{"$parentaddr###items"} ) {
+        @signals = @{ $EdjeSignals{"$parentaddr###items"} };
+    }
+    push @signals, $struct;
+
+    $EdjeSignals{"$parentaddr###items"} = \@signals;
+    return $#signals;
 }
 
 ##############################
@@ -332,7 +437,7 @@ sub cleanup_ecore_evas_event_cb {
 ##############################
 # Ecore EventHandler
 #############################
-	
+
 our @EcoreEventHandler_Cbs;
 
 sub register_ecore_event_handler_cb {

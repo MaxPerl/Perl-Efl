@@ -48,10 +48,39 @@ Revision history for Perl extension Efl.
 	- remove (at the moment not working) functions elm_object_item_del_cb_set and elm_object_item_signal_callback_add
 		(TODO: Implement callbacks of ElmWidgetItemPtr)
 	- remove (at the moment not working) function elm_object_signal_callback_add
-		(TODO: Implement this callback)
 	- remove (at the moment not working) functions ecore_event_add (TODO: Implement this!)
 	- remove (at the moment not working) functions elm_genlist_item_tooltip_content_cb_set() (TODO: Implement this!)
 	- Let $win->main_menu_get() return an Efl::Elm::Menu object
 	- Correct Efl::Elm::Inwin->add()
 	- ADD evas_object_size_hint_aspect_set|get
 	- Fix GenlistItemClass functions (obj must be GenlistItemPtr)
+0.68 Fr Sep 02 22:00:00 2022
+	- Add Ecore Modifiers constants
+	- Fix elm_entry_utf8_to_markup
+	- Add all macros of elm_object_item.h
+	- Implement elm_object_signal_callback_add|del and automatic cleanup of signals 
+		(TODO: Check which widgets really can have signal callbacks? Only Layout and Edje object?) 
+	- automatically cleanup c struct and GenItem hash, if a Efl::Elm::CtxPopupItem|IndexItem|ListItem|HoverselItem|MenuItem| 
+		PopupItem is deleted
+		(TODO: Do the same with ColorpaletteItem, SegmentItem???)
+	- implement elm_object_item_signal_callback_add|del and automatic cleanup of signal when parent widget is deleted
+		(TODO: Check which widgets really can have signal callbacks? Only Layout and Edje object?) 
+	- passing function possible to Elm::List->item_insert_*|item_append|item_prepend, Elm::Ctypopup->item_append, 
+		Elm::Popup->item_append 
+	- add EVAS_ASPECT_CONTROL_* Constants
+	- minor fixes in examples and add new examples
+	- Add the special version of $naviframe->item_pop_pv, $object->(part_)content_get_pv and $object_item->(part_)content_get_pv 
+		that tries to bless the returned EvasObject to the appropriate perl class
+		(TODO: Perhaps a own function Efl::Elm::widgetType2pclass()?)
+	- Fixes with the automatical cleanup of cstruct and GenItem hash, if a Efl::Elm::GenlistItem is deleted, and the 
+		cleanup of all GenlistItems when Genlist is deleted
+		(Note: The del_cb of the GenlistItc class is always predefined to call_perl_gen_del. There the Genlistitem hash
+		and c struct are deleted and a user-defined del_cb is called. Therefore for cleaning up the GenlistItems in 
+		Efl::Elm::PLSide::cleanup_genitems it is sufficient to clear the Genlist
+		TODO: Check whether this is a way for all "GenWidgets" (e.g. Toolbar, CtxPopupItem, IndexItem, ListItem, HoverselItem, MenuItem, 
+		PopupItem))
+	- minor fixes
+	- Adjust automatical cleanup of CtxPopupItem, IndexItem, ListItem, HoverselItem, MenuItem according to GenlistItem (see below)
+		because there occured problems (witg Menu and Hoversel)
+		(TODO: Same with ToolbarItem and PopupItem [as far as apparent there are no problems with these widgets])
+		

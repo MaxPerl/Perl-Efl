@@ -2,15 +2,8 @@
 use strict;
 use warnings;
 
-use Efl;
 use Efl::Evas;
 use Efl::Elm;
-use Efl::Elm::Win;
-use Efl::Elm::Box;
-use Efl::Elm::Frame;
-use Efl::Evas::Rectangle;
-use Efl::Elm::Colorselector;
-use Efl::Elm::ColorselectorPaletteItem;
 
 Efl::Elm::init($#ARGV, \@ARGV);
 
@@ -41,7 +34,7 @@ $rect->show();
 my $fr2 = Efl::Elm::Frame->add($win);
 $fr2->size_hint_weight_set(1.0,0.5);
 $fr2->size_hint_align_set(EVAS_HINT_FILL,EVAS_HINT_FILL);
-$fr2->text_set("Color View");
+$fr2->text_set("Color Selector");
 $bx->pack_end($fr2);
 $fr2->show();
 
@@ -51,6 +44,7 @@ $cs->size_hint_weight_set(EVAS_HINT_EXPAND,0.0);
 $cs->size_hint_align_set(EVAS_HINT_FILL,0.0);
 $cs->color_set(255,90,18,255);
 $cs->show();
+# TODO: Callbacks
 $fr2->part_content_set("default",$cs);
 
 $cs->smart_callback_add("color,item,longpressed" => \&longpressed_cb);
@@ -64,5 +58,5 @@ sub longpressed_cb {
     my ($data,$obj,$ev_info) = @_;
     my $it = Efl::ev_info2obj( $ev_info, "Efl::Elm::ColorselectorPaletteItem");
     my ($r,$g,$b,$a) = $it->color_get();
-    print "COLOR: $r $g $b $a\n";
+    print "color: $r $g $b $a\n";
 }

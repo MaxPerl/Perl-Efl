@@ -34,12 +34,15 @@ sub add {
     my $widget = elm_index_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_genitems, $widget);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 
 *new = \&add;
 
 package ElmIndexPtr;
+
+use Efl::PLSide;
 
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
 

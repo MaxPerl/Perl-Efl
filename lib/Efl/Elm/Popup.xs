@@ -7,6 +7,8 @@
 
 #include <Elementary.h>
 
+#include "PLSide.h"
+
 // We need this typedef to bless the created object into the class ElmWinPtr
 // This class is a child class of Efl::Elm::Win, which inherits from EvasObjectPtr
 // see the @ISA's in Elm/Win.pm
@@ -94,20 +96,30 @@ elm_popup_scrollable_get(obj)
 
 
 ElmWidgetItem *
-elm_popup_item_append(obj,label,icon,func,data)
-	ElmPopup *obj
-	const char *label
-	EvasObject *icon
-	SV* func
-	void *data
+_elm_popup_item_append(pobj,label,icon,id)
+	SV *pobj
+	char *label
+	EvasObject *icon  
+	int id
+PREINIT:
+	_perl_gendata *data;
+    ElmPopup *obj;
+    IV tmp;
+	ElmWidgetItem *item;
 CODE:
-    if (SvOK(func)) {
-        fprintf(stderr, "registering callback function is not supported at the moment \n");
-    }
-    RETVAL = elm_popup_item_append(obj,label,icon, (Evas_Smart_Cb) NULL ,NULL);
+	// Fetch the c struct from the perl SV
+    // stolen from the typemap of T_PTROBJ
+    tmp = SvIV((SV*)SvRV(pobj));
+    obj = INT2PTR(ElmPopup*,tmp);
+    
+    // Save C struct with necessary infos to link to perl side
+    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    item = elm_popup_item_append(obj,label,icon,call_perl_gen_item_selected, data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
-    RETVAL
-
+    RETVAL    
+	
 
 void
 elm_popup_dismiss(obj)

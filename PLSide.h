@@ -38,6 +38,11 @@ _perl_callback *save_markup_filter_struct(pTHX_ SV *func, UV addr);
 void call_perl_markup_filter_cb(void *data, Elm_Entry *entry, char **text);
 
 
+//
+// Used by Elm::Ctxpopup, Elm::Genlist, Elm::Hoversel, Elm::Index, Elm::List, Elm::Menu,  
+// Elm::Popup, Elm::Toolbar etc.pp.
+//
+
 typedef struct __perl_gendata _perl_gendata;
 
 struct __perl_gendata {
@@ -46,7 +51,7 @@ struct __perl_gendata {
     int item_id;
 };
 
-_perl_gendata *perl_save_gen_cb(pTHX_ SV *obj, SV *itc, int id);
+_perl_gendata *perl_save_gen_cb(pTHX_ SV *obj, UV itcaddr, int id);
 char* call_perl_gen_text_get(void *data, Evas_Object *obj, const char *part);
 Evas_Object* call_perl_gen_content_get(void *data, Evas_Object *obj, const char *part);
 Eina_Bool call_perl_gen_state_get(void *data, Evas_Object *obj, const char *part);
@@ -54,6 +59,9 @@ void call_perl_gen_del(void *data, Evas_Object *obj, void *event_info);
 void call_perl_genitc_del(void *data, Evas_Object *obj);
 void call_perl_gen_item_selected(void *data, Evas_Object *obj, void *event_info);
 
+//
+// used by Elm::Layout, Elm::Object, Elm::WidgetItem (signal_callback_add|del)
+//
 
 typedef struct __perl_signal_cb _perl_signal_cb;
 
@@ -62,10 +70,15 @@ struct __perl_signal_cb {
     int signal_id;
 };
 
-_perl_signal_cb *perl_save_signal_cb(pTHX_ SV *obj, int id);
+_perl_signal_cb *perl_save_signal_cb(pTHX_ UV objaddr, int id);
+_perl_signal_cb *perl_save_item_signal_cb(pTHX_ UV objaddr, int id);
 void call_perl_signal_cb(void *data, Evas_Object *layout, const char *emission, const char *source);
+void call_perl_item_signal_cb(void *data, Elm_Object_Item *it, const char *emission, const char *source);
 
+//
 // Ecore_Evas_Events
+// 
+
 void call_perl_ecore_evas_resize(Ecore_Evas *ee);
 void call_perl_ecore_evas_move(Ecore_Evas *ee);
 void call_perl_ecore_evas_show(Ecore_Evas *ee);

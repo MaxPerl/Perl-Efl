@@ -7,6 +7,8 @@
 
 #include <Elementary.h>
 
+#include "PLSide.h"
+
 typedef Elm_Widget_Item ElmWidgetItem;
 typedef Evas_Object EvasObject;
 typedef Eina_List EinaList;
@@ -165,22 +167,50 @@ elm_object_item_part_content_unset(obj,part)
 	const char *part
 
 
-# TODO: func ist eigtl. stets Elm_Object_Item_Signal_Cb func
-#void
-#elm_object_item_signal_callback_add(obj,emission,source,func,data)
-#	ElmWidgetItem *obj
-#	const char *emission
-#	const char *source
-#	SV* func
-#	void *data
 
+void
+_elm_object_item_signal_callback_add(obj,emission,source,func,id)
+	ElmWidgetItem *obj
+	const char *emission
+	const char *source
+	SV* func
+	int id
+PREINIT:
+    UV objaddr;
+    _perl_signal_cb *data;
+CODE:
+    objaddr = PTR2IV(obj);
+    data = perl_save_item_signal_cb(aTHX_ objaddr, id);
+    elm_object_item_signal_callback_add(obj,emission,source,call_perl_item_signal_cb,data);
+    
 
-# void *
-#elm_object_item_signal_callback_del(obj,emission,source,func)
-#	ElmWidgetItem *obj
-#	const char *emission
-#	const char *source
-#	SV* func
+void *
+_elm_object_item_signal_callback_del(obj,emission,source,cstructaddr)
+	ElmWidgetItem *obj
+	const char *emission
+	const char *source
+	SV* cstructaddr
+PREINIT:
+    _perl_signal_cb *sc = NULL;
+    _perl_signal_cb *del_sc = NULL;
+    UV address;
+    void *data;
+CODE:
+    address = SvUV(cstructaddr);
+    sc = INT2PTR(_perl_signal_cb*,address);
+    data = elm_object_item_signal_callback_del(obj, emission, source, call_perl_item_signal_cb);
+    while (data != NULL) {
+        del_sc = (_perl_signal_cb *) data;
+        data = elm_object_signal_callback_del(obj, emission, source, call_perl_signal_cb);
+        if (del_sc->signal_id == sc->signal_id) {
+            Safefree(del_sc);
+        }
+        // If signal_ids are different reregister the signal callback
+        else {
+            elm_object_item_signal_callback_add(obj,emission,source,call_perl_signal_cb,del_sc);
+        }
+        
+    }
 
 
 

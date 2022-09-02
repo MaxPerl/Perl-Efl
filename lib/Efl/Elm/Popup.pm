@@ -33,6 +33,7 @@ sub add {
     my ($class,$parent) = @_;
     my $widget = elm_popup_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 
@@ -40,7 +41,16 @@ sub add {
 
 package ElmPopupPtr;
 
+use Efl::PLSide;
+
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
+
+sub item_append {
+    my ($obj,$label,$icon, $func,$func_data) = @_;
+    my $id = Efl::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
+    my $widget = _elm_popup_item_append($obj,$label,$icon,$id);
+    return $widget;
+}
 
 # Preloaded methods go here.
 

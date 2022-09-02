@@ -64,7 +64,7 @@ CODE:
     itc->func.state_get = call_perl_gen_state_get;
     
 void
-elm_genlist_item_class_style(itc, style)
+elm_genlist_item_class_item_style(itc, style)
     ElmGenlistItemClass *itc
     char *style
 CODE:

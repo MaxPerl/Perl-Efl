@@ -29,6 +29,11 @@ void
 elm_object_text_set(object,text)
     EvasObject *object
     char *text
+
+
+char *
+elm_object_text_get(obj)
+	const EvasObject *obj
     
 
 void
@@ -54,11 +59,32 @@ Eina_Bool
 elm_object_focus_get(obj)
 	const EvasObject *obj
 
+
 void
 elm_object_domain_translatable_part_text_set(obj,part,domain,text)
 	EvasObject *obj
 	const char *part
 	const char *domain
+	const char *text
+	
+
+void
+elm_object_domain_translatable_text_set(obj,domain,text)
+	EvasObject *obj
+	const char *domain
+	const char *text
+
+
+void
+elm_object_translatable_text_set(obj,text)
+	EvasObject *obj
+	const char *text
+	
+
+void
+elm_object_translatable_part_text_set(obj,part,text)
+	EvasObject *obj
+	const char *part
 	const char *text
 
 
@@ -68,10 +94,28 @@ elm_object_translatable_part_text_get(obj,part)
 	const char *part
 
 
+char *
+elm_object_translatable_text_get(obj)
+	const EvasObject *obj
+	
+
 void
 elm_object_domain_part_text_translatable_set(obj,part,domain,translatable)
 	EvasObject *obj
 	const char *part
+	const char *domain
+	Eina_Bool translatable
+
+
+void
+elm_object_part_text_translatable_set(obj,part,translatable)
+	EvasObject *obj
+	const char *part
+	Eina_Bool translatable
+
+void
+elm_object_domain_text_translatable_set(obj,domain,translatable)
+	EvasObject *obj
 	const char *domain
 	Eina_Bool translatable
 
@@ -83,16 +127,32 @@ elm_object_part_content_set(obj,part,content)
 	EvasObject *content
 
 
+void
+elm_object_content_set(obj,content)
+	EvasObject *obj
+	EvasObject *content
+
+
 EvasObject *
 elm_object_part_content_get(obj,part)
 	const EvasObject *obj
 	const char *part
+
+	
+EvasObject *
+elm_object_content_get(obj)
+	const EvasObject *obj
 
 
 EvasObject *
 elm_object_part_content_unset(obj,part)
 	EvasObject *obj
 	const char *part
+
+
+EvasObject *
+elm_object_content_unset(obj)
+	EvasObject *obj
 
 
 void
@@ -161,22 +221,50 @@ elm_object_signal_emit(obj,emission,source)
 	const char *emission
 	const char *source
 
-# func = Edje_Signal_Cb
-#void
-#elm_object_signal_callback_add(obj,emission,source,func,data)
-#	EvasObject *obj
-#	const char *emission
-#	const char *source
-#	SV* func
-#	SV *data
+void
+_elm_object_signal_callback_add(obj,emission,source,func,id)
+	EvasObject *obj
+	const char *emission
+	const char *source
+	SV* func
+	int id
+PREINIT:
+    UV objaddr;
+    _perl_signal_cb *data;
+CODE:
+    objaddr = PTR2IV(obj);
+    data = perl_save_signal_cb(aTHX_ objaddr, id);
+    elm_object_signal_callback_add(obj,emission,source,call_perl_signal_cb,data);
 
+    
 
-# void *
-# elm_object_signal_callback_del(obj,emission,source,func)
-#	EvasObject *obj
-#	const char *emission
-#	const char *source
-#	SV* func
+void *
+_elm_object_signal_callback_del(obj,emission,source,cstructaddr)
+	EvasObject *obj
+	const char *emission
+	const char *source
+	SV* cstructaddr
+PREINIT:
+    _perl_signal_cb *sc = NULL;
+    _perl_signal_cb *del_sc = NULL;
+    UV address;
+    void *data;
+CODE:
+    address = SvUV(cstructaddr);
+    sc = INT2PTR(_perl_signal_cb*,address);
+    data = elm_object_signal_callback_del(obj, emission, source, call_perl_signal_cb);
+    while (data != NULL) {
+        del_sc = (_perl_signal_cb *) data;
+        data = elm_object_signal_callback_del(obj, emission, source, call_perl_signal_cb);
+        if (del_sc->signal_id == sc->signal_id) {
+            Safefree(del_sc);
+        }
+        // If signal_ids are different reregister the signal callback
+        else {
+            elm_object_signal_callback_add(obj,emission,source,call_perl_signal_cb,del_sc);
+        }
+        
+    }
 
 # func = Elm_Event_Cb
 # void

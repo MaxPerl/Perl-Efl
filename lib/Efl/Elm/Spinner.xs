@@ -14,7 +14,7 @@
 typedef Elm_Spinner ElmSpinner;
 typedef Evas_Object EvasObject;
 
-MODULE = Efl::Elm::Spinner		PACKAGE = Efl::Elm::Spinner     PREFIX = elm_spinner_
+MODULE = Efl::Elm::Spinner		PACKAGE = Efl::Elm::Spinner
 
 ElmSpinner * 
 elm_spinner_add(parent)

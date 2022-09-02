@@ -14,7 +14,7 @@
 typedef Elm_Mapbuf ElmMapbuf;
 typedef Evas_Object EvasObject;
 
-MODULE = Efl::Elm::Mapbuf		PACKAGE = Efl::Elm::Mapbuf     PREFIX = elm_mapbuf_
+MODULE = Efl::Elm::Mapbuf		PACKAGE = Efl::Elm::Mapbuf
 
 ElmMapbuf * 
 elm_mapbuf_add(parent)

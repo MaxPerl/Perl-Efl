@@ -372,6 +372,12 @@ if  (eval {require ExtUtils::Constant; 1}) {
         {name => 'EVAS_NATIVE_SURFACE_STATUS_PLANE_ASSIGN', 'macro' => 1},
         {name => 'EVAS_NATIVE_SURFACE_STATUS_PLANE_RELEASE', 'macro' => 1},
         #
+        {name => 'EVAS_ASPECT_CONTROL_NONE', 'macro' => 1},
+        {name => 'EVAS_ASPECT_CONTROL_NEITHER', 'macro' => 1},
+        {name => 'EVAS_ASPECT_CONTROL_HORIZONTAL', 'macro' => 1},
+        {name => 'EVAS_ASPECT_CONTROL_VERTICAL', 'macro' => 1},
+        {name => 'EVAS_ASPECT_CONTROL_BOTH', 'macro' => 1},
+        #
         {name => 'EVAS_IMAGE_ORIENT_NONE', 'macro' => 1},
         {name => 'EVAS_IMAGE_ORIENT_0', 'macro' => 1},
         {name => 'EVAS_IMAGE_ORIENT_90', 'macro' => 1},
@@ -533,6 +539,29 @@ my @names_ecore = (
 	{name => 'ECORE_EVENT_MOUSE_WHEEL', 'macro' => 1},
 	{name => 'ECORE_EVENT_MOUSE_IN', 'macro' => 1},
 	{name => 'ECORE_EVENT_MOUSE_OUT', 'macro' => 1},
+	#{name => 'ECORE_EVENT_MODIFIER_SHIFT, 'macro' => 1},
+	{name => 'ECORE_EVENT_MODIFIER_CTRL', 'macro' => 1},
+	{name => 'ECORE_EVENT_MODIFIER_ALT', 'macro' => 1},
+	{name => 'ECORE_EVENT_MODIFIER_WIN', 'macro' => 1},
+	{name => 'ECORE_EVENT_MODIFIER_SCROLL', 'macro' => 1},
+	{name => 'ECORE_EVENT_MODIFIER_NUM', 'macro' => 1},
+	{name => 'ECORE_EVENT_MODIFIER_CAPS', 'macro' => 1},
+	{name => 'ECORE_EVENT_LOCK_SCROLL', 'macro' => 1},
+	{name => 'ECORE_EVENT_LOCK_NUM', 'macro' => 1},
+	{name => 'ECORE_EVENT_LOCK_CAPS', 'macro' => 1},
+	{name => 'ECORE_EVENT_LOCK_SHIFT', 'macro' => 1},
+	{name => 'ECORE_EVENT_MODIFIER_ALTGR', 'macro' => 1},
+	#
+	{name => 'ECORE_NONE', 'macro' => 1},
+	{name => 'ECORE_SHIFT', 'macro' => 1},
+	{name => 'ECORE_CTRL', 'macro' => 1},
+	{name => 'ECORE_ALT', 'macro' => 1},
+	{name => 'ECORE_WIN', 'macro' => 1},
+	{name => 'ECORE_SCROLL', 'macro' => 1},
+	{name => 'ECORE_CAPS', 'macro' => 1},
+	{name => 'ECORE_MODE', 'macro' => 1},
+	{name => 'ECORE_LAST', 'macro' => 1},
+	#
     );
     
     ExtUtils::Constant::WriteConstants(

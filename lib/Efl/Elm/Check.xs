@@ -14,7 +14,7 @@
 typedef Evas_Object ElmCheck;
 typedef Evas_Object EvasObject;
 
-MODULE = Efl::Elm::Check		PACKAGE = Efl::Elm::Check     PREFIX = elm_check_
+MODULE = Efl::Elm::Check		PACKAGE = Efl::Elm::Check
 
 ElmCheck * 
 elm_check_add(EvasObject *parent)

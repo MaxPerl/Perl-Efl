@@ -35,12 +35,15 @@ sub add {
     my $widget = elm_toolbar_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_genitems, $widget);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 
 *new = \&add;
 
 package ElmToolbarPtr;
+
+use Efl::PLSide;
 
 our @ISA = qw(ElmScrollerPtr ElmObjectPtr EvasObjectPtr);
 
@@ -54,7 +57,7 @@ sub insert_before {
 sub insert_after {
     my ($obj,$after,$icon,$label,$func,$func_data) = @_;
     my $id = Efl::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
-    my $widget = _elm_toolbar_insert_after($obj,$after,$icon,$label,$id);
+    my $widget = _elm_toolbar_item_insert_after($obj,$after,$icon,$label,$id);
     return $widget;
 }
 

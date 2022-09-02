@@ -215,11 +215,10 @@ evas_object_size_hint_padding_get(obj,OUTLIST l,OUTLIST r,OUTLIST t,OUTLIST b)
 	Evas_Coord b
 
 
-# TODO(?) aspect is of type Evas_Aspect_Control
 void
 evas_object_size_hint_aspect_set(obj,aspect,w,h)
 	EvasObject *obj
-	double aspect
+	Evas_Aspect_Control aspect
 	Evas_Coord w
 	Evas_Coord h
 
@@ -227,7 +226,7 @@ evas_object_size_hint_aspect_set(obj,aspect,w,h)
 void
 evas_object_size_hint_aspect_get(obj,OUTLIST aspect,OUTLIST w,OUTLIST h)
 	const EvasObject *obj
-	double aspect
+	Evas_Aspect_Control aspect
 	Evas_Coord w
 	Evas_Coord h
 

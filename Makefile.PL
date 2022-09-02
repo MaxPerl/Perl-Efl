@@ -69,11 +69,23 @@ WriteMakefile(
 		'lib/Efl/Elm/Slider' => {
 			OBJECT => 'lib/Efl/Elm/Slider$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},
+		'lib/Efl/Elm/Ctxpopup' => {
+			OBJECT => 'lib/Efl/Elm/Ctxpopup$(OBJ_EXT) PLSide$(OBJ_EXT)',
+		},
+		'lib/Efl/Elm/Popup' => {
+			OBJECT => 'lib/Efl/Elm/Popup$(OBJ_EXT) PLSide$(OBJ_EXT)',
+		},
+		'lib/Efl/Elm/List' => {
+			OBJECT => 'lib/Efl/Elm/List$(OBJ_EXT) PLSide$(OBJ_EXT)',
+		},
 		'lib/Efl/Elm/Toolbar' => {
 			OBJECT => 'lib/Efl/Elm/Toolbar$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},
 		'lib/Efl/Elm/ToolbarItem' => {
 			OBJECT => 'lib/Efl/Elm/ToolbarItem$(OBJ_EXT) PLSide$(OBJ_EXT)',
+		},
+		'lib/Efl/Elm/WidgetItem' => {
+			OBJECT => 'lib/Efl/Elm/WidgetItem$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},
 		'lib/Efl/Evas/Object' => {
 			OBJECT => 'lib/Efl/Evas/Object$(OBJ_EXT) PLSide$(OBJ_EXT)',

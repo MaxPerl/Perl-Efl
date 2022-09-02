@@ -42,41 +42,32 @@ __END__
 
 =head1 NAME
 
-Elm - Perl extension for blah blah blah
+Efl::Elm:NaviframeItem
 
 =head1 SYNOPSIS
 
-  use Elm;
-  blah blah blah
+  use Efl::Elm;
+  [...]
 
 =head1 DESCRIPTION
 
-Stub documentation for Elm, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
+This module is a perl binding to the Elementary NaviframeItem widget.
 
-Blah blah blah.
+For more informations see https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Naviframe.html 
+
+For instructions, how to use Efl::Elm::NaviframeItem, please study this API reference for now. A perl-specific documentation will perhaps come in later versions. But applying the C documentation should be no problem. Efl::Elm::NaviframeItem gives you a nice object-oriented interface that is kept close to the C API. Please note, that the perl method names remove the "elm_naviframe_item_" at the beginning of the c functions.
 
 =head2 EXPORT
 
 None by default.
 
-
-
 =head1 SEE ALSO
 
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
+https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__NaviframeItem.html
 
 =head1 AUTHOR
 
-Maximilian Lika, E<lt>maximilian@E<gt>
+Maximilian Lika
 
 =head1 COPYRIGHT AND LICENSE
 

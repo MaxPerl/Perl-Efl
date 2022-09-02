@@ -14,7 +14,7 @@
 typedef Evas_Object ElmActionslider;
 typedef Evas_Object EvasObject;
 
-MODULE = Efl::Elm::Actionslider		PACKAGE = Efl::Elm::Actionslider     PREFIX = elm_actionslider_
+MODULE = Efl::Elm::Actionslider		PACKAGE = Efl::Elm::Actionslider
 
 ElmActionslider * 
 elm_actionslider_add(parent)

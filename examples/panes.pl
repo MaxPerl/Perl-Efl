@@ -1,11 +1,11 @@
+# Based on the Panes Tutorial
+# see https://www.enlightenment.org/develop/legacy/tutorial/panes_tutorial
+#
 #! /usr/bin/perl
 use strict;
 use warnings;
 
 use Efl::Elm;
-use Efl::Elm::Win;
-use Efl::Elm::Panes;
-use Efl::Elm::Button;
 use Efl::Evas;
 
 my $size;

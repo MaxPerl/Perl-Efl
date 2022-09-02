@@ -34,6 +34,7 @@ sub add {
     my $widget = elm_menu_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_genitems, $widget);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 
@@ -42,18 +43,21 @@ sub add {
 package ElmMenuPtr;
 
 use Efl::Eina;
+use Efl::PLSide;
 
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
 
 sub items_get_pv {
     my ($obj) = @_;
     my $list = $obj->items_get();
-    my @array = Efl::Eina::list2array($list,"ElmListItem");
+    my @array = Efl::Eina::list2array($list,"ElmMenuItemPtr");
     return @array;
 }
 
 sub item_add {
     my ($obj,$parent,$icon,$label,$func,$data) = @_;
+    $icon = $icon || "";
+    $label = $label || "";
     my $id = Efl::PLSide::save_gen_item_data( $obj,undef,$func,$data );
     my $widget = _elm_menu_item_add($obj,$parent,$icon,$label,$id);
     return $widget;

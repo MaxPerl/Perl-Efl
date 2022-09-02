@@ -1,18 +1,12 @@
 #! /usr/bin/perl
-#use strict;
+use strict;
 use warnings;
 
 use Efl::Evas;
 use Efl::Elm;
-use Efl::Elm::Win;
-use Efl::Elm::Box;
-use Efl::Elm::Slider;
-use Efl::Ecore::Timer;
-use Efl::Ecore;
 
 Efl::Elm::init($#ARGV, \@ARGV);
 
-print "VERSION " . ECORE_VERSION_MAJOR . ECORE_VERSION_MINOR . "\n";
 Efl::Elm::policy_set(ELM_POLICY_QUIT, ELM_POLICY_QUIT_LAST_WINDOW_CLOSED);
 my $win = Efl::Elm::Win->util_standard_add("hello", "Hello, World!");
 $win->autodel_set(1);
@@ -40,8 +34,4 @@ sub indicator_format {
     my ($val) = @_;
     my $str = "Val is $val";
     return $str;
-}
-
-sub free {
-
 }

@@ -4,10 +4,6 @@ use warnings;
 
 use Efl::Evas;
 use Efl::Elm;
-use Efl::Elm::Win;
-use Efl::Elm::Hoversel;
-use Efl::Elm::Button;
-use Efl::Elm::Icon;
 
 Efl::Elm::init($#ARGV, \@ARGV);
 
@@ -22,10 +18,8 @@ $hoversel->hover_parent_set($win);
 $hoversel->horizontal_set(0);
 $hoversel->text_set("Add an item to Hoversel");
 # elm_object_part_content_set(hoversel, "icon", rect);
-$hoversel->item_add("Print items", undef, ELM_ICON_NONE,
-                        \&_print_items, 123);
-$hoversel->item_add("Option 2", "home", ELM_ICON_STANDARD, undef,
-                        undef);
+$hoversel->item_add("Print items", undef, ELM_ICON_NONE, \&_print_items, 123);
+$hoversel->item_add("Option 2", "home", ELM_ICON_STANDARD, undef, undef);
 $hoversel->smart_callback_add("clicked", \&_add_item, undef);
 
 $hoversel->resize(180, 30);
@@ -41,9 +35,11 @@ Efl::Elm::shutdown();
 sub _print_items {
     my ($data,$obj,$event_info) = @_;
     my @items = $obj->items_get_pv();
-    print "ITEMS @items DATA $data \n";
+    foreach my $item (@items) {
+    	print "Item with text " . $item->text_get() . "\n";
+    }
 }
 
 sub _add_item {
-    print "ADD\n";
+    print "Add an item to Hoversel clicked. The example must be completed :-S :-D \n";
 }

@@ -2,12 +2,9 @@
 use strict;
 use warnings;
 
-use Efl;
+
 use Efl::Evas;
 use Efl::Elm;
-use Efl::Elm::Win;
-use Efl::Elm::Box;
-use Efl::Elm::Entry;
 
 Efl::Elm::init($#ARGV, \@ARGV);
 
@@ -33,9 +30,9 @@ $en->file_set("./da_test.txt", ELM_TEXT_FORMAT_MARKUP_UTF8);
 $en->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
 $en->size_hint_align_set(EVAS_HINT_FILL,EVAS_HINT_FILL);
 $en->line_wrap_set(ELM_WRAP_WORD);
-#$en->markup_filter_append(\&filter_user, undef);
-#$en->markup_filter_prepend("limit_size", {max_char_count => 5, max_byte_count => 0});
-#$en->markup_filter_append("accept_set", {accepted=> "ABCE",rejected => "0123456789"});
+$en->markup_filter_append(\&filter_user, undef);
+$en->markup_filter_prepend("limit_size", {max_char_count => 50, max_byte_count => 0});
+$en->markup_filter_append("accept_set", {accepted=> "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",rejected => "0123456789"});
 $en->smart_callback_add("anchor,clicked" => \&anchor_clicked, undef);
 $box->pack_end($en);
 $en->show();
@@ -51,7 +48,7 @@ Efl::Elm::shutdown();
 sub filter_user {
     my ($data, $entry, $text) = @_;
     print "TEXT $text\n";
-    return "B";
+    return $text;
 }
 
 sub anchor_clicked {

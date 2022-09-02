@@ -14,7 +14,7 @@
 // see the @ISA's in Elm/Win.pm
 // By this trick we get a wonderful perlish oo-interface :-)
 typedef Elm_Hoversel ElmHoversel;
-typedef Elm_Widget_Item ElmWidgetItem;
+typedef Elm_Object_Item ElmObjectItem;
 typedef Evas_Object EvasObject;
 typedef Eina_List EinaList;
 
@@ -84,7 +84,7 @@ elm_hoversel_hover_end(obj)
 	ElmHoversel *obj
 
 
-ElmWidgetItem *
+ElmObjectItem *
 _elm_hoversel_item_add(pobj,label,icon_file,icon_type,id)
 	SV *pobj
 	const char *label
@@ -95,6 +95,7 @@ PREINIT:
     _perl_gendata *data;
     ElmHoversel *obj;
     IV tmp;
+    ElmObjectItem *item;
 CODE:
     // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
@@ -102,7 +103,9 @@ CODE:
     obj = INT2PTR(ElmHoversel*,tmp);
     // Save C struct with necessary infos to link to perl side
     data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
-    RETVAL = elm_hoversel_item_add(obj,label,icon_file,icon_type,call_perl_gen_item_selected,data);
+    item = elm_hoversel_item_add(obj,label,icon_file,icon_type,call_perl_gen_item_selected,data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
 

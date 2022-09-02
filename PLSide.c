@@ -53,7 +53,7 @@ HV* _get_smart_cb_hash(pTHX_ UV objaddr,char *event,SV *funcname, char* hashName
         Obj_Cbs = (HV*) (SvRV(*Obj_CbsPtr));
     }
     else {
-        croak("No callbacks found\n");
+        croak("Error in _get_smart_cb_hash: No callbacks found\n");
     }
 
 
@@ -349,7 +349,7 @@ HV* _get_format_cb_hash(pTHX_ UV objaddr) {
         cb_data = (HV*) (SvRV(*Cb_DataPtr));
     }
     else {
-        croak("No callbacks found\n");
+        croak("Error in _get_format_cb_hash: No callbacks found\n");
     }
 
     free(keybuffer);
@@ -440,7 +440,7 @@ HV* _get_markup_filter_cb(pTHX_ UV objaddr,SV* funcname) {
         cb_data = (HV*) SvRV(*cb_dataPtr);
     }
     else {
-        croak("No callbacksss found\n");
+        croak("Error in _get_markup_filters_cb: No callbacks found\n");
     }
 
     free(keybuffer);
@@ -576,8 +576,9 @@ HV* _get_gen_item_hash(pTHX_ UV objaddr, int item_id) {
     return GenItem;
 }
 
-_perl_gendata *perl_save_gen_cb(pTHX_ SV *obj, SV *itc, int id) {
+_perl_gendata *perl_save_gen_cb(pTHX_ SV *obj, UV itcaddr, int id) {
     _perl_gendata *cb;
+    
     New(0,cb,1,_perl_gendata);
 
     if (obj && SvOK(obj)) {
@@ -588,8 +589,7 @@ _perl_gendata *perl_save_gen_cb(pTHX_ SV *obj, SV *itc, int id) {
         croak("No Gen item class passed\n");
     }
 
-    if (itc && SvOK(itc)) {
-        UV itcaddr = PTR2UV(SvRV(itc));
+    if (itcaddr) {
         cb->itcaddr = itcaddr ;
     }
     else {
@@ -621,19 +621,19 @@ HV* _get_gen_hash(pTHX_ UV objaddr, char *hashName) {
     HV* cbs;
     int len, n;
     char *keybuffer = _get_keybuffer(NULL,objaddr, &len);
-
+	
     HV *GenItc_Cbs = get_hv(hashName, 0);
     if (GenItc_Cbs == NULL) {
         croak("Efl::PLSide::GenItc hash does not exist\n");
     }
-
+	
     n = snprintf(keybuffer, len, "%" UVuf, objaddr);
     if (hv_exists(GenItc_Cbs,keybuffer,strlen(keybuffer))) {
         SV** CbsPtr = hv_fetch(GenItc_Cbs, keybuffer,strlen(keybuffer),FALSE);
         cbs = (HV*) (SvRV(*CbsPtr));
     }
     else {
-        croak("No callbacks found in GenItc\n");
+        croak("Error in _get_gen_hash: No callbacks found\n");
     }
 
     free(keybuffer);
@@ -766,14 +766,14 @@ Evas_Object* call_perl_gen_content_get(void *data, Evas_Object *obj, const char 
     SV *s_part;
     SV *s_content; Evas_Object *ret_obj;
     char* buf;
-
+	
     _perl_gendata *perl_saved_cb = data;
 
     HV *cb_data = _get_gen_hash(aTHX_ perl_saved_cb->itcaddr,"Efl::PLSide::GenItc");
     SV *func = *( hv_fetch(cb_data, "content_get",11,FALSE) );
 
     HV *GenItem = _get_gen_item_hash(aTHX_ perl_saved_cb->objaddr, perl_saved_cb->item_id);
-
+	
     // Get data
     SV* s_data = *( hv_fetch(GenItem, "data",4,FALSE) );
 
@@ -828,13 +828,13 @@ void call_perl_genitc_del(void *data, Evas_Object *obj) {
 void call_perl_gen_del(void *data, Evas_Object *obj, void *event_info) {
     dTHX;
     dSP;
-
+	
     _perl_gendata *perl_saved_cb = data;
     
     int id = perl_saved_cb->item_id;
     
     HV *cb_data = NULL;
-    UV itcaddr = perl_saved_cb->itcaddr; 
+    UV itcaddr = perl_saved_cb->itcaddr;
 	if (perl_saved_cb->itcaddr != 0) {
     	cb_data = _get_gen_hash(aTHX_ perl_saved_cb->itcaddr,"Efl::PLSide::GenItc");
     }
@@ -873,6 +873,7 @@ void call_perl_gen_del(void *data, Evas_Object *obj, void *event_info) {
     }
 
     hv_undef(GenItem);
+    
     Safefree(data);
 }
 
@@ -938,17 +939,25 @@ void call_perl_gen_item_selected(void *data, Evas_Object *obj, void *event_info)
 
 // Same as _get_gen_items()
 // perhaps make one function??
-AV* _get_signals(pTHX_ UV objaddr) {
+AV* _get_signals(pTHX_ UV objaddr, int items) {
     AV* cbs;
     int len, n;
-    char *keybuffer = _get_keybuffer(NULL,objaddr, &len);
+    char *keybuffer;
+    if ( items == 0 ) {
+    	keybuffer = _get_keybuffer(NULL,objaddr, &len);
+    	n = snprintf(keybuffer, len, "%"UVuf, objaddr);
+    }
+    else if (items == 1) {
+    	keybuffer = _get_keybuffer("###items",objaddr, &len);
+    	n = snprintf(keybuffer, len, "%"UVuf"###items", objaddr);
+    } 
 
     HV *Signals_Cbs = get_hv("Efl::PLSide::EdjeSignals", 0);
     if (Signals_Cbs == NULL) {
         croak("Efl::PLSide::EdjeSignals hash does not exist\n");
     }
 
-    n = snprintf(keybuffer, len, "%"UVuf, objaddr);
+    
     if (hv_exists(Signals_Cbs,keybuffer,strlen(keybuffer))) {
         SV** CbsPtr = hv_fetch(Signals_Cbs, keybuffer,strlen(keybuffer),FALSE);
         cbs = (AV*) (SvRV(*CbsPtr));
@@ -963,38 +972,66 @@ AV* _get_signals(pTHX_ UV objaddr) {
 }
 
 HV* _get_signal_hash(pTHX_ UV objaddr, int item_id) {
-    AV *Items = _get_signals(aTHX_ objaddr);
+    AV *Items = _get_signals(aTHX_ objaddr, 0);
 
     SV** Item_Ptr = av_fetch(Items, (I32) item_id,FALSE);
     HV *Item = (HV*) (SvRV(*Item_Ptr));
     return Item;
 }
 
-_perl_signal_cb *perl_save_signal_cb(pTHX_ SV *obj, int id) {
+HV* _get_item_signal_hash(pTHX_ UV objaddr, int item_id) {
+    AV *Items = _get_signals(aTHX_ objaddr, 1);
+
+    SV** Item_Ptr = av_fetch(Items, (I32) item_id,FALSE);
+    HV *Item = (HV*) (SvRV(*Item_Ptr));
+    return Item;
+}
+
+_perl_signal_cb* perl_save_signal(pTHX_ UV objaddr, int id) {
     _perl_signal_cb *cb;
 
     New(0,cb,1,_perl_signal_cb);
 
-    if (obj && SvOK(obj)) {
-        UV objaddr = PTR2UV(SvRV(obj));
+    if (objaddr) {
         cb->objaddr = objaddr ;
     }
     else {
-        croak("No Gen item class passed\n");
+        croak("Saving Signal Callback failed: No object address passed\n");
     }
 
     if (id>=0) {
         cb->signal_id = id;
     }
     else {
-        croak("No Item id passed \n");
+        croak("Saving Signal Callback failed: No Id passed \n");
     }
 
+    return cb;
+}
+
+_perl_signal_cb* perl_save_signal_cb(pTHX_ UV objaddr, int id) {
+    _perl_signal_cb *cb;
+
+    cb = perl_save_signal(aTHX_ objaddr,id);
 
     // For Smart Callbacks and Evas Callbacks we have to save
     // a pointer to the c struct in the perl hash, too
     // This is necessary for deletion
     HV *cb_data = _get_signal_hash(aTHX_ cb->objaddr, cb->signal_id);
+    hv_store(cb_data, "cstructaddr",11,newSVuv(PTR2UV(cb)),0);
+
+    return cb;
+}
+
+_perl_signal_cb* perl_save_item_signal_cb(pTHX_ UV objaddr, int id) {
+    _perl_signal_cb *cb;
+
+    cb = perl_save_signal(aTHX_ objaddr,id);
+
+    // For Smart Callbacks and Evas Callbacks we have to save
+    // a pointer to the c struct in the perl hash, too
+    // This is necessary for deletion
+    HV *cb_data = _get_item_signal_hash(aTHX_ cb->objaddr, cb->signal_id);
     hv_store(cb_data, "cstructaddr",11,newSVuv(PTR2UV(cb)),0);
 
     return cb;
@@ -1012,7 +1049,45 @@ void call_perl_signal_cb(void *data, Evas_Object *layout, const char *emission, 
     SV *func = *( hv_fetch(cb_data, "function",8,FALSE) );
     SV *args = *( hv_fetch(cb_data, "data",4,FALSE) ) ;
     SV *s_obj = newSV(0);
-    sv_setref_pv(s_obj, "ElmLayoutPtr", layout);
+    SV *pclass = *( hv_fetch(cb_data, "pclass",6,FALSE) );
+    sv_setref_pv(s_obj, SvPV_nolen(pclass), layout);
+    SV *s_emission = newSVpvn(emission,strlen(emission));
+    SV *s_source = newSVpvn(source,strlen(source));
+
+    ENTER;
+    SAVETMPS;
+
+    PUSHMARK(SP);
+
+    XPUSHs( args );
+    XPUSHs(sv_2mortal(s_obj) );
+    XPUSHs(sv_2mortal(s_emission) );
+    XPUSHs(sv_2mortal(s_source));
+
+    PUTBACK;
+
+    count = call_sv(func, G_DISCARD);
+    if (count != 0) {
+        croak("Expected 0 value got %d\n", count);
+    }
+
+    FREETMPS;
+    LEAVE;
+}
+
+void call_perl_item_signal_cb(void *data, Elm_Object_Item *layout, const char *emission, const char *source) {
+    dTHX;
+    dSP;
+
+    int n; int count;
+
+    _perl_signal_cb *perl_saved_cb = data;
+    HV *cb_data = _get_item_signal_hash(aTHX_ perl_saved_cb->objaddr, perl_saved_cb->signal_id);
+
+    SV *func = *( hv_fetch(cb_data, "function",8,FALSE) );
+    SV *args = *( hv_fetch(cb_data, "data",4,FALSE) ) ;
+    SV *s_obj = newSV(0);
+    sv_setref_pv(s_obj, "ElmObjectItemPtr", layout);
     SV *s_emission = newSVpvn(emission,strlen(emission));
     SV *s_source = newSVpvn(source,strlen(source));
 
@@ -1057,7 +1132,7 @@ HV* _get_ecore_evas_event_cb_hash(pTHX_ UV objaddr) {
         cb_data = (HV*) (SvRV(*Cb_DataPtr));
     }
     else {
-        croak("No callbacks found\n");
+        croak("Error in _get_ecore_evas_event_ch_hash: No callbacks found\n");
     }
 
     free(keybuffer);

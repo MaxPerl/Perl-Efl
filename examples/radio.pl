@@ -1,11 +1,8 @@
- #! /usr/bin/perl
-#use strict;
+#! /usr/bin/perl
+use strict;
 use warnings;
 
 use Efl::Elm;
-use Efl::Elm::Win;
-use Efl::Elm::Box;
-use Efl::Elm::Radio;
 
 Efl::Elm::init($#ARGV, \@ARGV);
 

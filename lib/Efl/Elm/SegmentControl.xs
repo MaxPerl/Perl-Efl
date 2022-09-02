@@ -16,7 +16,7 @@ typedef Elm_Widget_Item ElmSegmentItem;
 typedef Evas_Object EvasObject;
 typedef Evas_Object ElmIcon;
 
-MODULE = Efl::Elm::SegmentControl		PACKAGE = Efl::Elm::SegmentControl     PREFIX = elm_segment_control_
+MODULE = Efl::Elm::SegmentControl		PACKAGE = Efl::Elm::SegmentControl
 
 ElmSegmentControl * 
 elm_segment_control_add(parent)

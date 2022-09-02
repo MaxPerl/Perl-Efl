@@ -353,11 +353,11 @@ static int
 constant_24 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
-     EVAS_BORDER_FILL_DEFAULT EVAS_BUTTON_DOUBLE_CLICK EVAS_BUTTON_TRIPLE_CLICK
-     EVAS_CALLBACK_MOUSE_DOWN EVAS_CALLBACK_MOUSE_MOVE EVAS_CALLBACK_MULTI_DOWN
-     EVAS_CALLBACK_MULTI_MOVE EVAS_CALLBACK_RENDER_PRE EVAS_DISPLAY_MODE_EXPAND
-     EVAS_IMAGE_FLIP_VERTICAL EVAS_NATIVE_SURFACE_NONE EVAS_VIDEO_SURFACE_BELOW
-     */
+     EVAS_ASPECT_CONTROL_BOTH EVAS_ASPECT_CONTROL_NONE EVAS_BORDER_FILL_DEFAULT
+     EVAS_BUTTON_DOUBLE_CLICK EVAS_BUTTON_TRIPLE_CLICK EVAS_CALLBACK_MOUSE_DOWN
+     EVAS_CALLBACK_MOUSE_MOVE EVAS_CALLBACK_MULTI_DOWN EVAS_CALLBACK_MULTI_MOVE
+     EVAS_CALLBACK_RENDER_PRE EVAS_DISPLAY_MODE_EXPAND EVAS_IMAGE_FLIP_VERTICAL
+     EVAS_NATIVE_SURFACE_NONE EVAS_VIDEO_SURFACE_BELOW */
   /* Offset 15 gives the best switch position.  */
   switch (name[15]) {
   case 'A':
@@ -418,6 +418,18 @@ constant_24 (pTHX_ const char *name, IV *iv_return) {
     if (memEQ(name, "EVAS_BUTTON_TRIPLE_CLICK", 24)) {
     /*                              ^               */
       *iv_return = EVAS_BUTTON_TRIPLE_CLICK;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'T':
+    if (memEQ(name, "EVAS_ASPECT_CONTROL_BOTH", 24)) {
+    /*                              ^               */
+      *iv_return = EVAS_ASPECT_CONTROL_BOTH;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "EVAS_ASPECT_CONTROL_NONE", 24)) {
+    /*                              ^               */
+      *iv_return = EVAS_ASPECT_CONTROL_NONE;
       return PERL_constant_ISIV;
     }
     break;
@@ -587,9 +599,9 @@ static int
 constant_27 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
-     EVAS_BIDI_DIRECTION_INHERIT EVAS_BIDI_DIRECTION_NATURAL
-     EVAS_BIDI_DIRECTION_NEUTRAL EVAS_TEXTBLOCK_CURSOR_UNDER
-     EVAS_TEXT_STYLE_SOFT_SHADOW */
+     EVAS_ASPECT_CONTROL_NEITHER EVAS_BIDI_DIRECTION_INHERIT
+     EVAS_BIDI_DIRECTION_NATURAL EVAS_BIDI_DIRECTION_NEUTRAL
+     EVAS_TEXTBLOCK_CURSOR_UNDER EVAS_TEXT_STYLE_SOFT_SHADOW */
   /* Offset 23 gives the best switch position.  */
   switch (name[23]) {
   case 'A':
@@ -614,6 +626,11 @@ constant_27 (pTHX_ const char *name, IV *iv_return) {
     }
     break;
   case 'T':
+    if (memEQ(name, "EVAS_ASPECT_CONTROL_NEITHER", 27)) {
+    /*                                      ^          */
+      *iv_return = EVAS_ASPECT_CONTROL_NEITHER;
+      return PERL_constant_ISIV;
+    }
     if (memEQ(name, "EVAS_BIDI_DIRECTION_NEUTRAL", 27)) {
     /*                                      ^          */
       *iv_return = EVAS_BIDI_DIRECTION_NEUTRAL;
@@ -635,9 +652,10 @@ static int
 constant_28 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
-     EVAS_CALLBACK_DEVICE_CHANGED EVAS_CALLBACK_IMAGE_UNLOADED
-     EVAS_IMAGE_CONTENT_HINT_NONE EVAS_LOAD_ERROR_CORRUPT_FILE
-     EVAS_TEXTBLOCK_CURSOR_BEFORE EVAS_TEXT_STYLE_SOFT_OUTLINE */
+     EVAS_ASPECT_CONTROL_VERTICAL EVAS_CALLBACK_DEVICE_CHANGED
+     EVAS_CALLBACK_IMAGE_UNLOADED EVAS_IMAGE_CONTENT_HINT_NONE
+     EVAS_LOAD_ERROR_CORRUPT_FILE EVAS_TEXTBLOCK_CURSOR_BEFORE
+     EVAS_TEXT_STYLE_SOFT_OUTLINE */
   /* Offset 16 gives the best switch position.  */
   switch (name[16]) {
   case 'A':
@@ -658,6 +676,13 @@ constant_28 (pTHX_ const char *name, IV *iv_return) {
     if (memEQ(name, "EVAS_IMAGE_CONTENT_HINT_NONE", 28)) {
     /*                               ^                  */
       *iv_return = EVAS_IMAGE_CONTENT_HINT_NONE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'R':
+    if (memEQ(name, "EVAS_ASPECT_CONTROL_VERTICAL", 28)) {
+    /*                               ^                  */
+      *iv_return = EVAS_ASPECT_CONTROL_VERTICAL;
       return PERL_constant_ISIV;
     }
     break;
@@ -730,49 +755,55 @@ static int
 constant_30 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
-     EVAS_CALLBACK_CANVAS_FOCUS_OUT EVAS_CALLBACK_RENDER_FLUSH_PRE
-     EVAS_IMAGE_CONTENT_HINT_STATIC EVAS_LOAD_ERROR_DOES_NOT_EXIST
-     EVAS_LOAD_ERROR_UNKNOWN_FORMAT EVAS_TEXT_STYLE_OUTLINE_SHADOW */
-  /* Offset 27 gives the best switch position.  */
-  switch (name[27]) {
-  case 'D':
+     EVAS_ASPECT_CONTROL_HORIZONTAL EVAS_CALLBACK_CANVAS_FOCUS_OUT
+     EVAS_CALLBACK_RENDER_FLUSH_PRE EVAS_IMAGE_CONTENT_HINT_STATIC
+     EVAS_LOAD_ERROR_DOES_NOT_EXIST EVAS_LOAD_ERROR_UNKNOWN_FORMAT
+     EVAS_TEXT_STYLE_OUTLINE_SHADOW */
+  /* Offset 22 gives the best switch position.  */
+  switch (name[22]) {
+  case 'E':
     if (memEQ(name, "EVAS_TEXT_STYLE_OUTLINE_SHADOW", 30)) {
-    /*                                          ^         */
+    /*                                     ^              */
       *iv_return = EVAS_TEXT_STYLE_OUTLINE_SHADOW;
       return PERL_constant_ISIV;
     }
     break;
-  case 'I':
-    if (memEQ(name, "EVAS_LOAD_ERROR_DOES_NOT_EXIST", 30)) {
-    /*                                          ^         */
-      *iv_return = EVAS_LOAD_ERROR_DOES_NOT_EXIST;
+  case 'L':
+    if (memEQ(name, "EVAS_CALLBACK_RENDER_FLUSH_PRE", 30)) {
+    /*                                     ^              */
+      *iv_return = EVAS_CALLBACK_RENDER_FLUSH_PRE;
       return PERL_constant_ISIV;
     }
     break;
-  case 'M':
+  case 'N':
     if (memEQ(name, "EVAS_LOAD_ERROR_UNKNOWN_FORMAT", 30)) {
-    /*                                          ^         */
+    /*                                     ^              */
       *iv_return = EVAS_LOAD_ERROR_UNKNOWN_FORMAT;
       return PERL_constant_ISIV;
     }
     break;
   case 'O':
     if (memEQ(name, "EVAS_CALLBACK_CANVAS_FOCUS_OUT", 30)) {
-    /*                                          ^         */
+    /*                                     ^              */
       *iv_return = EVAS_CALLBACK_CANVAS_FOCUS_OUT;
       return PERL_constant_ISIV;
     }
+    if (memEQ(name, "EVAS_LOAD_ERROR_DOES_NOT_EXIST", 30)) {
+    /*                                     ^              */
+      *iv_return = EVAS_LOAD_ERROR_DOES_NOT_EXIST;
+      return PERL_constant_ISIV;
+    }
     break;
-  case 'P':
-    if (memEQ(name, "EVAS_CALLBACK_RENDER_FLUSH_PRE", 30)) {
-    /*                                          ^         */
-      *iv_return = EVAS_CALLBACK_RENDER_FLUSH_PRE;
+  case 'R':
+    if (memEQ(name, "EVAS_ASPECT_CONTROL_HORIZONTAL", 30)) {
+    /*                                     ^              */
+      *iv_return = EVAS_ASPECT_CONTROL_HORIZONTAL;
       return PERL_constant_ISIV;
     }
     break;
   case 'T':
     if (memEQ(name, "EVAS_IMAGE_CONTENT_HINT_STATIC", 30)) {
-    /*                                          ^         */
+    /*                                     ^              */
       *iv_return = EVAS_IMAGE_CONTENT_HINT_STATIC;
       return PERL_constant_ISIV;
     }
@@ -899,6 +930,11 @@ use ExtUtils::Constant qw (constant_types C_constant XS_constant);
 
 my $types = {map {($_, 1)} qw(IV)};
 my @names = (qw(),
+            {name=>"EVAS_ASPECT_CONTROL_BOTH", type=>"IV", macro=>"1"},
+            {name=>"EVAS_ASPECT_CONTROL_HORIZONTAL", type=>"IV", macro=>"1"},
+            {name=>"EVAS_ASPECT_CONTROL_NEITHER", type=>"IV", macro=>"1"},
+            {name=>"EVAS_ASPECT_CONTROL_NONE", type=>"IV", macro=>"1"},
+            {name=>"EVAS_ASPECT_CONTROL_VERTICAL", type=>"IV", macro=>"1"},
             {name=>"EVAS_BIDI_DIRECTION_INHERIT", type=>"IV", macro=>"1"},
             {name=>"EVAS_BIDI_DIRECTION_LTR", type=>"IV", macro=>"1"},
             {name=>"EVAS_BIDI_DIRECTION_NATURAL", type=>"IV", macro=>"1"},

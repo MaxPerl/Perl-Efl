@@ -33,6 +33,7 @@ sub add {
     my ($class,$parent) = @_;
     my $widget = elm_table_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 

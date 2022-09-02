@@ -113,6 +113,7 @@ PREINIT:
     _perl_gendata *data;
     ElmIndex *obj;
     IV tmp;
+    ElmIndexItem *item;
 CODE:
     // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
@@ -121,7 +122,9 @@ CODE:
     
     // Save C struct with necessary infos to link to perl side
     data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
-    RETVAL = elm_index_item_prepend(obj,letter,call_perl_gen_item_selected, data);
+    item = elm_index_item_prepend(obj,letter,call_perl_gen_item_selected, data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
 
@@ -141,6 +144,7 @@ PREINIT:
     _perl_gendata *data;
     ElmIndex *obj;
     IV tmp;
+    ElmIndexItem *item;
 CODE:
    // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
@@ -149,7 +153,9 @@ CODE:
     
     // Save C struct with necessary infos to link to perl side
     data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
-    RETVAL = elm_index_item_insert_after(obj,after,letter,call_perl_gen_item_selected, data);
+    item = elm_index_item_insert_after(obj,after,letter,call_perl_gen_item_selected, data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
 
@@ -170,6 +176,7 @@ PREINIT:
     _perl_gendata *data;
     ElmIndex *obj;
     IV tmp;
+    ElmIndexItem *item;
 CODE:
    // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
@@ -178,7 +185,9 @@ CODE:
     
     // Save C struct with necessary infos to link to perl side
     data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
-    RETVAL = elm_index_item_insert_before(obj,before,letter,call_perl_gen_item_selected, data);
+    item = elm_index_item_insert_before(obj,before,letter,call_perl_gen_item_selected, data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
 
@@ -192,6 +201,7 @@ PREINIT:
     _perl_gendata *data;
     ElmIndex *obj;
     IV tmp;
+    ElmIndexItem *item;
 CODE:
     // Fetch the c struct from the perl SV
     // stolen from the typemap of T_PTROBJ
@@ -200,7 +210,9 @@ CODE:
     
     // Save C struct with necessary infos to link to perl side
     data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
-    RETVAL = elm_index_item_append(obj,letter,call_perl_gen_item_selected, data);
+    item = elm_index_item_append(obj,letter,call_perl_gen_item_selected, data);
+    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    RETVAL = item;
 OUTPUT:
     RETVAL
 

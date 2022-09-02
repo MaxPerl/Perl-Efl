@@ -33,6 +33,7 @@ sub add {
     my ($class,$parent) = @_;
     my $widget = elm_naviframe_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 
@@ -41,6 +42,20 @@ sub add {
 package ElmNaviframePtr;
 
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
+
+sub item_pop_pv {
+	my ($nav) = @_;
+	my $content = $nav->item_pop();
+	my $class = ElmObjectPtr::widget_type_get($content);
+	if ($class =~ /^Elm_/) {
+		my $pclass = $class;
+		$pclass =~ s/_//g;
+		$pclass = $pclass . "Ptr";
+		bless($content,$pclass);
+	}
+	return $content;
+
+}
 
 
 
@@ -68,6 +83,12 @@ This module is a perl binding to the Elementary Naviframe widget.
 For more informations see https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Naviframe.html 
 
 For instructions, how to use Efl::Elm::Naviframe, please study this API reference for now. A perl-specific documentation will perhaps come in later versions. But applying the C documentation should be no problem. Efl::Elm::Naviframe gives you a nice object-oriented interface that is kept close to the C API. Please note, that the perl method names remove the "elm_naviframe_" at the beginning of the c functions.
+
+=head1 SPECIFICS OF THE BINDING
+
+There is a special version of $nav->item_pop() with the name $nav->item_pop_pv() that tries to bless the returned EvasObject to the appropriate perl class. In fact the C class is fetched by ElmObjectPtr::widget_type_get and translated to the PerlClass through deleting underscores and adding "Ptr". It should work with all Elm_*-Widgets for which a perl binding exist. Nevertheless it is not guaranteed to work in all cases.
+
+If you prefer to use the pure version $nav->item_pop() be aware, that this version returns a EvasObject and you possibly have to bless this to the right perl class manually.
 
 =head2 EXPORT
 

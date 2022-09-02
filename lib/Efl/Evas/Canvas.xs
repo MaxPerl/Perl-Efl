@@ -266,6 +266,11 @@ evas_font_hinting_get(e)
 
 
 void
+evas_font_path_prepend(obj,path)
+	EvasCanvas *obj
+	const char *path
+
+void
 evas_font_path_append(obj,path)
 	EvasCanvas *obj
 	const char *path
