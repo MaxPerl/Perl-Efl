@@ -34,6 +34,8 @@ sub add {
     my $widget = elm_entry_add($parent);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_markup_filters, $widget);
+    # For context menu items we have to call cleanup_genitems!!!
+    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_genitems, $widget);
     $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
@@ -96,6 +98,15 @@ sub markup_filter_remove{
     
     # Delete the callback on the Perl side
     delete($Efl::PLSide::MarkupFilters_Cbs{$objaddr}{$funcname});
+}
+
+sub context_menu_item_add {
+	my ($obj, $label, $icon_file,$icon_type,$func,$data) = @_;
+	$icon_file = $icon_file || "";
+	$label = $label || "";
+	my $id = Efl::PLSide::save_gen_item_data( $obj,undef,$func,$data );
+	my $widget = _elm_entry_context_menu_item_add($obj,$label,$icon_file,$icon_type,$id);
+	return $widget;
 }
 
 package Efl::Elm::EntryAnchorInfo;

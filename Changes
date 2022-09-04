@@ -83,4 +83,5 @@ Revision history for Perl extension Efl.
 	- Adjust automatical cleanup of CtxPopupItem, IndexItem, ListItem, HoverselItem, MenuItem according to GenlistItem (see below)
 		because there occured problems (witg Menu and Hoversel)
 		(TODO: Same with ToolbarItem and PopupItem [as far as apparent there are no problems with these widgets])
+	- Add elm_entry_context_menu_item_add
 		

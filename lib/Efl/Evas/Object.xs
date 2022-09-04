@@ -552,6 +552,8 @@ evas_object_smart_callback_call(obj,event,event_info)
 	EvasObject *obj
 	const char *event
 	void *event_info
+CODE:
+	evas_object_smart_callback_call(obj, event, NULL);
 	
 
 void

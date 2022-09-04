@@ -40,7 +40,7 @@ void call_perl_markup_filter_cb(void *data, Elm_Entry *entry, char **text);
 
 //
 // Used by Elm::Ctxpopup, Elm::Genlist, Elm::Hoversel, Elm::Index, Elm::List, Elm::Menu,  
-// Elm::Popup, Elm::Toolbar etc.pp.
+// Elm::Popup, Elm::Toolbar, Elm::Entry(::context_menu_item_add!) etc.pp.
 //
 
 typedef struct __perl_gendata _perl_gendata;

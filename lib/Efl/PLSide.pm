@@ -182,10 +182,10 @@ sub cleanup_genitems {
 	# Solution: If widget is a genlist we have to delete the Genlistitems. Thereby the perl hash and c struct is freed by the del callback
 	# of the GenlistItemClass (see call_perl_gen_del in PLSide.c)
 	# TODO: Would be this solution possible with other widgets with items (there is call_perl_gen_del also used, if user deletes an item
-	#		automatically (e.g. Toolbar, CtxPopupItem (done), IndexItem (done), ListItem (done), HoverselItem (done), MenuItem (done), PopupItem)
+	# automatically (e.g. Toolbar, CtxPopupItem (done), IndexItem (done), ListItem (done), HoverselItem (done), MenuItem (done), PopupItem, EntryContextMenuItem (done, no del_cb))
 	my $pclass = blessed($widget);
 	if ( 	$pclass eq "ElmGenlistPtr" || $pclass eq "Efl::Elm::Genlist" ||
-			# CtxPopup doesn't work because in the del_cb data ins't defined
+			# CtxPopup doesn't work because in the del_cb data seems not to be defined :-|
 			#$pclass eq "ElmCtxpopupPtr" || $pclass eq "Efl::Elm::Ctxpopup" ||
 			$pclass eq "ElmListPtr" || $pclass eq "Efl::Elm::List" ) {
 
@@ -317,7 +317,7 @@ sub cleanup_signals {
 
     my $objaddr = $$widget;
     print "Cleanup Signals from widget with adress $objaddr\n" if ($Efl::Debug);
-    
+
     my $cbs = $EdjeSignals{$objaddr};
     foreach my $key (@$cbs) {
         next unless (defined($key));
