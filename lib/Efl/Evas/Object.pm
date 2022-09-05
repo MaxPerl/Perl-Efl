@@ -44,15 +44,14 @@ sub smart_callback_add {
     
     Efl::PLSide::register_smart_cb( $obj, $event, $func, $data);
     
-    $obj->_evas_object_smart_callback_add($event, $func, $obj, $data);
+    $obj->_evas_object_smart_callback_add($event, $func, $data);
     
 }
 
 sub smart_callback_del {
     my ($obj, $event, $func) = @_;
     
-    my $objaddr = refaddr($obj);
-    my $funcaddr = refaddr($func);
+    my $objaddr = $$obj;
     my $funcname = Efl::PLSide::get_func_name($func);
     my $key = "$event###$funcname";
     
@@ -76,7 +75,7 @@ sub event_callback_add {
 sub event_callback_del {
     my ($obj, $event, $func) = @_;
     
-    my $objaddr = refaddr($obj);
+    my $objaddr = $$obj;
     my $funcaddr = refaddr($func);
     my $key = "$event###$funcaddr";
     

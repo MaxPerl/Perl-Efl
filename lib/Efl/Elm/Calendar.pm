@@ -53,7 +53,7 @@ our @ISA = qw(ElmObjectPtr EvasObjectPtr);
 sub register_format_cb {
     my ($obj, $func) = @_;
 
-    my $objaddr = refaddr($obj);
+    my $objaddr = $$obj;
     my $funcaddr = refaddr($func);
 
     my $func_struct ={

@@ -663,23 +663,21 @@ CODE:
 
     
 void
-_elm_entry_context_menu_item_add(pobj,label,icon_file,icon_type,id)
-	SV *pobj
+_elm_entry_context_menu_item_add(obj,label,icon_file,icon_type,id)
+	ElmEntry *obj
 	const char *label
 	const char *icon_file
 	int icon_type
 	int id
 PREINIT:
 	_perl_gendata *data;
-	ElmEntry *obj;
-	IV tmp;
+	UV objaddr;
 CODE:
-	// Fetch the c struct from the perl SV
-	// stolen from the typemap of T_PTROBJ
-	tmp = SvIV((SV*)SvRV(pobj));
-	obj = INT2PTR(ElmEntry*,tmp);
+	// Get the adress of the object
+    objaddr = PTR2IV(obj);
+    
 	// Save C struct with necessary infos to link to perl side
-	data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+	data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
 	elm_entry_context_menu_item_add(obj,label,icon_file,icon_type,call_perl_gen_item_selected,data);
 
 

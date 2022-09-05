@@ -186,8 +186,8 @@ elm_genlist_last_item_get(obj)
 
 
 ElmGenlistItem *
-_elm_genlist_item_insert_before(pobj,itc,id,parent,before_it,type)
-	SV *pobj
+_elm_genlist_item_insert_before(obj,itc,id,parent,before_it,type)
+	ElmGenlist *obj
     const ElmGenlistItemClass *itc
 	int id
 	ElmWidgetItem *parent
@@ -195,24 +195,21 @@ _elm_genlist_item_insert_before(pobj,itc,id,parent,before_it,type)
 	int type
 PREINIT:
     _perl_gendata *gen_data;
-    ElmGenlist *obj;
-    IV tmp;
+    UV objaddr;
     UV itcaddr;
 CODE:
     if (!itc)
         itc = NULL;
     if (!parent) 
         parent = NULL;
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmGenlist*,tmp);
     
+    // Get the adress of the object
+    objaddr = PTR2IV(obj);
     // Get the Adress of the itc struct
     itcaddr = PTR2IV(itc);
     
     // Save GenItc
-    gen_data = perl_save_gen_cb(aTHX_ pobj, itcaddr, id);
+    gen_data = perl_save_gen_cb(aTHX_ objaddr, itcaddr, id);
     RETVAL = elm_genlist_item_insert_before( obj,itc,gen_data, parent, before_it, type,call_perl_gen_item_selected,gen_data);
 OUTPUT:
     RETVAL
@@ -224,8 +221,8 @@ elm_genlist_realized_items_update(obj)
 
 
 ElmGenlistItem *
-_elm_genlist_item_insert_after(pobj,itc,id,parent,after_it,type)
-	SV *pobj
+_elm_genlist_item_insert_after(obj,itc,id,parent,after_it,type)
+	ElmGenlist *obj
 	const ElmGenlistItemClass *itc
 	int id
 	ElmWidgetItem *parent
@@ -233,24 +230,21 @@ _elm_genlist_item_insert_after(pobj,itc,id,parent,after_it,type)
 	int type
 PREINIT:
     _perl_gendata *gen_data;
-    ElmGenlist *obj;
     UV itcaddr;
-    IV tmp;
+    UV objaddr;
 CODE:
     if (!itc)
         itc = NULL;
     if (!parent) 
         parent = NULL;
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmGenlist*,tmp);
-    
+        
+    // Get the adress of the object
+    objaddr = PTR2IV(obj);
     // Get the Adress of the itc struct
     itcaddr = PTR2IV(itc);
     
     // Save GenItc
-    gen_data = perl_save_gen_cb(aTHX_ pobj, itcaddr, id);
+    gen_data = perl_save_gen_cb(aTHX_ objaddr, itcaddr, id);
     RETVAL = elm_genlist_item_insert_after( obj,itc,gen_data, parent, after_it, type,call_perl_gen_item_selected,gen_data);
 OUTPUT:
     RETVAL
@@ -285,32 +279,29 @@ elm_genlist_items_count(obj)
 
 
 ElmGenlistItem *
-_elm_genlist_item_prepend(pobj,itc,id,parent,type)
-    SV *pobj
+_elm_genlist_item_prepend(obj,itc,id,parent,type)
+    ElmGenlist *obj
 	const ElmGenlistItemClass *itc
 	int id
 	ElmWidgetItem *parent
 	int type
 PREINIT:
     _perl_gendata *gen_data;
-    ElmGenlist *obj;
     UV itcaddr;
-    IV tmp;
+    UV objaddr;
 CODE:
     if (!itc)
         itc = NULL;
     if (!parent) 
         parent = NULL;
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmGenlist*,tmp);
-    
+        
+    // Get the adress of the object
+    objaddr = PTR2IV(obj);
     // Get the Adress of the itc struct
     itcaddr = PTR2IV(itc);
     
     // Save GenItc
-    gen_data = perl_save_gen_cb(aTHX_ pobj, itcaddr, id);
+    gen_data = perl_save_gen_cb(aTHX_ objaddr, itcaddr, id);
     RETVAL = elm_genlist_item_prepend( obj,itc,gen_data, parent,type,call_perl_gen_item_selected,gen_data);
 OUTPUT:
     RETVAL
@@ -322,32 +313,29 @@ elm_genlist_clear(obj)
 
 
 ElmGenlistItem *
-_elm_genlist_item_append(pobj,itc,id,parent,type)
-	SV *pobj
+_elm_genlist_item_append(obj,itc,id,parent,type)
+	ElmGenlist *obj
 	const ElmGenlistItemClass *itc;
 	int id
 	ElmWidgetItem *parent
 	int type
 PREINIT:
     _perl_gendata *gen_data;
-    ElmGenlist *obj;
     UV itcaddr;
-    IV tmp;
+    UV objaddr;
 CODE:
     if (!itc)
         itc = NULL;
     if (!parent) 
         parent = NULL;
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmGenlist*,tmp);
     
+    // Get the adress of the object
+    objaddr = PTR2IV(obj);
     // Get the Adress of the itc struct
     itcaddr = PTR2IV(itc);
     
     // Save GenItc
-    gen_data = perl_save_gen_cb(aTHX_ pobj, itcaddr, id);
+    gen_data = perl_save_gen_cb(aTHX_ objaddr, itcaddr, id);
     RETVAL = elm_genlist_item_append( obj,itc,gen_data, parent,type,call_perl_gen_item_selected,gen_data);
 OUTPUT:
     RETVAL

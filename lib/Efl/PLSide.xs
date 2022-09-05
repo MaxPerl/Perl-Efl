@@ -56,7 +56,8 @@ PREINIT:
     _perl_gendata *data;
 CODE:
     address = SvUV(addr);
-    printf("Freeing gendata with address %"UVuf"\n",address);
+    if (SvTRUE(get_sv("Efl::Debug",0)))
+    	fprintf(stderr,"Freeing gendata with address %"UVuf"\n",address);
     data = INT2PTR(_perl_gendata*,address);
     
     if (data == NULL) {

@@ -103,8 +103,8 @@ elm_list_last_item_get(obj)
 
 	
 ElmListItem *
-_elm_list_item_insert_before(pobj,before,label,icon,end,id)
-	SV *pobj
+_elm_list_item_insert_before(obj,before,label,icon,end,id)
+	ElmList *obj
 	ElmListItem *before
 	char *label
 	EvasObject *icon 
@@ -112,17 +112,14 @@ _elm_list_item_insert_before(pobj,before,label,icon,end,id)
 	int id
 PREINIT:
 	_perl_gendata *data;
-    ElmList *obj;
-    IV tmp;
+    UV objaddr;
 	ElmListItem *item;
 CODE:
-	// Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmList*,tmp);
+	// Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_list_item_insert_before(obj,before,label,icon,end,call_perl_gen_item_selected, data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
@@ -134,8 +131,8 @@ elm_list_go(obj)
 	ElmList *obj
 	
 ElmListItem *
-_elm_list_item_insert_after(pobj,after,label,icon,end,id)
-	SV *pobj
+_elm_list_item_insert_after(obj,after,label,icon,end,id)
+	ElmList *obj
 	ElmListItem *after
 	char *label
 	EvasObject *icon 
@@ -143,17 +140,14 @@ _elm_list_item_insert_after(pobj,after,label,icon,end,id)
 	int id
 PREINIT:
 	_perl_gendata *data;
-    ElmList *obj;
-    IV tmp;
+    UV objaddr;
 	ElmListItem *item;
 CODE:
-	// Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmList*,tmp);
+	// Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_list_item_insert_after(obj,after,label,icon,end,call_perl_gen_item_selected, data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
@@ -170,25 +164,22 @@ elm_list_at_xy_item_get(obj,x,y,OUTLIST posret)
 	
 	
 ElmListItem *
-_elm_list_item_append(pobj,label,icon,end,id)
-	SV *pobj
+_elm_list_item_append(obj,label,icon,end,id)
+	ElmList *obj
 	char *label
 	EvasObject *icon 
 	EvasObject *end  
 	int id
 PREINIT:
 	_perl_gendata *data;
-    ElmList *obj;
-    IV tmp;
+    UV objaddr;
 	ElmListItem *item;
 CODE:
-	// Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmList*,tmp);
+	// Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_list_item_append(obj,label,icon,end,call_perl_gen_item_selected, data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
@@ -197,25 +188,22 @@ OUTPUT:
     
 	
 ElmListItem *
-_elm_list_item_prepend(pobj,label,icon,end,id)
-	SV *pobj
+_elm_list_item_prepend(obj,label,icon,end,id)
+	ElmList *obj
 	char *label
 	EvasObject *icon 
 	EvasObject *end  
 	int id
 PREINIT:
 	_perl_gendata *data;
-    ElmList *obj;
-    IV tmp;
+    UV objaddr;
 	ElmListItem *item;
 CODE:
-	// Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmList*,tmp);
+	// Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_list_item_prepend(obj,label,icon,end,call_perl_gen_item_selected, data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;

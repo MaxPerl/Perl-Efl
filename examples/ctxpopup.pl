@@ -37,13 +37,11 @@ Efl::Elm::shutdown();
 
 sub _dismissed_cb {
 	my ($data, $obj, $ev) = @_;
-	print "TYPE " . $obj->widget_type_get() . "\n";
 	$obj->del();
 }
 
 sub _ctxpopup_item_cb {
 	my ($data, $obj, $evinfo) = @_;
-	print "EV $evinfo\n";
 	my $selected = Efl::ev_info2obj($evinfo, "Efl::Elm::CtxpopupItem");
 	print "ctxpopup item selected: " . $selected->text_get() . "\n";
 }
@@ -82,9 +80,6 @@ sub _list_item_cb {
    	
    	my $selected = Efl::ev_info2obj($ev_info, "Efl::Elm::ListItem");
    	$selected->selected_set(0);
-   	
-   	use Data::Dumper;
-   	print Dumper(%Efl::PLSide::GenItems);
 }
 
 sub _list_item_cb2 {

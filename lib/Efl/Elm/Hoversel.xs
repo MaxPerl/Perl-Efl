@@ -85,24 +85,22 @@ elm_hoversel_hover_end(obj)
 
 
 ElmObjectItem *
-_elm_hoversel_item_add(pobj,label,icon_file,icon_type,id)
-	SV *pobj
+_elm_hoversel_item_add(obj,label,icon_file,icon_type,id)
+	ElmHoversel *obj
 	const char *label
 	const char *icon_file
 	int icon_type
 	int id
 PREINIT:
     _perl_gendata *data;
-    ElmHoversel *obj;
-    IV tmp;
+    UV objaddr;
     ElmObjectItem *item;
 CODE:
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmHoversel*,tmp);
+    // Get the adress of the object
+    objaddr = PTR2IV(obj);
+    
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_hoversel_item_add(obj,label,icon_file,icon_type,call_perl_gen_item_selected,data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;

@@ -391,28 +391,24 @@ evas_object_evas_get(obj)
 
 #TODO: Implement enum Evas_Callback_Type
 void
-_evas_object_event_callback_add(perlobj,type,func,data)
-	SV *perlobj
+_evas_object_event_callback_add(obj,type,func,data)
+	EvasObject *obj
 	SV *type
 	SV *func
 	SV *data
 PREINIT:
     _perl_callback *sc = NULL;
-    EvasObject *obj;
-    IV tmp;
     char *event;
     int event_iv;
+    UV objaddr;
 CODE:
+    objaddr = PTR2IV(obj);
     New(0,event,3,char);
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(perlobj));
-    obj = INT2PTR(EvasObject*,tmp);
     event_iv = SvIV(type);
     event = SvPV_nolen(type);
     
     // Save the data on the perl side
-    sc = perl_save_callback(aTHX_ func, perlobj,event,"Efl::PLSide::Callbacks");
+    sc = perl_save_callback(aTHX_ func, objaddr,event,"Efl::PLSide::Callbacks");
     evas_object_event_callback_add(obj,event_iv,call_perl_evas_event_cb,sc);
 
 
@@ -444,7 +440,8 @@ PREINIT:
     void *data;
 CODE:
     address = SvUV(cstructaddr);
-    printf("Delete cb CSTRUCTADDR %"UVuf,address);
+    if (SvTRUE(get_sv("Efl::Debug",0)))
+    	fprintf(stderr,"Delete cstruct with adress %"UVuf"\n",address);
     sc = INT2PTR(_perl_callback*,address);
     data = evas_object_event_callback_del_full(obj, type, call_perl_evas_event_cb,sc);
     if (data == NULL) {
@@ -502,16 +499,17 @@ CODE:
 
 
 void
-_evas_object_smart_callback_add(obj, event, func, perlobj, data)
+_evas_object_smart_callback_add(obj, event, func, data)
     EvasObject *obj
     char *event
     SV *func
-    SV *perlobj
     SV *data
 PREINIT:
         _perl_callback *sc = NULL;
+        UV objaddr;
 CODE:
-    sc = perl_save_callback(aTHX_ func, perlobj, event,"Efl::PLSide::Callbacks");
+	objaddr = PTR2IV(obj);
+    sc = perl_save_callback(aTHX_ func, objaddr, event,"Efl::PLSide::Callbacks");
     evas_object_smart_callback_add(obj, event, call_perl_sub, sc);
     
 
@@ -536,7 +534,8 @@ PREINIT:
     void *data;
 CODE:
     address = SvUV(cstructaddr);
-    printf("Delete cb CSTRUCTADDR %"UVuf,address);
+    if (SvTRUE(get_sv("Efl::Debug",0)))
+    	fprintf(stderr,"Delete cstruct with addr %"UVuf"\n",address);
     sc = INT2PTR(_perl_callback*,address);
     data = evas_object_smart_callback_del_full(obj, event, call_perl_sub,sc);
     if (data == NULL) {

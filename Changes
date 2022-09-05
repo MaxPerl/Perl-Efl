@@ -84,4 +84,6 @@ Revision history for Perl extension Efl.
 		because there occured problems (witg Menu and Hoversel)
 		(TODO: Same with ToolbarItem and PopupItem [as far as apparent there are no problems with these widgets])
 	- Add elm_entry_context_menu_item_add
+	- Add EINA_TRUE|FALSE constants
+	- Unify storage of callback data (always use c pointer adress as key instead of refadress of perl object)
 		

@@ -48,14 +48,14 @@ sub units_format_function_set {
     my ($obj, $func) = @_;
     Efl::PLSide::register_format_cb( $obj, $func);
 
-    $obj->_elm_slider_units_format_function_set($func,$obj);
+    $obj->_elm_slider_units_format_function_set($func);
 }
 
 sub indicator_format_function_set {
     my ($obj, $func) = @_;
     Efl::PLSide::register_format_cb( $obj, $func);
 
-    $obj->_elm_slider_indicator_format_function_set($func,$obj);
+    $obj->_elm_slider_indicator_format_function_set($func);
 }
 
 # Preloaded methods go here.

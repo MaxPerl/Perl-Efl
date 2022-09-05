@@ -27,6 +27,8 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 our @EXPORT = qw(
+EINA_TRUE
+EINA_FALSE
 );
 
 

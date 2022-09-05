@@ -66,7 +66,7 @@ HV* _get_smart_cb_hash(pTHX_ UV objaddr,char *event,SV *funcname, char* hashName
     return cb_data;
 }
 
-_perl_callback *perl_save_callback(pTHX_ SV *func, SV *obj, char *event, char *hashName) {
+_perl_callback *perl_save_callback(pTHX_ SV *func, UV objaddr, char *event, char *hashName) {
     _perl_callback *cb;
 
     cb = (_perl_callback *)malloc(sizeof(_perl_callback));
@@ -80,8 +80,7 @@ _perl_callback *perl_save_callback(pTHX_ SV *func, SV *obj, char *event, char *h
         croak("No function passed\n");
     }
 
-    if (obj && SvOK(obj)) {
-        UV objaddr = PTR2UV (SvRV(obj));
+    if (objaddr) {
         cb->objaddr = objaddr;
     }
     else {
@@ -576,13 +575,12 @@ HV* _get_gen_item_hash(pTHX_ UV objaddr, int item_id) {
     return GenItem;
 }
 
-_perl_gendata *perl_save_gen_cb(pTHX_ SV *obj, UV itcaddr, int id) {
+_perl_gendata *perl_save_gen_cb(pTHX_ UV objaddr, UV itcaddr, int id) {
     _perl_gendata *cb;
     
     New(0,cb,1,_perl_gendata);
 
-    if (obj && SvOK(obj)) {
-        UV objaddr = PTR2UV(SvRV(obj));
+    if (objaddr) {
         cb->objaddr = objaddr ;
     }
     else {

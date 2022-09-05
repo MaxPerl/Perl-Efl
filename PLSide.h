@@ -19,8 +19,11 @@ struct __perl_callback {
     UV funcaddr;
 };
 
-
-_perl_callback *perl_save_callback(pTHX_ SV *func, SV *obj, char *event, char *hashName);
+//
+// used by Smart_Cbs, Evas_Events, Tooltip::Content_Cbs
+// perl_save_callback is used by ElmSlider and ElmProgressbar, too (but they call call_perl_format_cb)
+//
+_perl_callback *perl_save_callback(pTHX_ SV *func, UV objaddr, char *event, char *hashName);
 void call_perl_sub(void *data, Evas_Object *obj, void *event_info);
 void del_free(void *data);
 
@@ -29,10 +32,16 @@ void call_perl_evas_event_cb(void *data, Evas *e, Evas_Object *obj, void *event_
 Evas_Object* call_perl_tooltip_content_cb(void *data, Evas_Object *obj, Evas_Object *tooltip);
 void del_tooltip(void *data, Evas_Object *obj, void *event_info);
 
+//
+// used by ElmSlider and ElmProgressbar (and in the future hopefully ElmCalendar)
+//
 HV* _get_format_cb_hash(pTHX_ UV objaddr);
 char* call_perl_format_cb(double value, void *data);
 void free_buf(char *buf);
 
+//
+//	used by ElmEntry
+//
 HV* _get_markup_filter_cb(pTHX_ UV objaddr,SV* funcname);
 _perl_callback *save_markup_filter_struct(pTHX_ SV *func, UV addr);
 void call_perl_markup_filter_cb(void *data, Elm_Entry *entry, char **text);
@@ -51,7 +60,7 @@ struct __perl_gendata {
     int item_id;
 };
 
-_perl_gendata *perl_save_gen_cb(pTHX_ SV *obj, UV itcaddr, int id);
+_perl_gendata *perl_save_gen_cb(pTHX_ UV objaddr, UV itcaddr, int id);
 char* call_perl_gen_text_get(void *data, Evas_Object *obj, const char *part);
 Evas_Object* call_perl_gen_content_get(void *data, Evas_Object *obj, const char *part);
 Eina_Bool call_perl_gen_state_get(void *data, Evas_Object *obj, const char *part);

@@ -113,25 +113,22 @@ elm_ctxpopup_clear(obj)
 
 
 ElmWidgetItem *
-_elm_ctxpopup_item_insert_before(pobj,before,label,icon,id)
-	SV *pobj
+_elm_ctxpopup_item_insert_before(obj,before,label,icon,id)
+	ElmCtxpopup *obj
 	ElmWidgetItem *before
 	char *label
 	EvasObject *icon 
 	int id
 PREINIT:
 	_perl_gendata *data;
-    ElmCtxpopup *obj;
-    IV tmp;
+    UV objaddr;
 	ElmWidgetItem *item;
 CODE:
-	// Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmCtxpopup*,tmp);
+	// Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_ctxpopup_item_insert_before(obj,before,label,icon,call_perl_gen_item_selected, data);
     // del_cb seems not to work with Ctxpopup
     //elm_object_item_del_cb_set(item,call_perl_gen_del);
@@ -141,25 +138,22 @@ OUTPUT:
 
 
 ElmWidgetItem *
-_elm_ctxpopup_item_insert_after(pobj,after,label,icon,id)
-	SV *pobj
+_elm_ctxpopup_item_insert_after(obj,after,label,icon,id)
+	ElmCtxpopup *obj
 	ElmWidgetItem *after
 	char *label
 	EvasObject *icon 
 	int id
 PREINIT:
 	_perl_gendata *data;
-    ElmCtxpopup *obj;
-    IV tmp;
+    UV objaddr;
 	ElmWidgetItem *item;
 CODE:
-	// Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmCtxpopup*,tmp);
+	// Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_ctxpopup_item_insert_after(obj,after,label,icon,call_perl_gen_item_selected, data);
     // del_cb seems not to work with Ctxpopup
     //elm_object_item_del_cb_set(item,call_perl_gen_del);
@@ -169,25 +163,22 @@ OUTPUT:
 
 
 ElmWidgetItem *
-_elm_ctxpopup_item_append(pobj,label,icon,id)
-	SV *pobj
+_elm_ctxpopup_item_append(obj,label,icon,id)
+	ElmCtxpopup *obj
 	char *label
 	EvasObject *icon 
 	int id
 PREINIT:
 	_perl_gendata *data;
-    ElmCtxpopup *obj;
-    IV tmp;
+    UV objaddr;
 	ElmWidgetItem *item;
 CODE:
-	// Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmCtxpopup*,tmp);
+	// Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
-    printf("Ctxadress %p\n",data);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
+    
     item = elm_ctxpopup_item_append(obj,label,icon,call_perl_gen_item_selected, data);
     // del_cb seems not to work with Ctxpopup
     // elm_object_item_del_cb_set(item,call_perl_gen_del);
@@ -197,24 +188,21 @@ OUTPUT:
 
 
 ElmWidgetItem *
-_elm_ctxpopup_item_prepend(pobj,label,icon,id)
-	SV *pobj
+_elm_ctxpopup_item_prepend(obj,label,icon,id)
+	ElmCtxpopup *obj
 	char *label
 	EvasObject *icon 
 	int id
 PREINIT:
 	_perl_gendata *data;
-    ElmCtxpopup *obj;
-    IV tmp;
+    UV objaddr;
 	ElmWidgetItem *item;
 CODE:
-	// Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmCtxpopup*,tmp);
+	// Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_ctxpopup_item_prepend(obj,label,icon,call_perl_gen_item_selected, data);
     // del_cb seems not to work with Ctxpopup
     //elm_object_item_del_cb_set(item,call_perl_gen_del);

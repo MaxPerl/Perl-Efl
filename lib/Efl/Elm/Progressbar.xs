@@ -82,14 +82,15 @@ elm_progressbar_unit_format_get(obj)
 
 
 void
-_elm_progressbar_unit_format_function_set(obj,func,pobj)
+_elm_progressbar_unit_format_function_set(obj,func)
 	ElmProgressbar *obj
 	SV* func
-	SV* pobj
 PREINIT:
-        _perl_callback *sc = NULL;
+	_perl_callback *sc = NULL;
+	UV objaddr;
 CODE:
-   sc = perl_save_callback(aTHX_ func, pobj, NULL, "Efl::PLSide::Format_Cbs");
+   objaddr = PTR2IV(obj);
+   sc = perl_save_callback(aTHX_ func, objaddr, NULL, "Efl::PLSide::Format_Cbs");
    elm_progressbar_unit_format_function_set_full(obj,call_perl_format_cb,free_buf,(void *) sc);
 
 

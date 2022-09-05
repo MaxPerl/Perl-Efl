@@ -9,8 +9,6 @@ use Efl::Elm;
 use Efl::Evas;
 use Scalar::Util qw(blessed refaddr);
 
-$Efl::Debug = 1;
-
 my @contacts = (
 	{name => "Alexander Holmes", mobile => "+1234567896", address => "", email => "alexander_holmes\@tizen.org", icon => "c1.svg"},
    	{name => "Lara Alvaréz", mobile => "+9876543216", address => "", email => "lara_alvares\@tizen.org", icon => "c2.svg"},

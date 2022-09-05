@@ -49,7 +49,7 @@ sub unit_format_function_set {
     my ($obj, $func) = @_;
     Efl::PLSide::register_format_cb( $obj, $func);
 
-    $obj->_elm_progressbar_unit_format_function_set($func,$obj);
+    $obj->_elm_progressbar_unit_format_function_set($func);
 }
 
 

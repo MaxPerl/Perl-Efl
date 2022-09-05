@@ -7,5 +7,8 @@
 
 #include <Eina.h>
 
+#include "const-eina-c.inc"
+
 MODULE = Efl::Eina		PACKAGE = Efl::Eina		
 
+INCLUDE: const-eina-xs.inc

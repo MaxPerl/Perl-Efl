@@ -33,7 +33,7 @@ require XSLoader;
 XSLoader::load('Efl::PLSide');
 
 ###################
-# General Callbacks (Smart_Cbs, Evas_Events, Tooltip::Content_Cbs etc.)
+# General Callbacks (Smart_Cbs, Evas_Events, Tooltip::Content_Cbs)
 ###################
 
 our %Callbacks;
@@ -41,7 +41,7 @@ our %Callbacks;
 sub register_smart_cb {
     my ($obj, $event, $func, $data) = @_;
 
-    my $objaddr = refaddr($obj);
+    my $objaddr = $$obj;
     my $funcname = get_func_name($func);
     my $key = "$event###$funcname";
 
@@ -60,7 +60,7 @@ sub register_smart_cb {
 
 sub cleanup {
     my ($widget) = @_;
-    my $objaddr = refaddr($widget);
+    my $objaddr = $$widget;
     warn "Cleanup smart callbacks of widget with adress $objaddr\n" if ($Efl::Debug);
     my $cbs = $Callbacks{$objaddr};
     foreach my $key (keys %$cbs) {
@@ -80,6 +80,7 @@ sub cleanup {
 ###################
 # Format Callbacks
 # There is only one callback per widget
+# used by: ElmSlider, ElmProgressbar (and in the future hopefully ElmCalendar :-S)
 ###################
 
 our %Format_Cbs;
@@ -87,7 +88,8 @@ our %Format_Cbs;
 sub register_format_cb {
     my ($obj, $func) = @_;
 
-    my $objaddr = refaddr($obj);
+    #my $objaddr = refaddr($obj);
+    my $objaddr = $$obj;
     my $func_struct ={
                         function => $func,
                         cstructaddr => ''
@@ -99,7 +101,8 @@ sub register_format_cb {
 sub cleanup_format_cb {
     my ($widget) = @_;
 
-    my $objaddr = refaddr($widget);
+    #my $objaddr = refaddr($widget);
+    my $objaddr = $$widget;
     warn "Delete Form Callback with key: $objaddr\n" if ($Efl::Debug);
 
     # Free the cstruct on C side
@@ -147,7 +150,7 @@ sub gen_del {
 
 sub save_gen_item_data {
     my ($obj, $data, $func, $func_data) = @_;
-    my $objaddr = refaddr($obj);
+    my $objaddr = $$obj;
     # Note: We don't save the object itself, becaus we don't want to increase
     # the refcount of the object!!!
     my $pclass = blessed($obj);
@@ -165,17 +168,18 @@ sub save_gen_item_data {
         @items = @{ $GenItems{$objaddr} };
     }
     push @items, $struct;
-
+	
     $GenItems{$objaddr} = \@items;
+
     return $#items;
 }
 
 sub cleanup_genitems {
     my ($widget) = @_;
 
-    my $objaddr = refaddr($widget);
-    my $caddr = $$widget;
-
+    my $objaddr = $$widget;
+    my $raddr = refaddr($widget);
+	
 	# Workaround:
 	# Problem: If we delete $item->cstructaddr, in the "del_cb" call of the GenlistItem (the callback is defined automatically
 	# and can be supplemented by a user-defined callback through $itc->del()) the perl_gendata struct cannot not be accessed any more :-( )
@@ -202,7 +206,7 @@ sub cleanup_genitems {
 			$item->del();
 		}
 	}
-
+	
     foreach my $item ( @{ $GenItems{$objaddr} } ) {
     	next unless (defined($item));
         warn "Delete Genitem with key: $objaddr\n" if ($Efl::Debug);

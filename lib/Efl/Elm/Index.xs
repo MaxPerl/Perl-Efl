@@ -105,23 +105,20 @@ elm_index_level_go(obj,level)
 
 
 ElmIndexItem *
-_elm_index_item_prepend(pobj,letter,id)
-	SV *pobj
+_elm_index_item_prepend(obj,letter,id)
+	ElmIndex *obj
 	const char *letter
 	int id
 PREINIT:
     _perl_gendata *data;
-    ElmIndex *obj;
-    IV tmp;
+    UV objaddr;
     ElmIndexItem *item;
 CODE:
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmIndex*,tmp);
+    // Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_index_item_prepend(obj,letter,call_perl_gen_item_selected, data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
@@ -135,24 +132,21 @@ elm_index_item_clear(obj)
 
 
 ElmIndexItem *
-_elm_index_item_insert_after(pobj,after,letter,id)
-	SV *pobj
+_elm_index_item_insert_after(obj,after,letter,id)
+	ElmIndex *obj
 	ElmIndexItem *after
 	const char *letter
 	int id
 PREINIT:
     _perl_gendata *data;
-    ElmIndex *obj;
-    IV tmp;
+    UV objaddr;
     ElmIndexItem *item;
 CODE:
-   // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmIndex*,tmp);
+    // Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_index_item_insert_after(obj,after,letter,call_perl_gen_item_selected, data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
@@ -167,24 +161,21 @@ elm_index_item_find(obj,data)
 
 
 ElmIndexItem *
-_elm_index_item_insert_before(pobj,before,letter,id)
-	SV *pobj
+_elm_index_item_insert_before(obj,before,letter,id)
+	ElmIndex *obj
 	ElmIndexItem *before
 	const char *letter
 	int id
 PREINIT:
     _perl_gendata *data;
-    ElmIndex *obj;
-    IV tmp;
+    UV objaddr;
     ElmIndexItem *item;
 CODE:
-   // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmIndex*,tmp);
+   // Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_index_item_insert_before(obj,before,letter,call_perl_gen_item_selected, data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
@@ -193,23 +184,20 @@ OUTPUT:
 
 
 ElmIndexItem *
-_elm_index_item_append(pobj,letter,id)
-	SV *pobj
+_elm_index_item_append(obj,letter,id)
+	ElmIndex *obj
 	const char *letter
 	int id
 PREINIT:
     _perl_gendata *data;
-    ElmIndex *obj;
-    IV tmp;
+    UV objaddr;
     ElmIndexItem *item;
 CODE:
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmIndex*,tmp);
+    // Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_index_item_append(obj,letter,call_perl_gen_item_selected, data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;

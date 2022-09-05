@@ -347,20 +347,17 @@ elm_object_tooltip_domain_translatable_text_set(obj,domain,text)
 
 
 void
-elm_object_tooltip_content_cb_set(pobj,func,data,del_cb)
-	SV *pobj
+elm_object_tooltip_content_cb_set(obj,func,data,del_cb)
+	EvasObject *obj
 	SV *func
 	SV *data
 PREINIT:
         _perl_callback *sc = NULL;
-        EvasObject *obj;
         IV tmp;
+        UV objaddr;
 CODE:
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(EvasObject*,tmp);
-    sc = perl_save_callback(aTHX_ func, pobj,"tooltip-content","Efl::PLSide::Callbacks");
+    objaddr = PTR2IV(obj);
+    sc = perl_save_callback(aTHX_ func, objaddr,"tooltip-content","Efl::PLSide::Callbacks");
     elm_object_tooltip_content_cb_set(obj,call_perl_tooltip_content_cb,(void *) sc,del_tooltip);
 
 void

@@ -169,25 +169,22 @@ elm_toolbar_more_item_get(obj)
 
 
 ElmToolbarItem *
-_elm_toolbar_item_insert_before(pobj,before,icon,label,id)
-	SV *pobj
+_elm_toolbar_item_insert_before(obj,before,icon,label,id)
+	ElmToolbar *obj
 	ElmToolbarItem *before
 	const char *icon
 	const char *label
 	int id
 PREINIT:
     _perl_gendata *data;
-    ElmToolbar *obj;
-    IV tmp;
+    UV objaddr;
     ElmToolbarItem *item;
 CODE:
-   	// Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmToolbar*,tmp);
+   	// Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_toolbar_item_insert_before(obj,before,icon,label,call_perl_gen_item_selected, data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
@@ -196,25 +193,22 @@ OUTPUT:
 
 
 ElmToolbarItem *
-_elm_toolbar_item_insert_after(pobj,after,icon,label,id)
-	SV *pobj
+_elm_toolbar_item_insert_after(obj,after,icon,label,id)
+	ElmToolbar *obj
 	ElmToolbarItem *after
 	const char *icon
 	const char *label
 	int id
 PREINIT:
     _perl_gendata *data;
-    ElmToolbar *obj;
-    IV tmp;
+    UV objaddr;
     ElmToolbarItem *item;
 CODE:
-   // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmToolbar*,tmp);
+    // Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_toolbar_item_insert_after(obj,after,icon,label,call_perl_gen_item_selected, data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
@@ -223,24 +217,21 @@ OUTPUT:
 
 
 ElmToolbarItem *
-_elm_toolbar_item_append(pobj,icon,label,id)
-	SV *pobj
+_elm_toolbar_item_append(obj,icon,label,id)
+	ElmToolbar *obj
 	const char *icon
 	const char *label
 	int id
 PREINIT:
     _perl_gendata *data;
-    ElmToolbar *obj;
-    IV tmp;
+    UV objaddr;
     ElmToolbarItem *item;
 CODE:
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmToolbar*,tmp);
+    // Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_toolbar_item_append(obj,icon,label,call_perl_gen_item_selected, data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
@@ -253,24 +244,21 @@ elm_toolbar_items_count(obj)
 
 
 ElmToolbarItem *
-_elm_toolbar_item_prepend(pobj,icon,label,id)
-	SV *pobj
+_elm_toolbar_item_prepend(obj,icon,label,id)
+	ElmToolbar *obj
 	const char *icon
 	const char *label
 	int id
 PREINIT:
     _perl_gendata *data;
-    ElmToolbar *obj;
-    IV tmp;
+    UV objaddr;
     ElmToolbarItem *item;
 CODE:
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmToolbar*,tmp);
+    // Get the adress of the object
+    objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_toolbar_item_prepend(obj,icon,label,call_perl_gen_item_selected, data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;

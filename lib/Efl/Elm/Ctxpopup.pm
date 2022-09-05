@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 require Exporter;
+use Efl::Evas;
 use Efl::Evas::Object;
 use Efl::Elm::Object;
 
@@ -32,8 +33,10 @@ XSLoader::load('Efl::Elm::Ctxpopup');
 sub add {
     my ($class,$parent) = @_;
     my $widget = elm_ctxpopup_add($parent);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
+    # Workaround: Smart event callback "del" is not triggered? Therefore use Evas event_callback!
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup_genitems, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 

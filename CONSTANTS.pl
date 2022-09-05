@@ -571,6 +571,19 @@ my @names_ecore = (
                                      C_FILE       => 'lib/Efl/const-ecore-c.inc',
                                      XS_FILE      => 'lib/Efl/const-ecore-xs.inc',
                                   );
+                                  
+my @names_eina = (
+    {name => 'EINA_TRUE', 'macro' => 1},
+    {name => 'EINA_FALSE', 'macro' => 1},
+    );
+    
+    ExtUtils::Constant::WriteConstants(
+                                     NAME         => 'Efl::Eina',
+                                     NAMES        => \@names_eina,
+                                     DEFAULT_TYPE => 'IV',
+                                     C_FILE       => 'lib/Efl/const-eina-c.inc',
+                                     XS_FILE      => 'lib/Efl/const-eina-xs.inc',
+                                  );
 }
 else {
   use File::Copy;

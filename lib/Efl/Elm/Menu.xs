@@ -65,26 +65,23 @@ elm_menu_move(obj,x,y)
 
 # func ist eigtl. Evas_Smart_Cb func
 ElmMenuItem *
-_elm_menu_item_add(pobj,parent,icon,label,id)
-	SV *pobj
+_elm_menu_item_add(obj,parent,icon,label,id)
+	ElmMenu *obj
 	ElmMenuItem *parent
 	const char *icon
 	const char *label
 	int id;
 PREINIT:
     _perl_gendata *data;
-    ElmMenu *obj;
-    IV tmp;
+    UV objaddr;
     ElmMenuItem *item;
 CODE:
     if (!parent) 
         parent = NULL;
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmMenu*,tmp);
+    // Get the adress of the object
+    objaddr = PTR2IV(obj);
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_menu_item_add(obj,parent,icon,label,call_perl_gen_item_selected,data);
     elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
