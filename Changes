@@ -86,4 +86,6 @@ Revision history for Perl extension Efl.
 	- Add elm_entry_context_menu_item_add
 	- Add EINA_TRUE|FALSE constants
 	- Unify storage of callback data (always use c pointer adress as key instead of refadress of perl object)
+	- Add a warning to evas_object_smart_callback_call that passing event_info is not possible at the moment
+		(TODO: How make it possible? In the python binding. it is for example always a (pure?) python object)
 		

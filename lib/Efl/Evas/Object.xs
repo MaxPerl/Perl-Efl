@@ -552,6 +552,9 @@ evas_object_smart_callback_call(obj,event,event_info)
 	const char *event
 	void *event_info
 CODE:
+	if (event_info) {
+        fprintf(stderr, "passing event info is not supported at the moment \n");
+    }
 	evas_object_smart_callback_call(obj, event, NULL);
 	
 
