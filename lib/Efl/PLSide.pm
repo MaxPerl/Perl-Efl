@@ -189,6 +189,7 @@ sub cleanup_genitems {
 	# automatically (e.g. Toolbar, CtxPopupItem (done), IndexItem (done), ListItem (done), HoverselItem (done), MenuItem (done), PopupItem, EntryContextMenuItem (done, no del_cb))
 	my $pclass = blessed($widget);
 	if ( 	$pclass eq "ElmGenlistPtr" || $pclass eq "Efl::Elm::Genlist" ||
+			$pclass eq "ElmComboboxPtr" || $pclass eq "Efl::Elm::Combobox" ||
 			# CtxPopup doesn't work because in the del_cb data seems not to be defined :-|
 			#$pclass eq "ElmCtxpopupPtr" || $pclass eq "Efl::Elm::Ctxpopup" ||
 			$pclass eq "ElmListPtr" || $pclass eq "Efl::Elm::List" ) {
@@ -221,6 +222,7 @@ sub cleanup_genitems {
 
     # Delete the callback on the Perl side
     delete($GenItems{$objaddr});
+   
 }
 
 

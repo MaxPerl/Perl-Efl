@@ -13,7 +13,7 @@ if  (eval {require ExtUtils::Constant; 1}) {
 	{name => 'ELM_POLICY_QUIT_LAST_WINDOW_HIDDEN', 'macro' => 1},
 	{name => 'ELM_POLICY_EXIT_NONE', 'macro' => 1},
 	{name => 'ELM_POLICY_EXIT_WINDOWS_DEL', 'macro' => 1},
-    {name => 'ELM_POLICY_THROTTLE_CONFIG', 'macro' => 1},
+	{name => 'ELM_POLICY_THROTTLE_CONFIG', 'macro' => 1},
 	{name => 'ELM_POLICY_THROTTLE_HIDDEN_ALWAYS', 'macro' => 1},
 	{name => 'ELM_POLICY_THROTTLE_NEVER', 'macro' => 1},
 	{name => 'ELM_TEXT_FORMAT_PLAIN_UTF8', 'macro' => 1},
@@ -337,6 +337,19 @@ if  (eval {require ExtUtils::Constant; 1}) {
 	{name => 'ELM_GENLIST_ITEM_SCROLLTO_TOP', 'macro' => 1},
 	{name => 'ELM_GENLIST_ITEM_SCROLLTO_MIDDLE', 'macro' => 1},
 	{name => 'ELM_GENLIST_ITEM_SCROLLTO_BOTTOM', 'macro' => 1},
+	# Elm::Config
+	{name => 'ELM_FOCUS_AUTOSCROLL_MODE_SHOW', 'macro' => 1},
+	{name => 'ELM_FOCUS_AUTOSCROLL_MODE_NONE', 'macro' => 1},
+	{name => 'ELM_FOCUS_AUTOSCROLL_MODE_BRING_IN', 'macro' => 1},
+	
+	
+	{name => 'ELM_SLIDER_INDICATOR_VISIBLE_MODE_DEFAULT', 'macro' => 1},
+	{name => 'ELM_SLIDER_INDICATOR_VISIBLE_MODE_ALWAYS', 'macro' => 1},
+	{name => 'ELM_SLIDER_INDICATOR_VISIBLE_MODE_ON_FOCUS', 'macro' => 1},
+	{name => 'ELM_SLIDER_INDICATOR_VISIBLE_MODE_NONE', 'macro' => 1},
+	
+	{name => 'ELM_FOCUS_MOVE_POLICY_CLICK', 'macro' => 1},
+	{name => 'ELM_FOCUS_MOVE_POLICY_IN', 'macro' => 1},
 	);
 
 

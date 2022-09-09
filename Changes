@@ -62,30 +62,32 @@ Revision history for Perl extension Efl.
 		(TODO: Check which widgets really can have signal callbacks? Only Layout and Edje object?) 
 	- automatically cleanup c struct and GenItem hash, if a Efl::Elm::CtxPopupItem|IndexItem|ListItem|HoverselItem|MenuItem| 
 		PopupItem is deleted
-		(TODO: Do the same with ColorpaletteItem, SegmentItem???)
+		(TODO: Do the same with ColorpaletteItem, SegmentItem?)
 	- implement elm_object_item_signal_callback_add|del and automatic cleanup of signal when parent widget is deleted
 		(TODO: Check which widgets really can have signal callbacks? Only Layout and Edje object?) 
 	- passing function possible to Elm::List->item_insert_*|item_append|item_prepend, Elm::Ctypopup->item_append, 
 		Elm::Popup->item_append 
 	- add EVAS_ASPECT_CONTROL_* Constants
 	- minor fixes in examples and add new examples
-	- Add the special version of $naviframe->item_pop_pv, $object->(part_)content_get_pv and $object_item->(part_)content_get_pv 
-		that tries to bless the returned EvasObject to the appropriate perl class
+	- Add the special version of $naviframe->item_pop_pv, $object->(part_)content_get_pv and 
+		$object_item->(part_)content_get_pv that tries to bless the returned EvasObject to the appropriate perl class
 		(TODO: Perhaps a own function Efl::Elm::widgetType2pclass()?)
 	- Fixes with the automatical cleanup of cstruct and GenItem hash, if a Efl::Elm::GenlistItem is deleted, and the 
 		cleanup of all GenlistItems when Genlist is deleted
 		(Note: The del_cb of the GenlistItc class is always predefined to call_perl_gen_del. There the Genlistitem hash
 		and c struct are deleted and a user-defined del_cb is called. Therefore for cleaning up the GenlistItems in 
 		Efl::Elm::PLSide::cleanup_genitems it is sufficient to clear the Genlist
-		TODO: Check whether this is a way for all "GenWidgets" (e.g. Toolbar, CtxPopupItem, IndexItem, ListItem, HoverselItem, MenuItem, 
-		PopupItem))
+		TODO: Check whether this is a way for all "GenWidgets" (e.g. Toolbar, CtxPopupItem, IndexItem, ListItem, 
+		HoverselItem, MenuItem, PopupItem))
 	- minor fixes
-	- Adjust automatical cleanup of CtxPopupItem, IndexItem, ListItem, HoverselItem, MenuItem according to GenlistItem (see below)
-		because there occured problems (witg Menu and Hoversel)
+	- Adjust automatical cleanup of CtxPopupItem, IndexItem, ListItem, HoverselItem, MenuItem according to GenlistItem 
+		(see above) because there occured problems (with Menu and Hoversel)
 		(TODO: Same with ToolbarItem and PopupItem [as far as apparent there are no problems with these widgets])
 	- Add elm_entry_context_menu_item_add
 	- Add EINA_TRUE|FALSE constants
 	- Unify storage of callback data (always use c pointer adress as key instead of refadress of perl object)
 	- Add a warning to evas_object_smart_callback_call that passing event_info is not possible at the moment
 		(TODO: How make it possible? In the python binding. it is for example always a (pure?) python object)
-		
+	- Add Efl::Elm::Combobox widget 
+		(TODO: Add to Genlist the filter_get functionality; but is the void* pointer key always of type char*?)
+	- Add Efl::Elm::Config	

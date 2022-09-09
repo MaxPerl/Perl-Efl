@@ -29,6 +29,8 @@ Elm_Calendar_Mark *                 T_PTR
 ElmColorselector *                  T_EVAS_OBJECT
 const ElmColorselector *            T_EVAS_OBJECT
 ElmColorselectorPaletteItem *       T_EVAS_OBJECT
+ElmCombobox *       				T_EVAS_OBJECT
+const ElmCombobox *   				T_EVAS_OBJECT
 ElmCtxpopup *                       T_EVAS_OBJECT
 ElmCtxpopupItem *                   T_EVAS_OBJECT
 ElmLabel *                          T_EVAS_OBJECT
@@ -106,6 +108,11 @@ ElmPlayer *                     	T_EVAS_OBJECT
 const ElmPlayer *                	T_EVAS_OBJECT
 ElmVideo *                      	T_EVAS_OBJECT
 const ElmVideo *              		T_EVAS_OBJECT
+
+# ElmConfig
+ElmTextClass *			T_PTROBJ
+ElmFontOverlay *		T_PTROBJ
+ElmColorClass *			T_PTROBJ
 
 # Containers
 ElmGrid *                       	T_EVAS_OBJECT
