@@ -449,11 +449,11 @@ constant_19 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
      ELM_BG_OPTION_SCALE ELM_CALENDAR_UNIQUE ELM_CALENDAR_WEEKLY
-     ELM_FLIP_CROSS_FADE ELM_FLIP_CUBE_RIGHT ELM_FLIP_PAGE_RIGHT
-     ELM_GLVIEW_DEPTH_16 ELM_GLVIEW_DEPTH_24 ELM_GLVIEW_DEPTH_32
-     ELM_HOVER_AXIS_BOTH ELM_HOVER_AXIS_NONE ELM_ICON_LOOKUP_FDO
-     ELM_IMAGE_ORIENT_90 ELM_IMAGE_ROTATE_90 ELM_POLICY_THROTTLE
-     ELM_WIN_KEYBOARD_IP ELM_WIN_KEYBOARD_ON */
+     ELM_CNP_MODE_MARKUP ELM_FLIP_CROSS_FADE ELM_FLIP_CUBE_RIGHT
+     ELM_FLIP_PAGE_RIGHT ELM_GLVIEW_DEPTH_16 ELM_GLVIEW_DEPTH_24
+     ELM_GLVIEW_DEPTH_32 ELM_HOVER_AXIS_BOTH ELM_HOVER_AXIS_NONE
+     ELM_ICON_LOOKUP_FDO ELM_IMAGE_ORIENT_90 ELM_IMAGE_ROTATE_90
+     ELM_POLICY_THROTTLE ELM_WIN_KEYBOARD_IP ELM_WIN_KEYBOARD_ON */
   /* Offset 17 gives the best switch position.  */
   switch (name[17]) {
   case '1':
@@ -562,6 +562,11 @@ constant_19 (pTHX_ const char *name, IV *iv_return) {
     if (memEQ(name, "ELM_CALENDAR_UNIQUE", 19)) {
     /*                                ^        */
       *iv_return = ELM_CALENDAR_UNIQUE;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "ELM_CNP_MODE_MARKUP", 19)) {
+    /*                                ^        */
+      *iv_return = ELM_CNP_MODE_MARKUP;
       return PERL_constant_ISIV;
     }
     break;
@@ -735,13 +740,13 @@ constant_21 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
      ELM_ACTIONSLIDER_LEFT ELM_ACTIONSLIDER_NONE ELM_BG_OPTION_STRETCH
-     ELM_CALENDAR_ANNUALLY ELM_COLORSELECTOR_ALL ELM_FILESELECTOR_GRID
-     ELM_FILESELECTOR_LAST ELM_FILESELECTOR_LIST ELM_FLIP_DIRECTION_UP
-     ELM_GENLIST_ITEM_NONE ELM_GENLIST_ITEM_TREE ELM_GLVIEW_STENCIL_16
-     ELM_ICON_LOOKUP_THEME ELM_IMAGE_ORIENT_NONE ELM_PANEL_ORIENT_LEFT
-     ELM_POPUP_ORIENT_LAST ELM_POPUP_ORIENT_LEFT ELM_WIN_DROPDOWN_MENU
-     ELM_WIN_INLINED_IMAGE ELM_WIN_KEYBOARD_FILE ELM_WIN_KEYBOARD_HOST
-     ELM_WIN_KEYBOARD_J2ME */
+     ELM_CALENDAR_ANNUALLY ELM_CNP_MODE_NO_IMAGE ELM_COLORSELECTOR_ALL
+     ELM_FILESELECTOR_GRID ELM_FILESELECTOR_LAST ELM_FILESELECTOR_LIST
+     ELM_FLIP_DIRECTION_UP ELM_GENLIST_ITEM_NONE ELM_GENLIST_ITEM_TREE
+     ELM_GLVIEW_STENCIL_16 ELM_ICON_LOOKUP_THEME ELM_IMAGE_ORIENT_NONE
+     ELM_PANEL_ORIENT_LEFT ELM_POPUP_ORIENT_LAST ELM_POPUP_ORIENT_LEFT
+     ELM_WIN_DROPDOWN_MENU ELM_WIN_INLINED_IMAGE ELM_WIN_KEYBOARD_FILE
+     ELM_WIN_KEYBOARD_HOST ELM_WIN_KEYBOARD_J2ME */
   /* Offset 8 gives the best switch position.  */
   switch (name[8]) {
   case 'D':
@@ -801,6 +806,13 @@ constant_21 (pTHX_ const char *name, IV *iv_return) {
     if (memEQ(name, "ELM_PANEL_ORIENT_LEFT", 21)) {
     /*                       ^                   */
       *iv_return = ELM_PANEL_ORIENT_LEFT;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'M':
+    if (memEQ(name, "ELM_CNP_MODE_NO_IMAGE", 21)) {
+    /*                       ^                   */
+      *iv_return = ELM_CNP_MODE_NO_IMAGE;
       return PERL_constant_ISIV;
     }
     break;
@@ -884,12 +896,20 @@ static int
 constant_22 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
-     ELM_ACTIONSLIDER_RIGHT ELM_BUBBLE_POS_INVALID ELM_COLORSELECTOR_BOTH
-     ELM_GENLIST_ITEM_GROUP ELM_PANEL_ORIENT_RIGHT ELM_POPUP_ORIENT_RIGHT
-     ELM_SCROLLER_POLICY_ON ELM_TOOLTIP_ORIENT_TOP ELM_WIN_INDICATOR_HIDE
-     ELM_WIN_INDICATOR_SHOW ELM_WIN_KEYBOARD_ALPHA ELM_WIN_KEYGRAB_SHARED */
+     ELM_ACTIONSLIDER_RIGHT ELM_BUBBLE_POS_INVALID ELM_CNP_MODE_PLAINTEXT
+     ELM_COLORSELECTOR_BOTH ELM_GENLIST_ITEM_GROUP ELM_PANEL_ORIENT_RIGHT
+     ELM_POPUP_ORIENT_RIGHT ELM_SCROLLER_POLICY_ON ELM_TOOLTIP_ORIENT_TOP
+     ELM_WIN_INDICATOR_HIDE ELM_WIN_INDICATOR_SHOW ELM_WIN_KEYBOARD_ALPHA
+     ELM_WIN_KEYGRAB_SHARED */
   /* Offset 19 gives the best switch position.  */
   switch (name[19]) {
+  case 'E':
+    if (memEQ(name, "ELM_CNP_MODE_PLAINTEXT", 22)) {
+    /*                                  ^         */
+      *iv_return = ELM_CNP_MODE_PLAINTEXT;
+      return PERL_constant_ISIV;
+    }
+    break;
   case 'G':
     if (memEQ(name, "ELM_ACTIONSLIDER_RIGHT", 22)) {
     /*                                  ^         */
@@ -1121,87 +1141,92 @@ constant_24 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
      ELM_BUBBLE_POS_TOP_RIGHT ELM_COLORSELECTOR_PICKER ELM_FLIP_DIRECTION_RIGHT
-     ELM_IMAGE_FLIP_TRANSPOSE ELM_SCROLLER_POLICY_AUTO ELM_SCROLLER_POLICY_LAST
-     ELM_TOOLTIP_ORIENT_RIGHT ELM_WIN_INDICATOR_OPAQUE ELM_WIN_KEYBOARD_NUMERIC
-     ELM_WIN_KEYBOARD_UNKNOWN ELM_WIN_MOVE_RESIZE_LEFT ELM_WIN_MOVE_RESIZE_MOVE
-     */
-  /* Offset 22 gives the best switch position.  */
-  switch (name[22]) {
-  case 'E':
-    if (memEQ(name, "ELM_COLORSELECTOR_PICKER", 24)) {
-    /*                                     ^        */
-      *iv_return = ELM_COLORSELECTOR_PICKER;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'F':
-    if (memEQ(name, "ELM_WIN_MOVE_RESIZE_LEFT", 24)) {
-    /*                                     ^        */
-      *iv_return = ELM_WIN_MOVE_RESIZE_LEFT;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'H':
-    if (memEQ(name, "ELM_BUBBLE_POS_TOP_RIGHT", 24)) {
-    /*                                     ^        */
-      *iv_return = ELM_BUBBLE_POS_TOP_RIGHT;
-      return PERL_constant_ISIV;
-    }
-    if (memEQ(name, "ELM_FLIP_DIRECTION_RIGHT", 24)) {
-    /*                                     ^        */
-      *iv_return = ELM_FLIP_DIRECTION_RIGHT;
-      return PERL_constant_ISIV;
-    }
-    if (memEQ(name, "ELM_TOOLTIP_ORIENT_RIGHT", 24)) {
-    /*                                     ^        */
-      *iv_return = ELM_TOOLTIP_ORIENT_RIGHT;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'I':
-    if (memEQ(name, "ELM_WIN_KEYBOARD_NUMERIC", 24)) {
-    /*                                     ^        */
-      *iv_return = ELM_WIN_KEYBOARD_NUMERIC;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'S':
+     ELM_FOCUS_MOVE_POLICY_IN ELM_IMAGE_FLIP_TRANSPOSE ELM_SCROLLER_POLICY_AUTO
+     ELM_SCROLLER_POLICY_LAST ELM_TOOLTIP_ORIENT_RIGHT ELM_WIN_INDICATOR_OPAQUE
+     ELM_WIN_KEYBOARD_NUMERIC ELM_WIN_KEYBOARD_UNKNOWN ELM_WIN_MOVE_RESIZE_LEFT
+     ELM_WIN_MOVE_RESIZE_MOVE */
+  /* Offset 17 gives the best switch position.  */
+  switch (name[17]) {
+  case 'A':
     if (memEQ(name, "ELM_IMAGE_FLIP_TRANSPOSE", 24)) {
-    /*                                     ^        */
+    /*                                ^             */
       *iv_return = ELM_IMAGE_FLIP_TRANSPOSE;
       return PERL_constant_ISIV;
     }
+    break;
+  case 'C':
+    if (memEQ(name, "ELM_SCROLLER_POLICY_AUTO", 24)) {
+    /*                                ^             */
+      *iv_return = ELM_SCROLLER_POLICY_AUTO;
+      return PERL_constant_ISIV;
+    }
     if (memEQ(name, "ELM_SCROLLER_POLICY_LAST", 24)) {
-    /*                                     ^        */
+    /*                                ^             */
       *iv_return = ELM_SCROLLER_POLICY_LAST;
       return PERL_constant_ISIV;
     }
     break;
+  case 'L':
+    if (memEQ(name, "ELM_FOCUS_MOVE_POLICY_IN", 24)) {
+    /*                                ^             */
+      *iv_return = ELM_FOCUS_MOVE_POLICY_IN;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'N':
+    if (memEQ(name, "ELM_FLIP_DIRECTION_RIGHT", 24)) {
+    /*                                ^             */
+      *iv_return = ELM_FLIP_DIRECTION_RIGHT;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "ELM_WIN_KEYBOARD_NUMERIC", 24)) {
+    /*                                ^             */
+      *iv_return = ELM_WIN_KEYBOARD_NUMERIC;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'P':
+    if (memEQ(name, "ELM_BUBBLE_POS_TOP_RIGHT", 24)) {
+    /*                                ^             */
+      *iv_return = ELM_BUBBLE_POS_TOP_RIGHT;
+      return PERL_constant_ISIV;
+    }
+    break;
   case 'T':
-    if (memEQ(name, "ELM_SCROLLER_POLICY_AUTO", 24)) {
-    /*                                     ^        */
-      *iv_return = ELM_SCROLLER_POLICY_AUTO;
+    if (memEQ(name, "ELM_TOOLTIP_ORIENT_RIGHT", 24)) {
+    /*                                ^             */
+      *iv_return = ELM_TOOLTIP_ORIENT_RIGHT;
       return PERL_constant_ISIV;
     }
     break;
   case 'U':
-    if (memEQ(name, "ELM_WIN_INDICATOR_OPAQUE", 24)) {
-    /*                                     ^        */
-      *iv_return = ELM_WIN_INDICATOR_OPAQUE;
+    if (memEQ(name, "ELM_WIN_KEYBOARD_UNKNOWN", 24)) {
+    /*                                ^             */
+      *iv_return = ELM_WIN_KEYBOARD_UNKNOWN;
       return PERL_constant_ISIV;
     }
     break;
-  case 'V':
+  case 'Z':
+    if (memEQ(name, "ELM_WIN_MOVE_RESIZE_LEFT", 24)) {
+    /*                                ^             */
+      *iv_return = ELM_WIN_MOVE_RESIZE_LEFT;
+      return PERL_constant_ISIV;
+    }
     if (memEQ(name, "ELM_WIN_MOVE_RESIZE_MOVE", 24)) {
-    /*                                     ^        */
+    /*                                ^             */
       *iv_return = ELM_WIN_MOVE_RESIZE_MOVE;
       return PERL_constant_ISIV;
     }
     break;
-  case 'W':
-    if (memEQ(name, "ELM_WIN_KEYBOARD_UNKNOWN", 24)) {
-    /*                                     ^        */
-      *iv_return = ELM_WIN_KEYBOARD_UNKNOWN;
+  case '_':
+    if (memEQ(name, "ELM_COLORSELECTOR_PICKER", 24)) {
+    /*                                ^             */
+      *iv_return = ELM_COLORSELECTOR_PICKER;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "ELM_WIN_INDICATOR_OPAQUE", 24)) {
+    /*                                ^             */
+      *iv_return = ELM_WIN_INDICATOR_OPAQUE;
       return PERL_constant_ISIV;
     }
     break;
@@ -1467,96 +1492,103 @@ constant_27 (pTHX_ const char *name, IV *iv_return) {
      here.  However, subsequent manual editing may have added or removed some.
      ELM_BUBBLE_POS_BOTTOM_RIGHT ELM_CALENDAR_SELECTABLE_DAY
      ELM_CTXPOPUP_DIRECTION_DOWN ELM_CTXPOPUP_DIRECTION_LEFT
-     ELM_FLIP_INTERACTION_ROTATE ELM_GENLIST_ITEM_FIELD_TEXT
-     ELM_GLVIEW_MULTISAMPLE_HIGH ELM_LABEL_SLIDE_MODE_ALWAYS
-     ELM_OBJECT_SELECT_MODE_NONE ELM_PHOTOCAM_ZOOM_MODE_LAST
-     ELM_POLICY_EXIT_WINDOWS_DEL ELM_TEXT_FORMAT_MARKUP_UTF8
-     ELM_TOOLTIP_ORIENT_TOP_LEFT */
-  /* Offset 9 gives the best switch position.  */
-  switch (name[9]) {
-  case 'C':
-    if (memEQ(name, "ELM_PHOTOCAM_ZOOM_MODE_LAST", 27)) {
-    /*                        ^                        */
-      *iv_return = ELM_PHOTOCAM_ZOOM_MODE_LAST;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'D':
+     ELM_FLIP_INTERACTION_ROTATE ELM_FOCUS_MOVE_POLICY_CLICK
+     ELM_GENLIST_ITEM_FIELD_TEXT ELM_GLVIEW_MULTISAMPLE_HIGH
+     ELM_LABEL_SLIDE_MODE_ALWAYS ELM_OBJECT_SELECT_MODE_NONE
+     ELM_PHOTOCAM_ZOOM_MODE_LAST ELM_POLICY_EXIT_WINDOWS_DEL
+     ELM_TEXT_FORMAT_MARKUP_UTF8 ELM_TOOLTIP_ORIENT_TOP_LEFT */
+  /* Offset 25 gives the best switch position.  */
+  switch (name[25]) {
+  case 'A':
     if (memEQ(name, "ELM_CALENDAR_SELECTABLE_DAY", 27)) {
-    /*                        ^                        */
+    /*                                        ^        */
       *iv_return = ELM_CALENDAR_SELECTABLE_DAY;
       return PERL_constant_ISIV;
     }
     break;
+  case 'C':
+    if (memEQ(name, "ELM_FOCUS_MOVE_POLICY_CLICK", 27)) {
+    /*                                        ^        */
+      *iv_return = ELM_FOCUS_MOVE_POLICY_CLICK;
+      return PERL_constant_ISIV;
+    }
+    break;
   case 'E':
-    if (memEQ(name, "ELM_BUBBLE_POS_BOTTOM_RIGHT", 27)) {
-    /*                        ^                        */
-      *iv_return = ELM_BUBBLE_POS_BOTTOM_RIGHT;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'F':
-    if (memEQ(name, "ELM_TEXT_FORMAT_MARKUP_UTF8", 27)) {
-    /*                        ^                        */
-      *iv_return = ELM_TEXT_FORMAT_MARKUP_UTF8;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'I':
-    if (memEQ(name, "ELM_FLIP_INTERACTION_ROTATE", 27)) {
-    /*                        ^                        */
-      *iv_return = ELM_FLIP_INTERACTION_ROTATE;
-      return PERL_constant_ISIV;
-    }
-    if (memEQ(name, "ELM_TOOLTIP_ORIENT_TOP_LEFT", 27)) {
-    /*                        ^                        */
-      *iv_return = ELM_TOOLTIP_ORIENT_TOP_LEFT;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'P':
-    if (memEQ(name, "ELM_CTXPOPUP_DIRECTION_DOWN", 27)) {
-    /*                        ^                        */
-      *iv_return = ELM_CTXPOPUP_DIRECTION_DOWN;
-      return PERL_constant_ISIV;
-    }
-    if (memEQ(name, "ELM_CTXPOPUP_DIRECTION_LEFT", 27)) {
-    /*                        ^                        */
-      *iv_return = ELM_CTXPOPUP_DIRECTION_LEFT;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'S':
-    if (memEQ(name, "ELM_GENLIST_ITEM_FIELD_TEXT", 27)) {
-    /*                        ^                        */
-      *iv_return = ELM_GENLIST_ITEM_FIELD_TEXT;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'T':
-    if (memEQ(name, "ELM_OBJECT_SELECT_MODE_NONE", 27)) {
-    /*                        ^                        */
-      *iv_return = ELM_OBJECT_SELECT_MODE_NONE;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'W':
-    if (memEQ(name, "ELM_GLVIEW_MULTISAMPLE_HIGH", 27)) {
-    /*                        ^                        */
-      *iv_return = ELM_GLVIEW_MULTISAMPLE_HIGH;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'Y':
     if (memEQ(name, "ELM_POLICY_EXIT_WINDOWS_DEL", 27)) {
-    /*                        ^                        */
+    /*                                        ^        */
       *iv_return = ELM_POLICY_EXIT_WINDOWS_DEL;
       return PERL_constant_ISIV;
     }
     break;
-  case '_':
+  case 'F':
+    if (memEQ(name, "ELM_CTXPOPUP_DIRECTION_LEFT", 27)) {
+    /*                                        ^        */
+      *iv_return = ELM_CTXPOPUP_DIRECTION_LEFT;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "ELM_TEXT_FORMAT_MARKUP_UTF8", 27)) {
+    /*                                        ^        */
+      *iv_return = ELM_TEXT_FORMAT_MARKUP_UTF8;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "ELM_TOOLTIP_ORIENT_TOP_LEFT", 27)) {
+    /*                                        ^        */
+      *iv_return = ELM_TOOLTIP_ORIENT_TOP_LEFT;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'G':
+    if (memEQ(name, "ELM_GLVIEW_MULTISAMPLE_HIGH", 27)) {
+    /*                                        ^        */
+      *iv_return = ELM_GLVIEW_MULTISAMPLE_HIGH;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'H':
+    if (memEQ(name, "ELM_BUBBLE_POS_BOTTOM_RIGHT", 27)) {
+    /*                                        ^        */
+      *iv_return = ELM_BUBBLE_POS_BOTTOM_RIGHT;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'N':
+    if (memEQ(name, "ELM_OBJECT_SELECT_MODE_NONE", 27)) {
+    /*                                        ^        */
+      *iv_return = ELM_OBJECT_SELECT_MODE_NONE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'S':
+    if (memEQ(name, "ELM_PHOTOCAM_ZOOM_MODE_LAST", 27)) {
+    /*                                        ^        */
+      *iv_return = ELM_PHOTOCAM_ZOOM_MODE_LAST;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'T':
+    if (memEQ(name, "ELM_FLIP_INTERACTION_ROTATE", 27)) {
+    /*                                        ^        */
+      *iv_return = ELM_FLIP_INTERACTION_ROTATE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'W':
+    if (memEQ(name, "ELM_CTXPOPUP_DIRECTION_DOWN", 27)) {
+    /*                                        ^        */
+      *iv_return = ELM_CTXPOPUP_DIRECTION_DOWN;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'X':
+    if (memEQ(name, "ELM_GENLIST_ITEM_FIELD_TEXT", 27)) {
+    /*                                        ^        */
+      *iv_return = ELM_GENLIST_ITEM_FIELD_TEXT;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'Y':
     if (memEQ(name, "ELM_LABEL_SLIDE_MODE_ALWAYS", 27)) {
-    /*                        ^                        */
+    /*                                        ^        */
       *iv_return = ELM_LABEL_SLIDE_MODE_ALWAYS;
       return PERL_constant_ISIV;
     }
@@ -1734,87 +1766,100 @@ constant_30 (pTHX_ const char *name, IV *iv_return) {
      here.  However, subsequent manual editing may have added or removed some.
      ELM_CALENDAR_LAST_DAY_OF_MONTH ELM_CTXPOPUP_DIRECTION_UNKNOWN
      ELM_FLIP_ROTATE_XZ_CENTER_AXIS ELM_FLIP_ROTATE_YZ_CENTER_AXIS
+     ELM_FOCUS_AUTOSCROLL_MODE_NONE ELM_FOCUS_AUTOSCROLL_MODE_SHOW
      ELM_GENLIST_ITEM_FIELD_CONTENT ELM_GENLIST_ITEM_SCROLLTO_NONE
      ELM_GLVIEW_RESIZE_POLICY_SCALE ELM_OBJECT_SELECT_MODE_DEFAULT
      ELM_SCROLLER_MOVEMENT_NO_BLOCK ELM_TOOLBAR_ITEM_SCROLLTO_LAST
      ELM_TOOLBAR_ITEM_SCROLLTO_NONE ELM_TOOLTIP_ORIENT_BOTTOM_LEFT */
-  /* Offset 9 gives the best switch position.  */
-  switch (name[9]) {
-  case 'A':
+  /* Offset 8 gives the best switch position.  */
+  switch (name[8]) {
+  case 'B':
     if (memEQ(name, "ELM_TOOLBAR_ITEM_SCROLLTO_LAST", 30)) {
-    /*                        ^                           */
+    /*                       ^                            */
       *iv_return = ELM_TOOLBAR_ITEM_SCROLLTO_LAST;
       return PERL_constant_ISIV;
     }
     if (memEQ(name, "ELM_TOOLBAR_ITEM_SCROLLTO_NONE", 30)) {
-    /*                        ^                           */
+    /*                       ^                            */
       *iv_return = ELM_TOOLBAR_ITEM_SCROLLTO_NONE;
       return PERL_constant_ISIV;
     }
     break;
-  case 'D':
-    if (memEQ(name, "ELM_CALENDAR_LAST_DAY_OF_MONTH", 30)) {
-    /*                        ^                           */
-      *iv_return = ELM_CALENDAR_LAST_DAY_OF_MONTH;
+  case 'C':
+    if (memEQ(name, "ELM_OBJECT_SELECT_MODE_DEFAULT", 30)) {
+    /*                       ^                            */
+      *iv_return = ELM_OBJECT_SELECT_MODE_DEFAULT;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'E':
+    if (memEQ(name, "ELM_GLVIEW_RESIZE_POLICY_SCALE", 30)) {
+    /*                       ^                            */
+      *iv_return = ELM_GLVIEW_RESIZE_POLICY_SCALE;
       return PERL_constant_ISIV;
     }
     break;
   case 'I':
-    if (memEQ(name, "ELM_TOOLTIP_ORIENT_BOTTOM_LEFT", 30)) {
-    /*                        ^                           */
-      *iv_return = ELM_TOOLTIP_ORIENT_BOTTOM_LEFT;
+    if (memEQ(name, "ELM_GENLIST_ITEM_FIELD_CONTENT", 30)) {
+    /*                       ^                            */
+      *iv_return = ELM_GENLIST_ITEM_FIELD_CONTENT;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "ELM_GENLIST_ITEM_SCROLLTO_NONE", 30)) {
+    /*                       ^                            */
+      *iv_return = ELM_GENLIST_ITEM_SCROLLTO_NONE;
       return PERL_constant_ISIV;
     }
     break;
   case 'L':
     if (memEQ(name, "ELM_SCROLLER_MOVEMENT_NO_BLOCK", 30)) {
-    /*                        ^                           */
+    /*                       ^                            */
       *iv_return = ELM_SCROLLER_MOVEMENT_NO_BLOCK;
       return PERL_constant_ISIV;
     }
     break;
-  case 'P':
+  case 'N':
+    if (memEQ(name, "ELM_CALENDAR_LAST_DAY_OF_MONTH", 30)) {
+    /*                       ^                            */
+      *iv_return = ELM_CALENDAR_LAST_DAY_OF_MONTH;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'O':
     if (memEQ(name, "ELM_CTXPOPUP_DIRECTION_UNKNOWN", 30)) {
-    /*                        ^                           */
+    /*                       ^                            */
       *iv_return = ELM_CTXPOPUP_DIRECTION_UNKNOWN;
       return PERL_constant_ISIV;
     }
     break;
-  case 'R':
-    if (memEQ(name, "ELM_FLIP_ROTATE_XZ_CENTER_AXIS", 30)) {
-    /*                        ^                           */
-      *iv_return = ELM_FLIP_ROTATE_XZ_CENTER_AXIS;
-      return PERL_constant_ISIV;
-    }
-    if (memEQ(name, "ELM_FLIP_ROTATE_YZ_CENTER_AXIS", 30)) {
-    /*                        ^                           */
-      *iv_return = ELM_FLIP_ROTATE_YZ_CENTER_AXIS;
-      return PERL_constant_ISIV;
-    }
-    break;
   case 'S':
-    if (memEQ(name, "ELM_GENLIST_ITEM_FIELD_CONTENT", 30)) {
-    /*                        ^                           */
-      *iv_return = ELM_GENLIST_ITEM_FIELD_CONTENT;
+    if (memEQ(name, "ELM_FOCUS_AUTOSCROLL_MODE_NONE", 30)) {
+    /*                       ^                            */
+      *iv_return = ELM_FOCUS_AUTOSCROLL_MODE_NONE;
       return PERL_constant_ISIV;
     }
-    if (memEQ(name, "ELM_GENLIST_ITEM_SCROLLTO_NONE", 30)) {
-    /*                        ^                           */
-      *iv_return = ELM_GENLIST_ITEM_SCROLLTO_NONE;
+    if (memEQ(name, "ELM_FOCUS_AUTOSCROLL_MODE_SHOW", 30)) {
+    /*                       ^                            */
+      *iv_return = ELM_FOCUS_AUTOSCROLL_MODE_SHOW;
       return PERL_constant_ISIV;
     }
     break;
   case 'T':
-    if (memEQ(name, "ELM_OBJECT_SELECT_MODE_DEFAULT", 30)) {
-    /*                        ^                           */
-      *iv_return = ELM_OBJECT_SELECT_MODE_DEFAULT;
+    if (memEQ(name, "ELM_TOOLTIP_ORIENT_BOTTOM_LEFT", 30)) {
+    /*                       ^                            */
+      *iv_return = ELM_TOOLTIP_ORIENT_BOTTOM_LEFT;
       return PERL_constant_ISIV;
     }
     break;
-  case 'W':
-    if (memEQ(name, "ELM_GLVIEW_RESIZE_POLICY_SCALE", 30)) {
-    /*                        ^                           */
-      *iv_return = ELM_GLVIEW_RESIZE_POLICY_SCALE;
+  case '_':
+    if (memEQ(name, "ELM_FLIP_ROTATE_XZ_CENTER_AXIS", 30)) {
+    /*                       ^                            */
+      *iv_return = ELM_FLIP_ROTATE_XZ_CENTER_AXIS;
+      return PERL_constant_ISIV;
+    }
+    if (memEQ(name, "ELM_FLIP_ROTATE_YZ_CENTER_AXIS", 30)) {
+    /*                       ^                            */
+      *iv_return = ELM_FLIP_ROTATE_YZ_CENTER_AXIS;
       return PERL_constant_ISIV;
     }
     break;
@@ -1990,11 +2035,11 @@ constant_34 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
      ELM_FILESELECTOR_SORT_BY_SIZE_DESC ELM_FILESELECTOR_SORT_BY_TYPE_DESC
-     ELM_GLVIEW_RENDER_POLICY_ON_DEMAND ELM_PHOTOCAM_ZOOM_MODE_AUTO_FIT_IN
-     ELM_POLICY_QUIT_LAST_WINDOW_CLOSED ELM_POLICY_QUIT_LAST_WINDOW_HIDDEN
-     ELM_SCROLLER_SINGLE_DIRECTION_HARD ELM_SCROLLER_SINGLE_DIRECTION_LAST
-     ELM_SCROLLER_SINGLE_DIRECTION_NONE ELM_SCROLLER_SINGLE_DIRECTION_SOFT
-     ELM_WIN_KEYGRAB_OVERRIDE_EXCLUSIVE */
+     ELM_FOCUS_AUTOSCROLL_MODE_BRING_IN ELM_GLVIEW_RENDER_POLICY_ON_DEMAND
+     ELM_PHOTOCAM_ZOOM_MODE_AUTO_FIT_IN ELM_POLICY_QUIT_LAST_WINDOW_CLOSED
+     ELM_POLICY_QUIT_LAST_WINDOW_HIDDEN ELM_SCROLLER_SINGLE_DIRECTION_HARD
+     ELM_SCROLLER_SINGLE_DIRECTION_LAST ELM_SCROLLER_SINGLE_DIRECTION_NONE
+     ELM_SCROLLER_SINGLE_DIRECTION_SOFT ELM_WIN_KEYGRAB_OVERRIDE_EXCLUSIVE */
   /* Offset 30 gives the best switch position.  */
   switch (name[30]) {
   case 'D':
@@ -2011,6 +2056,13 @@ constant_34 (pTHX_ const char *name, IV *iv_return) {
     if (memEQ(name, "ELM_POLICY_QUIT_LAST_WINDOW_HIDDEN", 34)) {
     /*                                             ^          */
       *iv_return = ELM_POLICY_QUIT_LAST_WINDOW_HIDDEN;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'G':
+    if (memEQ(name, "ELM_FOCUS_AUTOSCROLL_MODE_BRING_IN", 34)) {
+    /*                                             ^          */
+      *iv_return = ELM_FOCUS_AUTOSCROLL_MODE_BRING_IN;
       return PERL_constant_ISIV;
     }
     break;
@@ -2162,6 +2214,9 @@ my @names = (qw(),
             {name=>"ELM_CALENDAR_SELECT_MODE_ONDEMAND", type=>"IV", macro=>"1"},
             {name=>"ELM_CALENDAR_UNIQUE", type=>"IV", macro=>"1"},
             {name=>"ELM_CALENDAR_WEEKLY", type=>"IV", macro=>"1"},
+            {name=>"ELM_CNP_MODE_MARKUP", type=>"IV", macro=>"1"},
+            {name=>"ELM_CNP_MODE_NO_IMAGE", type=>"IV", macro=>"1"},
+            {name=>"ELM_CNP_MODE_PLAINTEXT", type=>"IV", macro=>"1"},
             {name=>"ELM_COLORSELECTOR_ALL", type=>"IV", macro=>"1"},
             {name=>"ELM_COLORSELECTOR_BOTH", type=>"IV", macro=>"1"},
             {name=>"ELM_COLORSELECTOR_COMPONENTS", type=>"IV", macro=>"1"},
@@ -2213,6 +2268,11 @@ my @names = (qw(),
             {name=>"ELM_FLIP_ROTATE_X_CENTER_AXIS", type=>"IV", macro=>"1"},
             {name=>"ELM_FLIP_ROTATE_YZ_CENTER_AXIS", type=>"IV", macro=>"1"},
             {name=>"ELM_FLIP_ROTATE_Y_CENTER_AXIS", type=>"IV", macro=>"1"},
+            {name=>"ELM_FOCUS_AUTOSCROLL_MODE_BRING_IN", type=>"IV", macro=>"1"},
+            {name=>"ELM_FOCUS_AUTOSCROLL_MODE_NONE", type=>"IV", macro=>"1"},
+            {name=>"ELM_FOCUS_AUTOSCROLL_MODE_SHOW", type=>"IV", macro=>"1"},
+            {name=>"ELM_FOCUS_MOVE_POLICY_CLICK", type=>"IV", macro=>"1"},
+            {name=>"ELM_FOCUS_MOVE_POLICY_IN", type=>"IV", macro=>"1"},
             {name=>"ELM_GENLIST_ITEM_FIELD_ALL", type=>"IV", macro=>"1"},
             {name=>"ELM_GENLIST_ITEM_FIELD_CONTENT", type=>"IV", macro=>"1"},
             {name=>"ELM_GENLIST_ITEM_FIELD_STATE", type=>"IV", macro=>"1"},

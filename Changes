@@ -90,4 +90,5 @@ Revision history for Perl extension Efl.
 		(TODO: How make it possible? In the python binding. it is for example always a (pure?) python object)
 	- Add Efl::Elm::Combobox widget 
 		(TODO: Add to Genlist the filter_get functionality; but is the void* pointer key always of type char*?)
-	- Add Efl::Elm::Config	
+	- Add Efl::Elm::Config
+	- Add ELM_CNP_MODE_MARKUP|PLAINTEXT|NO_IMAGE constants and fix Constants	
