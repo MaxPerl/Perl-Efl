@@ -80,9 +80,9 @@ Revision history for Perl extension Efl.
 		TODO: Check whether this is a way for all "GenWidgets" (e.g. Toolbar, CtxPopupItem, IndexItem, ListItem, 
 		HoverselItem, MenuItem, PopupItem))
 	- minor fixes
-	- Adjust automatical cleanup of CtxPopupItem, IndexItem, ListItem, HoverselItem, MenuItem according to GenlistItem 
-		(see above) because there occured problems (with Menu and Hoversel)
-		(TODO: Same with ToolbarItem and PopupItem [as far as apparent there are no problems with these widgets])
+	- Adjust automatical cleanup of CtxPopupItem, IndexItem, ListItem, ToolbarItem, HoverselItem, MenuItem 
+		according to GenlistItem (see above) because there occured problems (with Menu and Hoversel)
+		(TODO: Same with PopupItem [as far as apparent there are no problems with these widgets??])
 	- Add elm_entry_context_menu_item_add
 	- Add EINA_TRUE|FALSE constants
 	- Unify storage of callback data (always use c pointer adress as key instead of refadress of perl object)

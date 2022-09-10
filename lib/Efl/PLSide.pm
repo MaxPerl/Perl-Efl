@@ -207,6 +207,12 @@ sub cleanup_genitems {
 			$item->del();
 		}
 	}
+	elsif ($pclass eq "ElmToolbarPtr" || $pclass eq "Efl::Elm::Toolbar") {
+		my $item;
+		while ($item=$widget->last_item_get()) {
+			$item->del();
+		}
+	}
 	
     foreach my $item ( @{ $GenItems{$objaddr} } ) {
     	next unless (defined($item));
