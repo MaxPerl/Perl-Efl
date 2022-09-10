@@ -5,8 +5,6 @@ use warnings;
 use Efl::Evas;
 use Efl::Elm;
 
-$Efl::Debug = 1;
-
 Efl::Elm::init($#ARGV, \@ARGV);
 
 Efl::Elm::policy_set(ELM_POLICY_QUIT, ELM_POLICY_QUIT_LAST_WINDOW_CLOSED);

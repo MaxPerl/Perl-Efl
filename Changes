@@ -54,7 +54,7 @@ Revision history for Perl extension Efl.
 	- Correct Efl::Elm::Inwin->add()
 	- ADD evas_object_size_hint_aspect_set|get
 	- Fix GenlistItemClass functions (obj must be GenlistItemPtr)
-0.68 Fr Sep 02 22:00:00 2022
+0.68 Sat Sep 10 13:55:00 2022
 	- Add Ecore Modifiers constants
 	- Fix elm_entry_utf8_to_markup
 	- Add all macros of elm_object_item.h
@@ -80,9 +80,10 @@ Revision history for Perl extension Efl.
 		TODO: Check whether this is a way for all "GenWidgets" (e.g. Toolbar, CtxPopupItem, IndexItem, ListItem, 
 		HoverselItem, MenuItem, PopupItem))
 	- minor fixes
-	- Adjust automatical cleanup of CtxPopupItem, IndexItem, ListItem, ToolbarItem, HoverselItem, MenuItem 
+	- Adjust automatical cleanup of IndexItem, ListItem, ToolbarItem, HoverselItem, MenuItem 
 		according to GenlistItem (see above) because there occured problems (with Menu and Hoversel)
-		(TODO: Same with PopupItem [as far as apparent there are no problems with these widgets??])
+	- Leave automatical cleanup as is at ElmPopupItems and ElmCtxpopupItems
+		(Note: The disadvantage is, that manual deleting don't cleanup things on the perl/xs side)
 	- Add elm_entry_context_menu_item_add
 	- Add EINA_TRUE|FALSE constants
 	- Unify storage of callback data (always use c pointer adress as key instead of refadress of perl object)
@@ -92,3 +93,4 @@ Revision history for Perl extension Efl.
 		(TODO: Add to Genlist the filter_get functionality; but is the void* pointer key always of type char*?)
 	- Add Efl::Elm::Config
 	- Add ELM_CNP_MODE_MARKUP|PLAINTEXT|NO_IMAGE constants and fix Constants	
+	- Add example of ElmPopup with ElmPopupItems

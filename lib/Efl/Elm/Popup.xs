@@ -14,7 +14,7 @@
 // see the @ISA's in Elm/Win.pm
 // By this trick we get a wonderful perlish oo-interface :-)
 typedef Elm_Popup ElmPopup;
-typedef Elm_Widget_Item ElmWidgetItem;
+typedef Elm_Object_Item ElmObjectItem;
 typedef Evas_Object EvasObject;
 
 MODULE = Efl::Elm::Popup		PACKAGE = Efl::Elm::Popup
@@ -95,7 +95,7 @@ elm_popup_scrollable_get(obj)
 	const ElmPopup *obj
 
 
-ElmWidgetItem *
+ElmObjectItem *
 _elm_popup_item_append(obj,label,icon,id)
 	ElmPopup *obj
 	char *label
@@ -104,7 +104,7 @@ _elm_popup_item_append(obj,label,icon,id)
 PREINIT:
 	_perl_gendata *data;
     UV objaddr;
-	ElmWidgetItem *item;
+	ElmObjectItem *item;
 CODE:
 	// Get the adress of the object
     objaddr = PTR2IV(obj);
@@ -112,7 +112,7 @@ CODE:
     // Save C struct with necessary infos to link to perl side
     data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_popup_item_append(obj,label,icon,call_perl_gen_item_selected, data);
-    elm_object_item_del_cb_set(item,call_perl_gen_del);
+    //elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
 OUTPUT:
     RETVAL    
