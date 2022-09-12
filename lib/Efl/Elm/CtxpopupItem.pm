@@ -4,8 +4,6 @@ use strict;
 use warnings;
 
 require Exporter;
-use Efl::Evas::Object;
-use Efl::Elm::Object;
 
 our @ISA = qw(Exporter ElmCtxpopupItemPtr);
 
@@ -30,6 +28,8 @@ require XSLoader;
 XSLoader::load('Efl::Elm::CtxpopupItem');
 
 package ElmCtxpopupItemPtr;
+
+use Efl::Elm::ObjectItem;
 
 our @ISA = qw(ElmObjectItemPtr);
 

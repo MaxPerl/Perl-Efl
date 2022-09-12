@@ -3,11 +3,7 @@
 use warnings;
 
 use Efl::Evas;
-use Efl::Evas::Object;
 use Efl::Elm;
-use Efl::Elm::Win;
-use Efl::Elm::Button;
-use Efl::Elm::Layout;
 
 my $btn_large = 0;
 

@@ -4,8 +4,7 @@ use strict;
 use warnings;
 
 require Exporter;
-use Efl::Evas::Object;
-use Efl::Elm::Object;
+use Efl::Evas;
 use Efl::Elm::ObjectItem;
 
 our @ISA = qw(Exporter ElmGenlistItemPtr);

@@ -1,11 +1,7 @@
 use strict;
 use warnings;
 
-use Efl;
 use Efl::Elm;
-use Efl::Elm::Win;
-use Efl::Elm::Box;
-use Efl::Elm::Fileselector;
 use Efl::Evas;
 
 my $size;

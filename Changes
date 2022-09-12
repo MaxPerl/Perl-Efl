@@ -54,7 +54,7 @@ Revision history for Perl extension Efl.
 	- Correct Efl::Elm::Inwin->add()
 	- ADD evas_object_size_hint_aspect_set|get
 	- Fix GenlistItemClass functions (obj must be GenlistItemPtr)
-0.68 Sat Sep 10 13:55:00 2022
+0.68 Sat Sep 12 06:20:00 2022
 	- Add Ecore Modifiers constants
 	- Fix elm_entry_utf8_to_markup
 	- Add all macros of elm_object_item.h
@@ -94,3 +94,7 @@ Revision history for Perl extension Efl.
 	- Add Efl::Elm::Config
 	- Add ELM_CNP_MODE_MARKUP|PLAINTEXT|NO_IMAGE constants and fix Constants	
 	- Add example of ElmPopup with ElmPopupItems
+	- Use alwalys $widget->even_callback_add(EVAS_CALLBACK_DEL..) for registering cleanup callbacks
+		(the smart callback version sometimes wasn't triggered (Genlist, Layout, List, Fileselector Index etc.)  
+		and/or one couldn't register an own "del" smart event (Frame, Box etc)???)
+	- (still) TODO: Deleting c struct in Format_Cbs 

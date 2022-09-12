@@ -18,6 +18,7 @@ $win->autodel_set(1);
 $win->resize(400,400);
 
 my $list = Efl::Elm::List->add($win);
+
 # $list->horizontal_set(1); //uncoment to get horizontal
 # size giving scrollbar
 $list->resize(320,300);

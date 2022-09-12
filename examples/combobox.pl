@@ -9,8 +9,6 @@ Efl::Elm::init($#ARGV, \@ARGV);
 
 Efl::Elm::policy_set(ELM_POLICY_QUIT, ELM_POLICY_QUIT_LAST_WINDOW_CLOSED);
 
-$Efl::Debug = 1;
-
 my $win = Efl::Elm::Win->util_standard_add("Main", "Hello, World");
 
 $win->autodel_set(1);

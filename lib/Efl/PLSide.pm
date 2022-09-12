@@ -61,11 +61,11 @@ sub register_smart_cb {
 sub cleanup {
     my ($widget) = @_;
     my $objaddr = $$widget;
-    warn "Cleanup smart callbacks of widget with adress $objaddr\n" if ($Efl::Debug);
+    warn "Cleanup Callbacks of widget with adress $objaddr\n" if ($Efl::Debug);
     my $cbs = $Callbacks{$objaddr};
     foreach my $key (keys %$cbs) {
-    	next unless (defined($key));
-        warn "Delete callback with key: $key\n" if ($Efl::Debug);
+	next unless (defined($key));
+	warn "Delete callback with key: $key\n" if ($Efl::Debug);
 
         # Free the cstruct on C side
         my $cstructaddr = $Callbacks{$objaddr}{$key}{cstructaddr};
@@ -74,6 +74,7 @@ sub cleanup {
         # Delete the callback on the Perl side
         delete($Callbacks{$objaddr}{$key});
     }
+    warn "\n" if ($Efl::Debug);
 }
 
 
@@ -103,13 +104,15 @@ sub cleanup_format_cb {
 
     #my $objaddr = refaddr($widget);
     my $objaddr = $$widget;
-    warn "Delete Form Callback with key: $objaddr\n" if ($Efl::Debug);
+    warn "Cleanup Form Callback with key: $objaddr\n" if ($Efl::Debug);
 
     # Free the cstruct on C side
     my $cstructaddr = $Format_Cbs{$objaddr}{cstructaddr};
+    warn "TODO: Free c struct at $objaddr (not implemented yet :-S)\n" if ($Efl::Debug);
     #Efl::PLSide->_free_perl_callback($cstructaddr);
 
     # Delete the callback on the Perl side
+    warn "Delete \%Efl::PLSide::Format_Cbs hash value with key $objaddr\n" if ($Efl::Debug);
     delete($Format_Cbs{$objaddr});
 }
 
@@ -176,7 +179,7 @@ sub save_gen_item_data {
 
 sub cleanup_genitems {
     my ($widget) = @_;
-
+	
     my $objaddr = $$widget;
     my $raddr = refaddr($widget);
 	
@@ -194,45 +197,52 @@ sub cleanup_genitems {
 			# CtxPopup doesn't work because in the del_cb data seems not to be defined :-|
 			#$pclass eq "ElmCtxpopupPtr" || $pclass eq "Efl::Elm::Ctxpopup" ||
 			$pclass eq "ElmListPtr" || $pclass eq "Efl::Elm::List" ) {
-
+		warn "Clear GenItems of Genlist/Combobox/List\n" if ($Efl::Debug);	
 		$widget->clear();
 
 	}
 	elsif ($pclass eq "ElmIndexPtr" || $pclass eq "Efl::Elm::Index") {
+		warn "Clear GenItems of Index\n" if ($Efl::Debug);
 		$widget->item_clear();
 	}
-	elsif ($pclass eq "ElmMenuPtr" || $pclass eq "Efl::Elm::Menu" ||
-			$pclass eq "ElmHoverselPtr" || $pclass eq "Efl::Elm::Hoversel") {
+	elsif ($pclass eq "ElmHoverselPtr" || $pclass eq "Efl::Elm::Hoversel" ||
+			$pclass eq "ElmMenuPtr" || $pclass eq "Efl::Elm::Menu") {
+		warn "Delete GenItems of Hoversel/Menu\n" if ($Efl::Debug);
 		my @items = $widget->items_get_pv;
 		foreach my $item (@items) {
 			$item->del();
 		}
 	}
 	elsif ($pclass eq "ElmToolbarPtr" || $pclass eq "Efl::Elm::Toolbar") {
+		warn "Delete GenItems of Toolbar\n" if ($Efl::Debug);
 		my $item;
 		while ($item=$widget->last_item_get()) {
 			$item->del();
 		}
 	}
 	else {
-		###########################
-		# This is only important for ElmPopupItems, ElmCtxpopup and perhaps EntryContextMenuItem :-)
-		###########################
-		foreach my $item ( @{ $GenItems{$objaddr} } ) {
-			next unless (defined($item));
-		    warn "Delete Genitem with key: $objaddr\n" if ($Efl::Debug);
-
-		    # Free the cstruct on C side
-		    if ($item->{cstructaddr}) {
-
-		        my $cstructaddr = $item->{cstructaddr};
-		        Efl::PLSide->_free_perl_gendata($cstructaddr);
-		    }
-		}
+		warn "Delete GenItems of Popup/Ctxpopup/EntryContextMenu\n" if ($Efl::Debug);
 	}
+	
+	###########################
+	# This is only important for ElmPopupItems, ElmCtxpopup and perhaps EntryContextMenuItem :-)
+	# Anyway, it doesn't hurt to check and possibly (if still exists) delete perl/xs things for safety twice
+	###########################
+	foreach my $item ( @{ $GenItems{$objaddr} } ) {
+		next unless (defined($item));
+
+	    # Free the cstruct on C side
+	    if ($item->{cstructaddr}) {
+	        warn "Free c struct at $objaddr\n" if ($Efl::Debug);
+	        my $cstructaddr = $item->{cstructaddr};
+	        Efl::PLSide->_free_perl_gendata($cstructaddr);
+	    }
+	}
+
 
     # Delete the callback on the Perl side
     # Really relevant also only for ElmPopupItems,ElmCtxpopupItems and perhaps EntryContextMenuItem
+    warn "Delete \%Efl::PLSide::GenItems hash value(s) with key: $objaddr\n\n" if ($Efl::Debug);
     delete($GenItems{$objaddr});
 }
 
@@ -268,7 +278,7 @@ sub cleanup_markup_filters {
     my $cbs = $MarkupFilter_Cbs{$objaddr};
     foreach my $key (keys %$cbs) {
     	next unless (defined($key));
-        warn "Delete callback with key: $key\n" if ($Efl::Debug);
+        warn "Delete markup filter callback with key: $key\n" if ($Efl::Debug);
 
         # Free the cstruct on C side
         my $cstructaddr = $MarkupFilter_Cbs{$objaddr}{$key}{cstructaddr};
@@ -338,7 +348,7 @@ sub cleanup_signals {
     my $cbs = $EdjeSignals{$objaddr};
     foreach my $key (@$cbs) {
         next unless (defined($key));
-        warn "Delete Edje Signal of Layout $widget, \n\t Function : " . $key->{function} . "Emission: " . $key->{emission} . "\n\tSource " . $key->{source} .  "\n" if ($Efl::Debug);
+        warn "Delete Edje Signal of Layout $widget, \n\tFunction : " . $key->{function} . "\n\tEmission: " . $key->{emission} . "\n\tSource " . $key->{source} .  "\n\n" if ($Efl::Debug);
 
         # Free the cstruct on C side
         my $cstructaddr = $key->{cstructaddr};
@@ -357,7 +367,7 @@ sub cleanup_signals {
 
 		foreach my $signal (@item_signals) {
 		    next unless (defined($signal));
-		    warn "Delete Edje Signal of Widget $signal->{objaddr}, \n\t Function : " . $signal->{function} . "Emission: " . $signal->{emission} . "\n\tSource " . $signal->{source} .  "\n" if ($Efl::Debug);
+		    warn "Delete Edje Signal of Item of widget with address $signal->{objaddr}, \n\t Function : " . $signal->{function} . "\n\tEmission: " . $signal->{emission} . "\n\tSource " . $signal->{source} .  "\n\n" if ($Efl::Debug);
 
 		    # Free the cstruct on C side
 		    my $cstructaddr = $signal->{cstructaddr};
@@ -440,7 +450,7 @@ sub cleanup_ecore_evas_event_cb {
     my ($widget) = @_;
 
     my $objaddr = $$widget;
-    warn "Delete Ecore Evas Event Callbacks with key: $objaddr\n" if ($Efl::Debug);
+    warn "Delete Ecore Evas Event Callbacks with key: $objaddr\n\n" if ($Efl::Debug);
 
     # Free the cstruct on C side
     #my $cstructaddr = $Format_Cbs{$objaddr}{cstructaddr};
@@ -491,7 +501,7 @@ sub cleanup_ecore_task_cb {
     my ($widget) = @_;
 
     my $objaddr = $$widget;
-    warn "Delete Ecore Evas Event Callbacks with key: $objaddr\n" if ($Efl::Debug);
+    warn "Delete Ecore Evas Event Callbacks with key: $objaddr\n\n" if ($Efl::Debug);
 
     # Free the cstruct on C side
     #my $cstructaddr = $Format_Cbs{$objaddr}{cstructaddr};

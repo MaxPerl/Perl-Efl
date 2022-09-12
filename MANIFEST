@@ -1,6 +1,5 @@
 Changes
 CONSTANTS.pl
-DONE
 examples/button.pl
 examples/c1.svg
 examples/c2.svg
@@ -10,6 +9,7 @@ examples/c5.svg
 examples/c6.svg
 examples/calendar.pl
 examples/colorselector.pl
+examples/combobox.pl
 examples/ctxpopup.pl
 examples/dict.txt
 examples/Ecore-Evas/basic-example.pl
@@ -30,6 +30,7 @@ examples/menu.pl
 examples/naviframe.pl
 examples/panes.pl
 examples/popup.pl
+examples/popup2.pl
 examples/progressbar.pl
 examples/radio.pl
 examples/slider.pl
@@ -38,6 +39,8 @@ lib/Efl.xs
 lib/Efl/const-c.inc
 lib/Efl/const-ecore-c.inc
 lib/Efl/const-ecore-xs.inc
+lib/Efl/const-eina-c.inc
+lib/Efl/const-eina-xs.inc
 lib/Efl/const-evas-c.inc
 lib/Efl/const-evas-xs.inc
 lib/Efl/const-xs.inc
@@ -100,6 +103,10 @@ lib/Efl/Elm/Colorselector.pm
 lib/Efl/Elm/Colorselector.xs
 lib/Efl/Elm/ColorselectorPaletteItem.pm
 lib/Efl/Elm/ColorselectorPaletteItem.xs
+lib/Efl/Elm/Combobox.pm
+lib/Efl/Elm/Combobox.xs
+lib/Efl/Elm/Config.pm
+lib/Efl/Elm/Config.xs
 lib/Efl/Elm/Conformant.pm
 lib/Efl/Elm/Conformant.xs
 lib/Efl/Elm/Ctxpopup.pm

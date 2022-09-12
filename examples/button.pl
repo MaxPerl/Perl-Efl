@@ -22,6 +22,7 @@ $win->resize(400,400);
 # basic tutorial code
 # basic text button
 my $button_text = Efl::Elm::Button->new($win);
+
 $button_text->text_set("Click me");
 
 # how a container object should resize a given child within its area
@@ -86,9 +87,9 @@ $win->show();
 Efl::Elm::run();
 Efl::Elm::shutdown();
 
-
 sub _button_click_cb {
     my ($data, $button, $event_info) = @_;
+    print "Clicked\n";
     $button->text_set("Clicked!");
 }
 

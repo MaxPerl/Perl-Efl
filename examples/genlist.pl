@@ -53,6 +53,7 @@ Efl::Elm::run();
 Efl::Elm::shutdown();
 
 sub del_cb {
+	print "Delete item\n";
 }
 
 sub _text_get {

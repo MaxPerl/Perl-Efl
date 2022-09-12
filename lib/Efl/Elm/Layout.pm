@@ -5,7 +5,6 @@ use warnings;
 
 require Exporter;
 use Efl::Evas;
-use Efl::Evas::Object;
 use Efl::Elm::Object;
 
 our @ISA = qw(Exporter ElmLayoutPtr);

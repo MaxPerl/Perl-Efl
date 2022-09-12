@@ -118,22 +118,20 @@ elm_toolbar_item_icon_file_set(obj,file,key)
 
 
 ElmToolbarItemState *
-_elm_toolbar_item_state_add(pobj,icon,label,id)
-	SV *pobj
+_elm_toolbar_item_state_add(obj,icon,label,id)
+	ElmToolbarItem *obj
 	const char *icon
 	const char *label
 	int id
 PREINIT:
     _perl_gendata *data;
-    ElmToolbarItem *obj;
-    IV tmp;
+    UV objaddr;
 CODE:
-    // Fetch the c struct from the perl SV
-    // stolen from the typemap of T_PTROBJ
-    tmp = SvIV((SV*)SvRV(pobj));
-    obj = INT2PTR(ElmToolbarItem*,tmp);
+    // Get the adress of the object
+    objaddr = PTR2IV(obj);
+    
     // Save C struct with necessary infos to link to perl side
-    data = perl_save_gen_cb(aTHX_ pobj, NULL, id);
+    data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     RETVAL = elm_toolbar_item_state_add(obj,icon,label,call_perl_gen_item_selected,data);
 OUTPUT:
     RETVAL

@@ -1,5 +1,5 @@
-# Based on the Popup Tutorial
-# see https://www.enlightenment.org/develop/legacy/tutorial/popup_tutorial
+# Based on the efl popup example under 
+# (efl-src/src/examples/popup2.c)
 #
 #! /usr/bin/perl
 use strict;

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 require Exporter;
-use Efl::Evas::Object;
+use Efl::Evas;
 use Efl::Elm::Object;
 use Efl::Elm::Image;
 
@@ -33,8 +33,8 @@ XSLoader::load('Efl::Elm::Icon');
 sub add {
     my ($class,$parent) = @_;
     my $widget = elm_icon_add($parent);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 

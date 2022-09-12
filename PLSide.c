@@ -826,10 +826,13 @@ void call_perl_genitc_del(void *data, Evas_Object *obj) {
 void call_perl_gen_del(void *data, Evas_Object *obj, void *event_info) {
     dTHX;
     dSP;
-	
+    	
     _perl_gendata *perl_saved_cb = data;
     
     int id = perl_saved_cb->item_id;
+    
+    if (SvTRUE(get_sv("Efl::Debug",0)))
+    	fprintf(stderr,"Calling call_perl_gen_del() on item %d of Genlist with address %"UVuf"\n", id, perl_saved_cb->objaddr);
     
     HV *cb_data = NULL;
     UV itcaddr = perl_saved_cb->itcaddr;
@@ -869,9 +872,15 @@ void call_perl_gen_del(void *data, Evas_Object *obj, void *event_info) {
         FREETMPS;
         LEAVE;
     }
-
+    // TODO: Check whether hash value exists
+    if (SvTRUE(get_sv("Efl::Debug",0)))
+    	fprintf(stderr,"Deleting Efl::PLSide::GenItems hash entry \n");
+    	
     hv_undef(GenItem);
     
+    if (SvTRUE(get_sv("Efl::Debug",0)))
+    	fprintf(stderr,"Freeing cstruct \n\n");
+    	
     Safefree(data);
 }
 

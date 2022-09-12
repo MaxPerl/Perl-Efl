@@ -4,8 +4,9 @@ use strict;
 use warnings;
 
 require Exporter;
-use Efl::Evas::Object;
-use Efl::Elm::Object;
+
+use Efl::Evas;
+use Efl::Elm;
 
 our @ISA = qw(Exporter ElmEntryPtr);
 
@@ -32,11 +33,11 @@ XSLoader::load('Efl::Elm::Entry');
 sub add {
     my ($class,$parent) = @_;
     my $widget = elm_entry_add($parent);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_markup_filters, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup_markup_filters, $widget);
     # For context menu items we have to call cleanup_genitems!!!
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_genitems, $widget);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup_genitems, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 
@@ -104,6 +105,7 @@ sub context_menu_item_add {
 	my ($obj, $label, $icon_file,$icon_type,$func,$data) = @_;
 	$icon_file = $icon_file || "";
 	$label = $label || "";
+	$icon_type = $icon_type || Efl::Elm::ELM_ICON_NONE();
 	my $id = Efl::PLSide::save_gen_item_data( $obj,undef,$func,$data );
 	my $widget = _elm_entry_context_menu_item_add($obj,$label,$icon_file,$icon_type,$id);
 	return $widget;

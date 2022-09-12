@@ -15,6 +15,7 @@ $win->autodel_set(1);
 $win->resize(400,400);
 
 my $cal = Efl::Elm::Calendar->add($win);
+
 $cal->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
 $cal->weekdays_names_set(["Mo","Di","Mi","Do","Fr","Sa","So"]);
 my $names = $cal->weekdays_names_get();

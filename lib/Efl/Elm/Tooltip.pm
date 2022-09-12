@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 require Exporter;
-use Efl::Evas::Object;
+use Efl::Evas;
 use Efl::Elm::Object;
 
 our @ISA = qw(Exporter ElmTooltipPtr);

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 require Exporter;
-use Efl::Evas::Object;
+use Efl::Evas;
 use Efl::Elm::Object;
 
 our @ISA = qw(Exporter ElmComboboxPtr);
@@ -32,9 +32,9 @@ XSLoader::load('Efl::Elm::Combobox');
 sub add {
     my ($class,$parent) = @_;
     my $widget = elm_combobox_add($parent);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup, $widget);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_genitems, $widget);
-    $widget->smart_callback_add("del", \&Efl::PLSide::cleanup_signals, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup_genitems, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
 }
 
