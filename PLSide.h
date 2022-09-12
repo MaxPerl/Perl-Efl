@@ -49,7 +49,7 @@ void call_perl_markup_filter_cb(void *data, Elm_Entry *entry, char **text);
 
 //
 // Used by Elm::Ctxpopup, Elm::Genlist, Elm::Hoversel, Elm::Index, Elm::List, Elm::Menu,  
-// Elm::Popup, Elm::Toolbar, Elm::Entry(::context_menu_item_add!) etc.pp.
+// Elm::Popup, Elm::Toolbar, Elm::Entry(::context_menu_item_add!), ElmNaviframe (item_pop_cb!!!) etc.pp.
 //
 
 typedef struct __perl_gendata _perl_gendata;
@@ -67,6 +67,8 @@ Eina_Bool call_perl_gen_state_get(void *data, Evas_Object *obj, const char *part
 void call_perl_gen_del(void *data, Evas_Object *obj, void *event_info);
 void call_perl_genitc_del(void *data, Evas_Object *obj);
 void call_perl_gen_item_selected(void *data, Evas_Object *obj, void *event_info);
+// Callback for NaviframeItem
+Eina_Bool call_perl_item_pop_cb(void*data,Elm_Naviframe_Item *it);
 
 //
 // used by Elm::Layout, Elm::Object, Elm::WidgetItem (signal_callback_add|del)

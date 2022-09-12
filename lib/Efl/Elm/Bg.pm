@@ -51,7 +51,7 @@ __END__
 
 =head1 NAME
 
-Efl::Elm:Bg
+Efl::Elm::Bg
 
 =head1 SYNOPSIS
 

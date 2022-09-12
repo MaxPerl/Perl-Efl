@@ -44,8 +44,45 @@ Efl - Perl bindings for the Enlightenment Foundation Libraries
 
 =head1 SYNOPSIS
 
-  use Efl;
-  [...]
+	use Efl;
+	use strict;
+	use warnings;
+
+	use Efl::Elm;
+
+	Efl::Elm::init($#ARGV, \@ARGV);
+
+	Efl::Elm::policy_set(ELM_POLICY_QUIT, ELM_POLICY_QUIT_LAST_WINDOW_CLOSED);
+
+	my $win = Efl::Elm::Win->util_standard_add("hello", "Hello");
+	$win->smart_callback_add("delete,request",\&on_done, undef);
+
+	my $box = Efl::Elm::Box->add($win);
+	$box->horizontal_set(1);
+	$win->resize_object_add($box);
+	$box->show();
+
+	my $lab = Efl::Elm::Label->add($win);
+	$lab->text_set("Hello out there, World\n");
+	$box->pack_end($lab);
+	$lab->show();
+
+	my $btn = Efl::Elm::Button->add($win);
+	$btn->text_set("OK");
+	$box->pack_end($btn);
+	$btn->show();
+	$btn->smart_callback_add("clicked", \&on_done, undef);
+
+	$win->show();
+
+	Efl::Elm::run();
+
+	Efl::Elm::shutdown();
+
+	sub on_done {
+    	print "Exiting \n";
+    	Efl::Elm::exit();
+	}
 
 =head1 DESCRIPTION
 
@@ -63,7 +100,7 @@ Sometimes a method returns an EvasObject which can be any Elm Widget Type (e.g. 
 
 =head2 Output Parameters
 
-Efl uses sometimes output parameters. See for example C<void elm_calendar_min_max_year_get(Evas_Object *obj,int *min,int *max)>, where you have to pass in C a pointer to max and min. In perl this is translated to my C<($min, $max) = $calendar->min_max_year_get();>. Sometimes the C function returns a status or similar as in C<Eina_Bool> elm_entry_cursor_geometry_get(Evas_Object *obj,int *x,int *y,int *w,int *h)>. In Perl this status variable is given, too. So the function elm_entry_cursor_geometry_get for example is translated into C<my ($status,$x,$y,$w,$h) = $entry->cursor_geometry_get;>.
+Efl sometimes uses output parameters. See for example C<void elm_calendar_min_max_year_get(Evas_Object *obj,int *min,int *max)>, where you have to pass in C a pointer to max and min. In perl this is translated to my C<($min, $max) = $calendar->min_max_year_get();>. Sometimes the C function returns a status or similar as in C<Eina_Bool> elm_entry_cursor_geometry_get(Evas_Object *obj,int *x,int *y,int *w,int *h)>. In Perl this status variable is given, too. So the function elm_entry_cursor_geometry_get for example is translated into C<my ($status,$x,$y,$w,$h) = $entry->cursor_geometry_get;>.
 
 =head1 FUNCTIONS IN EFL
 
@@ -78,6 +115,8 @@ The Efl modules gives you the following functions:
 =over 8
 
 =item Elm_Entry_Anchor_Info (aka Efl::Elm::EntryAnchorInfo)
+
+=item Elm_Entry_Change_Info (aka Efl::Elm::EntryChangeInfo)
 
 =item Elm_Image_Progress (aka Efl::Elm::ImageProgress)
 
@@ -96,6 +135,20 @@ The Efl modules gives you the following functions:
 =item Evas_Event_Mouse_Move (aka Efl::Evas::Event::MouseMove)
 
 =item Evas_Event_Mouse_Wheel (aka Efl::Evas::Event::MouseWheel)
+
+=item Ecore_Event_Key (aka Efl::Ecore::Event::Key)
+
+=item Ecore_Event_MouseButton (aka Efl::Ecore::Event::MouseButton)
+
+=item Ecore_Event_MouseMove (aka Efl::Ecore::Event::MouseMove)
+
+=item Ecore_Event_MouseWheel (aka Efl::Ecore::Event::MouseWheel)
+
+=item Ecore_Event_Signal_Exit (aka Efl::Ecore::Event::SignalExit)
+
+=item Ecore_Event_Signal_Realtime (aka Efl::Ecore::Event::SignalRealtime)
+
+=item Ecore_Event_Signal_User (aka Efl::Ecore::Event::SignalUser)
 
 =back
 
@@ -117,9 +170,9 @@ None by default.
 
 =head1 SEE ALSO
 
-https://www.enlightenment.org/docs/start
+L<https://www.enlightenment.org/docs/start>
 
-https://github.com/MaxPerl/Perl-Efl
+L<https://github.com/MaxPerl/Perl-Efl>
 
 =head1 AUTHOR
 

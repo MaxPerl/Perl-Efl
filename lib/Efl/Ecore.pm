@@ -126,41 +126,31 @@ __END__
 
 =head1 NAME
 
-Ecore - Perl extension for blah blah blah
-
-=head1 SYNOPSIS
-
-  use Efl;
-  blah blah blah
+Efl::Ecore
 
 =head1 DESCRIPTION
 
-Stub documentation for Efl, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
+Efl::Ecore contains the "ECORE_*" Constants.
 
-Blah blah blah.
+Additional it contains the following general function:
+
+=over 4
+
+=item Efl::Ecore::init();
+
+=back
 
 =head2 EXPORT
 
 None by default.
 
-
-
 =head1 SEE ALSO
 
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
+L<https://www.enlightenment.org/develop/legacy/api/c/start#ecore_main.html>
 
 =head1 AUTHOR
 
-Maximilian Lika, E<lt>maximilian@E<gt>
+Maximilian Lika
 
 =head1 COPYRIGHT AND LICENSE
 

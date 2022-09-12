@@ -32,6 +32,14 @@ package ElmNaviframeItemPtr;
 
 our @ISA = qw(ElmObjectItemPtr);
 
+sub pop_cb_set {
+	my ($item, $func, $data) = @_;
+	my $parent = $item->widget_get(); bless($parent, "ElmNaviframePtr");
+	my $id = Efl::PLSide::save_gen_item_data($parent, undef, $func, $data);
+	my $widget = _elm_naviframe_item_pop_cb_set($item,$parent,$id);
+	return $widget;
+}
+
 # Preloaded methods go here.
 
 1;

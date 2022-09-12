@@ -27,6 +27,7 @@ examples/layout_example.edc
 examples/layout_example.edj
 examples/list.pl
 examples/menu.pl
+examples/multimedia.pl
 examples/naviframe.pl
 examples/panes.pl
 examples/popup.pl
@@ -41,6 +42,8 @@ lib/Efl/const-ecore-c.inc
 lib/Efl/const-ecore-xs.inc
 lib/Efl/const-eina-c.inc
 lib/Efl/const-eina-xs.inc
+lib/Efl/const-emotion-c.inc
+lib/Efl/const-emotion-xs.inc
 lib/Efl/const-evas-c.inc
 lib/Efl/const-evas-xs.inc
 lib/Efl/const-xs.inc
@@ -211,6 +214,10 @@ lib/Efl/Elm/WidgetItem.pm
 lib/Efl/Elm/WidgetItem.xs
 lib/Efl/Elm/Win.pm
 lib/Efl/Elm/Win.xs
+lib/Efl/Emotion.pm
+lib/Efl/Emotion.xs
+lib/Efl/Emotion/Object.pm
+lib/Efl/Emotion/Object.xs
 lib/Efl/Evas.pm
 lib/Efl/Evas.xs
 lib/Efl/Evas/Canvas.pm

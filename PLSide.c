@@ -826,9 +826,9 @@ void call_perl_genitc_del(void *data, Evas_Object *obj) {
 void call_perl_gen_del(void *data, Evas_Object *obj, void *event_info) {
     dTHX;
     dSP;
-    	
-    _perl_gendata *perl_saved_cb = data;
     
+    _perl_gendata *perl_saved_cb = data;
+    	
     int id = perl_saved_cb->item_id;
     
     if (SvTRUE(get_sv("Efl::Debug",0)))
@@ -882,6 +882,61 @@ void call_perl_gen_del(void *data, Evas_Object *obj, void *event_info) {
     	fprintf(stderr,"Freeing cstruct \n\n");
     	
     Safefree(data);
+}
+
+Eina_Bool call_perl_item_pop_cb(void*data,Elm_Naviframe_Item *it) {
+    dTHX;
+    dSP;
+	
+    int count; STRLEN len;
+    SV *s_bool; Eina_Bool e_bool;
+	
+    _perl_gendata *perl_saved_cb = data;
+	
+    HV *GenItem = _get_gen_item_hash(aTHX_ perl_saved_cb->objaddr, perl_saved_cb->item_id);
+
+    // Object
+    SV *s_obj = newSV(0);
+    sv_setref_pv(s_obj, "ElmNaviframeItemPtr", it);
+
+    // Get func
+    SV* func = *( hv_fetch(GenItem, "func",4,FALSE) );
+	
+        // Get func_data
+        SV *func_data = *( hv_fetch(GenItem, "func_data",9,FALSE) );
+
+        ENTER;
+        SAVETMPS;
+
+        PUSHMARK(SP);
+
+        XPUSHs(func_data);
+        XPUSHs(sv_2mortal(s_obj));
+
+        PUTBACK;
+
+        count = call_sv(func, G_SCALAR);
+
+    	SPAGAIN;
+
+    	if (count != 1) {
+        	croak("Expected 1 value got %d\n", count);
+    	}
+
+    	s_bool = POPs;
+    	if (SvTRUE(s_bool) ) {
+        	e_bool = EINA_TRUE;
+    	}
+    	else {
+        	e_bool = EINA_FALSE;
+    	}
+
+    	PUTBACK;
+    	FREETMPS;
+    	LEAVE;    
+
+    return e_bool;
+
 }
 
 void call_perl_gen_item_selected(void *data, Evas_Object *obj, void *event_info) {

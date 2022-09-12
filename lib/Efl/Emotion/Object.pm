@@ -1,14 +1,14 @@
-package Efl::Elm::Video;
+package Efl::Emotion::Object;
 
 use strict;
 use warnings;
 
 require Exporter;
+
 use Efl::Evas;
 use Efl::Elm::Object;
-use Efl::Emotion::Object;
 
-our @ISA = qw(Exporter ElmVideoPtr);
+our @ISA = qw(Exporter EmotionObjectPtr);
 
 # Items to export into callers namespace by default. Note: do not export
 # names by default without a very good reason. Use EXPORT_OK instead.
@@ -28,11 +28,11 @@ our @EXPORT = qw(
 );
 
 require XSLoader;
-XSLoader::load('Efl::Elm::Video');
+XSLoader::load('Efl::Emotion::Object');
 
 sub add {
-    my ($class,$parent) = @_;
-    my $widget = elm_video_add($parent);
+    my ($class,$evas) = @_;
+    my $widget = emotion_object_add($evas);
     $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup, $widget);
     $widget->event_callback_add(EVAS_CALLBACK_DEL, \&Efl::PLSide::cleanup_signals, $widget);
     return $widget;
@@ -40,7 +40,7 @@ sub add {
 
 *new = \&add;
 
-package ElmVideoPtr;
+package EmotionObjectPtr;
 
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
 
@@ -51,23 +51,22 @@ __END__
 
 =head1 NAME
 
-Efl::Elm:Video
+Efl::Emotion::Object
 
 =head1 SYNOPSIS
 
   use Efl::Elm;
   [...]
-  my $video = Efl::Elm::Video->add($parent);
+  my $emotion = Efl::Emotion::Object->add($evas);
   [...]
 
 =head1 DESCRIPTION
 
-This module is a perl binding to the Elementary Video widget.
+This module is a perl binding to the Emotion Object widget.
 
-For more informations see https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Video.html 
+For more informations see L<https://www.enlightenment.org/develop/legacy/api/c/start#emotion_main.html>
 
-For instructions, how to use Efl::Elm::Video, please study this API reference for now. A perl-specific documentation will perhaps come in later versions. But applying the C documentation should be no problem. 
-Efl::Elm::Video gives you a nice object-oriented interface that is kept close to the C API. Please note, that the perl method names remove the "elm_video_" at the beginning of the c functions.
+For instructions, how to use Efl::Emotion::Object, please study this API reference for now. A perl-specific documentation will perhaps come in later versions. But applying the C documentation should be no problem. Efl::Emotion::Object gives you a nice object-oriented interface that is kept close to the C API. Please note, that the perl method names remove the "emotion_object_" at the beginning of the c functions.
 
 =head2 EXPORT
 
@@ -75,7 +74,7 @@ None by default.
 
 =head1 SEE ALSO
 
-https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Video.html
+L<https://www.enlightenment.org/develop/legacy/api/c/start#emotion_main.html>
 
 =head1 AUTHOR
 

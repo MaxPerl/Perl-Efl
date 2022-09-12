@@ -7,7 +7,9 @@
 
 #include <Evas.h>
 
-typedef Evas_Canvas EvasCanvas;
+// TODO: What is the difference between Evas and EvasCanvas?
+// both are a typedef to Eo, therefore we use Eo here direct ;-)
+typedef Eo EvasCanvas;
 typedef Evas_Object EvasObject;
 typedef Eina_List EinaList;
 

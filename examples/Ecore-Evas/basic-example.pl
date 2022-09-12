@@ -39,7 +39,6 @@ Efl::Ecore::Evas::shutdown();
 
 sub on_delete {
     my ($ee) = @_;
-    print "Deleting $ee \n";
     Efl::Ecore::Mainloop::quit();
 }
 
@@ -119,10 +118,10 @@ sub on_mouse_move {
 	print "\nMOUSE MOVE EVENT\n";
 	my $pev = Efl::ev_info2obj( $ev, "Efl::Evas::Event::MouseMove");
 	
-	my $cur = $pev->prev();
+	my $prev = $pev->prev();
 	print "PREVIOUS POSITION\n";
-	print "OUTPUT: $cur->{output}->{x} $cur->{output}->{y}\n";
-	print "CANVAS: $cur->{canvas}->{x} $cur->{canvas}->{y}\n";
+	print "OUTPUT: $prev->{output}->{x} $prev->{output}->{y}\n";
+	print "CANVAS: $prev->{canvas}->{x} $prev->{canvas}->{y}\n";
 	
 	my $cur = $pev->cur();
 	print "CURRENT POSITION\n";

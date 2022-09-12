@@ -220,12 +220,23 @@ sub cleanup_genitems {
 			$item->del();
 		}
 	}
+	# Note: The data passed to $item->pop_cb_set is not (!) passed to 
+	#	item_del_cb!!!! Therefore at the moment there is no possibility
+	#	to delelte popped items individually :-S
+	# TODO: Implement elm_object_item_data_set|get and try it again
+	#elsif ($pclass eq "ElmNaviframePtr" || $pclass eq "Efl::Elm::Naviframe") {
+	#	warn "Delete NaviframeItems\n" if ($Efl::Debug);
+	#	my $item;
+	#	while ($item=$widget->bottom_item_get()) {
+	#		$item->del();
+	#	}
+	#}
 	else {
-		warn "Delete GenItems of Popup/Ctxpopup/EntryContextMenu\n" if ($Efl::Debug);
+		warn "Delete GenItems of Popup/Ctxpopup/EntryContextMenu/NaviframeItem\n" if ($Efl::Debug);
 	}
 	
 	###########################
-	# This is only important for ElmPopupItems, ElmCtxpopup and perhaps EntryContextMenuItem :-)
+	# This is only important for ElmPopupItems, ElmCtxpopup, NaviframeItem and perhaps EntryContextMenuItem :-)
 	# Anyway, it doesn't hurt to check and possibly (if still exists) delete perl/xs things for safety twice
 	###########################
 	foreach my $item ( @{ $GenItems{$objaddr} } ) {

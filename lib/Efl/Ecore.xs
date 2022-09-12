@@ -11,7 +11,7 @@
 #include "const-ecore-c.inc"
 
 
-MODULE = Efl::Ecore		PACKAGE = Efl::Ecore PREFIX = ecore_
+MODULE = Efl::Ecore		PACKAGE = Efl::Ecore	PREFIX = ecore_
 
 INCLUDE: const-ecore-xs.inc
 

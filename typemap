@@ -130,6 +130,14 @@ ElmNaviframeItem *                 	T_EVAS_OBJECT
 const ElmNaviframeItem *       		T_EVAS_OBJECT
 
 #####################
+# EMOTION
+#####################
+EmotionObject *				T_EVAS_OBJECT
+const EmotionObject *		       T_EVAS_OBJECT
+EmotionWebcam *				T_EVAS_OBJECT
+const EmotionWebcam *		       T_EVAS_OBJECT
+
+#####################
 # EVAS
 #####################
 EvasCanvas *                    	T_EVAS_OBJECT

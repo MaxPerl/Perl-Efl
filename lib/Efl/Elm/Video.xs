@@ -13,6 +13,7 @@
 // By this trick we get a wonderful perlish oo-interface :-)
 typedef Evas_Object ElmVideo;
 typedef Evas_Object EvasObject;
+typedef Evas_Object EmotionObject;
 
 MODULE = Efl::Elm::Video		PACKAGE = Efl::Elm::Video
 
@@ -109,9 +110,9 @@ elm_video_remember_position_get(obj)
 	const ElmVideo *obj
 
 
-# Efl_Canvas_Object *
-# elm_video_emotion_get(obj)
-#	const Efl_Ui_Video *obj
+EmotionObject *
+elm_video_emotion_get(obj)
+	const ElmVideo *obj
 
 
 char *

@@ -180,7 +180,7 @@ PREINIT:
     UV objaddr;
     ElmToolbarItem *item;
 CODE:
-   	// Get the adress of the object
+    // Get the adress of the object
     objaddr = PTR2IV(obj);
     
     // Save C struct with necessary infos to link to perl side

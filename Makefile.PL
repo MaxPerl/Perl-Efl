@@ -57,6 +57,9 @@ WriteMakefile(
 		'lib/Efl/Elm/Menu' => {
 			OBJECT => 'lib/Efl/Elm/Menu$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},
+		'lib/Efl/Elm/NaviframeItem' => {
+			OBJECT => 'lib/Efl/Elm/NaviframeItem$(OBJ_EXT) PLSide$(OBJ_EXT)',
+		},
 		'lib/Efl/Elm/Hoversel' => {
 			OBJECT => 'lib/Efl/Elm/Hoversel$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},
@@ -96,7 +99,7 @@ WriteMakefile(
 	},
     },
     XSMULTI	=> 1,
-    OPTIMIZE => '-g',
+    # OPTIMIZE => '-g',
 	# Un-comment this if you add C files to link with later:
     # OBJECT            => '$(O_FILES)', # link all the C files too
 );
