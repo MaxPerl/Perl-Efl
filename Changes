@@ -98,6 +98,7 @@ Revision history for Perl extension Efl.
 		(the smart callback version sometimes wasn't triggered (Genlist, Layout, List, Fileselector Index etc.)  
 		and/or one couldn't register an own "del" smart event (Frame, Box etc)???)
 	- (still) TODO: Deleting c struct in Format_Cbs 
+0.69	
 	- POD additions and corrections
 	- cleanup code in basic Ecore-Evas example
 	- Add $naviframe_item->pop_cb_set()
