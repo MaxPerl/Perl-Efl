@@ -63,6 +63,7 @@ XSLoader::load('Efl::Eina');
 sub list2array {
     my ($list,$class) = @_;
     my @array = ();
+    return @array if (!defined($list));
     my $count = $list->count;
     my $i;
     for ($i = 0; $i < $count; $i++) {

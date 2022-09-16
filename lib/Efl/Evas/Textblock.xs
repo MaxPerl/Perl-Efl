@@ -22,23 +22,32 @@ EvasTextblock *
 evas_object_textblock_add(e)
 	EvasCanvas *e
 
-MODULE = Efl::Evas::Textblock		PACKAGE = EvasTextblockPtr     PREFIX = evas_textblock_
+MODULE = Efl::Evas::Textblock		PACKAGE = Efl::Evas::Textblock    PREFIX = evas_textblock_
 
 char *
 evas_textblock_escape_string_get(escape)
 	const char *escape
 
-
 char *
 evas_textblock_string_escape_get(string,OUTLIST len_ret)
 	const char *string
 	int len_ret
-	
 
 char *
 evas_textblock_escape_string_range_get(escape_start,escape_end)
 	const char *escape_start
 	const char *escape_end
+
+
+MODULE = Efl::Evas::Textblock		PACKAGE = Efl::Evas::Textblock    PREFIX = evas_object_textblock_
+
+void
+evas_object_textblock_text_markup_prepend(cur,text)
+	EvasTextblockCursor *cur
+	const char *text
+
+		
+MODULE = Efl::Evas::Textblock		PACKAGE = EvasTextblockPtr     PREFIX = evas_textblock_
 	
 	
 EvasTextblockNodeFormat*
@@ -133,7 +142,6 @@ evas_object_textblock_text_markup_set(obj,text)
 char *
 evas_object_textblock_text_markup_get(obj)
 	EvasTextblock *obj
-
 	
 void
 evas_object_textblock_style_set(obj,ts)

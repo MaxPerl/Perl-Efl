@@ -40,17 +40,22 @@ package EvasTextblockCursorPtr;
 use Efl::Eina;
 
 sub range_formats_get_pv {
-	my ($obj) = @_;
-    my $list = $obj->range_formats_get();
-    my @array = Efl::Eina::list2array($list,"EvasTextblockNodeFormat");
-    return @array;
+	my ($obj,$cp2) = @_;
+	my $list = $obj->range_formats_get($cp2);
+	my @array = Efl::Eina::list2array($list,"EvasTextblockNodeFormatPtr");
+	return @array;
 }
 
 sub range_geometry_get_pv {
 	my ($obj) = @_;
-    my $list = $obj->range_geometry_get();
-    my @array = Efl::Eina::list2array($list,"EvasRectangle");
-    return @array;
+	my $list = $obj->range_geometry_get();
+	my @array = Efl::Eina::list2array($list,"EvasRectanglePtr");
+	return @array;
+}
+
+sub text_markup_prepend {
+	my ($cur,$text) = @_;
+	return $cur->evas_object_textblock_text_markup_prepend($text);
 }
 
 #our @ISA = qw(EvasObjectPtr);
@@ -69,6 +74,32 @@ Efl::Evas::TextblockCursor
 This module is a perl binding to Evas_Textblock_Cursor.
 
 A Efl::Evas::TextblockCursor is used to manipulate the cursor of an evas textblock.
+
+=head1 SPECIFICS OF THE BINDING
+
+For the following methods, which return an Eina_List, exist a "perl-value"-method:
+
+=over 4
+
+=item $cur->range_formats_get_pv();
+
+=item $cur->range_geometry_get_pv();
+
+=back
+
+Beyond the pure translation of the C-API, there are some shortcuts-methods:
+
+=over 4
+
+=item $cur->text_markup_prepend($text); (for evas_object_textblock_text_markup_prepend($cur,$text);
+
+=item Efl::Evas::TextblockCursor::copy($cur1,$cur2);
+
+=item Efl::Evas::TextblockCursor::compare($cur1,$cur2);
+
+=item Efl::Evas::TextblockCursor::equal($cur1,$cur2);
+
+=back 
 
 =head1 SEE ALSO
 

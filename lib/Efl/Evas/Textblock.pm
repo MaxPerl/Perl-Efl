@@ -49,9 +49,48 @@ sub node_format_list_get_pv {
     return @array;
 }
 
+sub range_delete {
+	my ($textblock,$cur1,$cur2) = @_;
+	return $cur1->range_delete($cur2);
+}
+
+sub visible_range_get {
+	my ($textblock,$cur1,$cur2) = @_;
+	return $cur1->visible_range_get($cur2);
+}
+
 sub range_text_get {
 	my ($textblock,$cur1,$cur2,$format) = @_;
 	return $cur1->range_text_get($cur2,$format);
+}
+
+sub range_formats_get {
+	my ($textblock,$cur1,$cur2) = @_;
+	return $cur1->range_formats_get($cur2);
+}
+
+sub range_formats_get_pv {
+	my ($textblock,$cur1,$cur2) = @_;
+	my $list = $cur1->range_formats_get($cur2);
+	my @array = Efl::Eina::list2array($list,"EvasTextblockNodeFormatPtr");
+	return @array;
+}
+
+sub range_geometry_get {
+	my ($textblock,$cur1,$cur2) = @_;
+	return $cur1->range_geometry_get($cur2);
+}
+
+sub range_geometry_get_pv {
+	my ($textblock,$cur1,$cur2) = @_;
+	my $list = $cur1->range_geometry_get($cur2);
+	my @array = Efl::Eina::list2array($list,"EvasRectanglePtr");
+	return @array;
+}
+
+sub text_markup_prepend {
+	my ($textblock, $cur, $text) = @_;
+	Efl::Evas::Textblock::text_markup_prepend($cur,$text)
 }
 
 # Preloaded methods go here.
@@ -68,6 +107,38 @@ Efl::Evas::Textblock
 This module is a perl binding to the Evas Textblock Object Functions.
 
 It contains functions and methods to create and manipulate textblock objects.
+
+=head1 SPECIFICS OF THE BINDING
+
+For the following method, which returns an Eina_List, exists a "perl-value"-method:
+
+=over 4
+
+=item $textblock->node_format_list_get_pv();
+
+=back
+
+For asthetic reason there are some shortcuts for some TextblockCursorPtr-methods (namely the range methods):
+
+=over 4
+
+=item $textblock->range_delete($cur1,$cur2);
+
+=item $textblock->visible_range_get($cur1,$cur2);
+
+=item $textblock->range_text_get($cur1,$cur2,$format);
+
+=item $textblock->range_formats_get($cur1,$cur2);
+
+=item $textblock->range_formats_get_pv($cur1,$cur2);
+
+=item $textblock->range_geometry_get($cur1,$cur2);
+
+=item $textblock->range_geometry_get_pv($cur1,$cur2);
+
+=item $textblock->text_markup_prepend($cur1,$text); 
+
+=back
 
 =head1 SEE ALSO
 

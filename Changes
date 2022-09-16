@@ -107,3 +107,6 @@ Revision history for Perl extension Efl.
 		therefore item_data_set/data_get functionality might be required?)
 	- Add Emotion multimedia library
 	- Add multimedia example
+	- Add shortcut vor $evas_textblock_cursor->text_markup_prepend()
+	- Fix problems with Eina::list2array()
+	- Add various shortcut-methods and perl-value methods to EvasTextblock and EvasTextblockCursor

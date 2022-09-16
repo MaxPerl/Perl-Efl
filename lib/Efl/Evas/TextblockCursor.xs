@@ -20,6 +20,25 @@ EvasTextblockCursor *
 evas_object_textblock_cursor_new(obj)
 	const EvasTextblock *obj
 
+MODULE = Efl::Evas::TextblockCursor		PACKAGE = Efl::Evas::TextblockCursor PREFIX = evas_textblock_cursor_
+
+void
+evas_textblock_cursor_copy(cur,cur_dest)
+	const EvasTextblockCursor *cur
+	EvasTextblockCursor *cur_dest
+
+int
+evas_textblock_cursor_compare(cur1,cur2)
+	const EvasTextblockCursor *cur1
+	const EvasTextblockCursor *cur2
+
+
+Eina_Bool
+evas_textblock_cursor_equal(obj,cur)
+	const EvasTextblockCursor *obj
+	const EvasTextblockCursor *cur
+	
+
 MODULE = Efl::Evas::TextblockCursor		PACKAGE = EvasTextblockCursorPtr     PREFIX = evas_textblock_cursor_
 
 void
