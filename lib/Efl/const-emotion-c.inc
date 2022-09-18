@@ -356,8 +356,8 @@ static int
 constant_28 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
-     EMOTION_VIS_LIBVISUAL_CORONA EMOTION_VIS_LIBVISUAL_JAKDAW
-     EMOTION_VIS_LIBVISUAL_PLASMA */
+     EMOTION_META_INFO_TRACK_YEAR EMOTION_VIS_LIBVISUAL_CORONA
+     EMOTION_VIS_LIBVISUAL_JAKDAW EMOTION_VIS_LIBVISUAL_PLASMA */
   /* Offset 22 gives the best switch position.  */
   switch (name[22]) {
   case 'C':
@@ -371,6 +371,13 @@ constant_28 (pTHX_ const char *name, IV *iv_return) {
     if (memEQ(name, "EMOTION_VIS_LIBVISUAL_JAKDAW", 28)) {
     /*                                     ^            */
       *iv_return = EMOTION_VIS_LIBVISUAL_JAKDAW;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'K':
+    if (memEQ(name, "EMOTION_META_INFO_TRACK_YEAR", 28)) {
+    /*                                     ^            */
+      *iv_return = EMOTION_META_INFO_TRACK_YEAR;
       return PERL_constant_ISIV;
     }
     break;
@@ -389,43 +396,106 @@ static int
 constant_29 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
-     EMOTION_ARTWORK_PREVIEW_IMAGE EMOTION_VIS_LIBVISUAL_G_FORCE
+     EMOTION_ARTWORK_PREVIEW_IMAGE EMOTION_META_INFO_TRACK_ALBUM
+     EMOTION_META_INFO_TRACK_COUNT EMOTION_META_INFO_TRACK_GENRE
+     EMOTION_META_INFO_TRACK_TITLE EMOTION_VIS_LIBVISUAL_G_FORCE
      EMOTION_VIS_LIBVISUAL_MADSPIN EMOTION_VIS_LIBVISUAL_NEBULUS
      EMOTION_VIS_LIBVISUAL_OINKSIE */
-  /* Offset 25 gives the best switch position.  */
-  switch (name[25]) {
-  case 'K':
-    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_OINKSIE", 29)) {
-    /*                                        ^          */
-      *iv_return = EMOTION_VIS_LIBVISUAL_OINKSIE;
+  /* Offset 24 gives the best switch position.  */
+  switch (name[24]) {
+  case 'A':
+    if (memEQ(name, "EMOTION_META_INFO_TRACK_ALBUM", 29)) {
+    /*                                       ^           */
+      *iv_return = EMOTION_META_INFO_TRACK_ALBUM;
       return PERL_constant_ISIV;
     }
     break;
-  case 'M':
-    if (memEQ(name, "EMOTION_ARTWORK_PREVIEW_IMAGE", 29)) {
-    /*                                        ^          */
-      *iv_return = EMOTION_ARTWORK_PREVIEW_IMAGE;
+  case 'B':
+    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_NEBULUS", 29)) {
+    /*                                       ^           */
+      *iv_return = EMOTION_VIS_LIBVISUAL_NEBULUS;
       return PERL_constant_ISIV;
     }
     break;
-  case 'O':
-    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_G_FORCE", 29)) {
-    /*                                        ^          */
-      *iv_return = EMOTION_VIS_LIBVISUAL_G_FORCE;
+  case 'C':
+    if (memEQ(name, "EMOTION_META_INFO_TRACK_COUNT", 29)) {
+    /*                                       ^           */
+      *iv_return = EMOTION_META_INFO_TRACK_COUNT;
       return PERL_constant_ISIV;
     }
     break;
-  case 'S':
+  case 'D':
     if (memEQ(name, "EMOTION_VIS_LIBVISUAL_MADSPIN", 29)) {
-    /*                                        ^          */
+    /*                                       ^           */
       *iv_return = EMOTION_VIS_LIBVISUAL_MADSPIN;
       return PERL_constant_ISIV;
     }
     break;
-  case 'U':
-    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_NEBULUS", 29)) {
-    /*                                        ^          */
-      *iv_return = EMOTION_VIS_LIBVISUAL_NEBULUS;
+  case 'F':
+    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_G_FORCE", 29)) {
+    /*                                       ^           */
+      *iv_return = EMOTION_VIS_LIBVISUAL_G_FORCE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'G':
+    if (memEQ(name, "EMOTION_META_INFO_TRACK_GENRE", 29)) {
+    /*                                       ^           */
+      *iv_return = EMOTION_META_INFO_TRACK_GENRE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'I':
+    if (memEQ(name, "EMOTION_ARTWORK_PREVIEW_IMAGE", 29)) {
+    /*                                       ^           */
+      *iv_return = EMOTION_ARTWORK_PREVIEW_IMAGE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'N':
+    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_OINKSIE", 29)) {
+    /*                                       ^           */
+      *iv_return = EMOTION_VIS_LIBVISUAL_OINKSIE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'T':
+    if (memEQ(name, "EMOTION_META_INFO_TRACK_TITLE", 29)) {
+    /*                                       ^           */
+      *iv_return = EMOTION_META_INFO_TRACK_TITLE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  }
+  return PERL_constant_NOTFOUND;
+}
+
+static int
+constant_30 (pTHX_ const char *name, IV *iv_return) {
+  /* When generated this function returned values for the list of names given
+     here.  However, subsequent manual editing may have added or removed some.
+     EMOTION_META_INFO_TRACK_ARTIST EMOTION_VIS_LIBVISUAL_INFINITE
+     EMOTION_VIS_LIBVISUAL_LV_SCOPE */
+  /* Offset 22 gives the best switch position.  */
+  switch (name[22]) {
+  case 'I':
+    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_INFINITE", 30)) {
+    /*                                     ^              */
+      *iv_return = EMOTION_VIS_LIBVISUAL_INFINITE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'K':
+    if (memEQ(name, "EMOTION_META_INFO_TRACK_ARTIST", 30)) {
+    /*                                     ^              */
+      *iv_return = EMOTION_META_INFO_TRACK_ARTIST;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'L':
+    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_LV_SCOPE", 30)) {
+    /*                                     ^              */
+      *iv_return = EMOTION_VIS_LIBVISUAL_LV_SCOPE;
       return PERL_constant_ISIV;
     }
     break;
@@ -437,35 +507,50 @@ static int
 constant_31 (pTHX_ const char *name, IV *iv_return) {
   /* When generated this function returned values for the list of names given
      here.  However, subsequent manual editing may have added or removed some.
+     EMOTION_META_INFO_TRACK_COMMENT EMOTION_META_INFO_TRACK_DISC_ID
      EMOTION_VIS_LIBVISUAL_BUMPSCOPE EMOTION_VIS_LIBVISUAL_GDKPIXBUF
      EMOTION_VIS_LIBVISUAL_LV_FLOWER EMOTION_VIS_LIBVISUAL_LV_GLTEST */
-  /* Offset 30 gives the best switch position.  */
-  switch (name[30]) {
+  /* Offset 29 gives the best switch position.  */
+  switch (name[29]) {
   case 'E':
-    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_BUMPSCOP", 30)) {
-    /*                                             E      */
-      *iv_return = EMOTION_VIS_LIBVISUAL_BUMPSCOPE;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'F':
-    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_GDKPIXBU", 30)) {
-    /*                                             F      */
-      *iv_return = EMOTION_VIS_LIBVISUAL_GDKPIXBUF;
-      return PERL_constant_ISIV;
-    }
-    break;
-  case 'R':
-    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_LV_FLOWE", 30)) {
-    /*                                             R      */
+    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_LV_FLOWER", 31)) {
+    /*                                            ^        */
       *iv_return = EMOTION_VIS_LIBVISUAL_LV_FLOWER;
       return PERL_constant_ISIV;
     }
     break;
-  case 'T':
-    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_LV_GLTES", 30)) {
-    /*                                             T      */
+  case 'I':
+    if (memEQ(name, "EMOTION_META_INFO_TRACK_DISC_ID", 31)) {
+    /*                                            ^        */
+      *iv_return = EMOTION_META_INFO_TRACK_DISC_ID;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'N':
+    if (memEQ(name, "EMOTION_META_INFO_TRACK_COMMENT", 31)) {
+    /*                                            ^        */
+      *iv_return = EMOTION_META_INFO_TRACK_COMMENT;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'P':
+    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_BUMPSCOPE", 31)) {
+    /*                                            ^        */
+      *iv_return = EMOTION_VIS_LIBVISUAL_BUMPSCOPE;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'S':
+    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_LV_GLTEST", 31)) {
+    /*                                            ^        */
       *iv_return = EMOTION_VIS_LIBVISUAL_LV_GLTEST;
+      return PERL_constant_ISIV;
+    }
+    break;
+  case 'U':
+    if (memEQ(name, "EMOTION_VIS_LIBVISUAL_GDKPIXBUF", 31)) {
+    /*                                            ^        */
+      *iv_return = EMOTION_VIS_LIBVISUAL_GDKPIXBUF;
       return PERL_constant_ISIV;
     }
     break;
@@ -529,6 +614,14 @@ my @names = (qw(),
             {name=>"EMOTION_EVENT_SELECT", type=>"IV", macro=>"1"},
             {name=>"EMOTION_EVENT_UP", type=>"IV", macro=>"1"},
             {name=>"EMOTION_HIBERNATE", type=>"IV", macro=>"1"},
+            {name=>"EMOTION_META_INFO_TRACK_ALBUM", type=>"IV", macro=>"1"},
+            {name=>"EMOTION_META_INFO_TRACK_ARTIST", type=>"IV", macro=>"1"},
+            {name=>"EMOTION_META_INFO_TRACK_COMMENT", type=>"IV", macro=>"1"},
+            {name=>"EMOTION_META_INFO_TRACK_COUNT", type=>"IV", macro=>"1"},
+            {name=>"EMOTION_META_INFO_TRACK_DISC_ID", type=>"IV", macro=>"1"},
+            {name=>"EMOTION_META_INFO_TRACK_GENRE", type=>"IV", macro=>"1"},
+            {name=>"EMOTION_META_INFO_TRACK_TITLE", type=>"IV", macro=>"1"},
+            {name=>"EMOTION_META_INFO_TRACK_YEAR", type=>"IV", macro=>"1"},
             {name=>"EMOTION_SLEEP", type=>"IV", macro=>"1"},
             {name=>"EMOTION_VIS_GOOM", type=>"IV", macro=>"1"},
             {name=>"EMOTION_VIS_LAST", type=>"IV", macro=>"1"},
@@ -638,25 +731,7 @@ __END__
     return constant_29 (aTHX_ name, iv_return);
     break;
   case 30:
-    /* Names all of length 30.  */
-    /* EMOTION_VIS_LIBVISUAL_INFINITE EMOTION_VIS_LIBVISUAL_LV_SCOPE */
-    /* Offset 22 gives the best switch position.  */
-    switch (name[22]) {
-    case 'I':
-      if (memEQ(name, "EMOTION_VIS_LIBVISUAL_INFINITE", 30)) {
-      /*                                     ^              */
-        *iv_return = EMOTION_VIS_LIBVISUAL_INFINITE;
-        return PERL_constant_ISIV;
-      }
-      break;
-    case 'L':
-      if (memEQ(name, "EMOTION_VIS_LIBVISUAL_LV_SCOPE", 30)) {
-      /*                                     ^              */
-        *iv_return = EMOTION_VIS_LIBVISUAL_LV_SCOPE;
-        return PERL_constant_ISIV;
-      }
-      break;
-    }
+    return constant_30 (aTHX_ name, iv_return);
     break;
   case 31:
     return constant_31 (aTHX_ name, iv_return);

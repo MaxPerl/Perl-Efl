@@ -194,7 +194,7 @@ evas_textblock_cursor_range_geometry_get(cur1,cur2)
 	const EvasTextblockCursor *cur2
 
 
-# Eina_Iterator *
+# EinaIterator *
 # evas_textblock_cursor_range_simple_geometry_get(cur1,cur2)
 #	const EvasTextblockCursor *cur1
 #	const EvasTextblockCursor *cur2

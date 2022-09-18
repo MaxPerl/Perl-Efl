@@ -609,6 +609,15 @@ my @names_emotion = (
 	{name => 'EMOTION_DEEP_SLEEP', 'macro' => 1},
 	{name => 'EMOTION_HIBERNATE', 'macro' => 1},
 	#
+	{name => 'EMOTION_META_INFO_TRACK_TITLE', 'macro' => 1},
+	{name => 'EMOTION_META_INFO_TRACK_ARTIST', 'macro' => 1},
+	{name => 'EMOTION_META_INFO_TRACK_ALBUM', 'macro' => 1},
+	{name => 'EMOTION_META_INFO_TRACK_YEAR', 'macro' => 1},
+	{name => 'EMOTION_META_INFO_TRACK_GENRE', 'macro' => 1},
+	{name => 'EMOTION_META_INFO_TRACK_COMMENT', 'macro' => 1},
+	{name => 'EMOTION_META_INFO_TRACK_DISC_ID', 'macro' => 1},
+	{name => 'EMOTION_META_INFO_TRACK_COUNT', 'macro' => 1},
+	#
 	{name => 'EMOTION_ARTWORK_IMAGE', 'macro' => 1},
 	{name => 'EMOTION_ARTWORK_PREVIEW_IMAGE', 'macro' => 1},
 	#

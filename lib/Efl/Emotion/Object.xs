@@ -278,9 +278,10 @@ emotion_object_title_get(obj)
 	EmotionObject *obj
 
 
-#const char *
-#emotion_object_meta_info_get(obj)
-#	EmotionObject *obj
+const char *
+emotion_object_meta_info_get(obj, meta)
+	EmotionObject *obj
+	int meta
 
 
 void

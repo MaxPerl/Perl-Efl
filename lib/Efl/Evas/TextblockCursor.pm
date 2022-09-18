@@ -47,8 +47,8 @@ sub range_formats_get_pv {
 }
 
 sub range_geometry_get_pv {
-	my ($obj) = @_;
-	my $list = $obj->range_geometry_get();
+	my ($obj,$cp2) = @_;
+	my $list = $obj->range_geometry_get($cp2);
 	my @array = Efl::Eina::list2array($list,"EvasRectanglePtr");
 	return @array;
 }

@@ -86,6 +86,10 @@ elm_toolbar_last_item_get(obj)
 	const ElmToolbar *obj
 
 
+# EinaIterator*
+# elm_toolbar_items_get(obj)
+#	const ElmToolbar *obj
+
 void
 elm_toolbar_homogeneous_set(obj,homogeneous)
 	ElmToolbar *obj
