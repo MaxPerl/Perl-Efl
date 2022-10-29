@@ -112,5 +112,7 @@ Revision history for Perl extension pEFL.
 	- Add various shortcut-methods and perl-value methods to EvasTextblock and EvasTextblockCursor
 	- Add perl-style constructors to pEFL::Ecore::Evas
 	- Add several missing methods to pEFL::Evas::Object
-0.70
+0.70 Sat Oct 29 15:30:00 2022
+    - Release on CPAN
 	- Rename Efl distribution to pEFL to avoid a name conflict with old EFL distribution
+	- Add pEFL::Evas::Canvas::font_path_list_pv and pEFL::Evas::Canvas::font_available_list_pv

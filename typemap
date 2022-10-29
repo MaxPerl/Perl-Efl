@@ -1,26 +1,26 @@
-char *							  T_PV_OR_NULL
+char *								T_PV_OR_NULL
 const char *						T_PV_OR_NULL
 
-EflTime *						   T_EVAS_OBJECT
+EflTime *						  	T_EVAS_OBJECT
 const EflTime * 					T_EVAS_OBJECT
 
-Eina_Bool						   T_IV
+Eina_Bool							T_IV
 Eina_Bool * 						T_PTR
 Elm_Text_Format 					T_IV
-Elm_Ctxpopup_Direction			  T_IV
+Elm_Ctxpopup_Direction				T_IV
 Elm_Scroller_Policy 				T_IV
 Evas_BiDi_Direction 				T_IV
 Evas_Aspect_Control 				T_IV
 
-ElmActionslider *				   T_EVAS_OBJECT
+ElmActionslider *				  	T_EVAS_OBJECT
 const ElmActionslider * 			T_EVAS_OBJECT
 ElmWin *							T_EVAS_OBJECT
-const ElmWin *					  T_EVAS_OBJECT
+const ElmWin *						T_EVAS_OBJECT
 ElmBg * 							T_EVAS_OBJECT
-const ElmBg *					   T_EVAS_OBJECT
+const ElmBg *						T_EVAS_OBJECT
 ElmBubble * 						T_EVAS_OBJECT
-const ElmBubble *				   T_EVAS_OBJECT
-ElmCalendar *					   T_EVAS_OBJECT
+const ElmBubble *					T_EVAS_OBJECT
+ElmCalendar *						T_EVAS_OBJECT
 const ElmCalendar * 				T_EVAS_OBJECT
 # TODO: Make a T_EVAS_OBJECT of Efl_Time
 Efl_Time *							T_PTR
@@ -110,9 +110,9 @@ ElmVideo *							T_EVAS_OBJECT
 const ElmVideo *					T_EVAS_OBJECT
 
 # ElmConfig
-ElmTextClass *			T_PTROBJ
-ElmFontOverlay *		T_PTROBJ
-ElmColorClass * 		T_PTROBJ
+ElmTextClass *						T_PTROBJ
+ElmFontOverlay *					T_PTROBJ
+ElmColorClass * 					T_PTROBJ
 
 # Containers
 ElmGrid *							T_EVAS_OBJECT
@@ -132,10 +132,10 @@ const ElmNaviframeItem *			T_EVAS_OBJECT
 #####################
 # EMOTION
 #####################
-EmotionObject * 			T_EVAS_OBJECT
-const EmotionObject *			   T_EVAS_OBJECT
-EmotionWebcam * 			T_EVAS_OBJECT
-const EmotionWebcam *			   T_EVAS_OBJECT
+EmotionObject * 					T_EVAS_OBJECT
+const EmotionObject *				T_EVAS_OBJECT
+EmotionWebcam * 					T_EVAS_OBJECT
+const EmotionWebcam *				T_EVAS_OBJECT
 
 #####################
 # EVAS
@@ -176,7 +176,7 @@ EvasEventMouseMove *				T_PTROBJ
 EvasEventMouseWheel *				T_PTROBJ
 EvasEventKeyDown *					T_PTROBJ
 EvasEventKeyUp *					T_PTROBJ
-EvasEventHold * 				T_PTROBJ
+EvasEventHold * 					T_PTROBJ
 
 ####################
 # ECORE

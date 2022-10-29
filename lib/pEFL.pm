@@ -21,10 +21,10 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 our @EXPORT = qw(
-    
+	
 );
 
-our $VERSION = '0.69';
+our $VERSION = '0.7';
 
 require XSLoader;
 XSLoader::load('pEFL', $VERSION);
@@ -80,8 +80,8 @@ pEFL - Perl bindings for the Enlightenment Foundation Libraries
 	pEFL::Elm::shutdown();
 
 	sub on_done {
-    	print "Exiting \n";
-    	pEFL::Elm::exit();
+		print "Exiting \n";
+		pEFL::Elm::exit();
 	}
 
 =head1 DESCRIPTION

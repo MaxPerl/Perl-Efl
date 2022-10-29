@@ -229,7 +229,7 @@ evas_focus_get(obj)
 	const EvasCanvas *obj
 
 
-Eina_List *
+EinaList *
 evas_font_available_list(obj)
 	const EvasCanvas *obj
 
@@ -283,7 +283,7 @@ evas_font_path_clear(obj)
 	EvasCanvas *obj
 
 
-Eina_List *
+EinaList *
 evas_font_path_list(obj)
 	const EvasCanvas *obj
 
