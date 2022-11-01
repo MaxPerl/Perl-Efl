@@ -116,7 +116,7 @@ Revision history for Perl extension pEFL.
 	- Release on CPAN
 	- Rename Efl distribution to pEFL to avoid a name conflict with old EFL distribution
 	- Add pEFL::Evas::Canvas::font_path_list_pv and pEFL::Evas::Canvas::font_available_list_pv
-0.71
-	- pod improvements
-	- fix pEfl::Evas::Textblock->range_geometry_get_pv and add pEFL::Evas::Textblock::Rectangle
-	- improve Makefile.PL (add ExtUtils::PkgConf as prereq and add META_MERGE)
+0.71 Tue Nov 01 13:35:00 2022
+	- POD corrections
+	- Fix pEfl::Evas::Textblock->range_geometry_get_pv and add pEFL::Evas::Textblock::Rectangle
+	- Improve Makefile.PL (add ExtUtils::PkgConf as prereq and add META_MERGE)
