@@ -4,14 +4,14 @@ Revision history for Perl extension pEFL.
 	- first published version
 	- this is still a work-in-progress version, even if the Elementary part seems to be usable
 0.61 Thu Jan 06 09:21:00 2022
-    - Add pEFL::ev_info2obj()
-    - Add the following Event_Info structs to use with pEFL::ev_info2obj:
-        - Elm_Entry_Anchor_Info (aka pEFL::Elm::EntryAnchorInfo)
-        - Elm_Image_Progress (aka pEFL::Elm::ImageProgress)
-        - Elm_Panel_Scroll_Info (aka pEFL::Elm::PanelScrollInfo)
-    - Add pEFL::Elm::ColorselectorPaletteItem
-    - Add example for colorselector.pl
-    - Add pEFL::Evas::Coord::Rectangle (= c struct Evas_Coord_Rectangle)
+	- Add pEFL::ev_info2obj()
+	- Add the following Event_Info structs to use with pEFL::ev_info2obj:
+		- Elm_Entry_Anchor_Info (aka pEFL::Elm::EntryAnchorInfo)
+		- Elm_Image_Progress (aka pEFL::Elm::ImageProgress)
+		- Elm_Panel_Scroll_Info (aka pEFL::Elm::PanelScrollInfo)
+	- Add pEFL::Elm::ColorselectorPaletteItem
+	- Add example for colorselector.pl
+	- Add pEFL::Evas::Coord::Rectangle (= c struct Evas_Coord_Rectangle)
 0.62 Fri Jan 21 00:29::00 2022
 	- Fix examples (use the right CONSTANTS)
 	- Fix pEFL::Elm::List->add($parent), pEFL::Elm::Panes->add($parent) and pEFL::Elm::Radio->add($parent)
@@ -113,6 +113,9 @@ Revision history for Perl extension pEFL.
 	- Add perl-style constructors to pEFL::Ecore::Evas
 	- Add several missing methods to pEFL::Evas::Object
 0.70 Sat Oct 29 15:30:00 2022
-    - Release on CPAN
+	- Release on CPAN
 	- Rename Efl distribution to pEFL to avoid a name conflict with old EFL distribution
 	- Add pEFL::Evas::Canvas::font_path_list_pv and pEFL::Evas::Canvas::font_available_list_pv
+0.71
+	- pod improvements
+	- fix pEfl::Evas::Textblock->range_geometry_get_pv and add pEFL::Evas::Textblock::Rectangle

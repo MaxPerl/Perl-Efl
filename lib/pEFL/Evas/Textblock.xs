@@ -14,6 +14,7 @@ typedef Evas_Textblock_Style EvasTextblockStyle;
 typedef Evas_Textblock_Node_Format EvasTextblockNodeFormat;
 typedef Evas_Textblock_Cursor EvasTextblockCursor;
 typedef Eina_List EinaList;
+typedef Evas_Textblock_Rectangle EvasTextblockRectangle;
 
 
 MODULE = pEFL::Evas::Textblock		PACKAGE = pEFL::Evas::Textblock
@@ -276,3 +277,40 @@ evas_object_textblock_obstacle_del(obj,eo_obs)
 void
 evas_object_textblock_obstacles_update(obj)
 	EvasTextblock *obj
+	
+MODULE = pEFL::Evas::Textblock		PACKAGE = EvasTextblockRectanglePtr
+
+Evas_Coord
+x(rect)
+    EvasTextblockRectangle *rect
+CODE:
+    RETVAL = rect->x;
+OUTPUT:
+    RETVAL
+  
+  
+Evas_Coord
+y(rect)
+    EvasTextblockRectangle *rect
+CODE:
+    RETVAL = rect->y;
+OUTPUT:
+    RETVAL
+    
+
+Evas_Coord
+w(rect)
+    EvasTextblockRectangle *rect
+CODE:
+    RETVAL = rect->w;
+OUTPUT:
+    RETVAL
+    
+    
+Evas_Coord
+h(rect)
+    EvasTextblockRectangle *rect
+CODE:
+    RETVAL = rect->h;
+OUTPUT:
+    RETVAL

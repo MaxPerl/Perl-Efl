@@ -31,14 +31,14 @@ require XSLoader;
 XSLoader::load('pEFL::Elm::Entry');
 
 sub add {
-    my ($class,$parent) = @_;
-    my $widget = elm_entry_add($parent);
-    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup, $widget);
-    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_markup_filters, $widget);
-    # For context menu items we have to call cleanup_genitems!!!
-    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_genitems, $widget);
-    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_signals, $widget);
-    return $widget;
+	my ($class,$parent) = @_;
+	my $widget = elm_entry_add($parent);
+	$widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup, $widget);
+	$widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_markup_filters, $widget);
+	# For context menu items we have to call cleanup_genitems!!!
+	$widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_genitems, $widget);
+	$widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_signals, $widget);
+	return $widget;
 }
 
 *new = \&add;
@@ -48,57 +48,57 @@ package ElmEntryPtr;
 our @ISA = qw(ElmScrollerPtr ElmObjectPtr EvasObjectPtr);
 
 sub markup_filter_prepend {
-    my ($obj, $func, $data) = @_;
-    
-    pEFL::PLSide::register_markup_filter_cb( $obj, $func, $data);
-    
-    if ($func eq "limit_size") {
-        $data->{max_char_count} = $data->{max_char_count} || 0;
-        $data->{max_byte_count} = $data->{max_byte_count} || 0;
-        $obj->_elm_entry_markup_filter_limit_size_prepend($func,$data);
-    }
-    elsif ($func eq "accept_set") {
-        $data->{accepted} = $data->{accepted} || undef;
-        $data->{rejected} = $data->{rejected} || undef;
-        $obj->_elm_entry_markup_filter_accept_set_prepend($func,$data);
-    }
-    else {
-        $obj->_elm_entry_markup_filter_prepend($func);
-    }
-    
+	my ($obj, $func, $data) = @_;
+	
+	pEFL::PLSide::register_markup_filter_cb( $obj, $func, $data);
+	
+	if ($func eq "limit_size") {
+		$data->{max_char_count} = $data->{max_char_count} || 0;
+		$data->{max_byte_count} = $data->{max_byte_count} || 0;
+		$obj->_elm_entry_markup_filter_limit_size_prepend($func,$data);
+	}
+	elsif ($func eq "accept_set") {
+		$data->{accepted} = $data->{accepted} || undef;
+		$data->{rejected} = $data->{rejected} || undef;
+		$obj->_elm_entry_markup_filter_accept_set_prepend($func,$data);
+	}
+	else {
+		$obj->_elm_entry_markup_filter_prepend($func);
+	}
+	
 }
 
 sub markup_filter_append {
-    my ($obj, $func, $data) = @_;
-    pEFL::PLSide::register_markup_filter_cb( $obj, $func, $data);
-    
-    if ($func eq "limit_size") {
-        $data->{max_char_count} = $data->{max_char_count} || 0;
-        $data->{max_byte_count} = $data->{max_byte_count} || 0;
-        $obj->_elm_entry_markup_filter_limit_size_append($func,$data);
-    }
-    elsif ($func eq "accept_set") {
-        $data->{accepted} = $data->{accepted} || undef;
-        $data->{rejected} = $data->{rejected} || undef;
-        $obj->_elm_entry_markup_filter_accept_set_append($func,$data);
-    }
-    else {
-        $obj->_elm_entry_markup_filter_append($func);
-    }
+	my ($obj, $func, $data) = @_;
+	pEFL::PLSide::register_markup_filter_cb( $obj, $func, $data);
+	
+	if ($func eq "limit_size") {
+		$data->{max_char_count} = $data->{max_char_count} || 0;
+		$data->{max_byte_count} = $data->{max_byte_count} || 0;
+		$obj->_elm_entry_markup_filter_limit_size_append($func,$data);
+	}
+	elsif ($func eq "accept_set") {
+		$data->{accepted} = $data->{accepted} || undef;
+		$data->{rejected} = $data->{rejected} || undef;
+		$obj->_elm_entry_markup_filter_accept_set_append($func,$data);
+	}
+	else {
+		$obj->_elm_entry_markup_filter_append($func);
+	}
 }
 
 sub markup_filter_remove{
-    my ($obj, $func) = @_;
-    
-    my $objaddr = $$obj;
-    my $funcname = pEFL::PLSide::get_func_name($func);
-    
-    my $cstructaddr = $pEFL::PLSide::MarkupFilters_Cbs{$objaddr}{$funcname}{cstructaddr};
-    
-    my $success = $obj->_elm_entry_markup_filter_remove($func,$cstructaddr);
-    
-    # Delete the callback on the Perl side
-    delete($pEFL::PLSide::MarkupFilters_Cbs{$objaddr}{$funcname});
+	my ($obj, $func) = @_;
+	
+	my $objaddr = $$obj;
+	my $funcname = pEFL::PLSide::get_func_name($func);
+	
+	my $cstructaddr = $pEFL::PLSide::MarkupFilters_Cbs{$objaddr}{$funcname}{cstructaddr};
+	
+	my $success = $obj->_elm_entry_markup_filter_remove($func,$cstructaddr);
+	
+	# Delete the callback on the Perl side
+	delete($pEFL::PLSide::MarkupFilters_Cbs{$objaddr}{$funcname});
 }
 
 sub context_menu_item_add {
@@ -167,9 +167,9 @@ pEFL::Elm:Entry
   pEFL::Elm::shutdown();
 
   sub filter_user {
-      my ($data, $entry, $text) = @_;
-      print "TEXT $text\n";
-      return "B";
+	  my ($data, $entry, $text) = @_;
+	  print "TEXT $text\n";
+	  return "B";
   }
 
 =head1 DESCRIPTION
@@ -188,23 +188,23 @@ None by default.
 
 =head1 LIMITATIONS
 
-The following functions are missing: 
+The following functions are at the moment missing: 
 
 =over 4
 
-=item elm_entry_imf_context_get()
+=item * elm_entry_imf_context_get()
 
-=item elm_entry_item_provider_prepend()
+=item * elm_entry_item_provider_prepend()
 
-=item elm_entry_item_provider_append()
+=item * elm_entry_item_provider_append()
 
-=item elm_entry_item_provider_remove()
+=item * elm_entry_item_provider_remove()
 
-=item elm_entry_input_panel_imdata_set()
+=item * elm_entry_input_panel_imdata_set()
 
-=item elm_entry_input_panel_imdata_get()
+=item * elm_entry_input_panel_imdata_get()
 
-=item elm_entry_context_menu_item_add()
+=item * elm_entry_context_menu_item_add()
 
 =back
 

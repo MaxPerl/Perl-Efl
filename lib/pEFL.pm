@@ -108,47 +108,53 @@ The pEFL modules gives you the following functions:
 
 =over 4
 
-=item pEFL::ev_info2s($ev_info) - if event info is a string, this function converts the void pointer to a perl string
+=item pEFL::ev_info2s($ev_info) 
 
-=item pEFL::ev_info2obj($ev_info, "pEFL::Evas::Event::MouseUp") - if event info is a c stuct, this function converts the void pointer to a perl scalar, that is blessed to the given class. The perl class gives the necessary methods to get the members of the struc. At the moment the following c structs are (among others) supported:
+if event info is a string, this function converts the void pointer to a perl string
+
+=item pEFL::ev_info2obj($ev_info, "pEFL::Evas::Event::MouseUp")
+
+if event info is a c stuct, this function converts the void pointer to a perl scalar, that is blessed to the given class. The perl class gives the necessary methods to get the members of the struc. At the moment the following c structs are (among others) supported:
 
 =over 8
 
-=item Elm_Entry_Anchor_Info (aka pEFL::Elm::EntryAnchorInfo)
+=item * Elm_Entry_Anchor_Info (aka pEFL::Elm::EntryAnchorInfo)
 
-=item Elm_Entry_Change_Info (aka pEFL::Elm::EntryChangeInfo)
+=item * Elm_Entry_Change_Info (aka pEFL::Elm::EntryChangeInfo)
 
-=item Elm_Image_Progress (aka pEFL::Elm::ImageProgress)
+=item * Elm_Image_Progress (aka pEFL::Elm::ImageProgress)
 
-=item Elm_Panel_Scroll_Info (aka pEFL::Elm::PanelScrollInfo)
+=item * Elm_Panel_Scroll_Info (aka pEFL::Elm::PanelScrollInfo)
 
-=item Evas_Coord_Rectangle (aka pEFL::Evas::Coord::Rectangle)
+=item * Evas_Coord_Rectangle (aka pEFL::Evas::Coord::Rectangle)
 
-=item Evas_Event_Mouse_Down (aka pEFL::Evas::Event::MouseDown)
+=item * Evas_Event_Mouse_Down (aka pEFL::Evas::Event::MouseDown)
 
-=item Evas_Event_Mouse_Up (aka pEFL::Evas::Event::MouseUp)
+=item * Evas_Event_Mouse_Up (aka pEFL::Evas::Event::MouseUp)
 
-=item Evas_Event_Mouse_In (aka pEFL::Evas::Event::MouseIn)
+=item * Evas_Event_Mouse_In (aka pEFL::Evas::Event::MouseIn)
 
-=item Evas_Event_Mouse_Out (aka pEFL::Evas::Event::MouseOut)
+=item * Evas_Event_Mouse_Out (aka pEFL::Evas::Event::MouseOut)
 
-=item Evas_Event_Mouse_Move (aka pEFL::Evas::Event::MouseMove)
+=item * Evas_Event_Mouse_Move (aka pEFL::Evas::Event::MouseMove)
 
-=item Evas_Event_Mouse_Wheel (aka pEFL::Evas::Event::MouseWheel)
+=item * Evas_Event_Mouse_Wheel (aka pEFL::Evas::Event::MouseWheel)
 
-=item Ecore_Event_Key (aka pEFL::Ecore::Event::Key)
+=item * Ecore_Event_Key (aka pEFL::Ecore::Event::Key)
 
-=item Ecore_Event_MouseButton (aka pEFL::Ecore::Event::MouseButton)
+=item * Ecore_Event_MouseButton (aka pEFL::Ecore::Event::MouseButton)
 
-=item Ecore_Event_MouseMove (aka pEFL::Ecore::Event::MouseMove)
+=item * Ecore_Event_MouseMove (aka pEFL::Ecore::Event::MouseMove)
 
-=item Ecore_Event_MouseWheel (aka pEFL::Ecore::Event::MouseWheel)
+=item * Ecore_Event_MouseWheel (aka pEFL::Ecore::Event::MouseWheel)
 
-=item Ecore_Event_Signal_Exit (aka pEFL::Ecore::Event::SignalExit)
+=item * Ecore_Event_Signal_Exit (aka pEFL::Ecore::Event::SignalExit)
 
-=item Ecore_Event_Signal_Realtime (aka pEFL::Ecore::Event::SignalRealtime)
+=item * Ecore_Event_Signal_Realtime (aka pEFL::Ecore::Event::SignalRealtime)
 
-=item Ecore_Event_Signal_User (aka pEFL::Ecore::Event::SignalUser)
+=item * Ecore_Event_Signal_User (aka pEFL::Ecore::Event::SignalUser)
+
+=item * Evas_Textblock_Rectangle (aka pEFL::Evas::TextblockRectangle)
 
 =back
 
@@ -164,10 +170,9 @@ The perl binding is in an early development state. So things may change in the f
 
 If you miss something or find issues, please report it to github (see below). 
 
-=head1 WHY pEFL
+=head1 WHY THE NAME "pEFL"
 
-Originally the name of the distribution was Efl. Unfortunately there was a conflict with the existing distribution EFL which isn't maintained any more and can't be compiled with newer versions of efl. Therefore the name pEFL was 
-chosen whereby the "p" stands for "perl". 
+Originally the name of the distribution was Efl. Unfortunately there was a conflict with the existing distribution EFL which isn't maintained any more and can't be compiled with newer versions of efl. Therefore the name pEFL was chosen whereby the "p" stands for "perl". 
 
 =head2 EXPORT
 
@@ -177,7 +182,7 @@ None by default.
 
 L<https://www.enlightenment.org/docs/start>
 
-L<https://github.com/MaxPerl/Perl-pEFL>
+L<https://github.com/MaxPerl/Perl-EFL>
 
 =head1 AUTHOR
 

@@ -30,11 +30,11 @@ require XSLoader;
 XSLoader::load('pEFL::Elm::Glview');
 
 sub add {
-    my ($class,$parent) = @_;
-    my $widget = elm_glview_add($parent);
-    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup, $widget);
-    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_signals, $widget);
-    return $widget;
+	my ($class,$parent) = @_;
+	my $widget = elm_glview_add($parent);
+	$widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup, $widget);
+	$widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_signals, $widget);
+	return $widget;
 }
 
 *new = \&add;
@@ -77,7 +77,7 @@ https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Glview.html
 
 =head1 LIMITATIONS
 
-Note: This is not really usable yet. Too much things are missing (elm_glview_init|del|resize|..._func_set, elm_glview_gl_api_get, elm_glview_evas_gl_get etc.) missing:-(
+Note: This is not really usable yet. Too much things are missing (elm_glview_init|del|resize|..._func_set, elm_glview_gl_api_get, elm_glview_evas_gl_get etc.) :-(
 
 =head1 AUTHOR
 

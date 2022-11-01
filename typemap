@@ -1,7 +1,7 @@
 char *								T_PV_OR_NULL
 const char *						T_PV_OR_NULL
 
-EflTime *						  	T_EVAS_OBJECT
+EflTime *							T_EVAS_OBJECT
 const EflTime * 					T_EVAS_OBJECT
 
 Eina_Bool							T_IV
@@ -12,7 +12,7 @@ Elm_Scroller_Policy 				T_IV
 Evas_BiDi_Direction 				T_IV
 Evas_Aspect_Control 				T_IV
 
-ElmActionslider *				  	T_EVAS_OBJECT
+ElmActionslider *					T_EVAS_OBJECT
 const ElmActionslider * 			T_EVAS_OBJECT
 ElmWin *							T_EVAS_OBJECT
 const ElmWin *						T_EVAS_OBJECT
@@ -160,6 +160,7 @@ EvasTextblockNodeFormat *			T_EVAS_OBJECT
 const EvasTextblockNodeFormat * 	T_EVAS_OBJECT
 EvasTextblockStyle *				T_EVAS_OBJECT
 const EvasTextblockStyle *			T_EVAS_OBJECT
+EvasTextblockRectangle *			T_PTROBJ
 EvasObject *						T_EVAS_OBJECT
 const EvasObject *					T_EVAS_OBJECT
 EvasCoordRectangle *				T_PTROBJ

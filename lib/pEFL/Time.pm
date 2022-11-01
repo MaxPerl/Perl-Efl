@@ -32,14 +32,14 @@ sub localtime {
 	my ($time) = shift;
 	$time = $time || time;
 	my $tm = pEFL::Time->new(localtime($time));
-	return $tm;	
+	return $tm; 
 }
 
 sub gmtime {
 	my ($time) = shift;
 	$time = $time || time;
 	my $tm = pEFL::Time->new(gmtime($time));
-	return $tm;	
+	return $tm; 
 }
 
 package EflTimePtr;
@@ -80,7 +80,7 @@ https://www.enlightenment.org/develop/api/efl/time
 
 =head1 AUTHOR
 
-Maximilian Lika, E<lt>maximilian@E<gt>
+Maximilian Lika
 
 =head1 COPYRIGHT AND LICENSE
 

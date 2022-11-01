@@ -28,10 +28,10 @@ require XSLoader;
 XSLoader::load('pEFL::Evas::Textblock');
 
 sub add {
-    my ($class,$parent) = @_;
-    my $widget = evas_object_textblock_add($parent);
-    #$widget->smart_callback_add("del", \&pEFL::PLSide::cleanup, $widget);
-    return $widget;
+	my ($class,$parent) = @_;
+	my $widget = evas_object_textblock_add($parent);
+	#$widget->smart_callback_add("del", \&pEFL::PLSide::cleanup, $widget);
+	return $widget;
 }
 
 *new = \&add;
@@ -44,9 +44,9 @@ our @ISA = qw(EvasObjectPtr);
 
 sub node_format_list_get_pv {
 	my ($obj) = @_;
-    my $list = $obj->node_format_list_get();
-    my @array = pEFL::Eina::list2array($list,"EvasTextblockNodeFormatPtr");
-    return @array;
+	my $list = $obj->node_format_list_get();
+	my @array = pEFL::Eina::list2array($list,"EvasTextblockNodeFormatPtr");
+	return @array;
 }
 
 sub range_delete {
@@ -84,7 +84,7 @@ sub range_geometry_get {
 sub range_geometry_get_pv {
 	my ($textblock,$cur1,$cur2) = @_;
 	my $list = $cur1->range_geometry_get($cur2);
-	my @array = pEFL::Eina::list2array($list,"EvasRectanglePtr");
+	my @array = pEFL::Eina::list2array($list,"EvasTextblockRectanglePtr");
 	return @array;
 }
 
@@ -93,7 +93,9 @@ sub text_markup_prepend {
 	pEFL::Evas::Textblock::text_markup_prepend($cur,$text)
 }
 
-# Preloaded methods go here.
+package pEFL::Evas::TextblockRectangle;
+
+our @ISA = qw(EvasTextblockRectanglePtr);
 
 1;
 __END__
@@ -114,7 +116,7 @@ For the following method, which returns an Eina_List, exists a "perl-value"-meth
 
 =over 4
 
-=item $textblock->node_format_list_get_pv();
+=item * $textblock->node_format_list_get_pv();
 
 =back
 
@@ -122,21 +124,21 @@ For asthetic reason there are some shortcuts for some TextblockCursorPtr-methods
 
 =over 4
 
-=item $textblock->range_delete($cur1,$cur2);
+=item * $textblock->range_delete($cur1,$cur2);
 
-=item $textblock->visible_range_get($cur1,$cur2);
+=item * $textblock->visible_range_get($cur1,$cur2);
 
-=item $textblock->range_text_get($cur1,$cur2,$format);
+=item * $textblock->range_text_get($cur1,$cur2,$format);
 
-=item $textblock->range_formats_get($cur1,$cur2);
+=item * $textblock->range_formats_get($cur1,$cur2);
 
-=item $textblock->range_formats_get_pv($cur1,$cur2);
+=item * $textblock->range_formats_get_pv($cur1,$cur2);
 
-=item $textblock->range_geometry_get($cur1,$cur2);
+=item * $textblock->range_geometry_get($cur1,$cur2);
 
-=item $textblock->range_geometry_get_pv($cur1,$cur2);
+=item * $textblock->range_geometry_get_pv($cur1,$cur2);
 
-=item $textblock->text_markup_prepend($cur1,$text); 
+=item * $textblock->text_markup_prepend($cur1,$text); 
 
 =back
 

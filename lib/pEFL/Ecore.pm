@@ -40,12 +40,12 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 our @EXPORT = qw(
-    ECORE_VERSION_MAJOR
-    ECORE_VERSION_MINOR
-    ECORE_CALLBACK_CANCEL
-    ECORE_CALLBACK_RENEW
-    ECORE_CALLBACK_PASS_ON
-    ECORE_CALLBACK_DONE
+	ECORE_VERSION_MAJOR
+	ECORE_VERSION_MINOR
+	ECORE_CALLBACK_CANCEL
+	ECORE_CALLBACK_RENEW
+	ECORE_CALLBACK_PASS_ON
+	ECORE_CALLBACK_DONE
 	ECORE_POLLER_CORE
 	ECORE_EVENT_NONE
 	ECORE_EVENT_SIGNAL_USER
@@ -97,26 +97,26 @@ XSLoader::load('pEFL::Ecore');
 # Preloaded methods go here.
 
 sub AUTOLOAD {
-    # This AUTOLOAD is used to 'autoload' constants from the constant()
-    # XS function.
+	# This AUTOLOAD is used to 'autoload' constants from the constant()
+	# XS function.
 
-    my $constname;
-    our $AUTOLOAD;
-    ($constname = $AUTOLOAD) =~ s/.*:://;
-    croak "&Callback::constant not defined" if $constname eq 'constant';
-    my ($error, $val) = constant($constname);
-    if ($error) { croak $error; }
-    {
+	my $constname;
+	our $AUTOLOAD;
+	($constname = $AUTOLOAD) =~ s/.*:://;
+	croak "&Callback::constant not defined" if $constname eq 'constant';
+	my ($error, $val) = constant($constname);
+	if ($error) { croak $error; }
+	{
 	no strict 'refs';
 	# Fixed between 5.005_53 and 5.005_61
 #XXX	if ($] >= 5.00561) {
-#XXX	    *$AUTOLOAD = sub () { $val };
+#XXX		*$AUTOLOAD = sub () { $val };
 #XXX	}
 #XXX	else {
-	    *$AUTOLOAD = sub { $val };
+		*$AUTOLOAD = sub { $val };
 #XXX	}
-    }
-    goto &$AUTOLOAD;
+	}
+	goto &$AUTOLOAD;
 }
 
 
@@ -136,7 +136,7 @@ Additional it contains the following general function:
 
 =over 4
 
-=item pEFL::Ecore::init();
+=item * pEFL::Ecore::init();
 
 =back
 

@@ -391,26 +391,26 @@ XSLoader::load('pEFL::Elm');
 # Preloaded methods go here.
 
 sub AUTOLOAD {
-    # This AUTOLOAD is used to 'autoload' constants from the constant()
-    # XS function.
+	# This AUTOLOAD is used to 'autoload' constants from the constant()
+	# XS function.
 
-    my $constname;
-    our $AUTOLOAD;
-    ($constname = $AUTOLOAD) =~ s/.*:://;
-    croak "&Callback::constant not defined" if $constname eq 'constant';
-    my ($error, $val) = constant($constname);
-    if ($error) { croak $error; }
-    {
+	my $constname;
+	our $AUTOLOAD;
+	($constname = $AUTOLOAD) =~ s/.*:://;
+	croak "&Callback::constant not defined" if $constname eq 'constant';
+	my ($error, $val) = constant($constname);
+	if ($error) { croak $error; }
+	{
 	no strict 'refs';
 	# Fixed between 5.005_53 and 5.005_61
 #XXX	if ($] >= 5.00561) {
-#XXX	    *$AUTOLOAD = sub () { $val };
+#XXX		*$AUTOLOAD = sub () { $val };
 #XXX	}
 #XXX	else {
-	    *$AUTOLOAD = sub { $val };
+		*$AUTOLOAD = sub { $val };
 #XXX	}
-    }
-    goto &$AUTOLOAD;
+	}
+	goto &$AUTOLOAD;
 }
 
 1;
@@ -442,17 +442,17 @@ Additional it contains the following general functions:
 
 =over 4
 
-=item pEFL::Elm::init($#ARGV, \@ARGV);
+=item * pEFL::Elm::init($#ARGV, \@ARGV);
 
-=item pEFL::Elm::quicklaunch_fallback($#ARGV, \@ARGV);
+=item * pEFL::Elm::quicklaunch_fallback($#ARGV, \@ARGV);
 
-=item pEFL::Elm::shutdown()
+=item * pEFL::Elm::shutdown()
 
-=item pEFL::Elm::run();
+=item * pEFL::Elm::run();
 
-=item pEFL::Elm::exit();
+=item * pEFL::Elm::exit();
 
-=item pEFL::Elm::policy_set(policy, value)
+=item * pEFL::Elm::policy_set(policy, value)
 
 =back
 
@@ -467,7 +467,7 @@ https://www.enlightenment.org/develop/legacy/api/c/start#elementary_main.html
 
 =head1 AUTHOR
 
-Maximilian Lika, E<lt>maximilian@E<gt>
+Maximilian Lika
 
 =head1 COPYRIGHT AND LICENSE
 
