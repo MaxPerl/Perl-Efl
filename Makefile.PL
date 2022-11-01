@@ -7,21 +7,22 @@ my %evas_pkg_info = ExtUtils::PkgConfig->find('evas');
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 WriteMakefile(
-    NAME              => 'pEFL',
-    VERSION_FROM      => 'lib/pEFL.pm', # finds $VERSION, requires EU::MM from perl >= 5.5
-    PREREQ_PM         => {}, # e.g., Module::Name => 1.1
-    ABSTRACT_FROM     => 'lib/pEFL.pm', # retrieve abstract from module
-    AUTHOR            => 'Maximilian Lika <maximilian@>',
-    #LICENSE           => 'perl',
-    #Value must be from legacy list of licenses here
-    #http://search.cpan.org/perldoc?Module%3A%3ABuild%3A%3AAPI
-    LIBS          => $elm_pkg_info{'libs'} . $evas_pkg_info{'libs'},
-    INC           => '-I. ' . $elm_pkg_info{'cflags'} . $evas_pkg_info{'cflags'}, # e.g., '-I. -I/usr/include/other'
-    DEFINE            => '', # e.g., '-DHAVE_SOMETHING'
-    XSBUILD => {
+	NAME			  => 'pEFL',
+	VERSION_FROM	  => 'lib/pEFL.pm', # finds $VERSION, requires EU::MM from perl >= 5.5
+	CONFIGURE_REQUIRES => {'ExtUtils::PkgConfig' => 0,},
+	PREREQ_PM		  => {}, # e.g., Module::Name => 1.1
+	ABSTRACT_FROM	  => 'lib/pEFL.pm', # retrieve abstract from module
+	AUTHOR			  => 'Maximilian Lika',
+	LICENSE		   => 'perl',
+	#Value must be from legacy list of licenses here
+	#http://search.cpan.org/perldoc?Module%3A%3ABuild%3A%3AAPI
+	LIBS		  => $elm_pkg_info{'libs'} . $evas_pkg_info{'libs'},
+	INC 		  => '-I. ' . $elm_pkg_info{'cflags'} . $evas_pkg_info{'cflags'}, # e.g., '-I. -I/usr/include/other'
+	DEFINE			  => '', # e.g., '-DHAVE_SOMETHING'
+	XSBUILD => {
 	all => {
-		LIBS          => $elm_pkg_info{'libs'} . $evas_pkg_info{'libs'},
-		INC           => '-Wall -I. ' . $elm_pkg_info{'cflags'} . $evas_pkg_info{'cflags'},
+		LIBS		  => $elm_pkg_info{'libs'} . $evas_pkg_info{'libs'},
+		INC 		  => '-Wall -I. ' . $elm_pkg_info{'cflags'} . $evas_pkg_info{'cflags'},
 	},
 	xs => {
 		'lib/pEFL/Ecore/EventHandler' => {
@@ -97,11 +98,17 @@ WriteMakefile(
 			OBJECT => 'lib/pEFL/PLSide$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},
 	},
-    },
-    XSMULTI	=> 1,
-    # OPTIMIZE => '-g',
+	},
+	XSMULTI => 1,
+	META_MERGE => {
+		resources => {
+			repository => 'https://github.com/MaxPerl/Perl-Efl',
+		},
+		keywords => [ qw( efl enlightenment Elementary gui) ],
+	},
+	# OPTIMIZE => '-g',
 	# Un-comment this if you add C files to link with later:
-    # OBJECT            => '$(O_FILES)', # link all the C files too
+	# OBJECT			=> '$(O_FILES)', # link all the C files too
 );
 
 require "./CONSTANTS.pl";

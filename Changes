@@ -119,3 +119,4 @@ Revision history for Perl extension pEFL.
 0.71
 	- pod improvements
 	- fix pEfl::Evas::Textblock->range_geometry_get_pv and add pEFL::Evas::Textblock::Rectangle
+	- improve Makefile.PL (add ExtUtils::PkgConf as prereq and add META_MERGE)
