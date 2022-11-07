@@ -124,3 +124,5 @@ Revision history for Perl extension pEFL.
 	- Fix blessing to "ElmEntryPtr" in callback of pEFL::Elm::Entry::markup_filter_append|prepend
 	- Fix Typemap of T_PV_OR_NULL to solve problems with pEFL::Elm::Toolbar->item_append etc.
 		(SvTYPE($arg) == SVt_NULL seems to be unreliable)
+	- POD corrections
+	- complete colorselector example

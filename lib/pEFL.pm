@@ -100,7 +100,7 @@ Sometimes a method returns an EvasObject which can be any Elm Widget Type (e.g. 
 
 =head2 Output Parameters
 
-pEFL sometimes uses output parameters. See for example C<void elm_calendar_min_max_year_get(Evas_Object *obj,int *min,int *max)>, where you have to pass in C a pointer to max and min. In perl this is translated to my C<($min, $max) = $calendar->min_max_year_get();>. Sometimes the C function returns a status or similar as in C<Eina_Bool> elm_entry_cursor_geometry_get(Evas_Object *obj,int *x,int *y,int *w,int *h)>. In Perl this status variable is given, too. So the function elm_entry_cursor_geometry_get for example is translated into C<my ($status,$x,$y,$w,$h) = $entry->cursor_geometry_get;>.
+pEFL sometimes uses output parameters. See for example C<< void elm_calendar_min_max_year_get(Evas_Object *obj,int *min,int *max) >>, where you have to pass in C a pointer to max and min. In perl this is translated to C<< my ($min, $max) = $calendar->min_max_year_get(); >>. Sometimes the C function returns a status or similar as in C<< Eina_Bool elm_entry_cursor_geometry_get(Evas_Object *obj,int *x,int *y,int *w,int *h) >>. In Perl this status variable is given, too. So the function C<< elm_entry_cursor_geometry_get >> for example is translated into C<< my ($status,$x,$y,$w,$h) = $entry->cursor_geometry_get; >>.
 
 =head1 FUNCTIONS IN EFL
 
