@@ -1180,3 +1180,12 @@ edje_object_part_exists(obj,part)
 char *
 edje_object_part_object_name_get(obj)
 	const EvasObject *obj
+	
+#######################
+# From elf_layout_group_eo.legacy.h
+######################
+
+const char *
+edje_object_data_get(obj,key)
+	const EvasObject *obj
+	const char *key
