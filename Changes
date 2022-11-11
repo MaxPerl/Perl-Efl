@@ -128,3 +128,5 @@ Revision history for Perl extension pEFL.
 	- complete colorselector example
 0.73
 	- Add ECORE_EVAS_ENGINE_|OBJECT_ASSOCIATE_|AVOID_DAMAGE_ Constants
+	- Add pEFL::Evas::Image->filled_add()
+	- Add automatical cleanup for pEFL::Evas::Objects (Image, Line, Polygon, Rect, Textblock, Text)
