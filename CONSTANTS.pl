@@ -573,6 +573,40 @@ my @names_ecore = (
 	{name => 'ECORE_MODE', 'macro' => 1},
 	{name => 'ECORE_LAST', 'macro' => 1},
 	#
+	{name => 'ECORE_EVAS_OBJECT_ASSOCIATE_BASE', 'macro' => 1},
+	{name => 'ECORE_EVAS_OBJECT_ASSOCIATE_STACK', 'macro' => 1},
+	{name => 'ECORE_EVAS_OBJECT_ASSOCIATE_LAYER', 'macro' => 1},
+	{name => 'ECORE_EVAS_OBJECT_ASSOCIATE_DEL', 'macro' => 1},
+	#
+	{name => 'ECORE_EVAS_ENGINE_SOFTWARE_BUFFER', 'macro' => 1},
+  	{name => 'ECORE_EVAS_ENGINE_SOFTWARE_XLIB', 'macro' => 1},
+  	{name => 'ECORE_EVAS_ENGINE_XRENDER_X11', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_OPENGL_X11', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_SOFTWARE_XCB', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_XRENDER_XCB', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_SOFTWARE_GDI', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_SOFTWARE_DDRAW', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_DIRECT3D', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_OPENGL_GLEW', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_OPENGL_COCOA', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_SOFTWARE_SDL', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_DIRECTFB', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_SOFTWARE_FB', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_SOFTWARE_8_X11', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_SOFTWARE_16_X11', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_SOFTWARE_16_DDRAW', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_SOFTWARE_16_WINCE', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_OPENGL_SDL', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_EWS', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_PSL1GHT', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_WAYLAND_SHM', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_WAYLAND_EGL', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_DRM', 'macro' => 1},
+   	{name => 'ECORE_EVAS_ENGINE_OPENGL_DRM', 'macro' => 1},
+	#
+	{name => 'ECORE_EVAS_AVOID_DAMAGE_NONE', 'macro' => 1},
+	{name => 'ECORE_EVAS_AVOID_DAMAGE_EXPOSE', 'macro' => 1},
+	{name => 'ECORE_EVAS_AVOID_DAMAGE_BUILT_IN', 'macro' => 1},
     );
     
     ExtUtils::Constant::WriteConstants(
@@ -582,6 +616,7 @@ my @names_ecore = (
                                      C_FILE       => 'lib/pEFL/const-ecore-c.inc',
                                      XS_FILE      => 'lib/pEFL/const-ecore-xs.inc',
                                   );
+
                                   
 my @names_eina = (
     {name => 'EINA_TRUE', 'macro' => 1},
