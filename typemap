@@ -180,6 +180,13 @@ EvasEventKeyUp *					T_PTROBJ
 EvasEventHold * 					T_PTROBJ
 
 ####################
+# EDJE
+####################
+
+EdjeObject *						T_EVAS_OBJECT
+const EdjeObject *					T_EVAS_OBJECT
+
+####################
 # ECORE
 ###################
 EcoreEventHandler * 				T_EVAS_OBJECT

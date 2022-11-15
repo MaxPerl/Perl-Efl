@@ -1,6 +1,16 @@
 Changes
 CONSTANTS.pl
 examples/Ecore-Evas/basic-example.pl
+examples/Edje/basic.edc
+examples/Edje/basic.pl
+examples/Edje/basic2.edc
+examples/Edje/basic2.pl
+examples/Edje/bubble.png
+examples/Edje/example.edc
+examples/Edje/example.pl
+examples/Edje/red.png
+examples/Edje/signals2.pl
+examples/Edje/signalsBubble.edc
 examples/Elementary/button.pl
 examples/Elementary/c1.svg
 examples/Elementary/c2.svg
@@ -44,6 +54,8 @@ lib/pEFL.xs
 lib/pEFL/const-c.inc
 lib/pEFL/const-ecore-c.inc
 lib/pEFL/const-ecore-xs.inc
+lib/pEFL/const-edje-c.inc
+lib/pEFL/const-edje-xs.inc
 lib/pEFL/const-eina-c.inc
 lib/pEFL/const-eina-xs.inc
 lib/pEFL/const-emotion-c.inc
@@ -85,6 +97,10 @@ lib/pEFL/Ecore/Time.pm
 lib/pEFL/Ecore/Time.xs
 lib/pEFL/Ecore/Timer.pm
 lib/pEFL/Ecore/Timer.xs
+lib/pEFL/Edje.pm
+lib/pEFL/Edje.xs
+lib/pEFL/Edje/Object.pm
+lib/pEFL/Edje/Object.xs
 lib/pEFL/Eina.pm
 lib/pEFL/Eina.xs
 lib/pEFL/Eina/List.pm
