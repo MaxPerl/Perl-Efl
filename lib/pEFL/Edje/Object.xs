@@ -41,7 +41,7 @@ PREINIT:
 CODE:
 	objaddr = PTR2IV(obj);
 	data = perl_save_signal_cb(aTHX_ objaddr, id);
-	elm_object_signal_callback_add(obj,emission,source,call_perl_signal_cb,data);
+	edje_object_signal_callback_add(obj,emission,source,call_perl_signal_cb,data);
 	
 
 
@@ -66,16 +66,16 @@ PREINIT:
 CODE:
 	address = SvUV(cstructaddr);
 	sc = INT2PTR(_perl_signal_cb*,address);
-	data = elm_object_signal_callback_del(obj, emission, source, call_perl_signal_cb);
+	data = edje_object_signal_callback_del(obj, emission, source, call_perl_signal_cb);
 	while (data != NULL) {
 		del_sc = (_perl_signal_cb *) data;
-		data = elm_object_signal_callback_del(obj, emission, source, call_perl_signal_cb);
+		data = edje_object_signal_callback_del(obj, emission, source, call_perl_signal_cb);
 		if (del_sc->signal_id == sc->signal_id) {
 			Safefree(del_sc);
 		}
 		// If signal_ids are different reregister the signal callback
 		else {
-			elm_object_signal_callback_add(obj,emission,source,call_perl_signal_cb,del_sc);
+			edje_object_signal_callback_add(obj,emission,source,call_perl_signal_cb,del_sc);
 		}
 		
 	}

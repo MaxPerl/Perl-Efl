@@ -54,7 +54,7 @@ sub signal_callback_add {
 	}
 	else {
 		$id = pEFL::PLSide::save_signal_data( $obj, $emission, $source, $func,$data );
-		my $widget = _elm_object_signal_callback_add($obj,$emission,$source,$func,$id);
+		my $widget = _edje_object_signal_callback_add($obj,$emission,$source,$func,$id);
 		return $id;
 	}
 }
@@ -66,7 +66,7 @@ sub signal_callback_del {
 	
 	if (defined($id)) {
 		my $cstructaddr = $pEFL::PLSide::EdjeSignals{$objaddr}[$id]{cstructaddr};
-		my $success = $obj->_elm_object_signal_callback_del($emission,$source, $cstructaddr);
+		my $success = $obj->_edje_object_signal_callback_del($emission,$source, $cstructaddr);
 		
 		undef $pEFL::PLSide::EdjeSignals{$objaddr}[$id];
 	}
@@ -79,7 +79,6 @@ sub signal_callback_del {
 
 1;
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
@@ -87,18 +86,18 @@ pEFL::Edje::Object
 
 =head1 SYNOPSIS
 
-  use pEFL::Elm;
+  use pEFL::Edje;
   [...]
-  my $edje = pEFL::Edje::Object->add($parent);
+  my $edje_obj = pEFL::Edje::Object->add($parent);
   [...]
 
 =head1 DESCRIPTION
 
 This module is a perl binding to Edje ojects. It contains functions that deal with Edje layouts and its components
 
-For more informations see https://www.enlightenment.org/develop/legacy/api/c/start#group__Edje__Object__Group.html 
+For more informations see L<< https://www.enlightenment.org/develop/legacy/api/c/start#group__Edje__Object__Group.html >>
 
-For instructions, how to use pEFL::Edje::Object, please study this API reference for now. A perl-specific documentation will perhaps come in later versions. But applying the C documentation should be no problem. pEFL::Edje::Object gives you a nice object-oriented interface that is kept close to the C API. Please note, that the perl method names remove the "elm_edje_" at the beginning of the c functions.
+For instructions, how to use pEFL::Edje::Object, please study this API reference for now. A perl-specific documentation will perhaps come in later versions. But applying the C documentation should be no problem. pEFL::Edje::Object gives you a nice object-oriented interface that is kept close to the C API. Please note, that the perl method names remove the "edje_object_" at the beginning of the c functions.
 
 =head2 EXPORT
 
@@ -106,7 +105,7 @@ None by default.
 
 =head1 SEE ALSO
 
-https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Bg.html
+L<< https://www.enlightenment.org/develop/legacy/api/c/start#group__Edje__Object__Group.html >>
 
 =head1 AUTHOR
 

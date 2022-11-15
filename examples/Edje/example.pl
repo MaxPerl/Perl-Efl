@@ -11,14 +11,20 @@ use pEFL::Edje;
 my $width = 320;
 my $height = 240;
 
-if (pEFL::Ecore::Evas::init() <= 0) {
-	exit 1;
+if (!pEFL::Ecore::Evas::init()) {
+	die "Could not init Ecore Evas\n";
 }
-pEFL::Edje::init();
+
+if (! pEFL::Edje::init()) {
+	pEFL::Ecore::Evas::shutdown();
+	die "Could not init Edje\n";
+}
 
 my $window = pEFL::Ecore::Evas->new(undef,0,0,$width,$height,undef);
 
 if (!$window) {
+	pEFL::Ecore::Edje::shutdown();
+	pEFL::Ecore::Evas::shutdown();
 	die "Could not create window.\n";
 }
 
@@ -27,6 +33,8 @@ my $canvas = $window->evas_get();
 my $edje = create_my_group($canvas,"");
 
 if (!$edje) {
+	pEFL::Ecore::Edje::shutdown();
+	pEFL::Ecore::Evas::shutdown();
 	exit -2;
 }
 
@@ -47,12 +55,15 @@ sub create_my_group {
 	my $edje = pEFL::Edje::Object->add($canvas);
 	
 	if (!$edje) {
-		die "Could not create edje object!\n";
+		warn "Could not create edje object!\n";
+		return undef;
 	}
 	
 	if (!$edje->file_set("./example.edj","my_group")) {
 		# TODO ERROR HANDLING
+		warn "Could not load 'my_group' from example.edj\n";
 		$edje->del();
+		return undef;
 	}
 	
 	$edje->move(0,0);
@@ -61,6 +72,3 @@ sub create_my_group {
 	
 	return $edje;
 }
-
-
-

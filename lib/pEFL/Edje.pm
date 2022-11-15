@@ -124,26 +124,41 @@ sub AUTOLOAD {
 
 1;
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
-pEFL::Edje::Object
+pEFL::Edje
 
 =head1 SYNOPSIS
 
-  use pEFL::Elm;
+  use pEFL::Edje;
   [...]
-  my $edje = pEFL::Edje::Object->add($parent);
+  my $edje = pEFL::Edje::Object->add($canvas);
+	
+  if (!$edje) {
+	pEFL::Ecore::Edje::shutdown();
+	pEFL::Ecore::Evas::shutdown();
+	die "Could not create edje object!\n";
+  }
+	
+  if (!$edje->file_set("./example.edj","my_group")) {
+	$edje->del();
+	pEFL::Ecore::Edje::shutdown();
+	pEFL::Ecore::Evas::shutdown();
+	die "Could not load Edje file\n";
+  }
+  $edje->move(0,0);
+  $edje->resize($width,$height);
+  $edje->show();
   [...]
 
 =head1 DESCRIPTION
 
-This module is a perl binding to Edje ojects. It contains functions that deal with Edje layouts and its components
+This module is a perl binding to Edje, the Layout and theme library with super-powers.
 
-For more informations see https://www.enlightenment.org/develop/legacy/api/c/start#group__Edje__Object__Group.html 
+For more informations see L<< https://www.enlightenment.org/develop/legacy/api/c/start#group__Edje.html >>
 
-For instructions, how to use pEFL::Edje::Object, please study this API reference for now. A perl-specific documentation will perhaps come in later versions. But applying the C documentation should be no problem. pEFL::Edje::Object gives you a nice object-oriented interface that is kept close to the C API. Please note, that the perl method names remove the "edje_" at the beginning of the c functions.
+For instructions, how to use pEFL::Edje, please study this API reference for now. A perl-specific documentation will perhaps come in later versions. But applying the C documentation should be no problem. pEFL::Edje gives you a nice object-oriented interface that is kept close to the C API. Please note, that the perl method names remove the "edje_" at the beginning of the c functions.
 
 =head2 EXPORT
 
@@ -151,7 +166,7 @@ None by default.
 
 =head1 SEE ALSO
 
-https://www.enlightenment.org/develop/legacy/api/c/start#group__Elm__Bg.html
+L<< https://www.enlightenment.org/develop/legacy/api/c/start#group__Edje.html >>
 
 =head1 AUTHOR
 

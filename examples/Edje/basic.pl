@@ -13,7 +13,7 @@ my $height = 300;
 my $edje_file = "./basic.edj";
 my $img_file = "./red.png";
 
-if (pEFL::Ecore::Evas::init() <= 0) {
+if (!pEFL::Ecore::Evas::init()) {
 	die "Could not init Ecore Evas\n";
 }
 
@@ -36,9 +36,9 @@ $ee->title_set("Edje Basic Example");
 my $evas = $ee->evas_get();
 
 my $bg = pEFL::Evas::Rectangle->add($evas);
-$bg->color_set(255,255,255,255);
-$bg->move(0,0);
-$bg->resize($width,$height);
+$bg->color_set(255,255,255,255); # White
+$bg->move(0,0); # origin
+$bg->resize($width,$height); # cover the window
 $bg->show();
 # TODO: Use ECORE_EVAS_OBJECT_ASSOCIATE_BASE
 $ee->object_associate($bg, 0);
