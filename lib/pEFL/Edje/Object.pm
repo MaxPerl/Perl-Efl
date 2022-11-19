@@ -75,6 +75,12 @@ sub signal_callback_del {
 	}
 }
 
+sub message_handler_set {
+	my ($obj,$func,$data) = @_;
+	pEFL::PLSide::register_cb($obj,"messageSent",$func,$data);
+	$obj->_edje_object_message_handler_set($func);
+}
+
 # Preloaded methods go here.
 
 1;

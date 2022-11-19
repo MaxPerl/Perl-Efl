@@ -11,6 +11,7 @@
 
 typedef Eo EdjeObject;
 typedef Evas_Object EvasObject;
+typedef Edje_Message_Int_Set EdjeMessageIntSet;
 
 MODULE = pEFL::Edje::Object 	PACKAGE = pEFL::Edje::Object
 
@@ -176,19 +177,31 @@ edje_object_thaw(obj)
 #	void *data
 
 
-# void
-# edje_object_message_handler_set(obj,func,data)
-#	EvasObject *obj
-#	Edje_Message_Handler_Cb func
-#	void *data
+void
+_edje_object_message_handler_set(obj,func)
+	EvasObject *obj
+	SV *func
+PREINIT:
+        _perl_callback *sc = NULL;
+        UV objaddr;
+CODE:
+	objaddr = PTR2IV(obj);
+	sc = perl_save_callback(aTHX_ func, objaddr, "messageSent", "pEFL::PLSide::Callbacks");
+	edje_object_message_handler_set(obj,call_perl_edje_message_handler,(void*) sc);
 
-
-# void
-# edje_object_message_send(obj,type,id,msg)
-#	EvasObject *obj
-#	Edje_Message_Type type
-#	int id
-#	void *msg
+void
+edje_object_message_send(obj,type,id,msg_sv)
+	EvasObject *obj
+	int type
+	int id
+	SV *msg_sv
+PREINIT:
+	void *msg;
+	IV tmp;
+CODE:
+	tmp = SvIV((SV*)SvRV(msg_sv));
+	msg = INT2PTR(void*,tmp);
+	edje_object_message_send(obj,type,id,msg);
 
 
 void

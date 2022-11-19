@@ -140,6 +140,7 @@ sub print_commands {
 		"\tEsc - exit\n" .
 		"\th - print help\n";
 }
+
 sub _on_keydown {
 	my ($edje_obj, $evas,$o,$einfo) = @_;
 	

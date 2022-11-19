@@ -131,3 +131,6 @@ Revision history for Perl extension pEFL.
 	- Add pEFL::Evas::Image->filled_add()
 	- Add automatical cleanup for pEFL::Evas::Objects (Image, Line, Polygon, Rect, Textblock, Text)
 	- Add basic support of Edje
+0.74
+	- Add most of the enums/constants of Edje_Common.h
+	- Add support of Edje Messages

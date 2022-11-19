@@ -24,7 +24,7 @@ our @EXPORT = qw(
 	
 );
 
-our $VERSION = '0.73';
+our $VERSION = '0.74_00';
 
 require XSLoader;
 XSLoader::load('pEFL', $VERSION);
