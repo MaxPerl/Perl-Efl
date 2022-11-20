@@ -7,38 +7,37 @@
 
 #include <Edje.h>
 
-typedef Edje_Message_Int_Set EdjeMessageIntSet;
+typedef Edje_Message_Float_Set EdjeMessageFloatSet;
 
-MODULE = pEFL::Edje::Message::IntSet		PACKAGE = pEFL::Edje::Message::IntSet
+MODULE = pEFL::Edje::Message::FloatSet		PACKAGE = pEFL::Edje::Message::FloatSet
 
-EdjeMessageIntSet *
+EdjeMessageFloatSet *
 _new(class,count, val_arr)
 	char *class
 	int count
 	AV *val_arr
 PREINIT:
-	EdjeMessageIntSet *message;
-	int *val;
+	EdjeMessageFloatSet *message;
+	double *val;
 	int index;
 CODE:
-	Newx(message,1,EdjeMessageIntSet);
-	Renewc(message,count+2,int,EdjeMessageIntSet);
+	Newx(message,1,EdjeMessageFloatSet);
+	Renewc(message,count+2,double,EdjeMessageFloatSet);
 	if (message == NULL) 
 		croak("Failed to allocate memory in _new function\n");
 	message->count = count+1;
 	for (index = 0; index <= count; index++) {
-		message->val[index] = SvIV( *av_fetch(val_arr,index,0) );
-		printf("VALUE %d\n",message->val[index]);
+		message->val[index] = SvNV( *av_fetch(val_arr,index,0) );
 	}
 	RETVAL = message;
 OUTPUT:
 	RETVAL
 
-MODULE = pEFL::Edje::Message::IntSet		PACKAGE = EdjeMessageIntSetPtr
+MODULE = pEFL::Edje::Message::FloatSet		PACKAGE = EdjeMessageFloatSetPtr
 
 int
 count(message)
-    EdjeMessageIntSet *message
+    EdjeMessageFloatSet *message
 CODE:
     RETVAL = message->count;
 OUTPUT:
@@ -46,10 +45,10 @@ OUTPUT:
     
 void
 val(message)
-    EdjeMessageIntSet *message
+    EdjeMessageFloatSet *message
 PREINIT:
 	int count;
-	int *vals;
+	double *vals;
 	int index;
 PPCODE:
     count = message->count;
@@ -57,12 +56,12 @@ PPCODE:
     
     EXTEND(SP,count);
     for (index = 0; index <count; index++) {
-    	PUSHs( sv_2mortal( newSViv( vals[index] ) ));
+    	PUSHs( sv_2mortal( newSVnv( vals[index] ) ));
 	}
 	
 void
 DESTROY(message) 
-    EdjeMessageIntSet *message
+    EdjeMessageFloatSet *message
 CODE:
-	//printf("Freeing Message_Int_Set\n");
+	//printf("Freeing Message_Float_Set\n");
 	Safefree(message);

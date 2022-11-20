@@ -14,14 +14,18 @@ MODULE = pEFL::Edje::Message::String		PACKAGE = pEFL::Edje::Message::String
 EdjeMessageString *
 new(class,str)
 	char *class
-	char *str
+	SV *str
 PREINIT:
 	EdjeMessageString *message;
+	char *string;
+	STRLEN len;
 CODE:
 	if (items != 2) {
 		Perl_croak(aTHX_ "Usage pEFL::Edje::Message::String->new($string)\n");
 	}
-	message->str = str;
+	New(0,message,1,EdjeMessageString);
+	string = SvPV(str,len);
+	message->str = savepvn(string,len);
 	RETVAL = message;
 OUTPUT:
 	RETVAL
@@ -35,3 +39,11 @@ CODE:
     RETVAL = message->str;
 OUTPUT:
     RETVAL
+    
+    
+void
+DESTROY(message) 
+    EdjeMessageString *message
+CODE:
+	printf("Freeing Message_String\n");
+	Safefree(message);

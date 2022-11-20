@@ -191,6 +191,8 @@ EdjeMessageIntSet *					T_PTROBJ
 EdjeMessageString *					T_PTROBJ
 EdjeMessageStringFloat *			T_PTROBJ
 EdjeMessageStringInt *				T_PTROBJ
+EdjeMessageFloatSet *				T_PTROBJ
+EdjeMessageStringSet *				T_PTROBJ
 
 ####################
 # ECORE

@@ -9,6 +9,8 @@ use pEFL::Evas;
 use pEFL::Edje;
 use pEFL::Edje::Message::IntSet;
 use pEFL::Edje::Message::String;
+use pEFL::Edje::Message::StringSet;
+use pEFL::Edje::Message::FloatSet;
 
 my $width = 300;
 my $height = 300;
@@ -63,7 +65,7 @@ if (!$edje_obj->file_set($edje_file,"example_group")) {
 
 $edje_obj->signal_callback_add("mouse,wheel,*","part_left",\&on_mouse_wheel,undef);
 $edje_obj->signal_callback_add("mouse,over", "part_right", \&on_mouse_over,undef);
-$edje_obj->message_handler_set(\&_message_handle, undef);
+#$edje_obj->message_handler_set(\&_message_handle, undef);
 
 $edje_obj->move(20,20);
 $edje_obj->resize($width-40,$height-40);
@@ -111,7 +113,28 @@ sub on_mouse_over {
 	
 	my @vals = ( rand(256) % 256, rand(256) % 256, rand(256) % 256);
 	my $msg = pEFL::Edje::Message::IntSet->new(@vals);
+	
+	my @colors = $msg->val();
+	print "RGB @colors\n";
+	
+	my $str = "Hello";
+	my $str2 = "World";
+	my $str3 = "frim Perl";
+	#my @str = ($str, $str2,$str3);
+	my @str = ("Hello", "Wordl", "from Perl", "DU ", "PFEIFE", "ARSCH", "DEPP", "PENN", "GEHTS NOCH");
+	my $str_msg = pEFL::Edje::Message::StringSet->new(@str);
+	my @strings = $str_msg->str();
+	print "STRINGS @strings\n";
 		
+	my $dm = pEFL::Edje::Message::FloatSet->new(0.7,0.12,12.3,1222.3,123,45,48,49.5);
+	my @doubles = $dm->val();
+	print "DOUBLES @doubles\n";
+	
+	#my $sstr_msg = pEFL::Edje::Message::String->new("Hello World");
+	#my $s = $sstr_msg->str();
+	#print "STRING $s\n";
+	
+	
 	$edje_obj->message_send(EDJE_MESSAGE_INT_SET,$msg_color,$msg);
 }
 
