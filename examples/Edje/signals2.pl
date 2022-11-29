@@ -47,11 +47,10 @@ $bg->focus_set(1);
 my $edje_obj = pEFL::Edje::Object->add($evas);
 
 if (!$edje_obj->file_set($edje_file,"image_group")) {
-	# TODO: Implement EdjeError
-	#my $err = $edje_obj->load_error_get();
-	#my $errszr = $err->load_error_str();
+	my $err = $edje_obj->load_error_get();
+	my $errstr = pEFL::Edje::load_error_str($err);
 	
-	warn "Could not load the edje file\n";
+	warn "Could not load the edje file: $errstr\n";
 	pEFL::Ecore::Edje::shutdown();
 	pEFL::Ecore::Evas::shutdown();
 }

@@ -12,6 +12,7 @@
 typedef Eo EdjeObject;
 typedef Evas_Object EvasObject;
 
+
 MODULE = pEFL::Edje 	PACKAGE = pEFL::Edje PREFIX = edje_
 
 INCLUDE: const-edje-xs.inc
@@ -447,6 +448,11 @@ edje_file_text_class_get(file,text_class,OUTLIST font,OUTLIST size)
 	const char * text_class
 	const char *font
 	int size
+	
+char *
+edje_load_error_str(error)
+	int error
+
 
 
 

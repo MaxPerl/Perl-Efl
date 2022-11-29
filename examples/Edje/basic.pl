@@ -48,18 +48,18 @@ my $edje_obj = pEFL::Edje::Object->add($evas);
 
 if (!$edje_obj->file_set($edje_file,"unexistent_group")) {
 	# TODO: Implement EdjeError
-	#my $err = $edje_obj->load_error_get();
-	#my $errszr = $err->load_error_str();
+	my $err = $edje_obj->load_error_get();
+	my $errstr = pEFL::Edje::load_error_str($err);
 	
-	warn "Could not load unexistant_group from basic.edj\n";
+	warn "Could not load unexistant_group from basic.edj: $errstr\n";
 }
 
 if (!$edje_obj->file_set($edje_file,"example_group")) {
 	# TODO: Implement EdjeError
-	#my $err = $edje_obj->load_error_get();
-	#my $errszr = $err->load_error_str();
+	my $err = $edje_obj->load_error_get();
+	my $errstr = pEFL::Edje::load_error_str($err);
 	
-	warn "Could not load unexistant_group from basic.edj\n";
+	warn "Could not load unexistant_group from basic.edj: $errstr\n";
 	$edje_obj->del();
 	pEFL::Ecore::Edje::shutdown();
 	pEFL::Ecore::Evas::shutdown();
