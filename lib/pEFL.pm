@@ -86,7 +86,7 @@ pEFL - Perl binding to the Enlightenment Foundation Libraries
 
 =head1 DESCRIPTION
 
-Perl bindings to the L<Enlightenment Foundation Libraries (EFL)|https://www.enlightenment.org>. The module gives a nice object-oriented interface. Apart from that the API is deliberately kept close to the Elementary C API. The Perl method names generally remove the prefix at the beginning of the C functions. Therefore applying the C documentation should be no problem. 
+This module provides a nice object-oriented interface to the L<Enlightenment Foundation Libraries (EFL)|https://www.enlightenment.org>. Apart from that the API is deliberately kept close to the Elementary C API. The Perl method names generally remove the prefix at the beginning of the C functions. Therefore applying the C documentation should be no problem. 
 
 For the documentation in detail please study the single modules and the L<C documentation|https://www.enlightenment.org/docs/start>
 
@@ -94,13 +94,13 @@ For the documentation in detail please study the single modules and the L<C docu
 
 =head2 Perl specific variants of methods (_pv, "Perl Value"-methods)
 
-If a method returns an Eina_List there usually is a version with the suffix _pv (for Perl Value) that returns a Perl array (for example in L<pEFL::Elm::List> the method C<< items_get_pv() >>). It is recommended to use these Perl adjusted methods. If you find a method, where the adaption is missing, please open an issue on L<github|https://github.com/MaxPerl/Perl-EFL>.
+If a method returns an C<Eina_List> there usually is a version with the suffix C<_pv> (for Perl Value) that returns a Perl array (for example in L<pEFL::Elm::List> the method C<< items_get_pv() >>). It is recommended to use these Perl adjusted methods. If you find a method, where the adaption is missing, please open an issue on L<github|https://github.com/MaxPerl/Perl-EFL>.
 
-Sometimes a method returns an EvasObject which can be any Elm Widget Type (e.g. C<< $nav->item_pop() >>, C<< $object->content_get >>, C<< $object_item->content_get() >>). In this case there will be a "Perl Value"-version that tries to bless the returned variable to the appropriate Perl class, too (e.g. C<< $naviframe->item_pop_pv() >>, C<< $object->[part_]content_get_pv() >>, C<< $object_item->[part_]content_get_pv() >>).
+Sometimes a method returns an C<EvasObject> which can be any Elm Widget Type (e.g. C<< $nav->item_pop() >>, C<< $object->content_get >>, C<< $object_item->content_get() >>). In this case there will be a "Perl Value"-version that tries to bless the returned variable to the appropriate Perl class, too (e.g. C<< $naviframe->item_pop_pv() >>, C<< $object->[part_]content_get_pv() >>, C<< $object_item->[part_]content_get_pv() >>).
 
 =head2 Output Parameters
 
-L<pEFL> sometimes uses output parameters. See for example C<< void elm_calendar_min_max_year_get(Evas_Object *obj,int *min,int *max) >>, where you have to pass in C a pointer to max and min. In Perl this is translated to C<< my ($min, $max) = $calendar->min_max_year_get() >>. Sometimes the C function returns a status or similar as in C<< Eina_Bool elm_entry_cursor_geometry_get(Evas_Object *obj,int *x,int *y,int *w,int *h) >>. In Perl this status variable is given, too. So the function C<< elm_entry_cursor_geometry_get >> for example is translated into C<< my ($status,$x,$y,$w,$h) = $entry->cursor_geometry_get; >>.
+L<pEFL> sometimes uses output parameters. See for example C<< void elm_calendar_min_max_year_get(Evas_Object *obj,int *min,int *max) >>, where you have to pass in C a pointer to max and min. In Perl this is translated to C<< my ($min, $max) = $calendar->min_max_year_get() >>. Sometimes the C function returns a status or similar as in C<< Eina_Bool elm_entry_cursor_geometry_get(Evas_Object *obj,int *x,int *y,int *w,int *h) >>. In Perl this status variable is given, too. So the function C<< elm_entry_cursor_geometry_get >> for example is translated into C<< my ($status,$x,$y,$w,$h) = $entry->cursor_geometry_get >>.
 
 =head1 FUNCTIONS IN EFL
 
@@ -110,11 +110,11 @@ The L<pEFL> module gives you the following functions:
 
 =item C<< pEFL::ev_info2s($event_info) >> 
 
-if C<$event_info> points to a C string, this function converts the C void pointer to a Perl string
+if C<$event_info> contains the address to a C string, this function converts the addressed C void pointer to a Perl string.
 
 =item C<< pEFL::ev_info2obj($event_info, "pEFL::Evas::Event::MouseUp") >>
 
-if C<$event_info> points to a C struct, this function converts the void pointer to a Perl scalar, that is blessed to the given class. The Perl class gives the necessary methods to get the members of the struct. At the moment the following C structs are (among others) supported:
+if C<$event_info> contains the address to a C struct, this function converts the addressed void pointer to a Perl scalar, that is blessed to the given class. The Perl class gives the necessary methods to get the members of the struct. At the moment the following C structs are (among others) supported:
 
 =over 8
 
@@ -160,7 +160,7 @@ if C<$event_info> points to a C struct, this function converts the void pointer 
 
 =back
 
-Some events pass an Elementary Widget or an Evas Object as event info. Of course you can use C<< ev_info2obj() >> to convert these pointers to a appropiate blessed Perl scalar, too. See for instance examples/colorselector.pl, where the Elm Widget Item Elm_Colorselector_Palette_Item is passed as event_info. This must converted by C<< pEFL::ev_info2obj($ev_info, "pEFL::Elm::ColorselectorPaletteItem"); >> 
+Some events pass an Elementary Widget or an Evas Object as C<$event_info>. Of course you can use C<< ev_info2obj() >> to convert these pointers to a appropiate blessed Perl scalar, too. See for instance examples/colorselector.pl, where the Elm Widget Item Elm_Colorselector_Palette_Item is passed as C<$event_info>. This must converted by C<< pEFL::ev_info2obj($ev_info, "pEFL::Elm::ColorselectorPaletteItem"); >> 
 
 The provision of Perl classes for event_info C structs is work in progress. If you need a specific binding for a C struct that is not supported at the moment, please send an issue report.
 
