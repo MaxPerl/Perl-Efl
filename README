@@ -23,7 +23,7 @@ DEPENDENCIES
 
 This module requires these other modules and libraries:
 
-efl-dev
+efl-dev or libefl-all-dev (e.g. on Ubuntu)
 
 COPYRIGHT AND LICENCE
 
