@@ -220,7 +220,13 @@ EcoreIdler *						T_EVAS_OBJECT
 EcoreIdleEnterer *					T_EVAS_OBJECT
 EcoreIdleExiter *					T_EVAS_OBJECT
 EcorePoller *						T_EVAS_OBJECT
-const EcorePoller * 				T_EVAS_OBJECT
+const EcorePoller *					T_EVAS_OBJECT
+
+#############
+# Others
+#############
+intArray *							T_ARRAY
+
 
 ################################################################################
 INPUT
