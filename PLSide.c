@@ -330,7 +330,7 @@ void del_tooltip(void *data, Evas_Object *obj, void *event_info) {
 }
 
 
-void call_perl_edje_message_handler(void *data, Evas_Object *obj, int type, int id,void *msg) {
+void call_perl_edje_message_handler(void *data, Evas_Object *obj, Edje_Message_Type type, int id,void *msg) {
 	dTHX;
 	dSP;
 

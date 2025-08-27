@@ -144,3 +144,6 @@ Revision history for Perl extension pEFL.
 0.76
 	- Code cleaning
 	- Add pEFL::Ecore::Event::type_flush_internal()
+	- Add support of ElmPalette
+0.77	
+	- Fix compile issue of edje_object_message_handler_set pEFL/Edje/Object.xs
