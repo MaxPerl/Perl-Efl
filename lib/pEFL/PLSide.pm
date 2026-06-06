@@ -493,6 +493,24 @@ sub register_ecore_event_handler_cb {
 }
 
 ##############################
+# Ecore EventHandler
+#############################
+
+our @EcoreFileMonitor_Cbs;
+
+sub register_ecore_file_monitor_cb {
+	my ($path,$func, $data) = @_;
+	
+	# TODO: Das ist exakt dasselbe wie EcoreTaskCbs!!!! Ich denke wir sollten das angleichen
+	my $struct = {	function => $func,
+					data => $data};
+	push @EcoreFileMonitor_Cbs, $struct;
+
+	return $#EcoreFileMonitor_Cbs;
+
+}
+
+##############################
 # Ecore Tasks (Timer, idler, poller, animator, etc)
 #############################
 
