@@ -119,5 +119,7 @@ Eina_Bool call_perl_ecore_event_handler_cb(void *data, int type, void *event);
 // Ecore Ecore File Monitor
 void call_perl_ecore_file_monitor_cb(void *data, Ecore_File_Monitor *em, Ecore_File_Event event, const char* path);
 
+Eina_Bool call_perl_ecore_fd_cb(void *data, Ecore_Fd_Handler *fd_handler);
+
 #define H_PLSIDE
 #endif

@@ -1626,3 +1626,58 @@ void call_perl_ecore_file_monitor_cb(void *data, Ecore_File_Monitor *em, Ecore_F
 		LEAVE;
 	}
 }
+
+Eina_Bool call_perl_ecore_fd_cb(void *data, Ecore_Fd_Handler *fd_handler) {
+	dTHX;
+	dSP;
+	int n, count;
+	SV *s_bool; Eina_Bool e_bool;
+	
+	if (SvTRUE(get_sv("pEFL::Debug",0)))
+			fprintf(stderr, "FD EVENT fired up\n");
+
+	int item_id = (intptr_t) data;
+	HV *Task = _get_task_hash(aTHX_ item_id);
+
+	// Object
+	SV *s_data = *( hv_fetch(Task,"data",4, FALSE) );
+
+	//Get func
+	SV *func = *( hv_fetch(Task,"function",8, FALSE) );
+
+	if (func && SvOK(func)) {
+		ENTER;
+		SAVETMPS;
+
+		PUSHMARK(SP);
+
+		XPUSHs(s_data);
+
+		PUTBACK;
+
+		count = call_sv(func, G_SCALAR);
+
+		SPAGAIN;
+
+		if (count != 1) {
+			croak("Expected 1 value got %d\n", count);
+		}
+
+		s_bool = POPs;
+
+		if (SvTRUE(s_bool) ) {
+		e_bool = EINA_TRUE;
+	}
+	else {
+		e_bool = EINA_FALSE;
+	}
+
+	PUTBACK;
+	FREETMPS;
+	LEAVE;
+
+	
+	}
+	
+	return e_bool;
+}

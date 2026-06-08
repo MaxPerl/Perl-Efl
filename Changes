@@ -149,4 +149,5 @@ Revision history for Perl extension pEFL.
 	- Fix compile issue of edje_object_message_handler_set pEFL/Edje/Object.xs
 	- Fix pEFL::Elm::List->items_get_pv();
 	- Add pEFL::Elm::Box->children_get(_pv)
-	- Add pEFL::Elm::File (only rudimentary at the moment) and pEFL::Elm::FileMonitor
+	- Add pEFL::Ecore::File (only rudimentary at the moment) and pEFL::Ecore::FileMonitor
+	- Add basic support of pEFL::Ecore::FDHandler

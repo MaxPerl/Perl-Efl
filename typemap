@@ -224,6 +224,8 @@ EcorePoller *						T_EVAS_OBJECT
 const EcorePoller *					T_EVAS_OBJECT
 EcoreFileMonitor *					T_EVAS_OBJECT
 const EcoreFileMonitor				T_EVAS_OBJECT
+EcoreFdHandler *					T_EVAS_OBJECT
+const EcoreFdHandler				T_EVAS_OBJECT
 
 #############
 # Others
