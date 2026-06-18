@@ -14,21 +14,25 @@ typedef Ecore_File_Monitor EcoreFileMonitor;
 
 MODULE = pEFL::Ecore::FileMonitor		PACKAGE = pEFL::Ecore::FileMonitor   PREFIX = ecore_file_monitor_
 
-void
+EcoreFileMonitor * 
 _ecore_file_monitor_add(path,func,id)
 	char *path
 	SV *func
 	int id
 CODE:
-    ecore_file_monitor_add(path, call_perl_ecore_file_monitor_cb,(void *) (intptr_t) id);
+    RETVAL = ecore_file_monitor_add(path, call_perl_ecore_file_monitor_cb,(void *) (intptr_t) id);
+OUTPUT:
+	RETVAL
+	
 
 MODULE = pEFL::Ecore::FileMonitor		PACKAGE = EcoreFileMonitorPtr   PREFIX = ecore_file_monitor_
 
 void
-ecore_file_monitor_del(monitor)
+_ecore_file_monitor_del(monitor)
 	EcoreFileMonitor *monitor
-
-
+CODE:
+	ecore_file_monitor_del(monitor);
+	 
 const char* 
 ecore_file_monitor_path_get(monitor)
-	EcoreFileMonitor *monitor 	
+	EcoreFileMonitor *monitor

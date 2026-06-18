@@ -42,7 +42,20 @@ package EcoreFileMonitorPtr;
 
 our @ISA = qw();
 
-
+sub del {
+	my ($filemonitor) = @_;
+	
+	# Cleanup C
+	my $path = $filemonitor->path_get();
+	_ecore_file_monitor_del($filemonitor);
+	
+	# Cleanup Perl
+	foreach my $cb (@pEFL::PLSide::EcoreFileMonitor_Cbs) {
+		if ($cb->{path} eq $path) {
+			$cb = undef;
+		}
+	}
+}
 
 
 # Preloaded methods go here.
@@ -56,13 +69,15 @@ pEFL::Ecore::FileMonitor
 
 =head1 DESCRIPTION
 
-This module is a perl binding to the Ecore Poll functions.
+This module is a perl binding to the Ecore File Monitor functions.
 
-Ecore poller provides infrastructure for the creation of pollers.
+Ecore File Monitor provides infrastructure for the creation of file monitors.
+
+Please note that only one filemonitor per path is possible.
 
 =head1 SEE ALSO
 
-https://www.enlightenment.org/develop/legacy/api/c/start#group__Ecore__FileMonitor__Group.html
+https://www.enlightenment.org/develop/legacy/api/c/start#group__Ecore__File__Group.html
 
 =head1 AUTHOR
 

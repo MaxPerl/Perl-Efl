@@ -213,6 +213,7 @@ EcoreEventMouseMove *				T_EVAS_OBJECT
 EcoreEventSignalExit *				T_EVAS_OBJECT
 EcoreEventSignalRealtime *			T_EVAS_OBJECT
 EcoreEventSignalUser *				T_EVAS_OBJECT
+EcoreEventPerlEvent *				T_EVAS_OBJECT
 EcoreEvas * 						T_EVAS_OBJECT
 const EcoreEvas *					T_EVAS_OBJECT
 EcoreTimer *						T_EVAS_OBJECT

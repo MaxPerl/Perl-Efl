@@ -1,17 +1,17 @@
-package pEFL::Ecore::Event::SignalUser;
+package pEFL::Ecore::Event::PerlEvent;
 
 use strict;
 use warnings;
 
 require Exporter;
 
-our @ISA = qw(Exporter EcoreEventSignalUserPtr);
+our @ISA = qw(Exporter EcoreEventPerlEventPtr);
 
 require XSLoader;
-XSLoader::load('pEFL::Ecore::Event::SignalUser');
+XSLoader::load('pEFL::Ecore::Event::PerlEvent');
 
 
-package EcoreEventSignalUserPtr;
+package EcoreEventPerlEventPtr;
 
 
 
@@ -22,11 +22,11 @@ __END__
 
 =head1 NAME
 
-pEFL::Ecore::Event::SignalUser
+pEFL::Ecore::Event::PerlEvent
 
 =head1 DESCRIPTION
 
-This module is a perl binding to the Ecore_Event_SignalUser struct.
+This module is a perl binding to the Ecore_Event_PerlEvent struct.
 
 =head1 AUTHOR
 

@@ -1471,7 +1471,7 @@ Eina_Bool call_perl_ecore_event_handler_cb(void *data, int type, void *event) {
 
 		XPUSHs(s_data);
 		XPUSHs(s_type);
-		XPUSHs(s_event);
+		XPUSHs(sv_2mortal(s_event));
 
 		PUTBACK;
 
@@ -1498,6 +1498,18 @@ Eina_Bool call_perl_ecore_event_handler_cb(void *data, int type, void *event) {
 
 	return e_bool;
 	}
+}
+
+void ecore_event_perl_free_cb(void *data, void *event) {
+    dTHX;
+    PerlEvent *pe = (PerlEvent*) event;
+    printf("Freeing PerlEvent Data\n");
+    if (pe) {
+        if (pe->perl_sv) {
+            SvREFCNT_dec(pe->perl_sv); // Perl-Objekt freigeben
+        }
+        Safefree(pe); // Das C-Struct freigeben
+    }
 }
 
 // --------------------------------------
@@ -1560,7 +1572,19 @@ Eina_Bool call_perl_task_cb(void *data) {
 	PUTBACK;
 	FREETMPS;
 	LEAVE;
-
+	
+	// ==========================================
+	// Important: If the timer returns 0 (e_bool == EINA_FALSE),
+	// the handler is on C-Side not valid anymore and there
+	// automatically cleaned up. We have to do this here on Perl, too
+	// ==========================================
+	if (e_bool == EINA_FALSE) {
+		AV *Task_Cbs = get_av("pEFL::PLSide::EcoreTask_Cbs", 0);
+		if (Task_Cbs) {
+			av_store(Task_Cbs, (I32)item_id, newSV(0));
+		}
+	}
+	
 	return e_bool;
 	}
 }
@@ -1677,6 +1701,18 @@ Eina_Bool call_perl_ecore_fd_cb(void *data, Ecore_Fd_Handler *fd_handler) {
 	LEAVE;
 
 	
+	}
+	
+	// ==========================================
+	// Important: If the timer returns 0 (e_bool == EINA_FALSE),
+	// the handler is on C-Side not valid anymore and there
+	// automatically cleaned up. We have to do this here on Perl, too
+	// ==========================================
+	if (e_bool == EINA_FALSE) {
+		AV *Task_Cbs = get_av("pEFL::PLSide::EcoreTask_Cbs", 0);
+		if (Task_Cbs) {
+			av_store(Task_Cbs, (I32)item_id, newSV(0));
+		}
 	}
 	
 	return e_bool;

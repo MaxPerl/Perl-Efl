@@ -116,6 +116,12 @@ Eina_Bool call_perl_task_cb(void *data);
 // Ecore Event Handler
 Eina_Bool call_perl_ecore_event_handler_cb(void *data, int type, void *event);
 
+typedef struct {
+    SV *perl_sv;
+} PerlEvent;
+
+void ecore_event_perl_free_cb(void *data, void *event);
+
 // Ecore Ecore File Monitor
 void call_perl_ecore_file_monitor_cb(void *data, Ecore_File_Monitor *em, Ecore_File_Event event, const char* path);
 

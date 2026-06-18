@@ -34,6 +34,9 @@ WriteMakefile(
 		'lib/pEFL/Ecore/EventHandler' => {
 			OBJECT => 'lib/pEFL/Ecore/EventHandler$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},
+		'lib/pEFL/Ecore/Event' => {
+			OBJECT => 'lib/pEFL/Ecore/Event$(OBJ_EXT) PLSide$(OBJ_EXT)',
+		},
 		'lib/pEFL/Ecore/Evas' => {
 			OBJECT => 'lib/pEFL/Ecore/Evas$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},
