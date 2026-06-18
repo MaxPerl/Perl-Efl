@@ -13,6 +13,7 @@ use pEFL::Ecore::Poller;
 use pEFL::Ecore::Time;
 use pEFL::Ecore::Timer;
 use pEFL::Ecore::Event;
+use pEFL::Ecore::EventType;
 use pEFL::Ecore::EventFilter;
 use pEFL::Ecore::EventHandler;
 use pEFL::Ecore::File;

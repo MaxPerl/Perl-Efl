@@ -37,7 +37,7 @@ ecore_event_shutdown()
 #	void *data
 
 EcoreEvent *
-ecore_event_add_pv(type,ev)
+_ecore_event_add_pv(type,ev)
 	int type
 	SV *ev
 CODE:

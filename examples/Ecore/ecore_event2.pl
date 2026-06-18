@@ -8,7 +8,7 @@ use Devel::Peek;
 
 pEFL::Ecore::init();
 
-my $event_type = pEFL::Ecore::Event::type_new();
+my $event_type = pEFL::Ecore::EventType->new();
 
 my $handler1 = pEFL::Ecore::EventHandler->add($event_type,\&_event_handler1_cb,"dataone");
 my $handler2 = pEFL::Ecore::EventHandler->add($event_type,\&_event_handler2_cb,"datatwo");
@@ -17,7 +17,7 @@ my $i = 0;
 for ($i=0; $i <= 15; $i++) {
 	print "Fire event with type $event_type and data $i\n";
 	my $hash = {number => $i};
-	my $event = pEFL::Ecore::Event::add_pv($event_type, $hash);
+	my $event = pEFL::Ecore::Event->add_pv($event_type, $hash);
 }
 
 print "Start the main loop\n";

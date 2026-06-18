@@ -1,4 +1,4 @@
-package pEFL::Ecore::Event;
+package pEFL::Ecore::EventType;
 
 use strict;
 use warnings;
@@ -7,7 +7,7 @@ require Exporter;
 
 use pEFL::PLSide;
 
-our @ISA = qw(Exporter EcoreEventPtr);
+our @ISA = qw(Exporter EcoreEventTypePtr);
 
 # Items to export into callers namespace by default. Note: do not export
 # names by default without a very good reason. Use EXPORT_OK instead.
@@ -27,15 +27,20 @@ our @EXPORT = qw(
 );
 
 require XSLoader;
-XSLoader::load('pEFL::Ecore::Event');
+XSLoader::load('pEFL::Ecore::EventType');
 
-sub add_pv {
-	my ($class,$type,$ev_info) = @_;
-     my $widget = _ecore_event_add_pv($type, $ev_info);
-     return $widget;
+sub new {
+	my ($class) = @_;
+     my $type = _ecore_event_type_new();
+     return $type;
 }
 
-package EcoreEventPtr;
+sub flush_internal {
+	my ($type, @array) = @_;
+	_ecore_event_type_flush_internal($type, @array)
+}
+
+package EcoreEventTypePtr;
 
 our @ISA = qw();
 
@@ -46,11 +51,11 @@ __END__
 
 =head1 NAME
 
-pEFL::Ecore::Event
+pEFL::Ecore::EventType
 
 =head1 DESCRIPTION
 
-This module is a perl binding to the Ecore_Event functions.
+This module is a perl binding to the Ecore_EventType functions.
 
 
 =head1 SEE ALSO
