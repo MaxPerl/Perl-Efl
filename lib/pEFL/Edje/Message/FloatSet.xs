@@ -33,6 +33,14 @@ CODE:
 OUTPUT:
 	RETVAL
 
+void
+DESTROY(message) 
+    EdjeMessageFloatSet *message
+CODE:
+	//printf("Freeing Message_Float_Set\n");
+	Safefree(message);
+
+
 MODULE = pEFL::Edje::Message::FloatSet		PACKAGE = EdjeMessageFloatSetPtr
 
 int
@@ -58,10 +66,3 @@ PPCODE:
     for (index = 0; index <count; index++) {
     	PUSHs( sv_2mortal( newSVnv( vals[index] ) ));
 	}
-	
-void
-DESTROY(message) 
-    EdjeMessageFloatSet *message
-CODE:
-	//printf("Freeing Message_Float_Set\n");
-	Safefree(message);

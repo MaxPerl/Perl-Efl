@@ -28,11 +28,18 @@ CODE:
 	message->count = count+1;
 	for (index = 0; index <= count; index++) {
 		message->val[index] = SvIV( *av_fetch(val_arr,index,0) );
-		printf("VALUE %d\n",message->val[index]);
+		//printf("VALUE %d\n",message->val[index]);
 	}
 	RETVAL = message;
 OUTPUT:
 	RETVAL
+
+void
+DESTROY(message) 
+    EdjeMessageIntSet *message
+CODE:
+	//printf("Freeing Message_Int_Set\n");
+	Safefree(message);
 
 MODULE = pEFL::Edje::Message::IntSet		PACKAGE = EdjeMessageIntSetPtr
 
@@ -59,10 +66,3 @@ PPCODE:
     for (index = 0; index <count; index++) {
     	PUSHs( sv_2mortal( newSViv( vals[index] ) ));
 	}
-	
-void
-DESTROY(message) 
-    EdjeMessageIntSet *message
-CODE:
-	//printf("Freeing Message_Int_Set\n");
-	Safefree(message);

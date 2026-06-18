@@ -21,10 +21,19 @@ CODE:
 	if (items != 2) {
 		Perl_croak(aTHX_ "Usage pEFL::Edje::Message::Int->new($val)\n");
 	}
+	New(0, message, 1, EdjeMessageInt);	
 	message->val = val;
 	RETVAL = message;
 OUTPUT:
 	RETVAL
+
+void
+DESTROY(message) 
+    EdjeMessageInt *message
+CODE:
+	/* Da wir oben New() nutzen, MÜSSEN wir hier via Safefree aufräumen,
+	   wenn das in Perl erstellte Objekt gelöscht wird. */
+	Safefree(message);
 
 MODULE = pEFL::Edje::Message::Int		PACKAGE = EdjeMessageIntPtr
 
