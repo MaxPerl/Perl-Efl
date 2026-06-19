@@ -54,34 +54,42 @@ OUTPUT:
 
 =pod
 
-/* =========================================================================
-   PACKAGE: pEFL::Edje::Message::String
-   -------------------------------------------------------------------------
-   Dieses Package repräsentiert Nachrichten, die aktiv in Perl erstellt wurden
-   (z. B. via ->new()). 
-   
-   OWNERSHIP: Perl besitzt diese Datenstruktur. Nach dem Senden via 
-   edje_object_message_send() macht Edje intern eine tiefe Kopie (Deep Copy). 
-   Das von Perl erstellte Original wird von C nicht mehr benötigt. Daher 
-   MUSS Perl den Speicher im DESTROY via Safefree freigeben, um Memory Leaks 
-   zu verhindern.
-   ========================================================================= */
+=head1 DEVELOPER MEMO: MEMORY MANAGEMENT & OWNERSHIP FOR MESSAGES
 
-/* =========================================================================
-   PACKAGE: EdjeMessageStringPtr
-   -------------------------------------------------------------------------
-   Dieses Package dient als Basisklasse für alle Message-String-Methoden. 
-   Es wird im C-Handler (call_perl_edje_message_handler) direkt genutzt, um 
-   reine Lese-Pointer aus C an Perl zu übergeben.
-   
-   OWNERSHIP-WARNUNG (KEIN DESTROY HIER):
-   1. Kommt das Objekt aus C, blesst der C-Handler es direkt in DIESES Package.
-      Der Speicher gehört Edje und wird von C nach dem Callback automatisch 
-      gelöscht. Ein DESTROY hier würde Edjes internen Speicher zerstören.
-   
-   2. Erstellt Perl die Nachricht, erbt 'pEFL::Edje::Message::String' von 
-      diesem Package, um die Methode str() mitnutzen zu können. Da Perl hier 
-      der Owner ist, fängt das dortige DESTROY das Aufräumen sauber ab.
-   ====================================================================== */
+=head2 PACKAGE: pEFL::Edje::Message::String
+
+=over 4
+
+=item * B<Context:> For messages actively created in Perl (e.g., via C<< ->new() >>).
+
+=item * B<Ownership:> Perl owns this data structure. 
+
+=item * B<Lifecycle:> After sending via C<edje_object_message_send()>, Edje performs a deep copy. The original Perl-created structure is no longer needed by the C layer. 
+
+=item * B<Action:> Perl B<MUST> free the memory in C<DESTROY> using C<Safefree> to prevent memory leaks.
+
+=back
+
+=head2 PACKAGE: EdjeMessageStringPtr
+
+=over 4
+
+=item * B<Context:> Base class for all EdjeMessageString methods. Used directly in the C-handler (C<call_perl_edje_message_handler>) to pass read-only pointers from C to Perl.
+
+=item * B<CRITICAL: NO DESTROY HERE!>
+
+=over 4
+
+=item 1. Object from C
+
+If the object originates in C, the C-handler blesses it directly into THIS package. The memory belongs to Edje and is automatically freed after the callback. Adding a C<DESTROY> here will corrupt Edje's internal memory.
+
+=item 2. Object from Perl
+
+When Perl creates the message, C<pEFL::Edje::Message::String> inherits from this package to share the C<str()> method. Since Perl is the owner in that case, its own C<DESTROY> block safely handles the cleanup.
+
+=back
+
+=back
 
 =cut

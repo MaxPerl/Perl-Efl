@@ -46,8 +46,7 @@ sub _event_handler1_cb {
 sub _event_handler2_cb {
 	my ($data, $ev_type, $ev_info) = @_;
 	
-	my $s_ev = pEFL::ev_info2obj($ev_info, "pEFL::Ecore::Event::PerlEvent");
-	my $hash = $s_ev->perl_sv();
+	my $hash = pEFL::ev_info2pv($ev_info);
 	my $number = $hash->{number};
 	
 	print "event handler2: number=$number\n";
