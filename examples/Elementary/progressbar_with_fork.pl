@@ -11,7 +11,6 @@ use IO::Handle;
 use IO::String; 
 
 my ($win);
-my $buffer = ""; 
 
 pEFL::Elm::init($#ARGV, \@ARGV);
 
@@ -88,13 +87,18 @@ sub _button_click_cb {
         $popup->show();
         
         my $fd = fileno($read_fh);
-        pEFL::Ecore::FdHandler->add($fd, ECORE_FD_READ, \&_pipe_read_cb, [$read_fh, $pid, $popup, $progress]);
+        # Keinen globalen Buffer, sondern für jeden Click eines Buttons nur einen Buffer (sonst könnte
+        # es ggf. bei Doppelklicks zu Datensalat kommen
+        # Wichtig: der Wert von $buffer wird hier in das Array nur kopiert. Es gibt also auch kein Problem
+        # mit dem Gültigkeitsbereich von $buffer
+        my $buffer = "";
+        pEFL::Ecore::FdHandler->add($fd, ECORE_FD_READ, \&_pipe_read_cb, [$read_fh, $pid, $popup, $progress, $buffer]);
     }
 }
 
 sub _pipe_read_cb {
     my ($data, $handler) = @_;
-    my ($read_fh, $pid, $popup, $progress) = @$data;
+    my ($read_fh, $pid, $popup, $progress, $buffer) = @$data;
     
     my $chunk;
     my $bytes_read = sysread($read_fh, $chunk, 1024);
