@@ -283,7 +283,7 @@ evas_font_path_clear(obj)
 	EvasCanvas *obj
 
 
-EinaList *
+const EinaList *
 evas_font_path_list(obj)
 	const EvasCanvas *obj
 

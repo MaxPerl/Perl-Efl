@@ -162,3 +162,11 @@ Revision history for Perl extension pEFL.
 	- Add new modules and examples to MANIFEST so that they really are in the tardist :-S
 0.78
 	- Fix example progressbar_with_fork.pl ("Don't use global $buffer")
+	- Code refactoring
+	- Always cleanup perl callbacks data, even if callback_del_full returns NULL
+	- No infinitive loops in *_signal_callbacks_del_full functions
+	- Fix heap-buffer-overflow in elm_calendar_weekdays_names_set() (use savepv() for string allocation)
+	- Implement pure perl interface to $evas_obj->data_set|get|del and $elm_object_item->data_set|get|del
+	- Refactor and secure memory release for all "Item Container Widgets" (e.g. for Genlist, Combobox, List,
+	  Menu, Hoversel, Toolbar, Index, CtxPopup, Popup, Colorbox, SegmentControl); 
+	  include detail comments for understanding in PLSide.mp

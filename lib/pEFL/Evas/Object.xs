@@ -429,7 +429,7 @@ CODE:
 #	SV *func
 
 
-void *
+void
 _evas_object_event_callback_del_full(obj,type,func,cstructaddr)
 	EvasObject *obj
 	int type
@@ -660,7 +660,25 @@ CODE:
         fprintf(stderr, "passing event info is not supported at the moment \n");
     }
 	evas_object_smart_callback_call(obj, event, NULL);
+
+void
+_evas_object_smart_callback_call_pv(obj,event,event_info)
+	EvasObject *obj
+	const char *event
+	SV *event_info
+CODE:
+	PerlEvent *pe;
+	SV *perl_sv = newSVsv(event_info);
 	
+	// Allocate memory
+	Newx(pe, 1, PerlEvent);
+	pe->perl_sv = perl_sv;
+	
+	evas_object_smart_callback_call(obj, event, (void*) pe);
+	
+    SvREFCNT_dec(pe->perl_sv); // Perl-Objekt freigeben
+	Safefree(pe);
+
 
 void
 _free_perl_callback(class, addr)

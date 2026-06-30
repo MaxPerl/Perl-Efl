@@ -67,6 +67,9 @@ WriteMakefile(
 		'lib/pEFL/Elm/Menu' => {
 			OBJECT => 'lib/pEFL/Elm/Menu$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},
+		'lib/pEFL/Elm/Naviframe' => {
+			OBJECT => 'lib/pEFL/Elm/Naviframe$(OBJ_EXT) PLSide$(OBJ_EXT)',
+		},
 		'lib/pEFL/Elm/NaviframeItem' => {
 			OBJECT => 'lib/pEFL/Elm/NaviframeItem$(OBJ_EXT) PLSide$(OBJ_EXT)',
 		},
@@ -108,6 +111,12 @@ WriteMakefile(
 		},
 		'lib/pEFL/PLSide' => {
 			OBJECT => 'lib/pEFL/PLSide$(OBJ_EXT) PLSide$(OBJ_EXT)',
+		},
+		'lib/pEFL/PerlSmartClass' => {
+			OBJECT => 'lib/pEFL/PerlSmartClass$(OBJ_EXT) PLSmart$(OBJ_EXT)',
+		},
+		'lib/pEFL/PerlSmartObject' => {
+			OBJECT => 'lib/pEFL/PerlSmartObject$(OBJ_EXT) PLSmart$(OBJ_EXT)',
 		},
 	},
 	},

@@ -36,6 +36,7 @@ XSLoader::load('pEFL::PLSide');
 # General Callbacks (Smart_Cbs, Evas_Events, Tooltip::Content_Cbs)
 ###################
 
+our %ObjectData;
 our %Callbacks;
 
 sub register_smart_cb {
@@ -44,8 +45,16 @@ sub register_smart_cb {
 	my $objaddr = $$obj;
 	my $funcname = get_func_name($func);
 	my $key = "$event###$funcname";
+	
+	if (defined($Callbacks{$objaddr}{$key})) {
+		croak "For object at address $objaddr there is already" .
+			" a callback handler registered for event $event and function" .
+			" $funcname. You can not register two handlers with the same event".
+			" and funcname. Perhaps you try to register two anonym subroutines" .
+			" for an event. This isn't supported at the moment. Sorry \n";
+	}
 
-	# Note: We don't save the object itself, becaus we don't want to increase
+	# Note: We don't save the object itself, because we don't want to increase
 	# the refcount of the object!!!
 	my $pclass = blessed($obj);
 
@@ -76,6 +85,12 @@ sub cleanup {
 		# Delete the callback on the Perl side
 		delete($Callbacks{$objaddr}{$key});
 	}
+	
+	if (exists $ObjectData{$objaddr}) {
+		warn "Delete custom object data for address $objaddr\n" if ($pEFL::Debug);
+		delete $ObjectData{$objaddr};
+	}
+	
 	warn "\n" if ($pEFL::Debug);
 }
 
@@ -120,10 +135,56 @@ sub cleanup_format_cb {
 
 #################
 # Genlist Item Class
+#
+# Das sind besondere item containers, bei denen die Items direkt bei ihrer der Erstellung mit 
+# bestimmten Callbacks assoziert werden. Meist ist das z.B. für die Auswahl des Items.
+# Es kann aber auch eine ganze ItemClass übergeben werden z.B. für die Erstellung des Textes (text_get) 
+# und des Inhalts (content_get) des Items oder die Zerstörung des Items (gen_del) usw
+# Viele Widgets haben zunächst nur eine automatische Cb-Funktion für die Auswahl des Elements,
+# fügen aber mit Hilfe von elm_object_item_del_cb() zusätzlich einen Callback für die Zerstörung hinzu
+# Allen Callbacks werden die bei der Erstellung des Items mitgegebenen Daten func_data übergeben.
+#
+# Die Herausforderung hier ist also, dass wir bei Registrierung der Callbacks (geschieht
+# intern durch Efl) keine Objektaddresse des Items haben, die wir als func_data mitgeben könnten. 
+# Gelöst wird dies durch mehrere Strukturen:
+#
+# %GenItc = Hash aller Item Container, wobei key die Objektadresse des Containers ist
+#			Containers / der Class ist; Als value werden alle Callback Funktionen der jeweiligen 
+#			ItemClass gespeichert
+# %GenItems = Für den Zugriff auf die für jedes Item spezifischen Daten (data) zu bekommen
+# 			enthält %GenItems einen Array aller Items eines Item Containers. Key ist die Objektadresse 
+#			des Item Containers, value der Array aller Items des jeweiligen Item Containers. 
+#			Bei Erstellung der C struct für jedes Item (s. sogleich) wird in %GenItems auch die Adresse
+# 			der c struct gespeichert, um auch die C struct später freigeben zu können! 
+# _perl_gendata = für jedes Item spezifische (!) C struct auf C Seite, der die Objektadresse des 
+#			Item Containers (z.B. Genlist Objekt) und ggf. der Item Class (z.B. GenlistItc) speichert
+#			sowie den Index des jeweiligen Items.
+#
+# Eine vollkommene Implementierung von %GenItc, %GenItems und _perl_gendata haben nur folgende Widgets:
+#	Genlist, Combobox
+#
+# Die meisten Widgets registrieren lediglich einen selected_item callback automatisch. Eine Item Class gibt 
+# es nicht. Diese Widgets haben daher nur %GenItems, _perl_gendata und ItemDatas in %ItemData. 
+# Auch für diese wird aber mittels elm_object_item_del_cb call_perl_gen_del() augerufen,
+# allerdings derzeit ohne eine user spezifische del Funktion! call_perl_gen_del löscht hier also nur 
+# den pEFL::PLSide::GenItems hash Eintrag, die _perl_gendata c struct (siehe ganz am Ende) und die Item-Daten in %ItemData
+#	List, Menu, Hoversel, Toolbar, Index, 
+#
+# Bei folgenden wird zwar für den selected item callback pEFL::GenItems und _perl_gendata aufgerufen,
+# leider wird aber bei del_cb nicht die bei der Erstellung des Items übergebene die funcdata (= id / index
+# für den %pEFL::PLSide::GenItems{objaddr}-Array
+# 	CtxPopup, Popup
+#	=> Hier müssen pEFL::PLSide::Genitems, _perl_gendata und ItemData gesondert freigegeben werden
+#
+# Naviframe hat seine eigene Infrakstruktur (pop_cb statt del_cb)
+#
+# Folgende Item Container nutzen überhaupt nicht den Genlist Ansatz
+#	Colorbox, SegmentControl => siehe insoweit eigene Cleanup Funktionen am Ende!
 ##################
 
 our %GenItc;
 our %GenItems;
+our %ItemData;
 
 sub gen_text_get {
 	my ($itc, $func) = @_;
@@ -150,7 +211,30 @@ sub gen_del {
 	my ($itc, $func) = @_;
 
 	my $itcaddr = $$itc;
-	$GenItc{$itcaddr}{'del'} = $func || sub {};
+	
+	# Die vom User oder Framework definierte originale Lösch-Funktion
+	my $user_del_func = $func || sub {};
+	
+	# Do automatic cleanup of item data and then call $user_del_func
+	my $wrapper_del_func = sub {
+		my ($item, $data) = @_; # C übergibt beim Löschen das Item-Objekt; NEIN DAS STIMMT NICHT!!!
+		
+		if (ref $item) {
+			my $itemaddr = $$item;
+			if (defined $pEFL::PLSide::ItemData{$itemaddr}) {
+				warn "Automated cleanup of custom item data for address $itemaddr\n" if ($pEFL::Debug);
+				delete $pEFL::PLSide::ItemData{$itemaddr}; 
+			}
+		}
+		
+		# Ruft die originale Lösch-Logik auf, damit alles wie gewohnt weiterläuft
+		$user_del_func->(@_);
+	};
+
+	# Wir speichern den Wrapper statt der nackten Funktion
+	$GenItc{$itcaddr}{'del'} = $wrapper_del_func;
+	
+	#$GenItc{$itcaddr}{'del'} = $func || sub {};
 }
 
 sub save_gen_item_data {
@@ -179,12 +263,28 @@ sub save_gen_item_data {
 	return $#items;
 }
 
+# Richtiger wäre der Name Cleanup Item Container
+# Das Cleanup der Items sollte in gen_del geschehen (tut es aber nicht immer / vollständig dort)
 sub cleanup_genitems {
 	my ($widget) = @_;
 	
 	my $objaddr = $$widget;
 	my $raddr = refaddr($widget);
 	
+	# Items müssen hier explizit gelöscht werden, bevor am Ende dieser
+	# Funktion delete($GenItems{$objaddr}) aufgerufen wird.
+	#
+	# Hintergrund: EFL feuert EVAS_CALLBACK_DEL auf dem Widget zuerst, löscht
+	# die enthaltenen Items aber erst danach. Würden wir hier nichts tun, käme
+	# die del_cb der Items (call_perl_gen_del) zu spät – nämlich NACHDEM
+	# $GenItems{$objaddr} bereits weggräumt wurde. Die Folge wäre ein
+	# "No items found in Genlist"-Fehler in _get_gen_item_hash().
+	#
+	# Durch das explizite $item->del() hier wird call_perl_gen_del() noch
+	# während $GenItems{$objaddr} existiert aufgerufen, und kann den
+	# zugehörigen _perl_gendata-C-Struct sowie den Perl-Hash-Eintrag
+	# sauber freigeben.
+	# 
 	# Workaround:
 	# Problem: If we delete $item->cstructaddr, in the "del_cb" call of the GenlistItem (the callback is defined automatically
 	# and can be supplemented by a user-defined callback through $itc->del()) the perl_gendata struct cannot not be accessed any more :-( )
@@ -226,24 +326,38 @@ sub cleanup_genitems {
 	#	item_del_cb!!!! Therefore at the moment there is no possibility
 	#	to delelte popped items individually :-S
 	# TODO: Implement elm_object_item_data_set|get and try it again
-	#elsif ($pclass eq "ElmNaviframePtr" || $pclass eq "pEFL::Elm::Naviframe") {
-	#	warn "Delete NaviframeItems\n" if ($pEFL::Debug);
-	#	my $item;
-	#	while ($item=$widget->bottom_item_get()) {
-	#		$item->del();
-	#	}
-	#}
-	else {
-		warn "Delete GenItems of Popup/Ctxpopup/EntryContextMenu/NaviframeItem\n" if ($pEFL::Debug);
+	elsif ($pclass eq "ElmNaviframePtr" || $pclass eq "pEFL::Elm::Naviframe") {
+		warn "Delete NaviframeItems\n" if ($pEFL::Debug);
+		my $item;
+		while ($item=$widget->bottom_item_get()) {
+			$item->del();
+		}
 	}
+		else {
+		warn "Delete Items of Popup/Ctxpopup/EntryContextMenu via fallback loop\n" if ($pEFL::Debug);
+		}
+
 	
 	###########################
-	# This is only important for ElmPopupItems, ElmCtxpopup, NaviframeItem and perhaps EntryContextMenuItem :-)
+	# This is only important for ElmPopupItems, ElmCtxpopup (perhaps EntryContextMenuItem ?) :-)
+	# Because on these Items call_perl_gen_del, that also frees c struct and deletes $pEFL::PLSide::GenItems->[$id],  
+	# is not fired up :-( 
 	# Anyway, it doesn't hurt to check and possibly (if still exists) delete perl/xs things for safety twice
+	#
+	# Problem: For CtxPopup and Popup obviously data will not be passed to all related callbacks, especially not to item_del_cb
+	# TODO (?): Bei Naviframe konnten die Daten mit elm_object_item_data_set() für call_perl_gen_del() verfügbar
+	# gemacht werden. Gegebenenfalls können wir dies auch für CtxPopup und Popup einmal anpassen???
+	# Im Moment geringe Priorität/Kein Anpassungsbedarf: 
+	# c struct und %GenItems werden hier sauber abgeräumt
+	# %ItemData wird in cleanup_itemdata in schönstem, reinem Perl aufgeräumt, nachdem bei der Konstruktion mit
+	# $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_genitems, $widget);
+	# hierfür ein eigenes Event registriert wurde
+	# Lösung funktioniert genauso gut, wie die C/XS Lösung in call_perl_gen_del(), daher im Moment kein Änderungsbedarf
+	#
 	###########################
 	foreach my $item ( @{ $GenItems{$objaddr} } ) {
 		next unless (defined($item));
-
+		
 		# Free the cstruct on C side
 		if ($item->{cstructaddr}) {
 			warn "Free c struct at $objaddr\n" if ($pEFL::Debug);
@@ -259,6 +373,34 @@ sub cleanup_genitems {
 	delete($GenItems{$objaddr});
 }
 
+# This callback is necessary for widget, where object_item_del doesn't work, that is:
+# CtxPopup, Popup (because $data (= $item) is only passed to select_item_cb!)
+# ColorSelector, SegmentControl (doesn't support the gen_cbs stuff at all)
+# Naviframe (there isn't an gen_del_cb, but instead an pop_cb)
+sub save_object_items {
+	my ($obj, $widget) = @_;
+	
+	# Save the items in the Object Data!
+    my $items = []; 
+    if (defined($obj->data_get("saved_items"))) {
+    	$items = $obj->data_get("saved_items");
+    }
+    push @$items, $widget;
+    $obj->data_set("saved_items",$items);
+}
+
+sub cleanup_itemdata {
+	my ($obj) = @_;
+	
+	my $items = $obj->data_get("saved_items");
+	foreach my $item (@$items) {
+		my $itemaddr = $$item;
+		warn "BEFORE $item with addr" . $itemaddr . Dumper(%pEFL::PLSide::ItemData);
+		warn "Automated cleanup of custom item data for address $itemaddr\n" if ($pEFL::Debug);
+		delete $pEFL::PLSide::ItemData{$itemaddr}; 
+		 warn "AFTER " . Dumper(%pEFL::PLSide::ItemData);
+	}
+}
 
 ###################
 # Entry - Markup_Filter_Cbs
@@ -341,11 +483,12 @@ sub get_signal_id {
 	my $signal_id = undef;
 	my $i = 0;
 	foreach my $signal (@signals) {
-		next unless (defined($signal));
-		my $sfuncname = get_func_name($signal->{function});
-		if (($signal->{emission} eq $emission) && ($signal->{source} eq $source) && ($sfuncname eq $funcname) ) {
-			$signal_id = $i;
-			last;
+		if (defined($signal)) {
+			my $sfuncname = get_func_name($signal->{function});
+			if (($signal->{emission} eq $emission) && ($signal->{source} eq $source) && ($sfuncname eq $funcname) ) {
+				$signal_id = $i;
+				last;
+			}
 		}
 		$i++;
 	}

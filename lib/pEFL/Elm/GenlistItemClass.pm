@@ -67,7 +67,8 @@ sub del {
 
     pEFL::PLSide::gen_del($obj,$func);
     # The del callback was already defined at creation of the GenlistItemClass!!!
-    #$obj->_elm_genlist_item_class_state_get();
+    #$obj->_elm_genlist_item_del_get();
+    
 }
 
 # Preloaded methods go here.

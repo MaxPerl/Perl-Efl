@@ -71,8 +71,8 @@ _perl_callback *perl_save_callback(pTHX_ SV *func, UV objaddr, char *event, char
 
 	cb = (_perl_callback *)malloc(sizeof(_perl_callback));
 	memset(cb, '\0', sizeof(_perl_callback));
+	
 	cb->funcname = newSV(0);
-
 	if (func && SvOK(func)) {
 		cv_name((CV*)SvRV(func),cb->funcname,0);
 	}
@@ -113,9 +113,11 @@ void call_perl_sub(void *data, Evas_Object *obj, void *event_info) {
 
 	int n;
 	int count;
-	SV *s_obj = newSV(0);
 	_perl_callback *perl_saved_cb = data;
+	
+	HV *cb_data = _get_smart_cb_hash(aTHX_ perl_saved_cb->objaddr,perl_saved_cb->event,perl_saved_cb->funcname, "pEFL::PLSide::Callbacks");
 
+	// event_Info
 	SV *s_ei  = newSV(0);
 	if (event_info) {
 		if (SvTRUE(get_sv("pEFL::Debug",0)))
@@ -125,15 +127,14 @@ void call_perl_sub(void *data, Evas_Object *obj, void *event_info) {
 		sv_setiv(s_ei,adress);
 	}
 
-	HV *cb_data = _get_smart_cb_hash(aTHX_ perl_saved_cb->objaddr,perl_saved_cb->event,perl_saved_cb->funcname, "pEFL::PLSide::Callbacks");
-
+	// Object
+	SV *s_obj = newSV(0);
 	SV *pclass = *( hv_fetch(cb_data, "pclass",6,FALSE) );
+	sv_setref_pv(s_obj, SvPV_nolen(pclass), obj);
+	
+	// Function and data
 	SV *func = *( hv_fetch(cb_data, "function",8,FALSE) );
 	SV *args = *( hv_fetch(cb_data, "data",4,FALSE) ) ;
-
-
-
-	sv_setref_pv(s_obj, SvPV_nolen(pclass), obj);
 
 	ENTER;
 	SAVETMPS;
@@ -164,10 +165,11 @@ void call_perl_evas_event_cb(void *data, Evas *e, Evas_Object *obj, void *event_
 
 	int n;
 	int count;
-	SV *s_obj = newSV(0);
-	SV *s_canvas = newSV(0);
 	_perl_callback *perl_saved_cb = data;
 
+	HV *cb_data = _get_smart_cb_hash(aTHX_ perl_saved_cb->objaddr,perl_saved_cb->event,perl_saved_cb->funcname, "pEFL::PLSide::Callbacks");
+	
+	// event_info
 	SV *s_ei  = newSV(0);
 	if (event_info) {
 		if (SvTRUE(get_sv("pEFL::Debug",0)))
@@ -176,17 +178,19 @@ void call_perl_evas_event_cb(void *data, Evas *e, Evas_Object *obj, void *event_
 		adress = PTR2IV(event_info);
 		sv_setiv(s_ei,adress);
 	}
-
-	HV *cb_data = _get_smart_cb_hash(aTHX_ perl_saved_cb->objaddr,perl_saved_cb->event,perl_saved_cb->funcname, "pEFL::PLSide::Callbacks");
-
+	
+	// Canvas
+	SV *s_canvas = newSV(0);
+	sv_setref_pv(s_canvas, "pEFL::Evas::Canvas", e);
+	
+	// Object
+	SV *s_obj = newSV(0);
 	SV *pclass = *( hv_fetch(cb_data, "pclass",6,FALSE) );
+	sv_setref_pv(s_obj, SvPV_nolen(pclass), obj);
+	
+	// function and data
 	SV *func = *( hv_fetch(cb_data, "function",8,FALSE) );
 	SV *args = *( hv_fetch(cb_data, "data",4,FALSE) ) ;
-
-
-
-	sv_setref_pv(s_obj, SvPV_nolen(pclass), obj);
-	sv_setref_pv(s_canvas, "pEFL::Evas::Canvas", e);
 
 	ENTER;
 	SAVETMPS;
@@ -637,6 +641,7 @@ AV* _get_gen_items(pTHX_ UV objaddr) {
 
 	HV *GenItc_Cbs = get_hv("pEFL::PLSide::GenItems", 0);
 	if (GenItc_Cbs == NULL) {
+		free(keybuffer); // Speicherleak verhindern vor dem croak!
 		croak("pEFL::PLSide::GenItems hash does not exist\n");
 	}
 
@@ -665,7 +670,7 @@ HV* _get_gen_item_hash(pTHX_ UV objaddr, int item_id) {
 _perl_gendata *perl_save_gen_cb(pTHX_ UV objaddr, UV itcaddr, int id) {
 	_perl_gendata *cb;
 	
-	New(0,cb,1,_perl_gendata);
+	Newxz(cb,1,_perl_gendata);
 
 	if (objaddr) {
 		cb->objaddr = objaddr ;
@@ -676,9 +681,6 @@ _perl_gendata *perl_save_gen_cb(pTHX_ UV objaddr, UV itcaddr, int id) {
 
 	if (itcaddr) {
 		cb->itcaddr = itcaddr ;
-	}
-	else {
-		cb->itcaddr = 0;
 	}
 
 	if (id>=0) {
@@ -907,7 +909,9 @@ Evas_Object* call_perl_gen_content_get(void *data, Evas_Object *obj, const char 
 }
 
 void call_perl_genitc_del(void *data, Evas_Object *obj) {
-	call_perl_gen_del(data,obj, NULL);
+	_perl_gendata *perl_saved_cb = data;
+	Elm_Object_Item *item = (Elm_Object_Item *) perl_saved_cb->item;
+	call_perl_gen_del(data,obj, (void *)item);
 }
 
 void call_perl_gen_del(void *data, Evas_Object *obj, void *event_info) {
@@ -915,60 +919,90 @@ void call_perl_gen_del(void *data, Evas_Object *obj, void *event_info) {
 	dSP;
 	
 	_perl_gendata *perl_saved_cb = data;
+	
+	if (perl_saved_cb != NULL) {
+			
+		int id = perl_saved_cb->item_id;
 		
-	int id = perl_saved_cb->item_id;
+		if (SvTRUE(get_sv("pEFL::Debug",0)))
+			fprintf(stderr,"Calling call_perl_gen_del() on item %d of Genlist with address %"UVuf"\n", id, perl_saved_cb->objaddr);
 	
-	if (SvTRUE(get_sv("pEFL::Debug",0)))
-		fprintf(stderr,"Calling call_perl_gen_del() on item %d of Genlist with address %"UVuf"\n", id, perl_saved_cb->objaddr);
-	
-	HV *cb_data = NULL;
-	UV itcaddr = perl_saved_cb->itcaddr;
-	if (perl_saved_cb->itcaddr != 0) {
-		cb_data = _get_gen_hash(aTHX_ perl_saved_cb->itcaddr,"pEFL::PLSide::GenItc");
-	}
-
-	HV *GenItem = _get_gen_item_hash(aTHX_ perl_saved_cb->objaddr, perl_saved_cb->item_id);
-
-	if (cb_data && hv_exists(cb_data,"del",3)) {
-		int count;
-
-		SV *func = *( hv_fetch(cb_data, "del",3,FALSE) );
-		// Get data
-		SV* s_data = *( hv_fetch(GenItem, "data",4,FALSE) );
-
-		// Object
-		SV *s_obj = newSV(0);
-		sv_setref_pv(s_obj, "ElmGenlistPtr", obj);
-
-		ENTER;
-		SAVETMPS;
-
-		PUSHMARK(SP);
-
-		XPUSHs(s_data);
-		XPUSHs(sv_2mortal(s_obj));
-
-		PUTBACK;
-
-		count = call_sv(func, G_DISCARD);
-
-		if (count != 0) {
-			croak("Expected 0 value got %d\n", count);
+		HV *cb_data = NULL;
+		UV itcaddr = perl_saved_cb->itcaddr;
+		if (perl_saved_cb->itcaddr != 0) {
+			cb_data = _get_gen_hash(aTHX_ perl_saved_cb->itcaddr,"pEFL::PLSide::GenItc");
 		}
 
-		FREETMPS;
-		LEAVE;
+		HV *GenItem = _get_gen_item_hash(aTHX_ perl_saved_cb->objaddr, perl_saved_cb->item_id);
+		
+		if (GenItem != NULL) {
+
+		if (cb_data && hv_exists(cb_data,"del",3)) {
+			int count;
+
+			SV *func = *( hv_fetch(cb_data, "del",3,FALSE) );
+			// Get data
+			SV* s_data = *( hv_fetch(GenItem, "data",4,FALSE) );
+
+			// Object
+			SV *s_obj = newSV(0);
+			sv_setref_pv(s_obj, "ElmGenlistPtr", obj);
+
+			ENTER;
+			SAVETMPS;
+
+			PUSHMARK(SP);
+
+			XPUSHs(s_data);
+			XPUSHs(sv_2mortal(s_obj));
+
+			PUTBACK;
+
+			count = call_sv(func, G_DISCARD);
+
+			if (count != 0) {
+				croak("Expected 0 value got %d\n", count);
+			}
+
+			FREETMPS;
+			LEAVE;
+		}
+		// TODO: Check whether hash value exists
+		if (SvTRUE(get_sv("pEFL::Debug",0)))
+			fprintf(stderr,"Deleting pEFL::PLSide::GenItems hash entry \n");
+		
+		hv_undef(GenItem);
 	}
-	// TODO: Check whether hash value exists
-	if (SvTRUE(get_sv("pEFL::Debug",0)))
-		fprintf(stderr,"Deleting pEFL::PLSide::GenItems hash entry \n");
-		
-	hv_undef(GenItem);
 	
-	if (SvTRUE(get_sv("pEFL::Debug",0)))
-		fprintf(stderr,"Freeing cstruct \n\n");
-		
-	Safefree(data);
+	}
+	
+	// Delete the ItemData!!!
+	// 1. Die Item-Adresse als String (Key) aufbereiten (äquivalent zu $$item in Perl)
+	Elm_Object_Item *item = (Elm_Object_Item *)event_info;
+    char itemaddr_str[32];
+    snprintf(itemaddr_str, sizeof(itemaddr_str), "%lu", (unsigned long)item);
+
+    // 2. Optionale Debug-Warnung (äquivalent zu: if ($pEFL::Debug) { warn ... })
+    if (SvTRUE(get_sv("pEFL::Debug",0))) {
+        fprintf(stderr,"Automated cleanup of custom item data for address %s\n", itemaddr_str);
+    }
+    
+    // 3. Element aus dem globalen Hash löschen (äquivalent zu: delete $pEFL::PLSide::ItemData{$itemaddr})
+    HV *item_data_hash = get_hv("pEFL::PLSide::ItemData", 0);
+    if (item_data_hash) {
+        
+        // G_DISCARD sorgt dafür, dass Perl den gelöschten Wert verwirft und bereinigt
+        hv_delete(item_data_hash, itemaddr_str, strlen(itemaddr_str), G_DISCARD);
+        
+    }
+	
+	if (perl_saved_cb != NULL) {
+		// Delete perl_gen_data c struct
+		if (SvTRUE(get_sv("pEFL::Debug",0)))
+			fprintf(stderr,"Freeing perl_gen_data cstruct \n\n");
+			
+		Safefree(data);
+	}
 }
 
 Eina_Bool call_perl_item_pop_cb(void*data,Elm_Naviframe_Item *it) {
@@ -1020,7 +1054,7 @@ Eina_Bool call_perl_item_pop_cb(void*data,Elm_Naviframe_Item *it) {
 
 		PUTBACK;
 		FREETMPS;
-		LEAVE;	  
+		LEAVE;
 
 	return e_bool;
 

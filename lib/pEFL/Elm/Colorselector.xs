@@ -45,7 +45,7 @@ elm_colorselector_palette_name_set(obj,palette_name)
 	const char *palette_name
 
 
-char *
+const char *
 elm_colorselector_palette_name_get(obj)
 	const ElmColorselector *obj
 
@@ -72,13 +72,16 @@ elm_colorselector_palette_selected_item_get(obj)
 
 
 ElmColorselectorPaletteItem *
-elm_colorselector_palette_color_add(obj,r,g,b,a)
+_elm_colorselector_palette_color_add(obj,r,g,b,a)
 	ElmColorselector *obj
 	int r
 	int g
 	int b
 	int a
-
+CODE:
+	RETVAL = elm_colorselector_palette_color_add(obj,r,g,b,a);
+OUTPUT:
+	RETVAL
 
 void
 elm_colorselector_palette_clear(obj)

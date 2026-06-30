@@ -9,7 +9,6 @@
 
 #include "PLSide.h"
 
-
 typedef Elm_Genlist ElmGenlist;
 typedef Elm_Genlist_Item ElmGenlistItem;
 typedef Elm_Genlist_Item_Class ElmGenlistItemClass;
@@ -194,6 +193,7 @@ PREINIT:
     _perl_gendata *gen_data;
     UV objaddr;
     UV itcaddr;
+    ElmGenlistItem *item;
 CODE:
     if (!itc)
         itc = NULL;
@@ -207,7 +207,9 @@ CODE:
     
     // Save GenItc
     gen_data = perl_save_gen_cb(aTHX_ objaddr, itcaddr, id);
-    RETVAL = elm_genlist_item_insert_before( obj,itc,gen_data, parent, before_it, type,call_perl_gen_item_selected,gen_data);
+    item = elm_genlist_item_insert_before( obj,itc,gen_data, parent, before_it, type,call_perl_gen_item_selected,gen_data);
+    gen_data->item = item;
+    RETVAL = item;
 OUTPUT:
     RETVAL
     
@@ -229,6 +231,7 @@ PREINIT:
     _perl_gendata *gen_data;
     UV itcaddr;
     UV objaddr;
+    ElmGenlistItem *item;
 CODE:
     if (!itc)
         itc = NULL;
@@ -242,7 +245,9 @@ CODE:
     
     // Save GenItc
     gen_data = perl_save_gen_cb(aTHX_ objaddr, itcaddr, id);
-    RETVAL = elm_genlist_item_insert_after( obj,itc,gen_data, parent, after_it, type,call_perl_gen_item_selected,gen_data);
+    item = elm_genlist_item_insert_after( obj,itc,gen_data, parent, after_it, type,call_perl_gen_item_selected,gen_data);
+    gen_data->item = item;
+    RETVAL = item;
 OUTPUT:
     RETVAL
 
@@ -286,6 +291,7 @@ PREINIT:
     _perl_gendata *gen_data;
     UV itcaddr;
     UV objaddr;
+    ElmGenlistItem *item;
 CODE:
     if (!itc)
         itc = NULL;
@@ -299,7 +305,9 @@ CODE:
     
     // Save GenItc
     gen_data = perl_save_gen_cb(aTHX_ objaddr, itcaddr, id);
-    RETVAL = elm_genlist_item_prepend( obj,itc,gen_data, parent,type,call_perl_gen_item_selected,gen_data);
+    item = elm_genlist_item_prepend( obj,itc,gen_data, parent,type,call_perl_gen_item_selected,gen_data);
+    gen_data->item = item;
+    RETVAL = item;
 OUTPUT:
     RETVAL
 	
@@ -320,6 +328,7 @@ PREINIT:
     _perl_gendata *gen_data;
     UV itcaddr;
     UV objaddr;
+    ElmGenlistItem *item;
 CODE:
     if (!itc)
         itc = NULL;
@@ -333,7 +342,9 @@ CODE:
     
     // Save GenItc
     gen_data = perl_save_gen_cb(aTHX_ objaddr, itcaddr, id);
-    RETVAL = elm_genlist_item_append( obj,itc,gen_data, parent,type,call_perl_gen_item_selected,gen_data);
+    item = elm_genlist_item_append( obj,itc,gen_data, parent,type,call_perl_gen_item_selected,gen_data);
+    gen_data->item = item;
+    RETVAL = item;
 OUTPUT:
     RETVAL
 

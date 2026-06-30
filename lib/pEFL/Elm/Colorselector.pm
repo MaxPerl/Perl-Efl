@@ -33,6 +33,8 @@ sub add {
     my ($class,$parent) = @_;
     my $widget = elm_colorselector_add($parent);
     $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup, $widget);
+    # For the ColorPaletteItems it is important to cleanup the items, too :-)
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_itemdata, $widget);
     $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_signals, $widget);
     return $widget;
 }
@@ -42,6 +44,7 @@ sub add {
 package ElmColorselectorPtr;
 
 use pEFL::Eina;
+use pEFL::PLSide;
 
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
 
@@ -50,6 +53,14 @@ sub palette_items_get_pv {
     my $list = $obj->palette_items_get();
     my @array = pEFL::Eina::list2array($list,"ElmColorselectorPaletteItemPtr");
     return @array;
+}
+
+sub palette_color_add {
+	my ($obj,$r,$g,$b,$a) = @_;
+	my $widget = _elm_colorselector_palette_color_add($obj,$r,$g,$b,$a);
+	# Save the items in the Object Data!
+    pEFL::PLSide::save_object_items($obj, $widget);
+    return $widget;
 }
 
 # Preloaded methods go here.

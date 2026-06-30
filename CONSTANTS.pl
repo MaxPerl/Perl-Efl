@@ -509,6 +509,24 @@ if	(eval {require ExtUtils::Constant; 1}) {
 		#
 		{name => 'EVAS_TEXTBLOCK_CURSOR_UNDER', 'macro' => 1},
 		{name => 'EVAS_TEXTBLOCK_CURSOR_BEFORE', 'macro' => 1},
+		#
+		{name => 'EVAS_OBJECT_TABLE_HOMOGENEOUS_NONE', 'macro' => 1},
+		{name => 'EVAS_OBJECT_TABLE_HOMOGENEOUS_TABLE', 'macro' => 1},
+		{name => 'EVAS_OBJECT_TABLE_HOMOGENEOUS_ITEM', 'macro' => 1},
+		#
+		# The following constants doesn't exist in efl!!!
+		# Used for evas_object_box_layout_set as there at the moment
+		# only the predefined layout functions are supported!
+		{name => 'EVAS_BOX_LAYOUT_NONE', type => 'IV', value => '0', macro => '1'},
+		{name => 'EVAS_BOX_LAYOUT_HORIZONTAL',type => 'IV', value => '1', macro => '1'},
+		{name => 'EVAS_BOX_LAYOUT_VERTICAL', type => 'IV', value => '2', macro => '1'},
+		{name => 'EVAS_BOX_LAYOUT_HOMOGENEOUS_HORIZONTAL', type => 'IV', value => '3', macro => '1'},
+		{name => 'EVAS_BOX_LAYOUT_HOMOGENEOUS_VERTICAL', type => 'IV', value => '4', macro => '1'},
+		{name => 'EVAS_BOX_LAYOUT_HOMOGENEOUS_MAX_SIZE_HORIZONTAL', type => 'IV', value => '5', macro => '1'},
+		{name => 'EVAS_BOX_LAYOUT_HOMOGENEOUS_MAX_SIZE_VERTICAL', type => 'IV', value => '6', macro => '1'},
+		{name => 'EVAS_BOX_LAYOUT_FLOW_HORIZONTAL', type => 'IV', value => '7', macro => '1'},
+		{name => 'EVAS_BOX_LAYOUT_FLOW_VERTICAL', type => 'IV', value => '8', macro => '1'},
+		{name => 'EVAS_BOX_LAYOUT_STACK', type => 'IV', value => '9', macro => '1'},
 	);
 	
 	ExtUtils::Constant::WriteConstants(
@@ -518,6 +536,21 @@ if	(eval {require ExtUtils::Constant; 1}) {
 									 C_FILE 	  => 'lib/pEFL/const-evas-c.inc',
 									 XS_FILE	  => 'lib/pEFL/const-evas-xs.inc',
 								  );
+
+my @names_perlsmart = (
+	{name => 'PERLSMARTCLASS_BASE_NONE', type => 'IV', value => '0', macro => '1'},
+	{name => 'PERLSMARTCLASS_BASE_CLIPPED', type => 'IV', value => '1', macro => '1'},
+	);
+
+	
+	ExtUtils::Constant::WriteConstants(
+									 NAME		  => 'pEFL::PerlSmartClass',
+									 NAMES		  => \@names_perlsmart,
+									 DEFAULT_TYPE => 'IV',
+									 C_FILE 	  => 'lib/pEFL/const-perlsmart-c.inc',
+									 XS_FILE	  => 'lib/pEFL/const-perlsmart-xs.inc',
+								  );
+
 my @names_ecore = (
 	{name => 'ECORE_VERSION_MAJOR', 'macro' => 1},
 	{name => 'ECORE_VERSION_MINOR', 'macro' => 1},
@@ -646,7 +679,6 @@ my @names_eina = (
 									 C_FILE 	  => 'lib/pEFL/const-eina-c.inc',
 									 XS_FILE	  => 'lib/pEFL/const-eina-xs.inc',
 								  );
-
 
 my @names_edje = (
 	{name => 'EDJE_CURSOR_MAIN', 'macro' => 1},

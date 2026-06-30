@@ -83,9 +83,6 @@ PREINIT:
     int i;
 CODE:
 {
-    char* c_weekdays[7];
-    STRLEN len;
-
     len = av_len(pl_weekdays);
     if (len != 6) {
         croak("You must pass an array with 7 elements\n");
@@ -102,10 +99,7 @@ CODE:
                 croak("Segmentation fault\n");
             }
             */
-            Newz(0, c_weekdays[i],len, char);
-
-            strcpy(c_weekdays[i],string);
-            printf("Saved: %s\n",c_weekdays[i]);
+            c_weekdays[i] = savepv(string);
         }
     }
 

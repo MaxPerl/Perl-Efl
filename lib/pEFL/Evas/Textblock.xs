@@ -209,7 +209,9 @@ evas_object_textblock_cursor_get(obj)
 	
 # TODO: start / end act like out-variables here, as they
 # are set to the positions of the start and the end of the visible range in
-# the text, respectively. (How) does this work???	
+# the text, respectively. (How) does this work???
+# in other packages we already have this - to be honest - unperlished API
+# let's do it uniform unperlish - Sorry for that
 #Eina_Bool
 #evas_object_textblock_visible_range_get(obj,OUTLIST start,OUTLIST end)
 #	EvasTextblock *obj

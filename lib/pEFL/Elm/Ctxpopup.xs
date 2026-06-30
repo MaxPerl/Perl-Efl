@@ -13,6 +13,7 @@
 typedef Elm_Ctxpopup ElmCtxpopup;
 typedef Evas_Object EvasObject;
 typedef Elm_Widget_Item ElmWidgetItem;
+typedef Elm_Ctxpopup_Item ElmCtxpopupItem;
 typedef Eina_List EinaList;
 
 MODULE = pEFL::Elm::Ctxpopup		PACKAGE = pEFL::Elm::Ctxpopup
@@ -109,7 +110,7 @@ elm_ctxpopup_clear(obj)
 	ElmCtxpopup *obj
 
 
-ElmWidgetItem *
+ElmCtxpopupItem *
 _elm_ctxpopup_item_insert_before(obj,before,label,icon,id)
 	ElmCtxpopup *obj
 	ElmWidgetItem *before
@@ -127,14 +128,16 @@ CODE:
     // Save C struct with necessary infos to link to perl side
     data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_ctxpopup_item_insert_before(obj,before,label,icon,call_perl_gen_item_selected, data);
-    // del_cb seems not to work with Ctxpopup
-    //elm_object_item_del_cb_set(item,call_perl_gen_del);
+    // del_cb seems not to work with Ctxpopup, because it only passes data
+    // to call_perl_gen_item_selected, not to all related callbacks (see
+    // difference in the docs with for example Elm_List)
+    // elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
 OUTPUT:
     RETVAL
 
 
-ElmWidgetItem *
+ElmCtxpopupItem *
 _elm_ctxpopup_item_insert_after(obj,after,label,icon,id)
 	ElmCtxpopup *obj
 	ElmWidgetItem *after
@@ -152,14 +155,14 @@ CODE:
     // Save C struct with necessary infos to link to perl side
     data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_ctxpopup_item_insert_after(obj,after,label,icon,call_perl_gen_item_selected, data);
-    // del_cb seems not to work with Ctxpopup
-    //elm_object_item_del_cb_set(item,call_perl_gen_del);
+    // del_cb seems not to work with Ctxpopup (see above)
+    // elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
 OUTPUT:
     RETVAL
 
 
-ElmWidgetItem *
+ElmCtxpopupItem *
 _elm_ctxpopup_item_append(obj,label,icon,id)
 	ElmCtxpopup *obj
 	char *label
@@ -184,7 +187,7 @@ OUTPUT:
     RETVAL
 
 
-ElmWidgetItem *
+ElmCtxpopupItem *
 _elm_ctxpopup_item_prepend(obj,label,icon,id)
 	ElmCtxpopup *obj
 	char *label
@@ -202,7 +205,7 @@ CODE:
     data = perl_save_gen_cb(aTHX_ objaddr, 0, id);
     item = elm_ctxpopup_item_prepend(obj,label,icon,call_perl_gen_item_selected, data);
     // del_cb seems not to work with Ctxpopup
-    //elm_object_item_del_cb_set(item,call_perl_gen_del);
+    // elm_object_item_del_cb_set(item,call_perl_gen_del);
     RETVAL = item;
 OUTPUT:
     RETVAL

@@ -166,6 +166,13 @@ const EvasTextblockStyle *			T_EVAS_OBJECT
 EvasTextblockRectangle *			T_PTROBJ
 EvasObject *						T_EVAS_OBJECT
 const EvasObject *					T_EVAS_OBJECT
+EvasBox *							T_EVAS_OBJECT
+const EvasBox *						T_EVAS_OBJECT
+EvasBoxOption *						T_PTROBJ
+EvasTable *							T_EVAS_OBJECT
+const EvasTable *					T_EVAS_OBJECT
+EvasGrid *							T_EVAS_OBJECT
+const EvasGrid *					T_EVAS_OBJECT
 EvasCoordRectangle *				T_PTROBJ
 Evas_Coord							T_IV
 EvasModifier *						T_EVAS_OBJECT
@@ -181,6 +188,18 @@ EvasEventMouseWheel *				T_PTROBJ
 EvasEventKeyDown *					T_PTROBJ
 EvasEventKeyUp *					T_PTROBJ
 EvasEventHold * 					T_PTROBJ
+
+####################
+# PerlSmartClass
+####################
+
+PerlSmartClass *    				T_EVAS_OBJECT 
+PerlSmartObject *   				T_EVAS_OBJECT
+EvasSmartClass *    				T_EVAS_OBJECT
+const EvasSmartClass * 				T_EVAS_OBJECT
+EvasSmart *         				T_EVAS_OBJECT
+const EvasSmart *         			T_EVAS_OBJECT
+PerlEvent *							T_EVAS_OBJECT
 
 ####################
 # EDJE

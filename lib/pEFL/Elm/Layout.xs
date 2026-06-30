@@ -65,7 +65,7 @@ CODE:
 
     
 
-void *
+void
 _elm_layout_signal_callback_del(obj,emission,source,cstructaddr)
 	EvasObject *obj
 	const char *emission
@@ -76,20 +76,27 @@ PREINIT:
     _perl_signal_cb *del_sc = NULL;
     UV address;
     void *data;
+    void *first = NULL;
 CODE:
     address = SvUV(cstructaddr);
     sc = INT2PTR(_perl_signal_cb*,address);
     data = elm_layout_signal_callback_del(obj, emission, source, call_perl_signal_cb);
+    first = data;
     while (data != NULL) {
         del_sc = (_perl_signal_cb *) data;
-        data = elm_layout_signal_callback_del(obj, emission, source, call_perl_signal_cb);
         if (del_sc->signal_id == sc->signal_id) {
             Safefree(del_sc);
+            break;
         }
         // If signal_ids are different reregister the signal callback
         else {
             elm_layout_signal_callback_add(obj,emission,source,call_perl_signal_cb,del_sc);
         }
+        data = elm_layout_signal_callback_del(obj, emission, source, call_perl_signal_cb);
+        if (data == first) {
+			elm_layout_signal_callback_add(obj,emission,source,call_perl_signal_cb,data);
+			break;
+		}
         
     }
 

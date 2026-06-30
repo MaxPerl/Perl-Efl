@@ -81,9 +81,8 @@ sub signal_callback_del {
     
     if (defined($id)) {
         my $cstructaddr = $pEFL::PLSide::EdjeSignals{"$parentaddr###items"}[$id]{cstructaddr};
-        my $success = $obj->_elm_object_signal_callback_del($emission,$source, $cstructaddr);
-        
         undef $pEFL::PLSide::EdjeSignals{"$parentaddr###items"}[$id];
+        my $success = $obj->_elm_object_signal_callback_del($emission,$source, $cstructaddr);
     }
     else {
         croak "Deleting signal was not possible. Could not find signal of $obj with \n Emission: $emission \n Source $source \n Function " . pEFL::PLSide::get_func_name($func) . "\n";

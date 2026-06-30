@@ -32,19 +32,22 @@ elm_segment_control_item_selected_get(obj)
 	const ElmSegmentControl *obj
 
 
-char *
+const char *
 elm_segment_control_item_label_get(obj,idx)
 	const ElmSegmentControl *obj
 	int idx
 
 
 ElmSegmentItem *
-elm_segment_control_item_insert_at(obj,icon,label,idx)
+_elm_segment_control_item_insert_at(obj,icon,label,idx)
 	ElmSegmentControl *obj
 	EvasObject *icon
 	const char *label
 	int idx
-
+CODE:
+	RETVAL = elm_segment_control_item_insert_at(obj,icon,label,idx);
+OUTPUT:
+	RETVAL
 
 ElmSegmentItem *
 elm_segment_control_item_get(obj,idx)
@@ -59,10 +62,14 @@ elm_segment_control_item_del_at(obj,idx)
 
 
 ElmSegmentItem *
-elm_segment_control_item_add(obj,icon,label)
+_elm_segment_control_item_add(obj,icon,label)
 	ElmSegmentControl *obj
 	EvasObject *icon
 	const char *label
+CODE:
+	RETVAL = elm_segment_control_item_add(obj,icon,label);
+OUTPUT:
+	RETVAL
 
 
 ElmIcon *

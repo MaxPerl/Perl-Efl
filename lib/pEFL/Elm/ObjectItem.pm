@@ -47,6 +47,33 @@ sub content_get_pv {
 	return $content;
 }
 
+sub data_set {
+    my ($obj, $value) = @_;
+    return unless ref $obj;
+   
+    my $itemaddr = $$obj;
+    $pEFL::PLSide::ItemData{$itemaddr} = $value;
+    return;
+}
+
+sub data_get {
+    my ($obj) = @_;
+    return unless ref $obj;
+    
+    my $itemaddr = $$obj;
+    return $pEFL::PLSide::ItemData{$itemaddr};
+}
+
+sub data_del {
+    my ($obj) = @_;
+    return unless ref $obj;
+    
+    my $itemaddr = $$obj;
+    delete $pEFL::PLSide::ItemData{$itemaddr};
+    return;
+}
+
+
 # Preloaded methods go here.
 
 1;

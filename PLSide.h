@@ -58,9 +58,12 @@ void call_perl_markup_filter_cb(void *data, Elm_Entry *entry, char **text);
 typedef struct __perl_gendata _perl_gendata;
 
 struct __perl_gendata {
-    UV itcaddr;
-    UV objaddr;
-    int item_id;
+    UV objaddr;             // 8 Bytes (64-Bit)
+    UV itcaddr;             // 8 Bytes (64-Bit)
+    // This is necessary for Genlist (and Combobox) to get access
+    // to item handler also in call_perl_genitc_del)
+    Elm_Genlist_Item *item;
+    int item_id;            // 4 Bytes (32-Bit) - Kommt ganz ans Ende!
 };
 
 _perl_gendata *perl_save_gen_cb(pTHX_ UV objaddr, UV itcaddr, int id);

@@ -33,7 +33,10 @@ sub add {
     my ($class,$parent) = @_;
     my $widget = elm_popup_add($parent);
     $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup, $widget);
+    # Clean up C struct for items and item callbacks
     $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_genitems, $widget);
+    # clean up ItemData
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_itemdata, $widget);
     $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_signals, $widget);
     return $widget;
 }
@@ -50,6 +53,10 @@ sub item_append {
     my ($obj,$label,$icon, $func,$func_data) = @_;
     my $id = pEFL::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
     my $widget = _elm_popup_item_append($obj,$label,$icon,$id);
+    
+    # Save the items in the Object Data!
+    pEFL::PLSide::save_object_items($obj, $widget);
+    
     return $widget;
 }
 

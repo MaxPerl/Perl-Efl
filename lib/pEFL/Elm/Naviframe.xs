@@ -7,6 +7,8 @@
 
 #include <Elementary.h>
 
+#include "PLSide.h"
+
 
 typedef Elm_Naviframe ElmNaviframe;
 typedef Elm_Naviframe_Item ElmNaviframeItem;
@@ -28,6 +30,14 @@ elm_naviframe_item_push(obj,title_label,prev_btn,next_btn,content,item_style)
 	EvasObject *next_btn
 	EvasObject *content
 	const char *item_style
+PREINIT:
+	ElmNaviframeItem *it;
+CODE:
+	it = elm_naviframe_item_push(obj,title_label,prev_btn,next_btn,content,item_style);
+	elm_object_item_del_cb_set(it,call_perl_gen_del);
+	RETVAL = it;
+OUTPUT:
+	RETVAL
 	
 
 void
@@ -87,6 +97,14 @@ elm_naviframe_item_insert_before(obj,before,title_label,prev_btn,next_btn,conten
 	EvasObject *next_btn
 	EvasObject *content
 	const char *item_style
+PREINIT:
+	ElmNaviframeItem *it;
+CODE:
+	it = elm_naviframe_item_insert_before(obj,before,title_label,prev_btn,next_btn,content,item_style);
+	elm_object_item_del_cb_set(it,call_perl_gen_del);
+	RETVAL = it;
+OUTPUT:
+	RETVAL
 
 
 void
@@ -104,5 +122,12 @@ elm_naviframe_item_insert_after(obj,after,title_label,prev_btn,next_btn,content,
 	EvasObject *next_btn
 	EvasObject *content
 	const char *item_style
-
+PREINIT:
+	ElmNaviframeItem *it;
+CODE:
+	it = elm_naviframe_item_insert_after(obj,after,title_label,prev_btn,next_btn,content,item_style);
+	elm_object_item_del_cb_set(it,call_perl_gen_del);
+	RETVAL = it;
+OUTPUT:
+	RETVAL
 

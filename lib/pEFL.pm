@@ -3,6 +3,8 @@ package pEFL;
 use strict;
 use warnings;
 
+use pEFL::PerlEvent;
+
 require Exporter;
 
 our @ISA = qw(Exporter);
@@ -36,7 +38,7 @@ our $Debug = 0;
 sub ev_info2pv {
 	my ($ev_info) = shift;
 	
-	my $s_ev = pEFL::ev_info2obj($ev_info, "pEFL::Ecore::Event::PerlEvent");
+	my $s_ev = pEFL::ev_info2obj($ev_info, "pEFL::PerlEvent");
 	my $perl_sv = $s_ev->perl_sv();
 	
 	return $perl_sv

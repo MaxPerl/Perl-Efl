@@ -33,6 +33,7 @@ sub add {
     my ($class,$parent) = @_;
     my $widget = elm_segment_control_add($parent);
     $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup, $widget);
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_itemdata, $widget);
     $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_signals, $widget);
     return $widget;
 }
@@ -41,7 +42,25 @@ sub add {
 
 package ElmSegmentControlPtr;
 
+use pEFL::PLSide;
+
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
+
+sub item_insert_at {
+	my ($obj,$icon, $label, $idx) = @_;
+	
+	my $widget = _elm_segment_control_item_insert_at($obj,$icon,$label,$idx);
+	pEFL::PLSide::save_object_items($obj, $widget);
+	return $widget;
+}
+
+sub item_add {
+	my ($obj,$icon, $label) = @_;
+	my $widget = _elm_segment_control_item_add($obj,$icon,$label);
+	# Save the items in the Object Data!
+    pEFL::PLSide::save_object_items($obj, $widget);
+    return $widget;
+}
 
 # Preloaded methods go here.
 

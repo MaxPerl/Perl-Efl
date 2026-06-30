@@ -56,6 +56,7 @@ CODE:
 	// This doesn't work, because data of item_pop_cb_set seems not to be
 	// passed to elm_object_item_del_cb
 	//elm_object_item_del_cb_set(item,call_perl_gen_del);
+	elm_object_item_data_set(item, data);
 	
 
 void

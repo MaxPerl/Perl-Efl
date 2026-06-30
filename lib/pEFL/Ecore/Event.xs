@@ -76,7 +76,11 @@ ecore_event_current_type_get()
 
 MODULE = pEFL::Ecore::Event		PACKAGE = EcoreEventPtr   PREFIX = ecore_event_
 
-void *
+# ecore_event_del returns the data pointer originally passed to ecore_event_add().
+# Currently always NULL since we pass NULL as data in _ecore_event_add_pv.
+# If a data pointer is ever needed in the future, change return type to void *
+# and pass data accordingly in ecore_event_add().
+void
 ecore_event_del(event)
 	EcoreEvent *event
 

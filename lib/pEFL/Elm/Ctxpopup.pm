@@ -34,7 +34,10 @@ sub add {
     my $widget = elm_ctxpopup_add($parent);
     # Workaround: Smart event callback "del" is not triggered? Therefore use Evas event_callback!
     $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup, $widget);
+    # Clean up C struct for items and item callbacks
     $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_genitems, $widget);
+    # Clean up ItemData
+    $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_itemdata, $widget);
     $widget->event_callback_add(EVAS_CALLBACK_DEL, \&pEFL::PLSide::cleanup_signals, $widget);
     return $widget;
 }
@@ -45,6 +48,7 @@ package ElmCtxpopupPtr;
 
 use pEFL::Eina;
 use pEFL::PLSide;
+use pEFL::Evas;
 
 our @ISA = qw(ElmObjectPtr EvasObjectPtr);
 
@@ -53,6 +57,10 @@ sub insert_before {
     $label = $label || "";
     my $id = pEFL::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
     my $widget = _elm_ctxpopup_item_insert_before($obj,$before,$label,$icon, $id);
+    
+    # Save the items in the Object Data!
+    pEFL::PLSide::save_object_items($obj, $widget);
+    
     return $widget;
 }
 
@@ -61,6 +69,10 @@ sub insert_after {
     $label = $label || "";
     my $id = pEFL::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
     my $widget = _elm_ctxpopup_insert_after($obj,$after,$label,$icon,$id);
+    
+    # Save the items in the Object Data!
+    pEFL::PLSide::save_object_items($obj, $widget);
+    
     return $widget;
 }
 
@@ -69,6 +81,10 @@ sub item_prepend {
     $label = $label || "";
     my $id = pEFL::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
     my $widget = _elm_ctxpopup_item_prepend($obj,$label,$icon,$id);
+    
+    # Save the items in the Object Data!
+    pEFL::PLSide::save_object_items($obj, $widget);
+    
     return $widget;
 }
 
@@ -77,6 +93,10 @@ sub item_append {
     $label = $label || "";
     my $id = pEFL::PLSide::save_gen_item_data( $obj,undef,$func,$func_data );
     my $widget = _elm_ctxpopup_item_append($obj,$label,$icon,$id);
+    
+    # Save the items in the Object Data!
+    pEFL::PLSide::save_object_items($obj, $widget);
+    
     return $widget;
 }
 

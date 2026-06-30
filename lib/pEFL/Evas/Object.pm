@@ -39,6 +39,11 @@ use Scalar::Util qw(blessed refaddr);
 our @ISA = qw();
 
 
+sub smart_callback_call_pv {
+	my ($obj,$event,$event_info) = @_;
+	_evas_object_smart_callback_call_pv($obj,$event,$event_info)
+}
+
 sub smart_callback_add {
     my ($obj, $event, $func, $data) = @_;
     
@@ -57,10 +62,11 @@ sub smart_callback_del {
     
     my $cstructaddr = $pEFL::PLSide::Callbacks{$objaddr}{$key}{cstructaddr};
     
-    my $success = $obj->_evas_object_smart_callback_del_full($event,$func,$cstructaddr);
-    
     # Delete the callback on the Perl side
     delete($pEFL::PLSide::Callbacks{$objaddr}{$key});
+    
+    # Delte the callback on C side
+    $obj->_evas_object_smart_callback_del_full($event,$func,$cstructaddr);
 }
 
 sub event_callback_add {
@@ -81,12 +87,40 @@ sub event_callback_del {
     
     my $cstructaddr = $pEFL::PLSide::Callbacks{$objaddr}{$key}{cstructaddr};
     
-    my $success = $obj->_evas_object_event_callback_del_full($event,$func,$cstructaddr);
-    
     # Delete the callback on the Perl side
     delete($pEFL::PLSide::Callbacks{$objaddr}{$key});
+    
+    # Delete the callback on C side
+    my $success = $obj->_evas_object_event_callback_del_full($event,$func,$cstructaddr);
 }
 
+# data_set: Speichert beliebige Perl-Daten für dieses Objekt
+sub data_set {
+    my ($obj, $key, $value) = @_;
+    return unless ref $obj;
+    
+    my $objaddr = $$obj;
+    $pEFL::PLSide::ObjectData{$objaddr}{$key} = $value;
+    return;
+}
+
+# data_get: Holt die gespeicherten Daten wieder ab
+sub data_get {
+    my ($obj, $key) = @_;
+    return unless ref $obj;
+    
+    my $objaddr = $$obj;
+    return $pEFL::PLSide::ObjectData{$objaddr}{$key};
+}
+
+# data_del: Löscht einen gezielten Key vorzeitig
+sub data_del {
+    my ($obj, $key) = @_;
+    return unless ref $obj;
+    
+    my $objaddr = $$obj;
+    return delete $pEFL::PLSide::ObjectData{$objaddr}{$key};
+}
 
 
 
