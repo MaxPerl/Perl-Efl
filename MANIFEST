@@ -40,6 +40,7 @@ examples/Elementary/index.pl
 examples/Elementary/layout.pl
 examples/Elementary/layout_example.edc
 examples/Elementary/layout_example.edj
+examples/Elementary/layout_signal_test.pl
 examples/Elementary/list.pl
 examples/Elementary/menu.pl
 examples/Elementary/multimedia.pl
@@ -55,6 +56,7 @@ examples/Emotion/emotion_basic.pl
 examples/Emotion/emotion_border_example.pl
 examples/Emotion/emotion_generic_example.pl
 examples/Emotion/emotion_signals_example.pl
+examples/segment_control.pl
 lib/pEFL.pm
 lib/pEFL.xs
 lib/pEFL/const-c.inc
@@ -68,6 +70,8 @@ lib/pEFL/const-emotion-c.inc
 lib/pEFL/const-emotion-xs.inc
 lib/pEFL/const-evas-c.inc
 lib/pEFL/const-evas-xs.inc
+lib/pEFL/const-perlsmart-c.inc
+lib/pEFL/const-perlsmart-xs.inc
 lib/pEFL/const-xs.inc
 lib/pEFL/Ecore.pm
 lib/pEFL/Ecore.xs
@@ -278,6 +282,10 @@ lib/pEFL/Emotion/Object.pm
 lib/pEFL/Emotion/Object.xs
 lib/pEFL/Evas.pm
 lib/pEFL/Evas.xs
+lib/pEFL/Evas/Box.pm
+lib/pEFL/Evas/Box.xs
+lib/pEFL/Evas/BoxOption.pm
+lib/pEFL/Evas/BoxOption.xs
 lib/pEFL/Evas/Canvas.pm
 lib/pEFL/Evas/Canvas.xs
 lib/pEFL/Evas/Coord/Rectangle.pm
@@ -300,6 +308,8 @@ lib/pEFL/Evas/Event/MouseUp.pm
 lib/pEFL/Evas/Event/MouseUp.xs
 lib/pEFL/Evas/Event/MouseWheel.pm
 lib/pEFL/Evas/Event/MouseWheel.xs
+lib/pEFL/Evas/Grid.pm
+lib/pEFL/Evas/Grid.xs
 lib/pEFL/Evas/Image.pm
 lib/pEFL/Evas/Image.xs
 lib/pEFL/Evas/Line.pm
@@ -314,6 +324,12 @@ lib/pEFL/Evas/Polygon.pm
 lib/pEFL/Evas/Polygon.xs
 lib/pEFL/Evas/Rectangle.pm
 lib/pEFL/Evas/Rectangle.xs
+lib/pEFL/Evas/Smart.pm
+lib/pEFL/Evas/Smart.xs
+lib/pEFL/Evas/SmartClass.pm
+lib/pEFL/Evas/SmartClass.xs
+lib/pEFL/Evas/Table.pm
+lib/pEFL/Evas/Table.xs
 lib/pEFL/Evas/Text.pm
 lib/pEFL/Evas/Text.xs
 lib/pEFL/Evas/Textblock.pm
@@ -324,6 +340,12 @@ lib/pEFL/Evas/TextblockNodeFormat.pm
 lib/pEFL/Evas/TextblockNodeFormat.xs
 lib/pEFL/Evas/TextblockStyle.pm
 lib/pEFL/Evas/TextblockStyle.xs
+lib/pEFL/PerlEvent.pm
+lib/pEFL/PerlEvent.xs
+lib/pEFL/PerlSmartClass.pm
+lib/pEFL/PerlSmartClass.xs
+lib/pEFL/PerlSmartObject.pm
+lib/pEFL/PerlSmartObject.xs
 lib/pEFL/PLSide.pm
 lib/pEFL/PLSide.xs
 lib/pEFL/Time.pm
@@ -332,6 +354,8 @@ Makefile.PL
 MANIFEST			This list of files
 PLSide.c
 PLSide.h
+PLSmart.c
+PLSmart.h
 ppport.h
 README
 t/pEFL.t

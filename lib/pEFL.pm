@@ -26,7 +26,7 @@ our @EXPORT = qw(
 	
 );
 
-our $VERSION = '0.7701';
+our $VERSION = '0.77_50';
 
 require XSLoader;
 XSLoader::load('pEFL', $VERSION);
@@ -186,6 +186,16 @@ Some events pass an Elementary Widget or an Evas Object as C<$event_info>. Of co
 The provision of Perl classes for event_info C structs is work in progress. If you need a specific binding for a C struct that is not supported at the moment, please send an issue report.
 
 =back
+
+=head1 PERL SMART CLASSES
+
+Since version 0.78 it is possible to create Evas Smart Classes and Evas Smart Objects in Perl. To do this, you must create a Perl class that inherits from the PerlSmartObjPtr class and contains methods for _add, _del, _move, _resize, _show, _hide, _color_set, _clip_set, clip_unset, _calculate, _member_add, and _member_del. Not all methods are necessary especially when Creating a Smart Clipped Class. 
+
+The Perl class must contain a constructor (usually named 'add' without an underscore). In this constructor, the Perl SmartClass must be registered in C/Evas upon its first call using C<pEFL::PerlSmartClass->register_class($class, $baseclass);>. C<$base_class> can be either PERLSMARTCLASS_BASE_NONE or PERLSMARTCLASS_BASE_CLIPPED (for a clipped Smart Class, recommended in most cases). To create the Single Instance of the smart class you have to call C<my $obj = PerlSmartObjectPtr->add($evas, $smart_class);> and return C<$obj>.
+
+In a Clipped Class you have to call first C<$obj->parent_sc->add($obj);> in the virtual function _add. Only then is the clipper created! Please note that in the virtual function _del, in contrast, $obj->parent_sc->del() must be called at the end.
+
+For a simple, but complete example see examples/Evas/smart_class.pl!
 
 =head1 STATE OF THE BINDING
 

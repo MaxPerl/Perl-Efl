@@ -395,10 +395,8 @@ sub cleanup_itemdata {
 	my $items = $obj->data_get("saved_items");
 	foreach my $item (@$items) {
 		my $itemaddr = $$item;
-		warn "BEFORE $item with addr" . $itemaddr . Dumper(%pEFL::PLSide::ItemData);
 		warn "Automated cleanup of custom item data for address $itemaddr\n" if ($pEFL::Debug);
-		delete $pEFL::PLSide::ItemData{$itemaddr}; 
-		 warn "AFTER " . Dumper(%pEFL::PLSide::ItemData);
+		delete $pEFL::PLSide::ItemData{$itemaddr};
 	}
 }
 
@@ -499,7 +497,7 @@ sub cleanup_signals {
 	my ($widget) = @_;
 
 	my $objaddr = $$widget;
-	print "Cleanup Signals from widget with adress $objaddr\n" if ($pEFL::Debug);
+	warn "Cleanup Signals from widget with adress $objaddr\n" if ($pEFL::Debug);
 
 	my $cbs = $EdjeSignals{$objaddr};
 	foreach my $key (@$cbs) {

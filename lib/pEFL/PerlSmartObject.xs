@@ -28,7 +28,7 @@ CODE:
 OUTPUT:
 	RETVAL
 
-# In Perl ist $self ein geblesstes PerlSmartObjectPtr (= My::Button).
+# In Perl ist $obj ein geblesstes PerlSmartObjectPtr (= My::Button).
 # In XS schreiben wir aber Evas_Object* als Typ, NICHT PerlSmartObject*.
 # Warum? Weil der tatsächliche C-Pointer der im SV steckt (abgelegt via
 # sv_setref_pv(s_obj, pclass, o) in perl_smart_add) ein Evas_Object* ist

@@ -59,12 +59,12 @@ sub register_class {
 	# also müssen wir sie direkt aufrufen:
 	my $perl_sc = _perl_smartclass_new($class, \%functions, $base);
     
-    	# DESTROY der neuen PerlSmartClass darf erst am Programmende aufgerufen
+    # DESTROY der neuen PerlSmartClass darf erst am Programmende aufgerufen
 	# werden!!! Deshalb speichern wir $perl_sc auch noch als Package Variable
 	# So ist es irrelevant, falls die zurückgegebene Referenz $perl_sc einmal
 	# out-of-scope gerät. Eine Referenz der PerlSmartClass lebt immer weiter
 	# bis zum Programmende
-    	${"${class}::_SMART_CLASS"} = $perl_sc;
+    ${"${class}::_SMART_CLASS"} = $perl_sc;
     
 	return $perl_sc;
 }

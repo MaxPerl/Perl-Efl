@@ -31,7 +31,6 @@ CODE:
 	
 	Newxz(perl_sc, 1, PerlSmartClass);
 	
-	// wir speichern unsere Evas_Smart_Class in perlsmat->sc
 	// Hier geben wir name und Version an
 	perl_sc->smart_class.name = savepv(pclass);
 	perl_sc->smart_class.version = EVAS_SMART_CLASS_VERSION;

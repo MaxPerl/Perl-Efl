@@ -74,7 +74,14 @@ _perl_callback *perl_save_callback(pTHX_ SV *func, UV objaddr, char *event, char
 	
 	cb->funcname = newSV(0);
 	if (func && SvOK(func)) {
-		cv_name((CV*)SvRV(func),cb->funcname,0);
+		// Wir prüfen direkt, ob der gecastete Zeiger anonym ist
+		if (CvANON((CV*)SvRV(func))) {
+			// Schreib die eindeutige Hex-Adresse in cb->funcname
+			sv_setpvf(cb->funcname, "CODE(0x%" UVxf ")", PTR2UV((CV*)SvRV(func)));
+		} else {
+			// Normaler Name für benannte Funktionen
+			cv_name((CV*)SvRV(func), cb->funcname, 0);
+		}
 	}
 	else {
 		croak("No function passed\n");
@@ -552,7 +559,14 @@ _perl_callback *save_markup_filter_struct(pTHX_ SV *func, UV addr) {
 		cb->funcname = func;
 	}
 	else if (func && SvOK(func)) {
-		cv_name((CV*)SvRV(func),cb->funcname,0);
+		// Wir prüfen direkt, ob func eine anonyme Funktion ist
+		if (CvANON((CV*)SvRV(func))) {
+			// Schreib die eindeutige Hex-Adresse in cb->funcname
+			sv_setpvf(cb->funcname, "CODE(0x%" UVxf ")", PTR2UV((CV*)SvRV(func)));
+		} else {
+			// Normaler Name für benannte Funktionen
+			cv_name((CV*)SvRV(func), cb->funcname, 0);
+		}
 	}
 	else {
 		croak("No function passed\n");

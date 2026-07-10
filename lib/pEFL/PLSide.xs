@@ -96,7 +96,14 @@ PREINIT:
 CODE:
     name = newSV(0);
     func = (CV*) SvRV(func_ref);
-    cv_name(func,name,0);
+    // Unterscheidung: Anonyme Sub oder Benannte Sub?
+    if (CvANON(func)) {
+        // Schreib die eindeutige Hex-Adresse in das name-SV
+        sv_setpvf(name, "CODE(0x%" UVxf ")", PTR2UV(func));
+    } else {
+        // Nutz das normale cv_name für benannte Funktionen
+        cv_name(func, name, 0);
+    }
     RETVAL = name;
 OUTPUT:
     RETVAL
