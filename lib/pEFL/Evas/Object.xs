@@ -179,6 +179,15 @@ evas_object_size_hint_min_set(obj,w,h)
 	Evas_Coord w
 	Evas_Coord h
 
+void
+evas_object_clip_set(obj,clip)
+	EvasObject *obj
+	EvasObject *clip
+
+
+EvasObject *
+evas_object_clip_get(obj)
+	const EvasObject *obj
 
 void
 evas_object_clip_unset(obj)

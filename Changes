@@ -175,3 +175,5 @@ Revision history for Perl extension pEFL.
 	  Popup, Colorbox, SegmentControl); 
 	  include detail comments for understanding in PLSide.pm
 	- Now several anonymous functions are possible with SmartCallbacks, EventCallbacks etc.
+0.77_51
+	- Add evas_object_clip_set and evas_object_clip_get in Evas_Object.xs
