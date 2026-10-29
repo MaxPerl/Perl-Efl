@@ -160,7 +160,7 @@ Revision history for Perl extension pEFL.
 0.7701
 	- Fix pod error in pEFL.pm
 	- Add new modules and examples to MANIFEST so that they really are in the tardist :-S
-0.77_50 (Beta Version of 0.78!)
+0.78 
 	- Create PerlSmartClass and PerlSmartObject and make Creation of SmartClasses
 	  out of Perl possible
 	- Add pEFL::Evas::Box, pEFL::Evas::Table, pEFL::Evas::Grid
@@ -175,5 +175,4 @@ Revision history for Perl extension pEFL.
 	  Popup, Colorbox, SegmentControl); 
 	  include detail comments for understanding in PLSide.pm
 	- Now several anonymous functions are possible with SmartCallbacks, EventCallbacks etc.
-0.77_51
 	- Add evas_object_clip_set and evas_object_clip_get in Evas_Object.xs
