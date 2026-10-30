@@ -51,12 +51,13 @@ examples/Elementary/popup2.pl
 examples/Elementary/progressbar.pl
 examples/Elementary/progressbar_with_fork.pl
 examples/Elementary/radio.pl
+examples/Elementary/segment_control.pl
 examples/Elementary/slider.pl
 examples/Emotion/emotion_basic.pl
 examples/Emotion/emotion_border_example.pl
 examples/Emotion/emotion_generic_example.pl
 examples/Emotion/emotion_signals_example.pl
-examples/segment_control.pl
+examples/Evas/smart_class.pl
 lib/pEFL.pm
 lib/pEFL.xs
 lib/pEFL/const-c.inc

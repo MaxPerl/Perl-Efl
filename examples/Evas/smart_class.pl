@@ -43,7 +43,6 @@ sub add {
     # Register the SmartClass on the first call (singleton)
     unless ($smart_class) {
         $smart_class = pEFL::PerlSmartClass->register_class($class, PERLSMARTCLASS_BASE_CLIPPED);
-        #$smart_class = pEFL::PerlSmartClass->register_class("My::Widget");
 		print "smart_class: $smart_class\n";
 		print "ref: ", ref($smart_class), "\n";
     }

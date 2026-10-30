@@ -7,8 +7,6 @@ use utf8;
 use pEFL;
 use pEFL::Elm;
 
-$pEFL::Debug = 1;
-
 # 1. Initialisierung von Elementary
 pEFL::Elm::init($#ARGV, \@ARGV);
 
